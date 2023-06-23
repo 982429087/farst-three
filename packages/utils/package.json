@@ -1,5 +1,5 @@
 {
-  "name": "@farst/utils",
+  "name": "@farst-three/utils",
   "private": true,
   "license": "MIT",
   "main": "index.ts",

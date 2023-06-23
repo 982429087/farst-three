@@ -1,5 +1,5 @@
 {
-  "name": "@farst/eslint-config",
+  "name": "@farst-three/eslint-config",
   "version": "0.0.1",
   "description": "ESLint Config",
   "license": "MIT",

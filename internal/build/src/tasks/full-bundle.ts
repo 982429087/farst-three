@@ -13,10 +13,10 @@ import {
   PKG_BRAND_NAME,
   PKG_CAMELCASE_LOCAL_NAME,
   PKG_CAMELCASE_NAME,
-} from '@farst/build-constants'
-import { epOutput, epRoot, localeRoot } from '@farst/build-utils'
-import { version } from '../../../../packages/farst/version'
-import { ElementPlusAlias } from '../plugins/farst-alias'
+} from '@farst-three/build-constants'
+import { epOutput, epRoot, localeRoot } from '@farst-three/build-utils'
+import { version } from '../../../../packages/farst-three/version'
+import { ElementPlusAlias } from '../plugins/farst-three-alias'
 import {
   formatBundleFilename,
   generateExternal,

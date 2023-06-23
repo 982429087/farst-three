@@ -1,1 +1,1 @@
-sed -i 's/"name": "farst",/"name": "@farst\/nightly",/' packages/farst/package.json
+sed -i 's/"name": "farst-three",/"name": "@farst-three\/nightly",/' packages/farst-three/package.json

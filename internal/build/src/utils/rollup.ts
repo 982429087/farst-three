@@ -1,4 +1,4 @@
-import { epPackage, getPackageDependencies } from '@farst/build-utils'
+import { epPackage, getPackageDependencies } from '@farst-three/build-utils'
 
 import type { OutputOptions, RollupBuild } from 'rollup'
 

@@ -1,5 +1,5 @@
-import { componentSizes, datePickTypes } from '@farst/constants'
-import type { ComponentSize, DatePickType } from '@farst/constants'
+import { componentSizes, datePickTypes } from '@farst-three/constants'
+import type { ComponentSize, DatePickType } from '@farst-three/constants'
 
 export const isValidComponentSize = (val: string): val is ComponentSize | '' =>
   ['', ...componentSizes].includes(val)

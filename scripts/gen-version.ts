@@ -1,8 +1,8 @@
 import { writeFile } from 'fs/promises'
 import path from 'path'
 import consola from 'consola'
-import { epRoot } from '@farst/build-utils'
-import pkg from '../packages/farst/package.json' // need to be checked
+import { epRoot } from '@farst-three/build-utils'
+import pkg from '../packages/farst-three/package.json' // need to be checked
 
 function getVersion() {
   const tagVer = process.env.TAG_VERSION

@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import glob from 'fast-glob'
-import { docRoot, docsDirName, projRoot } from '@farst/build-utils'
-import { REPO_BRANCH, REPO_PATH } from '@farst/build-constants'
+import { docRoot, docsDirName, projRoot } from '@farst-three/build-utils'
+import { REPO_BRANCH, REPO_PATH } from '@farst-three/build-constants'
 import { getLang, languages } from '../utils/lang'
 import footerLocale from '../i18n/component/footer.json'
 
@@ -14,7 +14,7 @@ let compPaths: string[]
 
 export function MarkdownTransform(): Plugin {
   return {
-    name: 'farst-md-transform',
+    name: 'farst-three-md-transform',
 
     enforce: 'pre',
 

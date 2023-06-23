@@ -1,6 +1,6 @@
 import { nextTick } from 'vue'
-import { obtainAllFocusableElements } from '@farst/utils'
-import { EVENT_CODE } from '@farst/constants'
+import { obtainAllFocusableElements } from '@farst-three/utils'
+import { EVENT_CODE } from '@farst-three/constants'
 import type { ObjectDirective } from 'vue'
 
 export const FOCUSABLE_CHILDREN = '_trap-focus-children'

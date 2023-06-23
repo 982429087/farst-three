@@ -1,4 +1,4 @@
-import { PKG_NAME, PKG_PREFIX } from '@farst/build-constants'
+import { PKG_NAME, PKG_PREFIX } from '@farst-three/build-constants'
 
 import type { Plugin } from 'rollup'
 
@@ -8,7 +8,7 @@ export function ElementPlusAlias(): Plugin {
   const bundleThemeChalk = `${PKG_NAME}/${themeChalk}` as const
 
   return {
-    name: 'farst-alias-plugin',
+    name: 'farst-three-alias-plugin',
     resolveId(id) {
       if (!id.startsWith(sourceThemeChalk)) return
       return {

@@ -16,21 +16,21 @@ const homeLang = computed(() => homeLocale[lang.value])
     <div class="footer-main">
       <h4>{{ homeLang['10'] }}</h4>
       <a
-        href="https://github.com/farst/farst"
+        href="https://github.com/farst-three/farst-three"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['11'] }}
       </a>
       <a
-        href="https://farst.gitee.io/zh-CN/"
+        href="https://farst-three.gitee.io/zh-CN/"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['china_mirror'] }}
       </a>
       <a
-        href="https://github.com/farst/farst/releases"
+        href="https://github.com/farst-three/farst-three/releases"
         class="footer-main-link"
         target="_blank"
       >
@@ -55,21 +55,21 @@ const homeLang = computed(() => homeLocale[lang.value])
         {{ homeLang['discord'] }}
       </a>
       <a
-        href="https://github.com/farst/farst/issues"
+        href="https://github.com/farst-three/farst-three/issues"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['16'] }}
       </a>
       <a
-        href="https://github.com/farst/farst/blob/dev/.github/CONTRIBUTING.en-US.md"
+        href="https://github.com/farst-three/farst-three/blob/dev/.github/CONTRIBUTING.en-US.md"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['17'] }}
       </a>
       <a
-        href="https://segmentfault.com/t/farst"
+        href="https://segmentfault.com/t/farst-three"
         class="footer-main-link"
         target="_blank"
       >

@@ -1,6 +1,6 @@
 import path from 'path'
-import { PKG_NAME } from '@farst/build-constants'
-import { epOutput } from '@farst/build-utils'
+import { PKG_NAME } from '@farst-three/build-constants'
+import { epOutput } from '@farst-three/build-utils'
 
 import type { ModuleFormat } from 'rollup'
 
@@ -13,12 +13,12 @@ export interface BuildInfo {
   output: {
     /** e.g: `es` */
     name: string
-    /** e.g: `dist/farst/es` */
+    /** e.g: `dist/farst-three/es` */
     path: string
   }
 
   bundle: {
-    /** e.g: `farst/es` */
+    /** e.g: `farst-three/es` */
     path: string
   }
 }

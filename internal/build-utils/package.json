@@ -1,10 +1,10 @@
 {
-  "name": "@farst/build-utils",
+  "name": "@farst-three/build-utils",
   "version": "0.0.1",
   "private": true,
-  "description": "Build utils for Farst",
+  "description": "Build utils for farst-three",
   "keywords": [
-    "Farst"
+    "farst-three"
   ],
   "license": "MIT",
   "main": "./dist/index.cjs",

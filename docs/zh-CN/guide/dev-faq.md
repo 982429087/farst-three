@@ -19,15 +19,15 @@ pnpm i
 ```shell
 # get dist
 pnpm build
-cd dist/farst
-# set cur farst to global `node_modules`
+cd dist/farst-three
+# set cur farst-three to global `node_modules`
 pnpm link --global
-# for esm we also need link farst for dist
-pnpm link --global farst
+# for esm we also need link farst-three for dist
+pnpm link --global farst-three
 
-# go to your project, link to `farst`
+# go to your project, link to `farst-three`
 cd your-project
-pnpm link --global farst
+pnpm link --global farst-three
 ```
 
 > More info see [pnpm link](https://pnpm.io/cli/link).
@@ -38,4 +38,4 @@ We should not write Chinese comments in scss files.
 
 It will generate warning `@charset "UTF-8";` in the header of css file when built with vite.
 
-> More info see [#3219](https://github.com/farst/farst/issues/3219).
+> More info see [#3219](https://github.com/farst-three/farst-three/issues/3219).

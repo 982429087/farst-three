@@ -5,7 +5,7 @@ lang: en-US
 
 # Migration
 
-[This guide](https://github.com/farst/farst/discussions/5658) will help you upgrade from Element 2.x to Element Plus.
+[This guide](https://github.com/farst-three/farst-three/discussions/5658) will help you upgrade from Element 2.x to Element Plus.
 
 ## Vue 3 migration build
 

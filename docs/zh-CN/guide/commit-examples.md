@@ -83,7 +83,7 @@ For the subject header, the format is:
 [type](scope): [messages]
 ```
 
-You can checkout the allowed values for **type** and **scope** in [commitlint.config.js](https://github.com/farst/farst/blob/c2ee36a7fc72b17742d43ecdff4e2912c416141d/commitlint.config.js#L57),
+You can checkout the allowed values for **type** and **scope** in [commitlint.config.js](https://github.com/farst-three/farst-three/blob/c2ee36a7fc72b17742d43ecdff4e2912c416141d/commitlint.config.js#L57),
 
 ### Useful links
 

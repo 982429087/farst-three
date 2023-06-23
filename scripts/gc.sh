@@ -51,7 +51,7 @@ const props = defineProps(${INPUT_NAME}Props)
 EOF
 
 cat > $DIRNAME/src/$INPUT_NAME.ts <<EOF
-import { buildProps } from '@farst/utils'
+import { buildProps } from '@farst-three/utils'
 
 import type { ExtractPropTypes } from 'vue'
 import type $NAME from './$INPUT_NAME.vue'
@@ -63,7 +63,7 @@ export type ${NAME}Instance = InstanceType<typeof $NAME>
 EOF
 
 cat <<EOF >"$DIRNAME/index.ts"
-import { withInstall } from '@farst/utils'
+import { withInstall } from '@farst-three/utils'
 import $NAME from './src/$INPUT_NAME.vue'
 
 export const El$NAME = withInstall($NAME)

@@ -1,9 +1,9 @@
 {
-  "name": "@farst/build-constants",
+  "name": "@farst-three/build-constants",
   "version": "0.0.1",
-  "description": "Build constants for Farst",
+  "description": "Build constants for farst-three",
   "keywords": [
-    "farst"
+    "farst-three"
   ],
   "license": "MIT",
   "main": "./dist/index.cjs",

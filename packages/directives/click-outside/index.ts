@@ -1,4 +1,4 @@
-import { isClient, isElement } from '@farst/utils'
+import { isClient, isElement } from '@farst-three/utils'
 
 import type {
   ComponentPublicInstance,

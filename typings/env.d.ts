@@ -1,5 +1,5 @@
 import type { vShow } from 'vue'
-import type { INSTALLED_KEY } from '@farst/constants'
+import type { INSTALLED_KEY } from '@farst-three/constants'
 
 declare global {
   const process: {

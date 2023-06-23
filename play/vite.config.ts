@@ -15,7 +15,7 @@ import {
   getPackageDependencies,
   pkgRoot,
   projRoot,
-} from '@farst/build-utils'
+} from '@farst-three/build-utils'
 import type { Plugin } from 'vite'
 import './vite.init'
 
@@ -44,11 +44,11 @@ export default defineConfig(async ({ mode }) => {
     resolve: {
       alias: [
         {
-          find: /^farst(\/(es|lib))?$/,
+          find: /^farst-three(\/(es|lib))?$/,
           replacement: path.resolve(epRoot, 'index.ts'),
         },
         {
-          find: /^farst\/(es|lib)\/(.*)$/,
+          find: /^farst-three\/(es|lib)\/(.*)$/,
           replacement: `${pkgRoot}/$2`,
         },
       ],

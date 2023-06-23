@@ -10,12 +10,12 @@ import {
   errorAndExit,
   projRoot,
   writeJson,
-} from '@farst/build-utils'
+} from '@farst-three/build-utils'
 import {
   REPO_BRANCH,
   REPO_NAME,
   REPO_OWNER,
-} from '@farst/build-constants'
+} from '@farst-three/build-constants'
 
 interface FetchOption {
   key: string

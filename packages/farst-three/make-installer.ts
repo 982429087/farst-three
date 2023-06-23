@@ -1,4 +1,4 @@
-import { INSTALLED_KEY } from '@farst/constants'
+import { INSTALLED_KEY } from '@farst-three/constants'
 import { version } from './version'
 
 import type { App, Plugin } from '@vue/runtime-core'

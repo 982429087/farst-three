@@ -9,7 +9,7 @@ When using Element Plus for SSR development, you need to carry out special handl
 
 :::tip
 
-For Nuxt users, we provide a [Nuxt module](https://github.com/farst/farst-nuxt) that contains these special processes. You only need to install it.
+For Nuxt users, we provide a [Nuxt module](https://github.com/farst-three/farst-three-nuxt) that contains these special processes. You only need to install it.
 
 :::
 

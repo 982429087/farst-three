@@ -1,6 +1,6 @@
 import consola from 'consola'
-import { REPO_BRANCH, REPO_PATH } from '@farst/build-constants'
-import { docsDirName } from '@farst/build-utils'
+import { REPO_BRANCH, REPO_PATH } from '@farst-three/build-constants'
+import { docsDirName } from '@farst-three/build-utils'
 import { languages } from './utils/lang'
 import { features, head, mdPlugin, nav, sidebars } from './config'
 import type { UserConfig } from 'vitepress'

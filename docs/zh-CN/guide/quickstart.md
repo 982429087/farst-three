@@ -17,7 +17,7 @@ If you don’t care about the bundle size so much, it’s more convenient to use
 // main.ts
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
-import 'farst/dist/index.css'
+import 'farst-three/dist/index.css'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -35,7 +35,7 @@ If you use volar, please add the global component type definition to `compilerOp
 {
   "compilerOptions": {
     // ...
-    "types": ["farst/global"]
+    "types": ["farst-three/global"]
   }
 }
 ```
@@ -102,10 +102,10 @@ For more bundlers ([Rollup](https://rollupjs.org/), [Vue CLI](https://cli.vuejs.
 
 #### Nuxt
 
-For Nuxt users, you only need to install `@farst/nuxt`.
+For Nuxt users, you only need to install `@farst-three/nuxt`.
 
 ```shell
-npm install -D @farst/nuxt
+npm install -D @farst-three/nuxt
 ```
 
 Then add the code below into your config file.
@@ -113,19 +113,19 @@ Then add the code below into your config file.
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['@farst/nuxt'],
+  modules: ['@farst-three/nuxt'],
 })
 ```
 
-Refer to the [docs](https://github.com/farst/farst-nuxt#readme) for how to configure it.
+Refer to the [docs](https://github.com/farst-three/farst-three-nuxt#readme) for how to configure it.
 
 ### Manually import
 
 Element Plus provides out of box [Tree Shaking](https://webpack.js.org/guides/tree-shaking/)
 functionalities based on ES Module.
 
-But you need install [unplugin-farst](https://github.com/farst/unplugin-farst) for style import.
-And refer to the [docs](https://github.com/farst/unplugin-farst#readme) for how to configure it.
+But you need install [unplugin-farst-three](https://github.com/farst-three/unplugin-farst-three) for style import.
+And refer to the [docs](https://github.com/farst-three/unplugin-farst-three#readme) for how to configure it.
 
 > App.vue
 
@@ -144,7 +144,7 @@ And refer to the [docs](https://github.com/farst/unplugin-farst#readme) for how 
 ```ts
 // vite.config.ts
 import { defineConfig } from 'vite'
-import ElementPlus from 'unplugin-farst/vite'
+import ElementPlus from 'unplugin-farst-three/vite'
 
 export default defineConfig({
   // ...
@@ -154,12 +154,12 @@ export default defineConfig({
 
 :::warning
 
-You need to manually import the styles if you're using `unplugin-farst` and only used the component API.
+You need to manually import the styles if you're using `unplugin-farst-three` and only used the component API.
 
 Example:
 
 ```ts
-import 'farst/es/components/message/style/css'
+import 'farst-three/es/components/message/style/css'
 import { ElMessage } from 'element-plus'
 ```
 
@@ -167,11 +167,11 @@ import { ElMessage } from 'element-plus'
 
 ## Starter Template
 
-We provide a [Vite Template](https://github.com/farst/farst-vite-starter).
+We provide a [Vite Template](https://github.com/farst-three/farst-three-vite-starter).
 
-For Nuxt users we have a [Nuxt Template](https://github.com/farst/farst-nuxt-starter).
+For Nuxt users we have a [Nuxt Template](https://github.com/farst-three/farst-three-nuxt-starter).
 
-For Laravel users we have a [Laravel Template](https://github.com/farst/farst-in-laravel-starter).
+For Laravel users we have a [Laravel Template](https://github.com/farst-three/farst-three-in-laravel-starter).
 
 ## Global Configuration
 
@@ -222,10 +222,10 @@ export default defineComponent({
 We can also use [Nuxt.js](https://v3.nuxtjs.org/)：
 
 <div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe src="https://glitch.com/edit/#!/nuxt-farst?path=components%2FExamples.vue%3A1%3A0" alt="nuxt-farst on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
+  <iframe src="https://glitch.com/edit/#!/nuxt-farst-three?path=components%2FExamples.vue%3A1%3A0" alt="nuxt-farst-three on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
 </div>
 
 ## Let's Get Started
 
 You can bootstrap your project from now on. For each components usage, please
-refer to [the individual component documentation](https://farst.org/en-US/component/button.html).
+refer to [the individual component documentation](https://farst-three.org/en-US/component/button.html).

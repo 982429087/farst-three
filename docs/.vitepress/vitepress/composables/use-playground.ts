@@ -10,10 +10,10 @@ export const usePlayground = (source: string) => {
 
   const encoded = utoa(JSON.stringify(originCode))
   const isPreview = location.host.startsWith('preview')
-  let link = `https://farst.run/#${encoded}`
+  let link = `https://farst-three.run/#${encoded}`
   if (isPreview) {
     const pr = location.host.split('-', 2)[1]
-    link = `https://farst.run/?pr=${pr}#${encoded}`
+    link = `https://farst-three.run/?pr=${pr}#${encoded}`
   }
   return {
     encoded,

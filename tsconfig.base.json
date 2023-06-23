@@ -16,7 +16,7 @@
     "rootDir": ".",
     "types": [],
     "paths": {
-      "@farst/*": ["packages/*"]
+      "@farst-three/*": ["packages/*"]
     }
   }
 }

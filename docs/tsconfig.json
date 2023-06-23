@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "lib": ["WebWorker"],
     "paths": {
-      "farst": ["../packages/farst"],
+      "farst-three": ["../packages/farst-three"],
       "~/*": ["./.vitepress/vitepress/*"]
     },
     "types": ["../typings/components"],

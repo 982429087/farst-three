@@ -12,7 +12,7 @@ import {
   epPackage,
   getPackageManifest,
   projRoot,
-} from '@farst/build-utils'
+} from '@farst-three/build-utils'
 
 import type { TaskFunction } from 'gulp'
 import type {
@@ -36,7 +36,7 @@ const reComponentName: ReComponentName = (title) => {
 }
 
 const reDocUrl: ReDocUrl = (fileName, header) => {
-  const docs = 'https://farst.org/en-US/component/'
+  const docs = 'https://farst-three.org/en-US/component/'
   const _header = header
     ? removeTag(header).replaceAll(/\s+/g, '-').toLowerCase()
     : ''

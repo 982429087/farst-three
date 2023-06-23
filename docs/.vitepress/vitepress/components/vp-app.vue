@@ -21,7 +21,7 @@ const [isSidebarOpen, toggleSidebar] = useToggle(false)
 const { hasSidebar } = useSidebar()
 // const lang = useLang()
 
-// const mirrorUrl = 'farst.gitee.io'
+// const mirrorUrl = 'farst-three.gitee.io'
 // const isMirrorUrl = () => {
 //   if (!isClient) return
 //   return window.location.hostname === mirrorUrl
@@ -98,7 +98,7 @@ onMounted(async () => {
   //       }
   //     )
   //     const toLang = '/zh-CN/'
-  //     location.href = `https://farst.gitee.io${toLang}${location.pathname.slice(
+  //     location.href = `https://farst-three.gitee.io${toLang}${location.pathname.slice(
   //       toLang.length
   //     )}`
   //   } catch {

@@ -1,18 +1,18 @@
 {
-  "name": "farst",
+  "name": "farst-three",
   "version": "0.0.0-dev.1",
   "description": "A Component Library for Vue 3",
   "keywords": [
-    "farst",
+    "farst-three",
     "element",
     "component library",
     "ui framework",
     "ui",
     "vue"
   ],
-  "homepage": "https://farst.org/",
+  "homepage": "https://farst-three.org/",
   "bugs": {
-    "url": "https://github.com/farst/farst/issues"
+    "url": "https://github.com/farst-three/farst-three/issues"
   },
   "license": "MIT",
   "main": "lib/index.js",
@@ -36,7 +36,7 @@
   "jsdelivr": "dist/index.full.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/farst/farst.git"
+    "url": "git+https://github.com/farst-three/farst-three.git"
   },
   "publishConfig": {
     "access": "public"
@@ -50,6 +50,7 @@
     "lib/components/*/style/*"
   ],
   "peerDependencies": {
+    "three": "^0.153.0",
     "vue": "^3.2.0"
   },
   "dependencies": {

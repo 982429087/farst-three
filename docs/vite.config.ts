@@ -14,7 +14,7 @@ import {
   epPackage,
   getPackageDependencies,
   projRoot,
-} from '@farst/build-utils'
+} from '@farst-three/build-utils'
 import { MarkdownTransform } from './.vitepress/plugins/markdown-transform'
 
 import type { Alias } from 'vite'
@@ -28,11 +28,11 @@ const alias: Alias[] = [
 if (process.env.DOC_ENV !== 'production') {
   alias.push(
     {
-      find: /^farst(\/(es|lib))?$/,
-      replacement: path.resolve(projRoot, 'packages/farst/index.ts'),
+      find: /^farst-three(\/(es|lib))?$/,
+      replacement: path.resolve(projRoot, 'packages/farst-three/index.ts'),
     },
     {
-      find: /^farst\/(es|lib)\/(.*)$/,
+      find: /^farst-three\/(es|lib)\/(.*)$/,
       replacement: `${path.resolve(projRoot, 'packages')}/$2`,
     }
   )
@@ -46,7 +46,8 @@ export default defineConfig(async ({ mode }) => {
 
   const optimizeDeps = [...new Set([...epDeps, ...docsDeps])].filter(
     (dep) =>
-      !dep.startsWith('@types/') && !['@farst/metadata', 'farst'].includes(dep)
+      !dep.startsWith('@types/') &&
+      !['@farst-three/metadata', 'farst-three'].includes(dep)
   )
 
   optimizeDeps.push(

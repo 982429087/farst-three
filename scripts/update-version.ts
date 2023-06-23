@@ -1,6 +1,6 @@
 import consola from 'consola'
 import chalk from 'chalk'
-import { errorAndExit, getWorkspacePackages } from '@farst/build-utils'
+import { errorAndExit, getWorkspacePackages } from '@farst-three/build-utils'
 import type { Project } from '@pnpm/find-workspace-packages'
 
 async function main() {
@@ -18,14 +18,14 @@ async function main() {
   consola.log(chalk.cyan(`$TAG_VERSION: ${tagVersion}`))
   consola.log(chalk.cyan(`$GIT_HEAD: ${gitHead}`))
 
-  consola.debug(chalk.yellow(`Updating package.json for farst`))
+  consola.debug(chalk.yellow(`Updating package.json for farst-three`))
 
   const pkgs = Object.fromEntries(
     (await getWorkspacePackages()).map((pkg) => [pkg.manifest.name!, pkg])
   )
-  const farst = pkgs['farst'] || pkgs['@farst/nightly']
-  const eslintConfig = pkgs['@farst/eslint-config']
-  const metadata = pkgs['@farst/metadata']
+  const farstThree = pkgs['farst-three'] || pkgs['@farst-three/nightly']
+  const eslintConfig = pkgs['@farst-three/eslint-config']
+  const metadata = pkgs['@farst-three/metadata']
 
   const writeVersion = async (project: Project) => {
     await project.writeProjectManifest({
@@ -36,7 +36,7 @@ async function main() {
   }
 
   try {
-    await writeVersion(farst)
+    await writeVersion(farstThree)
     await writeVersion(eslintConfig)
     await writeVersion(metadata)
   } catch (err: any) {

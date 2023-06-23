@@ -1,2 +1,2 @@
-import '@farst/components/base/style'
-import '@farst/theme-chalk/src/affix.scss'
+import '@farst-three/components/base/style'
+import '@farst-three/theme-chalk/src/affix.scss'

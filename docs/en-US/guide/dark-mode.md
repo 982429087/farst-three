@@ -29,10 +29,10 @@ Then, you can quickly enable it with just one line of code to import CSS in your
 ```ts
 // main.ts
 // if you just want to import css
-import 'farst/theme-chalk/dark/css-vars.css'
+import 'farst-three/theme-chalk/dark/css-vars.css'
 ```
 
-> If you want an example, you can refer to [farst-vite-starter](https://github.com/farst/farst-vite-starter).
+> If you want an example, you can refer to [farst-three-vite-starter](https://github.com/farst-three/farst-three-vite-starter).
 
 ## Custom variables
 
@@ -53,7 +53,7 @@ Import it after styles of Element Plus:
 
 ```ts
 // main.ts
-import 'farst/theme-chalk/dark/css-vars.css'
+import 'farst-three/theme-chalk/dark/css-vars.css'
 import './styles/dark/css-vars.css'
 ```
 
@@ -66,7 +66,7 @@ If you use scss, you can also import scss file to compile.
 ```scss
 // styles/element/index.scss
 /*just override what you need*/
-@forward 'farst/theme-chalk/src/dark/var.scss' with (
+@forward 'farst-three/theme-chalk/src/dark/var.scss' with (
   $bg-color: (
     'page': #0a0a0a,
     '': #626aef,
@@ -80,5 +80,5 @@ If you use scss, you can also import scss file to compile.
 import './styles/element/index.scss'
 
 // or just want to import scss?
-// import 'farst/theme-chalk/src/dark/css-vars.scss'
+// import 'farst-three/theme-chalk/src/dark/css-vars.scss'
 ```

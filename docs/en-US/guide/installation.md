@@ -20,7 +20,7 @@ Since Vue 3 no longer supports IE11, Element Plus does not support IE either.
 
 Element Plus is currently in a rapid development iteration.
 
-[![ElementPlus version badge](https://img.shields.io/npm/v/farst.svg?style=flat-square)](https://www.npmjs.org/package/farst)
+[![ElementPlus version badge](https://img.shields.io/npm/v/farst-three.svg?style=flat-square)](https://www.npmjs.org/package/farst-three)
 
 ## Using Package Manager
 
@@ -32,13 +32,13 @@ so that you can utilize bundlers like [Vite](https://vitejs.dev) and
 # Choose a package manager you like.
 
 # NPM
-$ npm install farst --save
+$ npm install farst-three --save
 
 # Yarn
-$ yarn add farst
+$ yarn add farst-three
 
 # pnpm
-$ pnpm install farst
+$ pnpm install farst-three
 ```
 
 If your network environment is not good, it is recommended to use a mirror registry [cnpm](https://github.com/cnpm/cnpm) or [Alibaba](https://registry.npmmirror.com/).
@@ -56,11 +56,11 @@ You can also use other CDN providers.
 ```html
 <head>
   <!-- Import style -->
-  <link rel="stylesheet" href="//unpkg.com/farst/dist/index.css" />
+  <link rel="stylesheet" href="//unpkg.com/farst-three/dist/index.css" />
   <!-- Import Vue 3 -->
   <script src="//unpkg.com/vue@3"></script>
   <!-- Import component library -->
-  <script src="//unpkg.com/farst"></script>
+  <script src="//unpkg.com/farst-three"></script>
 </head>
 ```
 
@@ -71,12 +71,12 @@ You can also use other CDN providers.
   <!-- Import style -->
   <link
     rel="stylesheet"
-    href="//cdn.jsdelivr.net/npm/farst/dist/index.css"
+    href="//cdn.jsdelivr.net/npm/farst-three/dist/index.css"
   />
   <!-- Import Vue 3 -->
   <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
   <!-- Import component library -->
-  <script src="//cdn.jsdelivr.net/npm/farst"></script>
+  <script src="//cdn.jsdelivr.net/npm/farst-three"></script>
 </head>
 ```
 

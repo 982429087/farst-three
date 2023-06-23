@@ -1,4 +1,4 @@
-import { buildRoot } from '@farst/build-utils'
+import { buildRoot } from '@farst-three/build-utils'
 import { run } from './process'
 
 import type { TaskFunction } from 'gulp'

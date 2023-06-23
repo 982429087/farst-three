@@ -7,7 +7,7 @@ pnpm update:version
 
 pnpm build
 
-cd dist/farst
+cd dist/farst-three
 npm publish
 cd -
 

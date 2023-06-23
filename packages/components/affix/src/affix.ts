@@ -1,5 +1,10 @@
-import { buildProps, definePropType, isBoolean, isNumber } from '@farst/utils'
-import { CHANGE_EVENT } from '@farst/constants'
+import {
+  buildProps,
+  definePropType,
+  isBoolean,
+  isNumber,
+} from '@farst-three/utils'
+import { CHANGE_EVENT } from '@farst-three/constants'
 import type { ExtractPropTypes } from 'vue'
 import type { ZIndexProperty } from 'csstype'
 import type Affix from './affix.vue'

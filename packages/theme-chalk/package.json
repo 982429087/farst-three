@@ -1,16 +1,16 @@
 {
-  "name": "@farst/theme-chalk",
+  "name": "@farst-three/theme-chalk",
   "version": "0.1.0",
   "description": "Element component chalk theme.",
   "keywords": [
     "vue-components",
-    "farst",
+    "farst-three",
     "theme-chalk",
     "theme-light"
   ],
-  "homepage": "https://github.com/farst/farst/blob/dev/packages/theme-chalk/README.md",
+  "homepage": "https://github.com/farst-three/farst-three/blob/dev/packages/theme-chalk/README.md",
   "bugs": {
-    "url": "https://github.com/farst/farst#issues"
+    "url": "https://github.com/farst-three/farst-three#issues"
   },
   "license": "MIT",
   "author": "yi.shyang@ele.me",
@@ -19,7 +19,7 @@
   "jsdelivr": "index.css",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/farst/farst.git"
+    "url": "git+https://github.com/farst-three/farst-three.git"
   },
   "style": "index.css",
   "scripts": {
@@ -27,8 +27,8 @@
     "build": "gulp --require @esbuild-kit/cjs-loader"
   },
   "devDependencies": {
-    "@farst/build": "workspace:*",
     "@esbuild-kit/cjs-loader": "^2.2.1",
+    "@farst-three/build": "workspace:*",
     "@types/gulp-autoprefixer": "^0.0.33",
     "@types/gulp-clean-css": "^4.3.0",
     "@types/gulp-rename": "^2.0.1",

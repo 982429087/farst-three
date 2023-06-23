@@ -27,7 +27,7 @@ the project will launch website for you to preview all existing component.
 
 ## Local development
 
-See [Local development guide](https://github.com/farst/farst/blob/dev/CONTRIBUTING.md)
+See [Local development guide](https://github.com/farst-three/farst-three/blob/dev/CONTRIBUTING.md)
 
 1. With command
 
@@ -47,8 +47,8 @@ will start the local development environment.
 </template>
 
 <script setup lang="ts">
-// make sure this component is registered in @farst/components
-import { ComponentYouAreDeveloping } from '@farst/components'
+// make sure this component is registered in @farst-three/components
+import { ComponentYouAreDeveloping } from '@farst-three/components'
 </script>
 ```
 

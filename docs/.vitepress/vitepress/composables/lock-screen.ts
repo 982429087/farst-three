@@ -6,7 +6,7 @@ import {
   getStyle,
   hasClass,
   removeClass,
-} from '@farst/utils'
+} from '@farst-three/utils'
 
 export const useLockScreen = () => {
   let scrollBarWidth = 0

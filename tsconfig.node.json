@@ -11,8 +11,8 @@
     "internal/**/*.json",
     "scripts/**/*",
     "packages/theme-chalk/*",
-    "packages/farst/version.ts",
-    "packages/farst/package.json"
+    "packages/farst-three/version.ts",
+    "packages/farst-three/package.json"
   ],
   "exclude": ["**/__tests__/**", "**/tests/**", "**/dist"]
 }

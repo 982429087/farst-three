@@ -40,7 +40,7 @@ transitions/collapse
 // collapse
 import { ElCollapseTransition } from 'element-plus'
 // fade/zoom
-import 'farst/lib/theme-chalk/base.css'
+import 'farst-three/lib/theme-chalk/base.css'
 import App from './App.vue'
 
 const app = createApp(App)

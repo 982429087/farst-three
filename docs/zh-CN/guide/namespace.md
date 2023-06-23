@@ -7,7 +7,7 @@ lang: en-US
 
 :::tip
 
-We provide a example in [farst-vite-starter](https://github.com/farst/farst-vite-starter).
+We provide a example in [farst-three-vite-starter](https://github.com/farst-three/farst-three-vite-starter).
 Just check it.
 
 :::
@@ -40,7 +40,7 @@ Create `styles/element/index.scss`:
 ```scss
 // styles/element/index.scss
 // we can add this to custom namespace, default is 'el'
-@forward 'farst/theme-chalk/src/mixins/config.scss' with (
+@forward 'farst-three/theme-chalk/src/mixins/config.scss' with (
   $namespace: 'ep'
 );
 // ...

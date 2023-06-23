@@ -26,7 +26,7 @@ const onVersionChange = (val) => {
 onMounted(async () => {
   try {
     const { data } = await axios.get<Release[]>(
-      'https://api.github.com/repos/farst/farst/releases'
+      'https://api.github.com/repos/farst-three/farst-three/releases'
     )
     releases.value = data
     currentRelease.value = data[0]

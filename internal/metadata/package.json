@@ -1,9 +1,9 @@
 {
-  "name": "@farst/metadata",
+  "name": "@farst-three/metadata",
   "version": "0.0.1",
-  "description": "Metadata for Farst",
+  "description": "Metadata for farst-three",
   "keywords": [
-    "farst"
+    "farst-three"
   ],
   "license": "MIT",
   "files": [
@@ -19,9 +19,9 @@
     "dev": "DEV=1 pnpm run build"
   },
   "devDependencies": {
-    "@farst/build": "^0.0.1",
-    "@farst/build-constants": "^0.0.1",
-    "@farst/build-utils": "^0.0.1",
+    "@farst-three/build": "^0.0.1",
+    "@farst-three/build-constants": "^0.0.1",
+    "@farst-three/build-utils": "^0.0.1",
     "@types/lodash-es": "^4.17.6",
     "chalk": "^5.0.1",
     "consola": "^2.15.3",

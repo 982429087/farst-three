@@ -1,5 +1,5 @@
 {
-  "name": "@farst/play",
+  "name": "@farst-three/play",
   "private": true,
   "scripts": {
     "dev": "vite",

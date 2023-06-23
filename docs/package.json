@@ -1,5 +1,5 @@
 {
-  "name": "@farst/docs",
+  "name": "@farst-three/docs",
   "private": true,
   "scripts": {
     "dev": "pnpm gen-locale && vitepress dev .",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@docsearch/js": "^3.1.0",
     "@element-plus/icons-vue": "^2.0.9",
-    "@farst/metadata": "workspace:*",
+    "@farst-three/metadata": "workspace:*",
     "@vue/shared": "^3.2.37",
     "@vueuse/core": "^9.1.0",
     "axios": "^0.27.2",
@@ -26,9 +26,9 @@
   "devDependencies": {
     "@crowdin/cli": "^3.7.8",
     "@docsearch/react": "^3.1.0",
-    "@farst/build": "workspace:*",
-    "@farst/build-constants": "workspace:*",
-    "@farst/build-utils": "workspace:*",
+    "@farst-three/build": "workspace:*",
+    "@farst-three/build-constants": "workspace:*",
+    "@farst-three/build-utils": "workspace:*",
     "@iconify-json/ri": "^1.1.3",
     "@types/markdown-it": "^12.2.3",
     "@vitejs/plugin-vue-jsx": "^1.3.10",

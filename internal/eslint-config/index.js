@@ -249,7 +249,7 @@ module.exports = defineConfig({
             position: 'before',
           },
           {
-            pattern: '@farst/**',
+            pattern: '@farst-three/**',
             group: 'internal',
           },
         ],

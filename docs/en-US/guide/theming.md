@@ -15,13 +15,13 @@ We provide four ways to change the style variables.
 
 These are examples about custom theme.
 
-- Full import: [farst-vite-starter](https://github.com/farst/farst-vite-starter)
-- On demand: [unplugin-farst/examples/vite](https://github.com/farst/unplugin-farst)
+- Full import: [farst-three-vite-starter](https://github.com/farst-three/farst-three-vite-starter)
+- On demand: [unplugin-farst-three/examples/vite](https://github.com/farst-three/unplugin-farst-three)
 
 ### By SCSS variables
 
 `theme-chalk` is written in SCSS.
-You can find SCSS variables in [`packages/theme-chalk/src/common/var.scss`](https://github.com/farst/farst/blob/dev/packages/theme-chalk/src/common/var.scss).
+You can find SCSS variables in [`packages/theme-chalk/src/common/var.scss`](https://github.com/farst-three/farst-three/blob/dev/packages/theme-chalk/src/common/var.scss).
 
 :::warning
 
@@ -33,7 +33,7 @@ For example, We use `$colors` as a map to preserve different types of colors.
 
 `$notification` is a map where all variables of the `notification` component at.
 
-In the future, we will write documentation for variables that can be customized for each component. You can also directly checkout the source [var.scss](https://github.com/farst/farst/blob/dev/packages/theme-chalk/src/common/var.scss).
+In the future, we will write documentation for variables that can be customized for each component. You can also directly checkout the source [var.scss](https://github.com/farst-three/farst-three/blob/dev/packages/theme-chalk/src/common/var.scss).
 
 :::
 
@@ -83,7 +83,7 @@ Because the sass team said they will remove `@import` eventually.
 ```scss
 // styles/element/index.scss
 /* just override what you need */
-@forward 'farst/theme-chalk/src/common/var.scss' with (
+@forward 'farst-three/theme-chalk/src/common/var.scss' with (
   $colors: (
     'primary': (
       'base': green,
@@ -93,23 +93,23 @@ Because the sass team said they will remove `@import` eventually.
 
 // If you just import on demand, you can ignore the following content.
 // if you want to import all styles:
-// @use "farst/theme-chalk/src/index.scss" as *;
+// @use "farst-three/theme-chalk/src/index.scss" as *;
 ```
 
 Then in the entry file of your project, import this style file instead of Element's built CSS:
 
 :::tip
 
-Import `element/index.scss` before scss of farst to avoid the problem of sass mixed variables, because we need generate light-x by your custom variables.
+Import `element/index.scss` before scss of farst-three to avoid the problem of sass mixed variables, because we need generate light-x by your custom variables.
 
 :::
 
-Create a `element/index.scss` to combine your variables and variables of farst. (If you import them in ts, they will not be combined.)
+Create a `element/index.scss` to combine your variables and variables of farst-three. (If you import them in ts, they will not be combined.)
 
 :::tip
 
 In addition, you should distinguish your scss from the element variable scss.
-If they are mixed together, each hot update of `farst` needs to compile a large number of scss files, resulting in slow speed.
+If they are mixed together, each hot update of `farst-three` needs to compile a large number of scss files, resulting in slow speed.
 
 :::
 
@@ -135,8 +135,8 @@ import vue from '@vitejs/plugin-vue'
 // import Components from 'unplugin-vue-components/vite'
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-// or use unplugin-farst
-import ElementPlus from 'unplugin-farst/vite'
+// or use unplugin-farst-three
+import ElementPlus from 'unplugin-farst-three/vite'
 
 // vite.config.ts
 export default defineConfig({
@@ -164,7 +164,7 @@ export default defineConfig({
     //     }),
     //   ],
     // }),
-    // or use unplugin-farst
+    // or use unplugin-farst-three
     ElementPlus({
       useSource: true,
     }),
@@ -176,9 +176,9 @@ If you are using webpack, and you want to custom theme when importing on demand.
 
 ```ts
 // webpack.config.ts
-// use unplugin-farst
+// use unplugin-farst-three
 
-import ElementPlus from 'unplugin-farst/webpack'
+import ElementPlus from 'unplugin-farst-three/webpack'
 
 export default defineConfig({
   css: {

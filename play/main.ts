@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-// import '@farst/theme-chalk/src/dark/css-vars.scss'
+// import '@farst-three/theme-chalk/src/dark/css-vars.scss'
 ;(async () => {
   const apps = import.meta.glob('./src/*.vue')
   const name = location.pathname.replace(/^\//, '') || 'App'

@@ -1,4 +1,4 @@
 {
   "root": true,
-  "extends": ["@farst/eslint-config"]
+  "extends": ["@farst-three/eslint-config"]
 }

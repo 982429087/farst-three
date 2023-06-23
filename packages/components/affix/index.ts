@@ -1,4 +1,4 @@
-import { withInstall } from '@farst/utils'
+import { withInstall } from '@farst-three/utils'
 
 import Affix from './src/affix.vue'
 

@@ -1,7 +1,7 @@
 {
-  "name": "@farst/hooks",
+  "name": "@farst-three/hooks",
   "version": "0.0.5",
-  "description": "Farst composables",
+  "description": "farst-three composables",
   "license": "MIT",
   "main": "index.ts",
   "module": "index.ts",

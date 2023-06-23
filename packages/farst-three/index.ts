@@ -1,8 +1,8 @@
 import installer from './defaults'
-export * from '@farst/components'
-export * from '@farst/constants'
-export * from '@farst/directives'
-export * from '@farst/hooks'
+export * from '@farst-three/components'
+export * from '@farst-three/constants'
+export * from '@farst-three/directives'
+export * from '@farst-three/hooks'
 export * from './make-installer'
 
 export const install = installer.install

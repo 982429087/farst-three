@@ -1,7 +1,7 @@
 {
-  "name": "@farst/directives",
+  "name": "@farst-three/directives",
   "version": "0.0.5",
-  "description": "Farst directives",
+  "description": "farst-three directives",
   "license": "MIT",
   "main": "index.ts",
   "module": "index.ts",

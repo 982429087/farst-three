@@ -1,4 +1,4 @@
-import { isFunction } from '@farst/utils'
+import { isFunction } from '@farst-three/utils'
 
 import type { ObjectDirective } from 'vue'
 

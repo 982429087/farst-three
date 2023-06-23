@@ -4,7 +4,7 @@ import { isClient } from '@vueuse/core'
 import { useLang } from '../../composables/lang'
 import resourceLocale from '../../../i18n/pages/resource.json'
 import { sendEvent } from '../../../config/analytics'
-const mirrorUrl = 'farst.gitee.io'
+const mirrorUrl = 'farst-three.gitee.io'
 const isMirrorUrl = () => {
   if (!isClient) return
   return window.location.hostname === mirrorUrl
@@ -18,9 +18,9 @@ const resourceUrl = {
   },
   gitee: {
     sketch:
-      'https://gitee.com/farst/resources/raw/master/Element_Plus_Design_System_2022_1.0_Beta.zip',
+      'https://gitee.com/farst-three/resources/raw/master/Element_Plus_Design_System_2022_1.0_Beta.zip',
     axure:
-      'https://gitee.com/farst/resources/raw/master/Element_Components_v2.1.0.rplib',
+      'https://gitee.com/farst-three/resources/raw/master/Element_Components_v2.1.0.rplib',
   },
 }[isMirrorUrl() ? 'gitee' : 'github']
 
