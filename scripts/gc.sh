@@ -41,7 +41,7 @@ cat > $DIRNAME/src/$INPUT_NAME.vue <<EOF
 import { ${INPUT_NAME}Props } from './$INPUT_NAME'
 
 defineOptions({
-  name: 'El$NAME',
+  name: 'Ft$NAME',
 })
 
 const props = defineProps(${INPUT_NAME}Props)
@@ -66,8 +66,8 @@ cat <<EOF >"$DIRNAME/index.ts"
 import { withInstall } from '@farst-three/utils'
 import $NAME from './src/$INPUT_NAME.vue'
 
-export const El$NAME = withInstall($NAME)
-export default El$NAME
+export const Ft$NAME = withInstall($NAME)
+export default Ft$NAME
 
 export * from './src/$INPUT_NAME'
 EOF

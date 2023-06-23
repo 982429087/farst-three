@@ -1,9 +1,9 @@
 ---
-title: Affix
+title: Scene
 lang: zh-CN
 ---
 
-# Affix
+# Scene
 
 第一个中文文档
 
@@ -13,29 +13,10 @@ lang: zh-CN
 
 :::demo 你可以设置`offset`属性来改变偏移顶部，默认值为0。
 
-affix/basic
+scene/basic
 
 :::
 
-## 目标容器
-
-您可以设置`target`属性以始终将词缀保留在容器中。如果超出范围，它将被隐藏。
-
-:::demo 请注意，容器避免有滚动条。
-
-affix/target
-
-:::
-
-## 固定位置
-
-The affix component provides two fixed positions: `top` and `bottom`.
-
-:::demo You can set `position` attribute to change the fixed position, the default value is `top`.
-
-affix/fixed
-
-:::
 
 ## Affix API
 
