@@ -18,7 +18,7 @@ import {
 } from '@farst-three/build-utils'
 import type { Plugin } from 'vite'
 import './vite.init'
-
+import { hyphenate as kebabCase } from '@vue/shared'
 const esbuildPlugin = (): Plugin => ({
   ...esbuild({
     target: 'chrome64',
@@ -69,8 +69,27 @@ export default defineConfig(async ({ mode }) => {
       esbuildPlugin(),
       Components({
         include: `${__dirname}/**`,
-        resolvers: ElementPlusResolver({ importStyle: 'sass' }),
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: 'sass',
+          }),
+          {
+            type: 'component',
+            resolve: (componentName: string) => {
+              if (componentName.startsWith('Ft')) {
+                console.log(componentName, epRoot)
+                return {
+                  name: componentName,
+                  from: '@farst-three/components',
+                  sideEffects: ['FtScene', 'FtPerspectiveCamera'].includes(componentName) ? undefined : `@farst-three/components/${kebabCase(componentName.slice(2))}/style/index.ts`,
+                }
+              }
+            }
+          }
+        ],
+
         dts: false,
+
       }),
       mkcert(),
       Inspect(),

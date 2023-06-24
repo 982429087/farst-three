@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 // import '@farst-three/theme-chalk/src/dark/css-vars.scss'
 ;(async () => {
   const apps = import.meta.glob('./src/*.vue')
-  const name = location.pathname.replace(/^\//, '') || 'App'
+  const name = location.pathname.replace(/^\//, '')
   const file = apps[`./src/${name}.vue`]
   if (!file) {
     location.pathname = 'App'

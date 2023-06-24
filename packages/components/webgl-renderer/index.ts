@@ -1,7 +1,7 @@
 import { withInstall } from '@farst-three/utils'
-import WebGLRenderer from './src/webgl-renderer.vue'
+import WebglRenderer from './src/webgl-renderer.vue'
 
-export const FtWebGLRenderer = withInstall(WebGLRenderer)
-export default FtWebGLRenderer
+export const FtWebglRenderer = withInstall(WebglRenderer)
+export default FtWebglRenderer
 
 export * from './src/webgl-renderer'

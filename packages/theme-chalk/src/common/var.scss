@@ -12,7 +12,7 @@
 $types: primary, success, warning, danger, error, info;
 
 // Color
-$colors: () !default;
+$colors: () !default; // ！default 用于设置变量的默认值，如果变量已经被赋值，则不会重新赋值，否则会被赋值
 $colors: map.deep-merge(
   (
     'white': #ffffff,
