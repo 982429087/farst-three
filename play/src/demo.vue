@@ -1,14 +1,20 @@
 <template>
   <div class="farst-three">
-    <ft-scene>
+    <FtScene>
       <FtPerspectiveCamera>
+        <FtMesh>
+          <FtBoxGeometry />
+          <FtMeshBasicMaterial />
+        </FtMesh>
         <FtWebglRenderer />
       </FtPerspectiveCamera>
-    </ft-scene>
+    </FtScene>
   </div>
 </template>
 
 <script setup lang="ts">
+
+
 
 </script>
 
