@@ -81,7 +81,8 @@ export default defineConfig(async ({ mode }) => {
                 return {
                   name: componentName,
                   from: '@farst-three/components',
-                  sideEffects: ['FtScene', 'FtPerspectiveCamera'].includes(componentName) ? undefined : `@farst-three/components/${kebabCase(componentName.slice(2))}/style/index.ts`,
+                  sideEffects: ['FtWebglRenderer']
+                  .includes(componentName) ? `@farst-three/components/${kebabCase(componentName.slice(2))}/style/index.ts` : undefined,
                 }
               }
             }
