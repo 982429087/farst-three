@@ -22,5 +22,6 @@ const camera = new PerspectiveCamera(
   0.1,
   1000
 )
+camera.position.z = 5
 provide(cameraInjectionKey, shallowRef(camera))
 </script>

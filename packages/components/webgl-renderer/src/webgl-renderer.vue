@@ -23,19 +23,29 @@ defineProps(webGLRendererProps)
 const emit = defineEmits(webglRendererEmits)
 
 const scene = useInjection<Scene>(sceneInjectionKey)
+// 任何camera都可以
+const camera = useInjection<any>(cameraInjectionKey)
 const perspectiveCamera = useInjection<PerspectiveCamera>(cameraInjectionKey)
 
 const appendToElement = ref<HTMLDivElement>()
 const ns = useNamespace('webgl-renderer')
 const renderer = new WebGLRenderer()
+
 onMounted(() => {
   if (appendToElement.value) {
     const container = appendToElement.value
-    console.log(container.scrollWidth, container.scrollHeight)
-    renderer.setSize(container.scrollWidth, container.scrollHeight)
+
+    renderer.setSize(container.clientWidth, container.clientHeight)
     container.appendChild(renderer.domElement)
     renderer.render(scene, perspectiveCamera)
     emit('load', renderer)
+    window.addEventListener('resize', () => {
+      if (camera.type === 'PerspectiveCamera') {
+        camera.aspect = container.clientWidth / container.clientHeight
+        renderer.setSize(container.clientWidth, container.clientHeight)
+        camera.updateProjectionMatrix()
+      }
+    })
   }
 })
 </script>
