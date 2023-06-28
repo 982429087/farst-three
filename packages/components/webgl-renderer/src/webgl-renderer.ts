@@ -4,7 +4,11 @@ import type { WebGLRenderer } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type WebglRendererComponent from './webgl-renderer.vue'
 
-export const webGLRendererProps = buildProps({})
+export const webGLRendererProps = buildProps({
+  animationFn: {
+    type: Function,
+  },
+})
 
 export type WebGLRendererProps = ExtractPropTypes<typeof webGLRendererProps>
 export type WebGLRendererInstance = InstanceType<typeof WebglRendererComponent>
