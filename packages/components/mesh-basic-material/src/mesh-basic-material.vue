@@ -15,11 +15,11 @@ defineOptions({
   name: 'FtMeshBasicMaterial',
 })
 
-defineProps(meshBasicMaterialProps)
+const props = defineProps(meshBasicMaterialProps)
 
 // init here
 
-const material = new MeshBasicMaterial({ color: '#00FF00' })
+const material = new MeshBasicMaterial(props.params)
 const mesh = useInjection<Mesh>(meshInjectionKey)
 mesh.material = material
 </script>
