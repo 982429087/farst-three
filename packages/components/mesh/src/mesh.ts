@@ -1,7 +1,7 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import type { BufferGeometry, NormalBufferAttributes } from 'three'
+import type { BufferGeometry, Mesh, NormalBufferAttributes } from 'three'
 import type { ExtractPropTypes } from 'vue'
-import type Mesh from './mesh.vue'
+import type MeshComponent from './mesh.vue'
 
 export const meshProps = buildProps({
   geometry: {
@@ -14,5 +14,10 @@ export const meshProps = buildProps({
   },
 })
 
+export const meshEmits = {
+  load: (mesh: Mesh) => mesh,
+}
+
 export type MeshProps = ExtractPropTypes<typeof meshProps>
-export type MeshInstance = InstanceType<typeof Mesh>
+export type MeshInstance = InstanceType<typeof MeshComponent>
+export type MeshEmits = typeof meshEmits
