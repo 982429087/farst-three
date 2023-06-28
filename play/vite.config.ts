@@ -81,7 +81,7 @@ export default defineConfig(async ({ mode }) => {
                 return {
                   name: componentName,
                   from: '@farst-three/components',
-                  sideEffects: ['FtWebglRenderer']
+                  sideEffects: ['FtScene']
                   .includes(componentName) ? `@farst-three/components/${kebabCase(componentName.slice(2))}/style/index.ts` : undefined,
                 }
               }
