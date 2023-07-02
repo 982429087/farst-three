@@ -2,11 +2,12 @@ import {
   boxGeometryInjectionKey,
   cameraInjectionKey,
   meshInjectionKey,
+  rendererInjectionKey,
   sceneInjectionKey,
   sceneRefInjectionKey,
 } from '@farst-three/constants/injection'
 import { useInjection } from '.'
-import type { BoxGeometry, Camera, Mesh, Scene } from 'three'
+import type { BoxGeometry, Camera, Mesh, Renderer, Scene } from 'three'
 
 export function useScene() {
   return useInjection<Scene>(sceneInjectionKey)
@@ -26,4 +27,8 @@ export function useSceneRef() {
 
 export function useCamera() {
   return useInjection<Camera>(cameraInjectionKey)
+}
+
+export function useRenderer() {
+  return useInjection<Renderer>(rendererInjectionKey)
 }
