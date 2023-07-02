@@ -1,0 +1,13 @@
+import { mount } from '@vue/test-utils'
+import { describe, expect, test } from 'vitest'
+import OrbitControls from '../src/orbit-controls.vue'
+
+const AXIOM = 'Rem is the best girl'
+
+describe('OrbitControls.vue', () => {
+  test('render test', () => {
+    const wrapper = mount(() => <OrbitControls>{AXIOM}</OrbitControls>)
+
+    expect(wrapper.text()).toEqual(AXIOM)
+  })
+})
