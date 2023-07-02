@@ -6,14 +6,8 @@
 import { onBeforeUnmount } from 'vue'
 import { WebGLRenderer } from 'three'
 import { debounce } from 'lodash-es'
-import { useInjection } from '@farst-three/hooks'
-import {
-  perspectiveCameraInjectionKey,
-  sceneInjectionKey,
-  sceneRefInjectionKey,
-} from '@farst-three/constants/injection'
+import { useCamera, useScene, useSceneRef } from '@farst-three/hooks'
 import { webGLRendererProps, webglRendererEmits } from './webgl-renderer'
-import type { Scene } from 'three'
 
 defineOptions({
   name: 'FtWebglRenderer',
@@ -22,10 +16,10 @@ defineOptions({
 const props = defineProps(webGLRendererProps)
 const emit = defineEmits(webglRendererEmits)
 
-const scene = useInjection<Scene>(sceneInjectionKey)
-const container = useInjection<HTMLDivElement>(sceneRefInjectionKey)
+const scene = useScene()
+const container = useSceneRef()
 // 任何camera都可以
-const camera = useInjection<any>(perspectiveCameraInjectionKey)
+const camera = useCamera()
 const renderer = new WebGLRenderer()
 renderer.setSize(container.offsetWidth, container.offsetHeight)
 container.appendChild(renderer.domElement)

@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts" setup>
+import { provide, shallowRef } from 'vue'
 import { BoxGeometry } from 'three'
-import { useInjection } from '@farst-three/hooks'
-import { meshInjectionKey } from '@farst-three/constants/injection'
+import { useMesh } from '@farst-three/hooks'
+import { boxGeometryInjectionKey } from '@farst-three/constants/injection'
 import { boxGeometryEmits, boxGeometryProps } from './box-geometry'
-import type { Mesh } from 'three'
 defineOptions({
   name: 'FtBoxGeometry',
 })
@@ -24,7 +24,9 @@ const geometry = new BoxGeometry(
   props.heightSegments,
   props.depthSegments
 )
-emit('load', geometry)
-const mesh = useInjection<Mesh>(meshInjectionKey)
+
+const mesh = useMesh()
 mesh.geometry = geometry
+emit('load', geometry)
+provide(boxGeometryInjectionKey, shallowRef(geometry))
 </script>

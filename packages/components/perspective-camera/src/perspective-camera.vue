@@ -7,11 +7,8 @@ import { onBeforeUnmount, shallowRef } from 'vue'
 import { provide } from '@vue/runtime-core'
 import { PerspectiveCamera } from 'three'
 import { debounce } from 'lodash-es'
-import {
-  perspectiveCameraInjectionKey,
-  sceneRefInjectionKey,
-} from '@farst-three/constants/injection'
-import { useInjection } from '@farst-three/hooks'
+import { cameraInjectionKey } from '@farst-three/constants/injection'
+import { useSceneRef } from '@farst-three/hooks'
 import {
   perspectiveCameraEmits,
   perspectiveCameraProps,
@@ -25,7 +22,7 @@ const props = defineProps(perspectiveCameraProps)
 const emit = defineEmits(perspectiveCameraEmits)
 
 // init here
-const container = useInjection<HTMLDivElement>(sceneRefInjectionKey)
+const container = useSceneRef()
 
 const camera = new PerspectiveCamera(
   props.fov,
@@ -36,7 +33,7 @@ const camera = new PerspectiveCamera(
 
 emit('load', camera)
 
-provide(perspectiveCameraInjectionKey, shallowRef(camera))
+provide(cameraInjectionKey, shallowRef(camera))
 const resize = () => {
   camera.aspect = container.offsetWidth / container.offsetHeight
   camera.updateProjectionMatrix()

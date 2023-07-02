@@ -1,25 +1,40 @@
 <template>
-  <div>
-    <slot />
-  </div>
+  <slot />
 </template>
 
 <script lang="ts" setup>
 import { MeshBasicMaterial } from 'three'
-import { useInjection } from '@farst-three/hooks'
-import { meshInjectionKey } from '@farst-three/constants/injection'
-import { meshBasicMaterialProps } from './mesh-basic-material'
-import type { Mesh } from 'three'
+import { isFunction } from 'lodash-es'
+import { useBoxGeometry, useMesh } from '@farst-three/hooks'
+import {
+  meshBasicMaterialEmits,
+  meshBasicMaterialProps,
+} from './mesh-basic-material'
 
 defineOptions({
   name: 'FtMeshBasicMaterial',
 })
 
 const props = defineProps(meshBasicMaterialProps)
+const emit = defineEmits(meshBasicMaterialEmits)
 
 // init here
-
-const material = new MeshBasicMaterial(props.params)
-const mesh = useInjection<Mesh>(meshInjectionKey)
-mesh.material = material
+const mesh = useMesh()
+const geometry = useBoxGeometry()
+const materials: MeshBasicMaterial[] = []
+let material: MeshBasicMaterial
+if (props.initCount > 1) {
+  for (let i = 0; i < props.initCount; i++) {
+    const params = isFunction(props.params) ? props.params(i) : props.params
+    const material = new MeshBasicMaterial(params)
+    materials.push(material)
+  }
+  mesh.material = materials
+  emit('load', { materials, mesh, geometry })
+} else {
+  const params = isFunction(props.params) ? props.params() : props.params
+  material = new MeshBasicMaterial(params)
+  mesh.material = material
+  emit('load', { material, mesh, geometry })
+}
 </script>
