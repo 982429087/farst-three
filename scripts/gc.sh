@@ -2,6 +2,19 @@
 
 NAME=$1
 
+arr=(`echo $NAME | tr '-' ' '`)
+result=''
+for var in ${arr[@]}
+do
+     firstLetter=`echo ${var:0:1} | awk '{print toupper($0)}'`
+     otherLetter=${var:1}
+     result=$result$firstLetter$otherLetter
+done
+
+firstResult=$(echo ${result:0:1} | tr '[A-Z]' '[a-z]')
+SMALL_HUMP=$firstResult${result:1}
+
+
 FILE_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")/../packages" && pwd)
 
 re="[[:space:]]+"
@@ -25,7 +38,9 @@ for i in $(echo $NAME | sed 's/[_|-]\([a-z]\)/\ \1/;s/^\([a-z]\)/\ \1/'); do
   NORMALIZED_NAME="$NORMALIZED_NAME${C}${i:1}"
 done
 NAME=$NORMALIZED_NAME
-
+# echo $NAME AaaBbb
+# echo $INPUT_NAME aaa-bbb
+# echo $SMALL_HUMP aaaBbb
 mkdir -p "$DIRNAME"
 mkdir -p "$DIRNAME/src"
 mkdir -p "$DIRNAME/__tests__"
@@ -38,15 +53,17 @@ cat > $DIRNAME/src/$INPUT_NAME.vue <<EOF
 </template>
 
 <script lang="ts" setup>
-import { ${INPUT_NAME}Props } from './$INPUT_NAME'
+import { ${SMALL_HUMP}Emits, ${SMALL_HUMP}Props } from './$INPUT_NAME'
 
 defineOptions({
   name: 'Ft$NAME',
 })
 
-const props = defineProps(${INPUT_NAME}Props)
+const props = defineProps(${SMALL_HUMP}Props)
+const emit = defineEmits(${SMALL_HUMP}Emits)
 
 // init here
+console.log(props, emit)
 </script>
 EOF
 
@@ -56,9 +73,13 @@ import { buildProps } from '@farst-three/utils'
 import type { ExtractPropTypes } from 'vue'
 import type $NAME from './$INPUT_NAME.vue'
 
-export const ${INPUT_NAME}Props = buildProps({})
+export const ${SMALL_HUMP}Props = buildProps({})
+export const ${SMALL_HUMP}Emits = {
+  load: (e: any) => e,
+}
 
-export type ${NAME}Props = ExtractPropTypes<typeof ${INPUT_NAME}Props>
+export type ${NAME}Emits = typeof ${SMALL_HUMP}Emits
+export type ${NAME}Props = ExtractPropTypes<typeof ${SMALL_HUMP}Props>
 export type ${NAME}Instance = InstanceType<typeof $NAME>
 EOF
 
