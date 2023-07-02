@@ -10,6 +10,9 @@ declare module '@vue/runtime-core' {
     FtMesh: typeof import('@farst-three/components')['FtMesh']
     FtWebglRenderer: typeof import('@farst-three/components')['FtWebglRenderer']
     FtBoxGeometry: typeof import('@farst-three/components')['FtBoxGeometry']
+    FtOrthographicCamera: typeof import('@farst-three/components')['FtOrthographicCamera']
+    FtAxesHelper: typeof import('@farst-three/components')['FtAxesHelper']
+    FtGridHelper: typeof import('@farst-three/components')['FtGridHelper']
   }
 }
 
