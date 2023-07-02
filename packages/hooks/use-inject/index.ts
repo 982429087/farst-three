@@ -5,3 +5,5 @@ export function useInjection<T>(key: symbol) {
   if (!injected) throw new Error(`injection ${String(key)} not found`)
   return injected.value as T
 }
+
+export * from './api'
