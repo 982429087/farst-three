@@ -1,16 +1,29 @@
 import {
   boxGeometryInjectionKey,
-  cameraInjectionKey,
   meshInjectionKey,
   rendererInjectionKey,
-  sceneInjectionKey,
-  sceneRefInjectionKey,
+  storeServiceInjectionKey,
 } from '@farst-three/constants/injection'
-import { useInjection } from '.'
-import type { BoxGeometry, Camera, Mesh, Renderer, Scene } from 'three'
+import { useInjection } from '@farst-three/hooks'
+import type { StoreService } from '@farst-three/hooks'
+import type { BoxGeometry, Mesh, Renderer } from 'three'
+
+export function useStoreService() {
+  return useInjection<StoreService>(storeServiceInjectionKey)
+}
+
+export function useSceneRef() {
+  const sceneRef = useInjection<StoreService>(
+    storeServiceInjectionKey
+  ).getSceneRef()
+  if (!sceneRef) {
+    throw new Error('sceneRef is not defined')
+  }
+  return sceneRef
+}
 
 export function useScene() {
-  return useInjection<Scene>(sceneInjectionKey)
+  return useInjection<StoreService>(storeServiceInjectionKey).getScene()
 }
 
 export function useMesh() {
@@ -19,14 +32,6 @@ export function useMesh() {
 
 export function useBoxGeometry() {
   return useInjection<BoxGeometry>(boxGeometryInjectionKey)
-}
-
-export function useSceneRef() {
-  return useInjection<HTMLDivElement>(sceneRefInjectionKey)
-}
-
-export function useCamera() {
-  return useInjection<Camera>(cameraInjectionKey)
 }
 
 export function useRenderer() {

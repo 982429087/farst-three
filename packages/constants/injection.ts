@@ -1,6 +1,10 @@
-export const cameraInjectionKey = Symbol('cameraInjectionKey')
-export const sceneInjectionKey = Symbol('sceneInjectionKey')
-export const sceneRefInjectionKey = Symbol('sceneRefInjectionKey')
+export const orthographicCameraInjectionKey = Symbol(
+  'orthographicCameraInjectionKey'
+)
+export const perspectiveCameraInjectionKey = Symbol(
+  'perspectiveCameraInjectionKey'
+)
 export const meshInjectionKey = Symbol('meshInjectionKey')
 export const boxGeometryInjectionKey = Symbol('boxGeometryInjectionKey')
 export const rendererInjectionKey = Symbol('rendererInjectionKey')
+export const storeServiceInjectionKey = Symbol('storeServiceInjectionKey')
