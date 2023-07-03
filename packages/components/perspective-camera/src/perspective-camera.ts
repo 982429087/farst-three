@@ -1,5 +1,5 @@
 import { buildProps } from '@farst-three/utils'
-import type { PerspectiveCamera } from 'three'
+import type { PerspectiveCamera, Scene } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
 import type PerspectiveCameraComponent from './perspective-camera.vue'
@@ -21,9 +21,18 @@ export const perspectiveCameraProps = buildProps({
   far: {
     type: Number,
   },
+  isRenderCamera: {
+    type: Boolean,
+    default: false,
+  },
 })
 export const perspectiveCameraEmits = {
-  load: (camera: PerspectiveCamera) => camera,
+  load: (e: PerspectiveCameraLoadEvent) => e,
+}
+
+export type PerspectiveCameraLoadEvent = {
+  camera: PerspectiveCamera
+  scene: Scene
 }
 export type PerspectiveCameraProps = ExtractPropTypes<
   typeof perspectiveCameraProps

@@ -3,12 +3,13 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount, provide, shallowRef } from 'vue'
+import { onBeforeUnmount, provide, watch } from 'vue'
 import { WebGLRenderer } from 'three'
 import { debounce } from 'lodash-es'
-import { useCamera, useScene, useSceneRef } from '@farst-three/hooks'
+import { useScene, useSceneRef, useStoreService } from '@farst-three/hooks'
 import { rendererInjectionKey } from '@farst-three/constants/injection'
 import { webGLRendererProps, webglRendererEmits } from './webgl-renderer'
+import type { Camera } from 'three'
 
 defineOptions({
   name: 'FtWebglRenderer',
@@ -19,13 +20,25 @@ const emit = defineEmits(webglRendererEmits)
 
 const scene = useScene()
 const container = useSceneRef()
-const camera = useCamera()
+const storeService = useStoreService()
+let camera: Camera | undefined = storeService.getRenderCamera()
+
+watch(
+  () => storeService.renderCamera.value,
+  (v) => {
+    if (v) camera = v
+  },
+  { immediate: true }
+)
+if (!camera) throw new Error('RenderCamera is not defined')
+
 const renderer = new WebGLRenderer(props.params)
 renderer.setSize(container.offsetWidth, container.offsetHeight)
 container.appendChild(renderer.domElement)
 
 function animate() {
   requestAnimationFrame(animate)
+  if (!camera) throw new Error('RenderCamera is not defined')
   props.animationFn?.({ renderer, scene, camera })
   renderer.render(scene, camera)
 }
@@ -43,5 +56,5 @@ onBeforeUnmount(() => {
   renderer.dispose()
 })
 emit('load', { renderer, scene, camera })
-provide(rendererInjectionKey, shallowRef(renderer))
+provide(rendererInjectionKey, renderer)
 </script>

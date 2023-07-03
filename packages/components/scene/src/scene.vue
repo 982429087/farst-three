@@ -5,14 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, provide, ref, shallowRef } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 import { Scene } from 'three'
-import {
-  sceneInjectionKey,
-  sceneRefInjectionKey,
-} from '@farst-three/constants/injection'
-import { useNamespace } from '@farst-three/hooks'
-// import { sceneProps } from './scene'
+import { storeServiceInjectionKey } from '@farst-three/constants/injection'
+import { StoreService, useNamespace } from '@farst-three/hooks'
 
 defineOptions({
   name: 'FtScene',
@@ -25,10 +21,10 @@ const ready = ref(false)
 const ns = useNamespace('scene')
 const sceneRef = ref<HTMLDivElement>()
 const scene = new Scene()
-provide(sceneInjectionKey, shallowRef(scene))
-provide(sceneRefInjectionKey, sceneRef)
 
 onMounted(() => {
   ready.value = true
 })
+const storeService = new StoreService(scene, sceneRef)
+provide(storeServiceInjectionKey, storeService)
 </script>

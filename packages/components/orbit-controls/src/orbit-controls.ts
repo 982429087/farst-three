@@ -4,7 +4,12 @@ import type { ExtractPropTypes } from 'vue'
 import type OrbitControlsComponent from './orbit-controls.vue'
 import type { Camera, Renderer } from 'three'
 
-export const orbitControlsProps = buildProps({})
+export const orbitControlsProps = buildProps({
+  modelValue: {
+    type: Object,
+  },
+})
+
 export const orbitControlsEmits = {
   load: (e: OrbitControlsLoadEvent) => e,
 }

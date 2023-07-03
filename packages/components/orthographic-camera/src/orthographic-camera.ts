@@ -11,6 +11,10 @@ export const orthographicCameraProps = buildProps({
   bottom: Number,
   near: Number,
   far: Number,
+  isRenderCamera: {
+    type: Boolean,
+    default: false,
+  },
 })
 export const orthographicCameraEmits = {
   load: (e: OrthographicCameraLoadEvent) => e,

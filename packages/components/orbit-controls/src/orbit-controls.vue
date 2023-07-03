@@ -1,23 +1,36 @@
 <template>
-  <div>
-    <slot />
-  </div>
+  <slot />
 </template>
 
 <script lang="ts" setup>
+import { onBeforeUnmount, watch } from 'vue'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { useCamera, useRenderer } from '@farst-three/hooks'
+import { useRenderer, useStoreService } from '@farst-three/hooks'
 import { orbitControlsEmits, orbitControlsProps } from './orbit-controls'
+import type { Camera } from 'three'
 defineOptions({
   name: 'FtOrbitControls',
 })
 
-const props = defineProps(orbitControlsProps)
+defineProps(orbitControlsProps)
 const emit = defineEmits(orbitControlsEmits)
 
 // init here
 const renderer = useRenderer()
-const camera = useCamera()
+const storeService = useStoreService()
+let camera: Camera | undefined = storeService.getRenderCamera()
+
+watch(
+  () => storeService.renderCamera.value,
+  (v) => {
+    if (v) camera = v
+  },
+  { immediate: true }
+)
+if (!camera) throw new Error('RenderCamera is not defined')
 const controls = new OrbitControls(camera, renderer.domElement)
 emit('load', { controls, camera, renderer })
+onBeforeUnmount(() => {
+  controls.dispose()
+})
 </script>

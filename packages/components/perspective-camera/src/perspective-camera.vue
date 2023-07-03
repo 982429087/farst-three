@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount, shallowRef } from 'vue'
+import { onBeforeUnmount } from 'vue'
 import { provide } from '@vue/runtime-core'
 import { PerspectiveCamera } from 'three'
 import { debounce } from 'lodash-es'
-import { cameraInjectionKey } from '@farst-three/constants/injection'
-import { useSceneRef } from '@farst-three/hooks'
+import { perspectiveCameraInjectionKey } from '@farst-three/constants/injection'
+import { useScene, useSceneRef, useSetRenderCamera } from '@farst-three/hooks'
 import {
   perspectiveCameraEmits,
   perspectiveCameraProps,
@@ -22,18 +22,19 @@ const props = defineProps(perspectiveCameraProps)
 const emit = defineEmits(perspectiveCameraEmits)
 
 // init here
-const container = useSceneRef()
 
+const container = useSceneRef()
+const scene = useScene()
 const camera = new PerspectiveCamera(
   props.fov,
   props.aspect || container.offsetWidth / container.offsetHeight,
   props.near,
   props.far
 )
-
-emit('load', camera)
-
-provide(cameraInjectionKey, shallowRef(camera))
+scene.add(camera)
+emit('load', { camera, scene })
+useSetRenderCamera(props, camera)
+provide(perspectiveCameraInjectionKey, camera)
 const resize = () => {
   camera.aspect = container.offsetWidth / container.offsetHeight
   camera.updateProjectionMatrix()

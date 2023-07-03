@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount, provide, shallowRef } from 'vue'
+import { onBeforeUnmount, provide } from 'vue'
 import { Mesh } from 'three'
 import { useScene } from '@farst-three/hooks'
 import { meshInjectionKey } from '@farst-three/constants/injection'
@@ -21,7 +21,7 @@ const scene = useScene()
 const mesh = new Mesh(props.geometry, props.material)
 emit('load', mesh)
 scene.add(mesh)
-provide(meshInjectionKey, shallowRef(mesh))
+provide(meshInjectionKey, mesh)
 
 onBeforeUnmount(() => {
   scene.remove(mesh)
