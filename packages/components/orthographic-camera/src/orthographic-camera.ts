@@ -13,7 +13,7 @@ export const orthographicCameraProps = buildProps({
   far: Number,
   isRenderCamera: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 })
 export const orthographicCameraEmits = {

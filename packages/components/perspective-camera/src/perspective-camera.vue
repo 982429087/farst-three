@@ -21,8 +21,6 @@ defineOptions({
 const props = defineProps(perspectiveCameraProps)
 const emit = defineEmits(perspectiveCameraEmits)
 
-// init here
-
 const container = useSceneRef()
 const scene = useScene()
 const camera = new PerspectiveCamera(

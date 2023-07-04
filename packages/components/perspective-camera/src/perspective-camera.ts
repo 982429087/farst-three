@@ -23,7 +23,7 @@ export const perspectiveCameraProps = buildProps({
   },
   isRenderCamera: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 })
 export const perspectiveCameraEmits = {

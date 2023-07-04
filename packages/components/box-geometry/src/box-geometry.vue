@@ -27,6 +27,7 @@ const geometry = new BoxGeometry(
 
 const mesh = useMesh()
 mesh.geometry = geometry
+mesh.geometry.computeBoundingBox()
 emit('load', geometry)
 provide(boxGeometryInjectionKey, geometry)
 </script>
