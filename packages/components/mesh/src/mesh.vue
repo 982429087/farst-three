@@ -19,7 +19,7 @@ const emit = defineEmits(meshEmits)
 // init here
 const scene = useScene()
 const mesh = new Mesh(props.geometry, props.material)
-emit('load', mesh)
+emit('load', { mesh, scene })
 scene.add(mesh)
 provide(meshInjectionKey, mesh)
 
