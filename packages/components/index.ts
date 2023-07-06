@@ -5,6 +5,8 @@ export * from './box-geometry'
 export * from './mesh'
 export * from './mesh-basic-material'
 export * from './orthographic-camera'
+export * from './tube-geometry'
+export * from './sphere-geometry'
 
 // 插件
 export * from './axes-helper'

@@ -1,5 +1,5 @@
 import {
-  boxGeometryInjectionKey,
+  geometryInjectionKey,
   meshInjectionKey,
   rendererInjectionKey,
   storeServiceInjectionKey,
@@ -31,7 +31,7 @@ export function useMesh() {
 }
 
 export function useBoxGeometry() {
-  return useInjection<BoxGeometry>(boxGeometryInjectionKey)
+  return useInjection<BoxGeometry>(geometryInjectionKey)
 }
 
 export function useRenderer() {

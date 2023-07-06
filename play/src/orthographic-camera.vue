@@ -104,9 +104,9 @@ const cameraLoad = ({ camera, scene }: OrthographicCameraLoadEvent) => {
   gui.add(parsms, 'switchCamera')
 }
 
-const loadMesh: MeshEmits['load'] = (mesh) => {
-  meshRef.value = mesh
-  return mesh
+const loadMesh: MeshEmits['load'] = (e) => {
+  meshRef.value = e.mesh
+  return e
 }
 
 const animationFn: WebGLRendererProps['animationFn'] = ({}) => {

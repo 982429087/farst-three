@@ -6,7 +6,7 @@
 import { provide } from 'vue'
 import { BoxGeometry } from 'three'
 import { useMesh } from '@farst-three/hooks'
-import { boxGeometryInjectionKey } from '@farst-three/constants/injection'
+import { geometryInjectionKey } from '@farst-three/constants/injection'
 import { boxGeometryEmits, boxGeometryProps } from './box-geometry'
 defineOptions({
   name: 'FtBoxGeometry',
@@ -29,5 +29,5 @@ const mesh = useMesh()
 mesh.geometry = geometry
 mesh.geometry.computeBoundingBox()
 emit('load', geometry)
-provide(boxGeometryInjectionKey, geometry)
+provide(geometryInjectionKey, geometry)
 </script>
