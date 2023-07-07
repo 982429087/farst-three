@@ -1,49 +1,27 @@
 <template>
   <div class="farst-three">
     <FtScene>
-      <FtPerspectiveCamera
-        :fov="100"
-        :near="0.01"
-        :far="1000"
-        @load="cameraLoad"
-      >
-      </FtPerspectiveCamera>
+      <FtPerspectiveCamera :fov="100" :near="0.01" :far="1000" @load="cameraLoad" />
       <FtMesh>
         <FtBoxGeometry>
           <FtMeshBasicMaterial :initCount="6" :params="meshBasicParams" />
         </FtBoxGeometry>
       </FtMesh>
       <FtMesh>
-        <FtTubeGeometry
-          :path="curve"
-          :tubularSegments="200"
-          :radius="0.01"
-          :radialSegments="8"
-          :closed="true"
-        >
+        <FtTubeGeometry :path="curve" :tubularSegments="200" :radius="0.01" :radialSegments="8" :closed="true">
           <FtMeshBasicMaterial :params="meshBasicParams"></FtMeshBasicMaterial>
         </FtTubeGeometry>
       </FtMesh>
       <FtMesh @load="meshLoad">
-        <FtSphereGeometry
-          :radius="0.5"
-          :widthSegments="32"
-          :heightSegments="64"
-        >
+        <FtSphereGeometry :radius="0.5" :widthSegments="32" :heightSegments="64">
           <FtMeshBasicMaterial :params="meshBasicParams"></FtMeshBasicMaterial>
         </FtSphereGeometry>
       </FtMesh>
       <FtAxesHelper :size="4" />
-      <FtGridHelper
-        :size="100"
-        :divisions="10"
-        :color1="0xcd37aa"
-        :color2="0x4a4a4a"
-      />
+      <FtGridHelper :size="100" :divisions="10" :color1="0xcd37aa" :color2="0x4a4a4a" />
 
       <FtWebglRenderer :animationFn="animationFn">
         <FtOrbitControls />
-
       </FtWebglRenderer>
     </FtScene>
   </div>
@@ -51,7 +29,7 @@
 
 <script setup lang="ts">
 import {
-MeshLoadEvent,
+  MeshLoadEvent,
   PerspectiveCameraLoadEvent,
   WebGLRendererLoadEvent,
 } from '@farst-three/components'
@@ -70,7 +48,7 @@ const cameraLoad = ({ camera }: PerspectiveCameraLoadEvent) => {
   perCamera = camera
 }
 
-const meshLoad = ({mesh}: MeshLoadEvent) => {
+const meshLoad = ({ mesh }: MeshLoadEvent) => {
   // 都是同步代码，上面的加载比下面快
   mesh.position.copy(perCamera.position)
   cmesh = mesh

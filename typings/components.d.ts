@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     FtCameraHelper: typeof import('@farst-three/components')['FtCameraHelper']
     FtTubeGeometry: typeof import('@farst-three/components')['FtTubeGeometry']
     FtSphereGeometry: typeof import('@farst-three/components')['FtSphereGeometry']
+    FtThumbnail: typeof import('@farst-three/components')['FtThumbnail']
   }
 }
 

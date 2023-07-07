@@ -3,20 +3,11 @@
     <FtScene>
       <FtMesh @load="loadMesh">
         <FtBoxGeometry @load="ftBoxGeometryLoad">
-          <FtMeshBasicMaterial
-            :initCount="6"
-            :params="meshBasicParamsFn"
-            @load="ftMeshBasicMaterialLoad"
-          />
+          <FtMeshBasicMaterial :initCount="6" :params="meshBasicParamsFn" @load="ftMeshBasicMaterialLoad" />
         </FtBoxGeometry>
       </FtMesh>
       <FtAxesHelper :size="4" />
-      <FtGridHelper
-        :size="100"
-        :divisions="10"
-        :color1="0xcd37aa"
-        :color2="0x4a4a4a"
-      />
+      <FtGridHelper :size="100" :divisions="10" :color1="0xcd37aa" :color2="0x4a4a4a" />
       <FtPerspectiveCamera :fov="100" :near="0.01" :far="1000" @load="cameraLoad">
         <FtWebglRenderer :animationFn="animationFn" />
       </FtPerspectiveCamera>
@@ -27,7 +18,7 @@
 <script setup lang="ts">
 import {
   BoxGeometryEmits,
-  MeshEmits,
+  MeshLoadEvent,
   PerspectiveCameraLoadEvent,
 } from '@farst-three/components'
 import FtMeshBasicMaterial, {
@@ -47,7 +38,7 @@ const meshBasicParamsFn = () => {
   }
 }
 
-const cameraLoad = ({camera}: PerspectiveCameraLoadEvent) => {
+const cameraLoad = ({ camera }: PerspectiveCameraLoadEvent) => {
   camera.position.z = 5
   gui.add(camera.position, 'x', 0, 1)
   gui.add(camera, 'fov').min(-4).max(100).step(0.01).onChange(() => {
@@ -70,7 +61,7 @@ const cameraLoad = ({camera}: PerspectiveCameraLoadEvent) => {
 
 }
 
-const loadMesh: MeshEmits['load'] = (mesh) => {
+const loadMesh = ({ mesh }: MeshLoadEvent) => {
   meshRef.value = mesh
 
   const params = {
@@ -80,19 +71,20 @@ const loadMesh: MeshEmits['load'] = (mesh) => {
   }
   gui.add(mesh, 'visible')
 
-  gui.addColor(params, 'color').onChange((color) => {
+  gui.addColor(params, 'color').onChange((color: string) => {
     if (Array.isArray(mesh.material)) {
       (mesh.material as MeshBasicMaterial[]).forEach(m => {
-      m.color.set(color)
-    });
+        m.color.set(color)
+      });
     }
 
   })
-  gui.add(mesh.material as MeshBasicMaterial, 'wireframe').onChange((val) => {
-    (mesh.material as MeshBasicMaterial[]).forEach((m) => {
-      m.wireframe = val
+  gui.add(mesh.material as MeshBasicMaterial, 'wireframe')
+    .onChange((val) => {
+      (mesh.material as MeshBasicMaterial[]).forEach((m) => {
+        m.wireframe = val
+      })
     })
-  })
   return mesh
 }
 
