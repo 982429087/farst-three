@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
 import GridHelper from '../src/grid-helper.vue'
 
-const AXIOM = 'Rem is the best girl'
+const AXIOM = 'Just test world'
 
 describe('GridHelper.vue', () => {
   test('render test', () => {

@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
 import AxesHelper from '../src/axes-helper.vue'
 
-const AXIOM = 'Rem is the best girl'
+const AXIOM = 'Just test world'
 
 describe('AxesHelper.vue', () => {
   test('render test', () => {
