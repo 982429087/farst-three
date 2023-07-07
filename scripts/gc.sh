@@ -47,9 +47,7 @@ mkdir -p "$DIRNAME/__tests__"
 
 cat > $DIRNAME/src/$INPUT_NAME.vue <<EOF
 <template>
-  <div>
-    <slot />
-  </div>
+  <slot />
 </template>
 
 <script lang="ts" setup>
@@ -71,7 +69,7 @@ cat > $DIRNAME/src/$INPUT_NAME.ts <<EOF
 import { buildProps } from '@farst-three/utils'
 
 import type { ExtractPropTypes } from 'vue'
-import type $NAME from './$INPUT_NAME.vue'
+import type ${$NAME}Component from './$INPUT_NAME.vue'
 
 export const ${SMALL_HUMP}Props = buildProps({})
 export const ${SMALL_HUMP}Emits = {
@@ -80,7 +78,7 @@ export const ${SMALL_HUMP}Emits = {
 
 export type ${NAME}Emits = typeof ${SMALL_HUMP}Emits
 export type ${NAME}Props = ExtractPropTypes<typeof ${SMALL_HUMP}Props>
-export type ${NAME}Instance = InstanceType<typeof $NAME>
+export type ${NAME}Instance = InstanceType<typeof ${$NAME}Component>
 EOF
 
 cat <<EOF >"$DIRNAME/index.ts"
@@ -98,7 +96,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
 import $NAME from '../src/$INPUT_NAME.vue'
 
-const AXIOM = 'Rem is the best girl'
+const AXIOM = 'Just test world'
 
 describe('$NAME.vue', () => {
   test('render test', () => {
