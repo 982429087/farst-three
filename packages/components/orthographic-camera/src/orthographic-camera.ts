@@ -15,6 +15,10 @@ export const orthographicCameraProps = buildProps({
     type: Boolean,
     default: true,
   },
+  autoAddToScene: {
+    type: Boolean,
+    default: true,
+  },
 })
 export const orthographicCameraEmits = {
   load: (e: OrthographicCameraLoadEvent) => e,

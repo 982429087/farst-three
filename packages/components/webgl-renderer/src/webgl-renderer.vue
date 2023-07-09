@@ -7,8 +7,12 @@ import { onBeforeUnmount, provide, watch } from 'vue'
 import { WebGLRenderer } from 'three'
 import { debounce } from 'lodash-es'
 import { useScene, useSceneRef, useStoreService } from '@farst-three/hooks'
-import { rendererInjectionKey } from '@farst-three/constants/injection'
+import {
+  animationServiceInjectionKey,
+  rendererInjectionKey,
+} from '@farst-three/constants/injection'
 import { webGLRendererProps, webglRendererEmits } from './webgl-renderer'
+import { AnimationService } from './AnimationService'
 import type { Camera } from 'three'
 
 defineOptions({
@@ -30,30 +34,50 @@ watch(
   },
   { immediate: true }
 )
-if (!camera) throw new Error('RenderCamera is not defined')
+if (!camera) throw new Error('没有找到主渲染相机!')
+
+const animationService = new AnimationService()
+provide(animationServiceInjectionKey, animationService)
+
+const dpr = window.devicePixelRatio || 1
 
 const renderer = new WebGLRenderer(props.params)
 renderer.setSize(container.offsetWidth, container.offsetHeight)
 container.appendChild(renderer.domElement)
 
+if (props.animationFn) animationService.on('propsFn', props.animationFn)
+
 function animate() {
-  requestAnimationFrame(animate)
-  if (!camera) throw new Error('RenderCamera is not defined')
-  props.animationFn?.({ renderer, scene, camera })
+  if (!camera) throw new Error('没有找到主渲染相机!')
+  if (props.scissor) {
+    renderer.setScissorTest(true)
+    renderer.setScissor(0, 0, container.offsetWidth, container.offsetHeight)
+    renderer.setViewport(0, 0, container.offsetWidth, container.offsetHeight)
+    renderer.setClearColor(
+      props.scissorClearColor,
+      props.scissorClearColorAlpha
+    )
+    renderer.setPixelRatio(dpr)
+    renderer.setSize(container.offsetWidth, container.offsetHeight)
+  }
   renderer.render(scene, camera)
+  animationService.emit({ renderer, scene, camera })
+  requestAnimationFrame(animate)
 }
 
 animate()
+
 const resize = () => {
   renderer.setSize(container.offsetWidth, container.offsetHeight)
 }
-const dOb = debounce(() => resize(), 10)
+const dOb = debounce(() => resize(), 5)
 const observer = new ResizeObserver(dOb)
 observer.observe(container)
 onBeforeUnmount(() => {
   observer.unobserve(container)
   container.removeChild(renderer.domElement)
   renderer.dispose()
+  animationService.off('propsFn')
 })
 emit('load', { renderer, scene, camera })
 provide(rendererInjectionKey, renderer)

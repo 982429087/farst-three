@@ -16,6 +16,18 @@ export const webGLRendererProps = buildProps({
   params: {
     type: definePropType<WebGLRendererParameters>(Object),
   },
+  scissor: {
+    type: Boolean,
+    default: false,
+  },
+  scissorClearColor: {
+    type: String,
+    default: '#999999',
+  },
+  scissorClearColorAlpha: {
+    type: Number,
+    default: 1,
+  },
 })
 export const webglRendererEmits = {
   load: (e: WebGLRendererLoadEvent) => e,

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <slot />
-  </div>
+  <slot />
 </template>
 
 <script lang="ts" setup>
@@ -30,7 +28,7 @@ const camera = new OrthographicCamera(
   props.far
 )
 const scene = useScene()
-scene.add(camera)
+props.autoAddToScene && scene.add(camera)
 emit('load', { scene, camera })
 provide(orthographicCameraInjectionKey, camera)
 useSetRenderCamera(props, camera)

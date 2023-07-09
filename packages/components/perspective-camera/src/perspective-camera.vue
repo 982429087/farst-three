@@ -37,7 +37,7 @@ const resize = () => {
   camera.aspect = container.offsetWidth / container.offsetHeight
   camera.updateProjectionMatrix()
 }
-const dOb = debounce(() => resize(), 10)
+const dOb = debounce(() => resize(), 5)
 const observer = new ResizeObserver(dOb)
 observer.observe(container)
 onBeforeUnmount(() => {

@@ -27,7 +27,7 @@ watch(
   },
   { immediate: true }
 )
-if (!camera) throw new Error('RenderCamera is not defined')
+if (!camera) throw new Error('没有找到主渲染相机!')
 const controls = new OrbitControls(camera, renderer.domElement)
 emit('load', { controls, camera, renderer })
 onBeforeUnmount(() => {

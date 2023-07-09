@@ -6,28 +6,46 @@
           <FtMeshBasicMaterial :params="meshBasicParams" />
         </FtBoxGeometry>
       </FtMesh>
-      <FtPerspectiveCamera :fov="100" :near="0.01" :far="1000" @load="cameraLoad">
-        <FtWebglRenderer :animationFn="animationFn">
+      <FtOrthographicCamera
+        :left="-aspect * frustumSize"
+        :right="aspect * frustumSize"
+        :top="frustumSize"
+        :bottom="-frustumSize"
+        :near="0.001"
+        :far="1000"
+        @load="cameraLoad"
+      >
+        <FtWebglRenderer :animationFn="animationFn" :scissor="true">
           <FtOrbitControls />
+          <FtThumbnail @load="thumbnailCameraLoad" :isRenderCamera="false" />
         </FtWebglRenderer>
-      </FtPerspectiveCamera>
+      </FtOrthographicCamera>
     </FtScene>
   </div>
 </template>
 
 <script setup lang="ts">
 import {
-  PerspectiveCameraLoadEvent,
+  OrthographicCameraLoadEvent,
   WebGLRendererLoadEvent,
 } from '@farst-three/components'
 import FtMeshBasicMaterial from '@farst-three/components/mesh-basic-material'
 import { Color } from 'three'
 
+const frustumSize = 4
+const aspect = window.innerWidth / window.innerHeight
+
 const meshBasicParams = {
   color: new Color(Math.random() * 0x00ffff),
 }
-const cameraLoad = ({ camera }: PerspectiveCameraLoadEvent) => {
-  camera.position.z = 5
+const cameraLoad = ({ camera, scene }: OrthographicCameraLoadEvent) => {
+  camera.position.set(1, 0.5, 2)
+  camera.lookAt(scene.position)
+}
+
+function thumbnailCameraLoad ({ camera, scene}: OrthographicCameraLoadEvent) {
+  camera.position.set(1, 0.5, 2)
+  camera.lookAt(scene.position)
 }
 
 function animationFn(e: WebGLRendererLoadEvent) {
