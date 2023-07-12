@@ -69,16 +69,19 @@ cat > $DIRNAME/src/$INPUT_NAME.ts <<EOF
 import { buildProps } from '@farst-three/utils'
 
 import type { ExtractPropTypes } from 'vue'
-import type ${$NAME}Component from './$INPUT_NAME.vue'
+import type ${NAME}Component from './$INPUT_NAME.vue'
 
 export const ${SMALL_HUMP}Props = buildProps({})
 export const ${SMALL_HUMP}Emits = {
   load: (e: any) => e,
 }
 
+export type ${NAME}LoadEvent = {
+  e: any
+}
 export type ${NAME}Emits = typeof ${SMALL_HUMP}Emits
 export type ${NAME}Props = ExtractPropTypes<typeof ${SMALL_HUMP}Props>
-export type ${NAME}Instance = InstanceType<typeof ${$NAME}Component>
+export type ${NAME}Instance = InstanceType<typeof ${NAME}Component>
 EOF
 
 cat <<EOF >"$DIRNAME/index.ts"
