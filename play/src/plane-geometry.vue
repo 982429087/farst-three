@@ -12,7 +12,7 @@
         :isRenderCamera="currentCamera === 'OrthographicCamera'" @load="cameraLoad" />
 
       <FtAmbientLight :color="0xffffff" :intensity=".4" />
-      <FtPointLight :color="0xff0000" :intensity="1" @load="pointlightLoad" />
+      <FtPointLight :color="0xbbccee" :intensity="1" @load="pointlightLoad" />
       <FtWebglRenderer :params="{ antialias: true }" :animationFn="animationFn">
         <FtOrbitControls v-if="showControl" />
         <FtCameraHelper @load="cameraHelperLoad" />
@@ -81,7 +81,7 @@ function meshLoad({ mesh }: MeshLoadEvent) {
   // mesh.position.y = 0.5
 }
 
-function pointlightLoad ({light}: PointLightLoadEvent) {
+function pointlightLoad({ light }: PointLightLoadEvent) {
   light.position.set(200, 200, 300)
 }
 
