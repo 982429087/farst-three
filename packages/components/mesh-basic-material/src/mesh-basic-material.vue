@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { MeshBasicMaterial } from 'three'
 import { isFunction } from 'lodash-es'
-import { useBoxGeometry, useMesh } from '@farst-three/hooks'
+import { useMesh } from '@farst-three/hooks'
 import {
   meshBasicMaterialEmits,
   meshBasicMaterialProps,
@@ -20,7 +20,6 @@ const emit = defineEmits(meshBasicMaterialEmits)
 
 // init here
 const mesh = useMesh()
-const geometry = useBoxGeometry()
 const materials: MeshBasicMaterial[] = []
 let material: MeshBasicMaterial
 if (props.initCount > 1) {
@@ -30,11 +29,11 @@ if (props.initCount > 1) {
     materials.push(material)
   }
   mesh.material = materials
-  emit('load', { materials, mesh, geometry })
+  emit('load', { materials, mesh })
 } else {
   const params = isFunction(props.params) ? props.params() : props.params
   material = new MeshBasicMaterial(params)
   mesh.material = material
-  emit('load', { material, mesh, geometry })
+  emit('load', { material, mesh })
 }
 </script>

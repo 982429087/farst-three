@@ -7,6 +7,9 @@ export * from './mesh-basic-material'
 export * from './orthographic-camera'
 export * from './tube-geometry'
 export * from './sphere-geometry'
+export * from './mesh-lambert-material'
+export * from './plane-geometry'
+export * from './ambient-light'
 
 // 插件
 export * from './axes-helper'

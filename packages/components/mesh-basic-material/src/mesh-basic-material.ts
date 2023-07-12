@@ -1,10 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import type {
-  BufferGeometry,
-  Mesh,
-  MeshBasicMaterial,
-  MeshBasicMaterialParameters,
-} from 'three'
+import type { Material, Mesh, MeshBasicMaterialParameters } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
 import type MeshBasicMaterialComponent from './mesh-basic-material.vue'
@@ -26,10 +21,9 @@ export const meshBasicMaterialEmits = {
 }
 
 export type MeshBasicMateriaLoadEvent = {
-  materials?: MeshBasicMaterial[]
+  materials?: Material[]
   mesh: Mesh
-  geometry: BufferGeometry
-  material?: MeshBasicMaterial
+  material?: Material
 }
 
 export type MeshBasicMaterialProps = ExtractPropTypes<
