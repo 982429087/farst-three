@@ -10,6 +10,7 @@ export * from './sphere-geometry'
 export * from './mesh-lambert-material'
 export * from './plane-geometry'
 export * from './ambient-light'
+export * from './point-light'
 
 // 插件
 export * from './axes-helper'

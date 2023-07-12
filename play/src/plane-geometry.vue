@@ -7,12 +7,12 @@
       </FtMesh>
 
       <FtPerspectiveCamera :fov="75" :near="0.1" :far="100" :isRenderCamera="currentCamera === 'PerspectiveCamera'"
-        @load="perspectiveCameraLoad">
-      </FtPerspectiveCamera>
+        @load="perspectiveCameraLoad" />
       <FtOrthographicCamera :left="-size" :right="size" :top="size / 2" :bottom="-size / 2" :near="0.001" :far="100"
-        :isRenderCamera="currentCamera === 'OrthographicCamera'" @load="cameraLoad">
-      </FtOrthographicCamera>
-      <FtAmbientLight></FtAmbientLight>
+        :isRenderCamera="currentCamera === 'OrthographicCamera'" @load="cameraLoad" />
+
+      <FtAmbientLight :color="0xffffff" :intensity=".4" />
+      <FtPointLight :color="0xff0000" :intensity="1" @load="pointlightLoad" />
       <FtWebglRenderer :params="{ antialias: true }" :animationFn="animationFn">
         <FtOrbitControls v-if="showControl" />
         <FtCameraHelper @load="cameraHelperLoad" />
@@ -28,6 +28,7 @@ import {
   MeshLoadEvent,
   OrthographicCameraLoadEvent,
   PerspectiveCameraLoadEvent,
+  PointLightLoadEvent,
   WebGLRendererProps,
 } from '@farst-three/components'
 import { useGui } from '@farst-three/hooks'
@@ -78,6 +79,10 @@ const perspectiveCameraLoad = ({
 function meshLoad({ mesh }: MeshLoadEvent) {
   // mesh.rotation.x = -Math.PI / 2
   // mesh.position.y = 0.5
+}
+
+function pointlightLoad ({light}: PointLightLoadEvent) {
+  light.position.set(200, 200, 300)
 }
 
 </script>

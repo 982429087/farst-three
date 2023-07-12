@@ -21,6 +21,7 @@ declare module '@vue/runtime-core' {
     FtLambertMaterial: typeof import('@farst-three/components')['FtLambertMaterial']
     FtPlaneGeometry: typeof import('@farst-three/components')['FtPlaneGeometry']
     FtAmbientLight: typeof import('@farst-three/components')['FtAmbientLight']
+    FtPointLight: typeof import('@farst-three/components')['FtPointLight']
   }
 }
 
