@@ -1,6 +1,7 @@
 import {
   animationServiceInjectionKey,
   geometryInjectionKey,
+  groupInjectionKey,
   meshInjectionKey,
   rendererInjectionKey,
   storeServiceInjectionKey,
@@ -8,7 +9,7 @@ import {
 import { useInjection } from '@farst-three/hooks'
 import type { AnimationService } from '@farst-three/components'
 import type { StoreService } from '@farst-three/hooks'
-import type { BoxGeometry, Mesh, Renderer } from 'three'
+import type { BoxGeometry, Group, Mesh, Renderer } from 'three'
 
 export function useStoreService() {
   return useInjection<StoreService>(storeServiceInjectionKey)
@@ -42,4 +43,8 @@ export function useRenderer() {
 
 export function useAnimationService() {
   return useInjection<AnimationService>(animationServiceInjectionKey)
+}
+
+export function useGroup() {
+  return useInjection<Group>(groupInjectionKey, null)
 }

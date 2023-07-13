@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     FtPlaneGeometry: typeof import('@farst-three/components')['FtPlaneGeometry']
     FtAmbientLight: typeof import('@farst-three/components')['FtAmbientLight']
     FtPointLight: typeof import('@farst-three/components')['FtPointLight']
+    FtGroup: typeof import('@farst-three/components')['FtGroup']
   }
 }
 

@@ -13,3 +13,11 @@ export type Nullable<T> = T | null
 
 export type Arrayable<T> = T | T[]
 export type Awaitable<T> = Promise<T> | T
+export type AnyFun = (...args: any[]) => any
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    : T[P] extends ReadonlyArray<infer U>
+    ? ReadonlyArray<DeepPartial<U>>
+    : DeepPartial<T[P]>
+}

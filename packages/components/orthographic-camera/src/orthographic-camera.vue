@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { provide } from 'vue'
 import { OrthographicCamera } from 'three'
-import { useScene, useSetRenderCamera } from '@farst-three/hooks'
+import { useOptions, useScene, useSetRenderCamera } from '@farst-three/hooks'
 import { orthographicCameraInjectionKey } from '@farst-three/constants/injection'
 import {
   orthographicCameraEmits,
@@ -31,5 +31,6 @@ const scene = useScene()
 props.autoAddToScene && scene.add(camera)
 emit('load', { scene, camera })
 provide(orthographicCameraInjectionKey, camera)
+useOptions(props.options, camera)
 useSetRenderCamera(props, camera)
 </script>
