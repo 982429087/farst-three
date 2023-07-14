@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import type { DeepPartial } from '@farst-three/utils'
+import type { ThreeOptions } from '@farst-three/utils'
 import type {
   BufferGeometry,
   Group,
@@ -21,7 +21,7 @@ export const meshProps = buildProps({
     type: definePropType<Material>(Object),
   },
   options: {
-    type: definePropType<DeepPartial<Mesh>>(Object),
+    type: definePropType<ThreeOptions<Mesh>>(Object),
     default: () => ({}),
   },
 })

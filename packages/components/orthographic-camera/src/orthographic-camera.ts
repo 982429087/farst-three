@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import type { DeepPartial } from '@farst-three/utils'
+import type { ThreeOptions } from '@farst-three/utils'
 import type { OrthographicCamera, Scene } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
@@ -21,7 +21,7 @@ export const orthographicCameraProps = buildProps({
     default: true,
   },
   options: {
-    type: definePropType<DeepPartial<OrthographicCamera>>(Object),
+    type: definePropType<ThreeOptions<OrthographicCamera>>(Object),
     default: () => ({}),
   },
 })

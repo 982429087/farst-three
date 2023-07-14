@@ -31,6 +31,6 @@ const scene = useScene()
 props.autoAddToScene && scene.add(camera)
 emit('load', { scene, camera })
 provide(orthographicCameraInjectionKey, camera)
-useOptions(props.options, camera)
+useOptions(props.options, camera, scene)
 useSetRenderCamera(props, camera)
 </script>

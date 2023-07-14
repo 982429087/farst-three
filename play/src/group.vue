@@ -31,13 +31,14 @@ import {
   WebGLRendererProps,
 } from '@farst-three/components'
 import { useGui } from '@farst-three/hooks'
-import { CameraHelper, DoubleSide } from 'three'
+import { ThreeOptions } from '@farst-three/utils'
+import { CameraHelper, DoubleSide, Mesh } from 'three'
 import { reactive, ref, shallowRef } from 'vue'
 
 const cameraHelper = shallowRef<CameraHelper>()
 const size = 4
 const showControl = ref(true)
-const meshOptions = reactive({
+const meshOptions = reactive<ThreeOptions<Mesh>>({
   position: {
     x: 0.5,
     z: 0.5,

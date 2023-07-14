@@ -28,7 +28,7 @@ if (group === null) {
 }
 provide(meshInjectionKey, mesh)
 
-useOptions(props.options, mesh)
+useOptions(props.options, mesh, scene)
 
 onBeforeUnmount(() => {
   if (group === null) {
