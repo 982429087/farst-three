@@ -3,9 +3,11 @@
 </template>
 
 <script lang="ts" setup>
+import { provide } from 'vue'
 import { MeshBasicMaterial } from 'three'
 import { isFunction } from 'lodash-es'
 import { useMesh } from '@farst-three/hooks'
+import { materialInjectKey } from '@farst-three/constants'
 import {
   meshBasicMaterialEmits,
   meshBasicMaterialProps,
@@ -29,11 +31,13 @@ if (props.initCount > 1) {
     materials.push(material)
   }
   mesh.material = materials
+  provide(materialInjectKey, materials)
   emit('load', { materials, mesh })
 } else {
   const params = isFunction(props.params) ? props.params() : props.params
   material = new MeshBasicMaterial(params)
   mesh.material = material
+  provide(materialInjectKey, material)
   emit('load', { material, mesh })
 }
 </script>

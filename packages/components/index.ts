@@ -12,6 +12,7 @@ export * from './plane-geometry'
 export * from './ambient-light'
 export * from './point-light'
 export * from './group'
+export * from './texture-loader'
 
 // 插件
 export * from './axes-helper'
