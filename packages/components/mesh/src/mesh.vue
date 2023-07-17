@@ -36,5 +36,7 @@ onBeforeUnmount(() => {
   } else {
     group.remove(mesh)
   }
+  mesh.geometry.dispose()
+  mesh.material.dispose()
 })
 </script>

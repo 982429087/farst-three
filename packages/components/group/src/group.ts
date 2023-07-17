@@ -1,11 +1,15 @@
-import { buildProps } from '@farst-three/utils'
+import { buildProps, definePropType } from '@farst-three/utils'
+import type { ThreeOptions } from '@farst-three/utils'
 import type { Group, Scene } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
 import type GroupComponent from './group.vue'
 
 export const groupProps = buildProps({
-  e: String,
+  options: {
+    type: definePropType<ThreeOptions<Group>>(Object),
+    default: () => ({}),
+  },
 })
 export const groupEmits = {
   load: (e: GroupLoadEvent) => e,

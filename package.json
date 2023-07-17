@@ -61,6 +61,7 @@
     "dat.gui": "^0.7.9",
     "dayjs": "^1.11.3",
     "escape-html": "^1.0.3",
+    "gsap": "^3.12.2",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "lodash-unified": "^1.0.2",

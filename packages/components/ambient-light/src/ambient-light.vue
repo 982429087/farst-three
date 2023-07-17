@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts" setup>
+import { onBeforeUnmount } from 'vue'
 import { AmbientLight } from 'three'
-import { useScene } from '@farst-three/hooks'
+import { useGroup, useScene } from '@farst-three/hooks'
 import { ambientLightEmits, ambientLightProps } from './ambient-light'
 
 defineOptions({
@@ -15,8 +16,23 @@ const props = defineProps(ambientLightProps)
 const emit = defineEmits(ambientLightEmits)
 
 // init here
-const secne = useScene()
+const scene = useScene()
+const group = useGroup()
+
 const ambientLight = new AmbientLight(props.color, props.intensity)
-secne.add(ambientLight)
-emit('load', { secne, light: ambientLight })
+
+emit('load', { scene, light: ambientLight })
+if (group === null) {
+  scene.add(ambientLight)
+} else {
+  group.add(ambientLight)
+}
+
+onBeforeUnmount(() => {
+  if (group === null) {
+    scene.remove(ambientLight)
+  } else {
+    group.remove(ambientLight)
+  }
+})
 </script>

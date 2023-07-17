@@ -15,7 +15,7 @@ export const ambientLightEmits = {
 }
 
 export type AmbientLightLoadEvent = {
-  secne: Scene
+  scene: Scene
   light: AmbientLight
 }
 export type AmbientLightEmits = typeof ambientLightEmits

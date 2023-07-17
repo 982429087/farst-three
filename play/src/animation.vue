@@ -2,23 +2,10 @@
   <div class="farst-three">
     <FtScene>
       <FtGroup @load="groupLoad">
-        <FtMesh :options="meshOptions">
-          <FtPlaneGeometry :width="2" :height="2" />
-          <FtMeshLambertMaterial
-            :params="{
-              color: 0xabcdef,
-              side: DoubleSide,
-              opacity: 0.5,
-              transparent: true,
-            }"
-          />
-        </FtMesh>
-        <FtMesh>
+        <FtMesh @load="meshLoad">
           <FtBoxGeometry></FtBoxGeometry>
           <FtMeshBasicMaterial :params="{ color: 0xabcdef }" />
         </FtMesh>
-        <FtAmbientLight :color="0x0000dd" :intensity="0.4" />
-        <FtPointLight :color="0xbbccee" :intensity="1" @load="pointlightLoad" />
       </FtGroup>
       <FtOrthographicCamera
         :left="-size"
@@ -30,7 +17,8 @@
         @load="cameraLoad"
         :options="othCameraOptions"
       />
-
+      <FtAmbientLight :color="0x0000dd" :intensity="0.4" />
+      <FtPointLight :color="0xbbccee" :intensity="1" @load="pointlightLoad" />
       <FtWebglRenderer :params="{ antialias: true }" :animationFn="animationFn">
         <FtOrbitControls v-if="showControl" />
       </FtWebglRenderer>
@@ -40,27 +28,20 @@
 
 <script setup lang="ts">
 import {
-  FtMeshLambertMaterial,
   GroupLoadEvent,
+  MeshLoadEvent,
   OrthographicCameraLoadEvent,
   PointLightLoadEvent,
   WebGLRendererProps,
 } from '@farst-three/components'
 import { useGui } from '@farst-three/hooks'
-import { ThreeOptions } from '@farst-three/utils'
-import { CameraHelper, DoubleSide, Mesh } from 'three'
-import { reactive, ref, shallowRef } from 'vue'
+import { CameraHelper } from 'three'
+import { ref, shallowRef } from 'vue'
+import gsap from 'gsap'
 
 const cameraHelper = shallowRef<CameraHelper>()
 const size = 4
 const showControl = ref(true)
-const meshOptions = reactive<ThreeOptions<Mesh>>({
-  position: {
-    x: 0.5,
-    z: 0.5,
-    y: 0.5,
-  },
-})
 
 const othCameraOptions = ref({
   position: {
@@ -88,6 +69,25 @@ const cameraLoad = ({ camera, scene }: OrthographicCameraLoadEvent) => {
 function groupLoad({ group, scene }: GroupLoadEvent) {
   gui.add(group.position, 'x', -10, 10)
   gui.add(group.rotation, 'x', -Math.PI, Math.PI)
+}
+
+function meshLoad({ mesh }: MeshLoadEvent) {
+  const params = {
+    rotate() {
+      gsap.to(mesh.rotation, {
+        duration: 1,
+        y: mesh.rotation.y + Math.PI,
+      })
+    },
+  }
+  gui.add(params, 'rotate')
+  gui.add(mesh.scale, 'x', 1, 3, 0.1).onChange(val => {
+    // 放大
+    console.log(val)
+  })
+  gui.add(mesh.position, 'x', -3, 3, 0.1).name('positionX')
+  gui.add(mesh.position, 'y', -3, 3, 0.1).name('positionY')
+  gui.add(mesh.position, 'z', -3, 3, 0.1).name('positionZ')
 }
 </script>
 
