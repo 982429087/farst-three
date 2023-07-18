@@ -3,7 +3,7 @@
     <FtScene>
       <FtMesh @load="loadMesh">
         <FtBoxGeometry @load="ftBoxGeometryLoad">
-          <FtMeshBasicMaterial :initCount="6" :params="meshBasicParamsFn" @load="ftMeshBasicMaterialLoad" />
+          <FtMeshBasicMaterial :params="meshBasicParamsFn" @load="ftMeshBasicMaterialLoad" />
         </FtBoxGeometry>
       </FtMesh>
       <FtAxesHelper :size="4" />
@@ -32,11 +32,10 @@ const meshRef = shallowRef<Mesh>()
 const geometryRef = shallowRef<BoxGeometry>()
 
 const { gui } = useGui()
-const meshBasicParamsFn = () => {
-  return {
+const meshBasicParamsFn = {
+
     color: new Color(Math.random() * 0x00ffff),
   }
-}
 
 const cameraLoad = ({ camera }: PerspectiveCameraLoadEvent) => {
   camera.position.z = 5

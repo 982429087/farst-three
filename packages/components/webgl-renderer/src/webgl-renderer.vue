@@ -60,7 +60,7 @@ function animate() {
     renderer.setPixelRatio(dpr)
     renderer.setSize(container.offsetWidth, container.offsetHeight)
   }
-  renderer.render(scene, camera)
+  renderer?.render(scene, camera)
   animationService.emit({ renderer, scene, camera })
   requestAnimationFrame(animate)
 }
@@ -76,15 +76,13 @@ observer.observe(container)
 
 emit('load', { renderer, scene, camera })
 provide(rendererInjectionKey, renderer)
-console.log(renderer.info)
 
 onBeforeUnmount(() => {
-  console.log(renderer.info)
+  animationService.off('propsFn')
   observer.unobserve(container)
   container.removeChild(renderer.domElement)
   renderer.forceContextLoss()
   renderer.dispose()
-  animationService.off('propsFn')
   ;(scene as any) = null
   ;(renderer as any) = null
 })

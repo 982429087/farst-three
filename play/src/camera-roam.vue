@@ -4,7 +4,7 @@
       <FtPerspectiveCamera :fov="100" :near="0.01" :far="1000" @load="cameraLoad" />
       <FtMesh>
         <FtBoxGeometry>
-          <FtMeshBasicMaterial :initCount="6" :params="meshBasicParams" />
+          <FtMeshBasicMaterial :params="meshBasicParams" />
         </FtBoxGeometry>
       </FtMesh>
       <FtMesh>

@@ -4,13 +4,12 @@
       <FtGroup @load="groupLoad">
         <FtMesh>
           <FtBoxGeometry></FtBoxGeometry>
-          <FtMeshBasicMaterial v-for="item in 5" :key="item">
+          <FtMeshLambertMaterial v-for="item in 6" :key="item">
             <FtTextureLoader url="/Material_1741/basecolor.jpg" :type="'map'"></FtTextureLoader>
-          </FtMeshBasicMaterial>
-          <FtMeshBasicMaterial></FtMeshBasicMaterial>
+          </FtMeshLambertMaterial>
         </FtMesh>
         <FtAmbientLight :color="0x0000dd" :intensity="0.4" />
-        <FtPointLight :color="0xbbccee" :intensity="1" @load="pointlightLoad" />
+        <FtPointLight :color="0xff00ee" :intensity="1" @load="pointlightLoad" />
       </FtGroup>
       <FtOrthographicCamera
         :left="-size"

@@ -4,7 +4,6 @@
       <FtMesh @load="loadMesh">
         <FtBoxGeometry @load="ftBoxGeometryLoad">
           <FtMeshBasicMaterial
-            :initCount="6"
             :params="meshBasicParamsFn"
             @load="ftMeshBasicMaterialLoad"
           />
@@ -69,10 +68,8 @@ const showControl = ref(true)
 
 const { gui } = useGui()
 
-const meshBasicParamsFn = () => {
-  return {
-    color: new Color(Math.random() * 0x00ffff),
-  }
+const meshBasicParamsFn = {
+  color: new Color(Math.random() * 0x00ffff),
 }
 
 const cameraLoad = ({ camera, scene }: OrthographicCameraLoadEvent) => {
