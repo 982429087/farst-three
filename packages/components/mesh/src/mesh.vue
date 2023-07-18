@@ -5,9 +5,18 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, provide } from 'vue'
 import { Mesh } from 'three'
-import { useGroup, useOptions, useScene } from '@farst-three/hooks'
-import { meshInjectionKey } from '@farst-three/constants/injection'
+import {
+  CountService,
+  useGroup,
+  useOptions,
+  useScene,
+} from '@farst-three/hooks'
+import {
+  materialServiceInjectionKey,
+  meshInjectionKey,
+} from '@farst-three/constants/injection'
 import { meshEmits, meshProps } from './mesh'
+import type { Material } from 'three'
 
 defineOptions({
   name: 'FtMesh',
@@ -20,6 +29,8 @@ const emit = defineEmits(meshEmits)
 const scene = useScene()
 const group = useGroup()
 const mesh = new Mesh(props.geometry, props.material)
+const materialService = new CountService<Material>()
+
 emit('load', { mesh, scene, group })
 if (group === null) {
   scene.add(mesh)
@@ -27,6 +38,7 @@ if (group === null) {
   group.add(mesh)
 }
 provide(meshInjectionKey, mesh)
+provide(materialServiceInjectionKey, materialService)
 
 useOptions(props.options, mesh, scene)
 

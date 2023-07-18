@@ -4,8 +4,8 @@
       <FtGroup @load="groupLoad">
         <FtMesh>
           <FtBoxGeometry></FtBoxGeometry>
-          <FtMeshBasicMaterial :params="{ color: 0xabcdef }">
-            <ftTextureLoader></ftTextureLoader>
+          <FtMeshBasicMaterial>
+            <ftTextureLoader url="/Material_1741/basecolor.jpg" :type="'map'"></ftTextureLoader>
           </FtMeshBasicMaterial>
         </FtMesh>
         <FtAmbientLight :color="0x0000dd" :intensity="0.4" />

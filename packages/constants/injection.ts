@@ -13,3 +13,4 @@ export const animationServiceInjectionKey = Symbol(
 )
 export const groupInjectionKey = Symbol('groupInjectionKey')
 export const materialInjectKey = Symbol('materialInjectKey')
+export const materialServiceInjectionKey = Symbol('materialServiceInjectionKey')

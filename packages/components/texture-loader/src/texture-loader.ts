@@ -4,24 +4,27 @@ import {
   isNumber,
   isString,
 } from '@farst-three/utils'
-import type { Texture } from 'three'
+import type { Material, Scene, Texture, TextureLoader } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type TextureLoaderComponent from './texture-loader.vue'
 
 export const textureLoaderProps = buildProps({
   url: {
-    type: String,
+    type: [String, definePropType<string[]>(Array)],
     required: true,
     default: '',
   },
   onLoad: {
     type: definePropType<TextureLoaderOnLoad>(Function),
+    default: () => () => undefined,
   },
   onProgress: {
     type: definePropType<TextureLoaderOnProgress>(Function),
+    default: () => () => undefined,
   },
   onError: {
     type: definePropType<TextureLoaderOnError>(Function),
+    default: () => () => undefined,
   },
   type: {
     type: definePropType<TextureType>(String),
@@ -29,12 +32,13 @@ export const textureLoaderProps = buildProps({
   },
 })
 export const textureLoaderEmits = {
-  load: () => true,
-  start: (url: string, loaded: number, total: number) =>
+  load: (e: TextureLoadEvent) => e,
+  managerLoad: () => true,
+  managerStart: (url: string, loaded: number, total: number) =>
     isString(url) && isNumber(loaded) && isNumber(total),
-  progress: (url: string, loaded: number, total: number) =>
+  managerProgress: (url: string, loaded: number, total: number) =>
     isString(url) && isNumber(loaded) && isNumber(total),
-  error: (url: string) => isString(url),
+  managerError: (url: string) => isString(url),
 }
 
 export type TextureType =
@@ -49,9 +53,17 @@ export type TextureType =
   | 'normalMap'
   | 'roughnessMap'
   | 'metalnessMap'
+export type TextureLoadEvent = {
+  scene: Scene
+  textureLoader: TextureLoader
+  material: Material
+}
 export type TextureLoaderEmits = typeof textureLoaderEmits
 export type TextureLoaderProps = ExtractPropTypes<typeof textureLoaderProps>
 export type TextureLoaderInstance = InstanceType<typeof TextureLoaderComponent>
-export type TextureLoaderOnLoad = (e: Texture) => void
-export type TextureLoaderOnProgress = (e: ProgressEvent<EventTarget>) => void
-export type TextureLoaderOnError = (e: ErrorEvent) => void
+export type TextureLoaderOnLoad = (e: Texture, index: number) => void
+export type TextureLoaderOnProgress = (
+  e: ProgressEvent<EventTarget>,
+  index: number
+) => void
+export type TextureLoaderOnError = (e: ErrorEvent, index: number) => void

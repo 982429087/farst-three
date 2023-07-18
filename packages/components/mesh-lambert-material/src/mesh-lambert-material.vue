@@ -3,8 +3,10 @@
 </template>
 
 <script lang="ts" setup>
+import { provide } from 'vue'
 import { MeshLambertMaterial } from 'three'
 import { useMesh, useOptions, useScene } from '@farst-three/hooks'
+import { materialInjectKey } from '@farst-three/constants'
 import {
   meshLambertMaterialEmits,
   meshLambertMaterialProps,
@@ -24,5 +26,6 @@ const meshLambertMaterial = new MeshLambertMaterial(props.params)
 mesh.material = meshLambertMaterial
 
 emit('load', { mesh, material: meshLambertMaterial })
+provide(materialInjectKey, meshLambertMaterial)
 useOptions(props.options, meshLambertMaterial, scene)
 </script>

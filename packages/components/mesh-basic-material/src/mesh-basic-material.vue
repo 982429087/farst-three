@@ -3,11 +3,9 @@
 </template>
 
 <script lang="ts" setup>
-import { provide } from 'vue'
 import { MeshBasicMaterial } from 'three'
-import { isFunction } from 'lodash-es'
-import { useMesh } from '@farst-three/hooks'
-import { materialInjectKey } from '@farst-three/constants'
+import { useMaterialProvide, useOptions } from '@farst-three/hooks'
+// import { materialInjectKey } from '@farst-three/constants'
 import {
   meshBasicMaterialEmits,
   meshBasicMaterialProps,
@@ -19,25 +17,27 @@ defineOptions({
 
 const props = defineProps(meshBasicMaterialProps)
 const emit = defineEmits(meshBasicMaterialEmits)
-
+// const mesh = useMesh()
 // init here
-const mesh = useMesh()
-const materials: MeshBasicMaterial[] = []
-let material: MeshBasicMaterial
-if (props.initCount > 1) {
-  for (let i = 0; i < props.initCount; i++) {
-    const params = isFunction(props.params) ? props.params(i) : props.params
-    const material = new MeshBasicMaterial(params)
-    materials.push(material)
-  }
-  mesh.material = materials
-  provide(materialInjectKey, materials)
-  emit('load', { materials, mesh })
-} else {
-  const params = isFunction(props.params) ? props.params() : props.params
-  material = new MeshBasicMaterial(params)
-  mesh.material = material
-  provide(materialInjectKey, material)
-  emit('load', { material, mesh })
-}
+
+const { materials, scene } = useMaterialProvide(props, emit, MeshBasicMaterial)
+useOptions(props.options, materials[0], scene)
+
+// const materials: MeshBasicMaterial[] = []
+
+// for (let i = 0; i < props.initCount; i++) {
+//   const params = isFunction(props.params) ? props.params(i) : props.params
+//   const material = new MeshBasicMaterial(params)
+//   materials.push(material)
+// }
+
+// if (props.initCount === 1) {
+//   mesh.material = materials[0]
+//   provide(materialInjectKey, materials[0])
+//   emit('load', { material: materials[0], mesh })
+// } else {
+//   mesh.material = materials
+//   provide(materialInjectKey, materials)
+//   emit('load', { materials, mesh })
+// }
 </script>
