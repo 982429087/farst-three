@@ -76,10 +76,13 @@ observer.observe(container)
 
 emit('load', { renderer, scene, camera })
 provide(rendererInjectionKey, renderer)
+console.log(renderer.info)
 
 onBeforeUnmount(() => {
+  console.log(renderer.info)
   observer.unobserve(container)
   container.removeChild(renderer.domElement)
+  renderer.forceContextLoss()
   renderer.dispose()
   animationService.off('propsFn')
   ;(scene as any) = null

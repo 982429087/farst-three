@@ -34,6 +34,7 @@ useOptions(props.options, material, scene)
 onBeforeUnmount(() => {
   materialService.subCount(material)
   material.dispose()
+  console.log('走', material)
   ;(scene as any) = null
   ;(material as any) = null
   ;(mesh as any) = null
