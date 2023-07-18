@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { provide } from 'vue'
+import { onBeforeUnmount, provide } from 'vue'
 import { OrthographicCamera } from 'three'
 import { useOptions, useScene, useSetRenderCamera } from '@farst-three/hooks'
 import { orthographicCameraInjectionKey } from '@farst-three/constants/injection'
@@ -19,7 +19,7 @@ defineOptions({
 const props = defineProps(orthographicCameraProps)
 const emit = defineEmits(orthographicCameraEmits)
 // init here
-const camera = new OrthographicCamera(
+let camera = new OrthographicCamera(
   props.left,
   props.right,
   props.top,
@@ -27,10 +27,16 @@ const camera = new OrthographicCamera(
   props.near,
   props.far
 )
-const scene = useScene()
+let scene = useScene()
 props.autoAddToScene && scene.add(camera)
 emit('load', { scene, camera })
 provide(orthographicCameraInjectionKey, camera)
 useOptions(props.options, camera, scene)
 useSetRenderCamera(props, camera)
+
+onBeforeUnmount(() => {
+  scene.remove(camera)
+  ;(scene as any) = null
+  ;(camera as any) = null
+})
 </script>

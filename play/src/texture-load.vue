@@ -4,9 +4,10 @@
       <FtGroup @load="groupLoad">
         <FtMesh>
           <FtBoxGeometry></FtBoxGeometry>
-          <FtMeshBasicMaterial>
-            <ftTextureLoader url="/Material_1741/basecolor.jpg" :type="'map'"></ftTextureLoader>
+          <FtMeshBasicMaterial v-for="item in 5" :key="item">
+            <FtTextureLoader url="/Material_1741/basecolor.jpg" :type="'map'"></FtTextureLoader>
           </FtMeshBasicMaterial>
+          <FtMeshBasicMaterial></FtMeshBasicMaterial>
         </FtMesh>
         <FtAmbientLight :color="0x0000dd" :intensity="0.4" />
         <FtPointLight :color="0xbbccee" :intensity="1" @load="pointlightLoad" />

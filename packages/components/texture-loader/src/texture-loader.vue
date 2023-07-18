@@ -3,11 +3,10 @@
 </template>
 
 <script lang="ts" setup>
+import { onBeforeUnmount } from 'vue'
 import { LoadingManager, TextureLoader } from 'three'
 import { useMaterial, useScene } from '@farst-three/hooks'
-import { isArray, isString } from '@farst-three/utils'
 import { textureLoaderEmits, textureLoaderProps } from './texture-loader'
-import type { Texture } from 'three'
 
 defineOptions({
   name: 'FtTextureLoader',
@@ -16,12 +15,11 @@ defineOptions({
 const props = defineProps(textureLoaderProps)
 const emit = defineEmits(textureLoaderEmits)
 
-const material = useMaterial()
-const scene = useScene()
-const loadingManager = new LoadingManager()
-const textureLoader = new TextureLoader(loadingManager)
-const url = []
-const textures: Texture[] = []
+let material = useMaterial()
+let scene = useScene()
+let loadingManager = new LoadingManager()
+let textureLoader = new TextureLoader(loadingManager)
+
 textureLoader.setCrossOrigin('Anonymous')
 
 emit('load', { textureLoader, material, scene })
@@ -30,19 +28,12 @@ if (!props.url) {
   console.error('component `<texture-loader />` props `url` is required')
 }
 
-if (isString(props.url)) {
-  url.push(props.url)
-}
-
-for (const [i, item] of url.entries()) {
-  const texture = textureLoader.load(
-    item,
-    (e) => props.onLoad(e, i),
-    (e) => props.onProgress(e, i),
-    (e) => props.onError(e, i)
-  )
-  textures.push(texture, texture)
-}
+let texture = textureLoader.load(
+  props.url,
+  props.onLoad,
+  props.onProgress,
+  props.onError
+)
 
 loadingManager.onStart = (url: string, loaded: number, total: number) => {
   emit('managerStart', url, loaded, total)
@@ -56,11 +47,17 @@ loadingManager.onProgress = (url: string, loaded: number, total: number) => {
 loadingManager.onError = (url: string) => {
   emit('managerError', url)
 }
-if (isArray(material)) {
-  material.forEach((item, index) => {
-    item[props.type] = textures[index]
-  })
-} else {
-  ;(material as any)[props.type] = textures[0]
+if (material) {
+  ;(material as any)[props.type] = texture
 }
+
+onBeforeUnmount(() => {
+  ;(material as any)[props.type] = null
+  texture.dispose()
+  ;(material as any) = null
+  ;(scene as any) = null
+  ;(loadingManager as any) = null
+  ;(texture as any) = null
+  ;(textureLoader as any) = null
+})
 </script>

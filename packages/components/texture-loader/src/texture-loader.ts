@@ -10,7 +10,7 @@ import type TextureLoaderComponent from './texture-loader.vue'
 
 export const textureLoaderProps = buildProps({
   url: {
-    type: [String, definePropType<string[]>(Array)],
+    type: String,
     required: true,
     default: '',
   },
@@ -61,9 +61,6 @@ export type TextureLoadEvent = {
 export type TextureLoaderEmits = typeof textureLoaderEmits
 export type TextureLoaderProps = ExtractPropTypes<typeof textureLoaderProps>
 export type TextureLoaderInstance = InstanceType<typeof TextureLoaderComponent>
-export type TextureLoaderOnLoad = (e: Texture, index: number) => void
-export type TextureLoaderOnProgress = (
-  e: ProgressEvent<EventTarget>,
-  index: number
-) => void
-export type TextureLoaderOnError = (e: ErrorEvent, index: number) => void
+export type TextureLoaderOnLoad = (e: Texture) => void
+export type TextureLoaderOnProgress = (e: ProgressEvent<EventTarget>) => void
+export type TextureLoaderOnError = (e: ErrorEvent) => void

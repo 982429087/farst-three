@@ -37,7 +37,7 @@ const props = defineProps(thumbnailProps)
 const emit = defineEmits(thumbnailEmits)
 
 // init here
-const animationService = useAnimationService()
+let animationService = useAnimationService()
 const bindProps = useBindProps(props, orthographicCameraProps)
 const onEmits = useOnEmits(emit, orthographicCameraEmits)
 
@@ -48,11 +48,11 @@ const cameraLoad = (e: OrthographicCameraLoadEvent) => {
   camera = e.camera
 }
 
-function animate({
+let animate = ({
   renderer,
   scene,
   camera: renderCamera,
-}: AnimationFunsParams) {
+}: AnimationFunsParams) => {
   if (camera) {
     const width = container.offsetWidth - props.width - props.margin
     const height = container.offsetHeight - props.height - props.margin
@@ -72,5 +72,8 @@ animationService.on('thumbnail', animate)
 
 onBeforeUnmount(() => {
   animationService.off('thumbnail')
+  ;(animate as any) = null
+  ;(animationService as any) = null
+  ;(camera as any) = null
 })
 </script>

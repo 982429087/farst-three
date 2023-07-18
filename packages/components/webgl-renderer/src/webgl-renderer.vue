@@ -22,7 +22,7 @@ defineOptions({
 const props = defineProps(webGLRendererProps)
 const emit = defineEmits(webglRendererEmits)
 
-const scene = useScene()
+let scene = useScene()
 const container = useSceneRef()
 const storeService = useStoreService()
 let camera: Camera | undefined = storeService.getRenderCamera()
@@ -41,7 +41,7 @@ provide(animationServiceInjectionKey, animationService)
 
 const dpr = window.devicePixelRatio || 1
 
-const renderer = new WebGLRenderer(props.params)
+let renderer = new WebGLRenderer(props.params)
 renderer.setSize(container.offsetWidth, container.offsetHeight)
 container.appendChild(renderer.domElement)
 
@@ -73,12 +73,16 @@ const resize = () => {
 const dOb = debounce(() => resize(), 5)
 const observer = new ResizeObserver(dOb)
 observer.observe(container)
+
+emit('load', { renderer, scene, camera })
+provide(rendererInjectionKey, renderer)
+
 onBeforeUnmount(() => {
   observer.unobserve(container)
   container.removeChild(renderer.domElement)
   renderer.dispose()
   animationService.off('propsFn')
+  ;(scene as any) = null
+  ;(renderer as any) = null
 })
-emit('load', { renderer, scene, camera })
-provide(rendererInjectionKey, renderer)
 </script>

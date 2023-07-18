@@ -3,11 +3,12 @@
 </template>
 
 <script lang="ts" setup>
-import { watch } from 'vue'
+import { onBeforeUnmount, watch } from 'vue'
 import { CameraHelper } from 'three'
 import { useScene, useStoreService } from '@farst-three/hooks'
 import { cameraHelperEmits, cameraHelperProps } from './camera-helper'
-import type { Camera } from 'three'
+import type { StoreService } from '@farst-three/hooks'
+import type { Camera, Scene } from 'three'
 
 defineOptions({
   name: 'FtCameraHelper',
@@ -18,19 +19,26 @@ const emit = defineEmits(cameraHelperEmits)
 
 // init here
 
-const scene = useScene()
-const storeService = useStoreService()
+let scene: Scene | null = useScene()
+let storeService: StoreService | null = useStoreService()
 let camera: Camera | undefined = storeService.getRenderCamera()
 
 watch(
-  () => storeService.renderCamera.value,
+  () => storeService?.renderCamera.value,
   (v) => {
     if (v) camera = v
   },
   { immediate: true }
 )
 if (!camera) throw new Error('camera is not defined')
-const helper = new CameraHelper(camera)
+let helper: CameraHelper | null = new CameraHelper(camera)
 scene.add(helper)
 emit('load', { helper, camera, scene })
+
+onBeforeUnmount(() => {
+  helper?.dispose()
+  helper = null
+  scene = null
+  storeService = null
+})
 </script>

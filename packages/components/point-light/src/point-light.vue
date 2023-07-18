@@ -16,9 +16,9 @@ const props = defineProps(pointLightProps)
 const emit = defineEmits(pointLightEmits)
 
 // init here
-const scene = useScene()
-const group = useGroup()
-const pointLight = new PointLight(
+let scene = useScene()
+let group = useGroup()
+let pointLight = new PointLight(
   props.color,
   props.intensity,
   props.distance,
@@ -37,5 +37,9 @@ onBeforeUnmount(() => {
   } else {
     group.remove(pointLight)
   }
+  pointLight.dispose()
+  ;(scene as any) = null
+  ;(group as any) = null
+  ;(pointLight as any) = null
 })
 </script>

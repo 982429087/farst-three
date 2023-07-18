@@ -16,8 +16,8 @@ defineProps(orbitControlsProps)
 const emit = defineEmits(orbitControlsEmits)
 
 // init here
-const renderer = useRenderer()
-const storeService = useStoreService()
+let renderer = useRenderer()
+let storeService = useStoreService()
 let camera: Camera | undefined = storeService.getRenderCamera()
 
 watch(
@@ -28,9 +28,13 @@ watch(
   { immediate: true }
 )
 if (!camera) throw new Error('没有找到主渲染相机!')
-const controls = new OrbitControls(camera, renderer.domElement)
+let controls = new OrbitControls(camera, renderer.domElement)
 emit('load', { controls, camera, renderer })
 onBeforeUnmount(() => {
   controls.dispose()
+  ;(renderer as any) = null
+  ;(storeService as any) = null
+  ;(camera as any) = null
+  ;(controls as any) = null
 })
 </script>

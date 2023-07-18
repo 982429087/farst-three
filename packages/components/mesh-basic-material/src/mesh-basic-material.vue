@@ -3,9 +3,15 @@
 </template>
 
 <script lang="ts" setup>
+import { onBeforeUnmount, provide } from 'vue'
 import { MeshBasicMaterial } from 'three'
-import { useMaterialProvide, useOptions } from '@farst-three/hooks'
-// import { materialInjectKey } from '@farst-three/constants'
+import { materialInjectKey } from '@farst-three/constants'
+import {
+  useMaterialService,
+  useMesh,
+  useOptions,
+  useScene,
+} from '@farst-three/hooks'
 import {
   meshBasicMaterialEmits,
   meshBasicMaterialProps,
@@ -17,27 +23,20 @@ defineOptions({
 
 const props = defineProps(meshBasicMaterialProps)
 const emit = defineEmits(meshBasicMaterialEmits)
-// const mesh = useMesh()
-// init here
-
-const { materials, scene } = useMaterialProvide(props, emit, MeshBasicMaterial)
-useOptions(props.options, materials[0], scene)
-
-// const materials: MeshBasicMaterial[] = []
-
-// for (let i = 0; i < props.initCount; i++) {
-//   const params = isFunction(props.params) ? props.params(i) : props.params
-//   const material = new MeshBasicMaterial(params)
-//   materials.push(material)
-// }
-
-// if (props.initCount === 1) {
-//   mesh.material = materials[0]
-//   provide(materialInjectKey, materials[0])
-//   emit('load', { material: materials[0], mesh })
-// } else {
-//   mesh.material = materials
-//   provide(materialInjectKey, materials)
-//   emit('load', { materials, mesh })
-// }
+let mesh = useMesh()
+let scene = useScene()
+let materialService = useMaterialService()
+let material = new MeshBasicMaterial(props.params)
+materialService.addCount(material)
+emit('load', { material, mesh, scene })
+provide(materialInjectKey, material)
+useOptions(props.options, material, scene)
+onBeforeUnmount(() => {
+  materialService.subCount(material)
+  material.dispose()
+  ;(scene as any) = null
+  ;(material as any) = null
+  ;(mesh as any) = null
+  ;(materialService as any) = null
+})
 </script>

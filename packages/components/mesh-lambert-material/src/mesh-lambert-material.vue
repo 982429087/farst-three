@@ -3,9 +3,14 @@
 </template>
 
 <script lang="ts" setup>
-import { provide } from 'vue'
+import { onBeforeUnmount, provide } from 'vue'
 import { MeshLambertMaterial } from 'three'
-import { useMesh, useOptions, useScene } from '@farst-three/hooks'
+import {
+  useMaterialService,
+  useMesh,
+  useOptions,
+  useScene,
+} from '@farst-three/hooks'
 import { materialInjectKey } from '@farst-three/constants'
 import {
   meshLambertMaterialEmits,
@@ -22,10 +27,17 @@ const emit = defineEmits(meshLambertMaterialEmits)
 // init here 必须添加光源才有效果
 const mesh = useMesh()
 const scene = useScene()
-const meshLambertMaterial = new MeshLambertMaterial(props.params)
-mesh.material = meshLambertMaterial
+const materialService = useMaterialService()
 
-emit('load', { mesh, material: meshLambertMaterial })
-provide(materialInjectKey, meshLambertMaterial)
-useOptions(props.options, meshLambertMaterial, scene)
+const material = new MeshLambertMaterial(props.params)
+materialService.addCount(material)
+
+emit('load', { mesh, material, scene })
+provide(materialInjectKey, material)
+useOptions(props.options, material, scene)
+
+onBeforeUnmount(() => {
+  materialService.subCount(material)
+  material.dispose()
+})
 </script>

@@ -3,9 +3,11 @@
 </template>
 
 <script lang="ts" setup>
+import { onBeforeUnmount } from 'vue'
 import { AxesHelper } from 'three'
 import { useScene } from '@farst-three/hooks'
 import { axesHelperProps } from './axes-helper'
+import type { Scene } from 'three'
 
 defineOptions({
   name: 'FtAxesHelper',
@@ -14,7 +16,13 @@ defineOptions({
 const props = defineProps(axesHelperProps)
 
 // init here
-const scene = useScene()
-const axesHelper = new AxesHelper(props.size)
+let scene: Scene | null = useScene()
+let axesHelper: AxesHelper | null = new AxesHelper(props.size)
 scene.add(axesHelper)
+
+onBeforeUnmount(() => {
+  axesHelper?.dispose()
+  axesHelper = null
+  scene = null
+})
 </script>

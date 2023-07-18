@@ -21,9 +21,9 @@ defineOptions({
 const props = defineProps(perspectiveCameraProps)
 const emit = defineEmits(perspectiveCameraEmits)
 
-const container = useSceneRef()
-const scene = useScene()
-const camera = new PerspectiveCamera(
+let container = useSceneRef()
+let scene = useScene()
+let camera = new PerspectiveCamera(
   props.fov,
   props.aspect || container.offsetWidth / container.offsetHeight,
   props.near,
@@ -41,6 +41,10 @@ const dOb = debounce(() => resize(), 5)
 const observer = new ResizeObserver(dOb)
 observer.observe(container)
 onBeforeUnmount(() => {
+  scene.remove(camera)
   observer.unobserve(container)
+  ;(scene as any) = null
+  ;(container as any) = null
+  ;(camera as any) = null
 })
 </script>

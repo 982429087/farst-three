@@ -13,14 +13,7 @@ import type MeshBasicMaterialComponent from './mesh-basic-material.vue'
 
 export const meshBasicMaterialProps = buildProps({
   params: {
-    type: [
-      definePropType<MeshBasicMaterialParameters>(Object),
-      definePropType<(i?: number) => MeshBasicMaterialParameters>(Function),
-    ],
-  },
-  initCount: {
-    type: Number,
-    default: 1,
+    type: definePropType<MeshBasicMaterialParameters>(Object),
   },
   options: {
     type: definePropType<ThreeOptions<MeshBasicMaterial>>(Object),
@@ -32,9 +25,8 @@ export const meshBasicMaterialEmits = {
 }
 
 export type MeshBasicMateriaLoadEvent = {
-  materials?: Material[]
   mesh: Mesh
-  material?: Material
+  material: Material
   scene: Scene
 }
 

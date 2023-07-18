@@ -1,28 +1,24 @@
-import { shallowRef } from 'vue'
+import { shallowReactive } from 'vue'
 
 export class CountService<T extends { [key: string]: any }> {
-  public materials = shallowRef<T[]>([])
+  public aollections = shallowReactive<T[]>([])
 
   constructor(public keyStr = 'id') {}
 
-  setMaterials(materials: T[]) {
-    this.materials.value = materials
-  }
-
-  clearMaterials() {
-    this.materials.value = []
+  clearCount() {
+    this.aollections.length = 0
   }
 
   addCount(material: T) {
-    this.materials.value.push(material)
+    this.aollections.push(material)
   }
 
   subCount(material: T) {
-    const index = this.materials.value.findIndex(
+    const index = this.aollections.findIndex(
       (item) => item[this.keyStr] === material[this.keyStr]
     )
     if (index > -1) {
-      this.materials.value.splice(index, 1)
+      this.aollections.splice(index, 1)
     }
   }
 }

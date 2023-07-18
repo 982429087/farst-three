@@ -5,6 +5,7 @@ import type {
   Mesh,
   MeshLambertMaterial,
   MeshLambertMaterialParameters,
+  Scene,
 } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
@@ -25,7 +26,8 @@ export const meshLambertMaterialEmits = {
 
 export type MeshLambertMaterialLoadEvent = {
   mesh: Mesh
-  material?: Material
+  material: Material
+  scene: Scene
 }
 export type MeshLambertMaterialEmits = typeof meshLambertMaterialEmits
 export type MeshLambertMaterialProps = ExtractPropTypes<

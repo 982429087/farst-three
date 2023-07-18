@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, provide, ref } from 'vue'
+import { onBeforeUnmount, onMounted, provide, ref } from 'vue'
 import { Scene } from 'three'
 import { storeServiceInjectionKey } from '@farst-three/constants/injection'
 import { StoreService, useNamespace } from '@farst-three/hooks'
@@ -20,11 +20,18 @@ defineOptions({
 const ready = ref(false)
 const ns = useNamespace('scene')
 const sceneRef = ref<HTMLDivElement>()
-const scene = new Scene()
+let scene = new Scene()
 
 onMounted(() => {
   ready.value = true
 })
-const storeService = new StoreService(scene, sceneRef)
+let storeService = new StoreService(scene, sceneRef)
 provide(storeServiceInjectionKey, storeService)
+
+onBeforeUnmount(() => {
+  sceneRef.value?.remove()
+  scene.clear()
+  ;(scene as any) = null
+  ;(storeService as any) = null
+})
 </script>
