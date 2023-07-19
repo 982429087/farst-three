@@ -51,7 +51,12 @@ cat > $DIRNAME/src/$INPUT_NAME.vue <<EOF
 </template>
 
 <script lang="ts" setup>
-import { ${SMALL_HUMP}Emits, ${SMALL_HUMP}Props } from './$INPUT_NAME'
+import { useOptions, useScene } from '@farst-three/hooks'
+import { onBeforeUnmount } from 'vue'
+import {
+  ${SMALL_HUMP}Emits,
+   ${SMALL_HUMP}Props
+} from './$INPUT_NAME'
 
 defineOptions({
   name: 'Ft$NAME',
@@ -61,27 +66,40 @@ const props = defineProps(${SMALL_HUMP}Props)
 const emit = defineEmits(${SMALL_HUMP}Emits)
 
 // init here
-console.log(props, emit)
+let scene = useScene()
+emit('load', { scene })
+useOptions(props.options, , scene)
+
+onBeforeUnmount(() => {
+  ;(scene as any) = null
+})
 </script>
 EOF
 
 cat > $DIRNAME/src/$INPUT_NAME.ts <<EOF
-import { buildProps } from '@farst-three/utils'
-
+import { buildProps, definePropType } from '@farst-three/utils'
+import type { ${NAME}, Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'
+import type { ThreeOptions } from '@farst-three/utils'
 import type ${NAME}Component from './$INPUT_NAME.vue'
 
-export const ${SMALL_HUMP}Props = buildProps({})
+export const ${SMALL_HUMP}Props = buildProps({
+  options: {
+    type: definePropType<ThreeOptions<${NAME}>>(Object),
+    default: () => ({}),
+  },
+})
 export const ${SMALL_HUMP}Emits = {
-  load: (e: any) => e,
+  load: (e: ${NAME}LoadEvent) => e,
 }
 
 export type ${NAME}LoadEvent = {
-  e: any
+  scene: Scene
 }
 export type ${NAME}Emits = typeof ${SMALL_HUMP}Emits
 export type ${NAME}Props = ExtractPropTypes<typeof ${SMALL_HUMP}Props>
 export type ${NAME}Instance = InstanceType<typeof ${NAME}Component>
+export type ${NAME}Options = ThreeOptions<${NAME}>
 EOF
 
 cat <<EOF >"$DIRNAME/index.ts"

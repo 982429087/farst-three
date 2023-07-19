@@ -41,3 +41,4 @@ export type OrthographicCameraInstance = InstanceType<
   typeof OrthographicCameraComponent
 >
 export type OrthographicCameraEmits = typeof orthographicCameraEmits
+export type OrthographicCameraOptions = ThreeOptions<OrthographicCamera>

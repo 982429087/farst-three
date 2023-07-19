@@ -30,7 +30,9 @@ let material = new MeshBasicMaterial(props.params)
 materialService.addCount(material)
 emit('load', { material, mesh, scene })
 provide(materialInjectKey, material)
+
 useOptions(props.options, material, scene)
+
 onBeforeUnmount(() => {
   materialService.subCount(material)
   material.dispose()

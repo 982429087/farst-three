@@ -27,7 +27,7 @@ export const perspectiveCameraProps = buildProps({
     default: true,
   },
   options: {
-    type: definePropType<ThreeOptions<PerspectiveCamera>>(Object),
+    type: definePropType<PerspectiveCameraOptions>(Object),
     default: () => ({}),
   },
 })
@@ -46,3 +46,4 @@ export type PerspectiveCameraInstance = InstanceType<
   typeof PerspectiveCameraComponent
 >
 export type PerspectiveCameraEmits = typeof perspectiveCameraEmits
+export type PerspectiveCameraOptions = ThreeOptions<PerspectiveCamera>

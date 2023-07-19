@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import {
-  BoxGeometryEmits,
+  BoxGeometryLoadEvent,
   CameraHelperLoadEvent,
   MeshEmits,
   OrbitControlsLoadEvent,
@@ -116,9 +116,8 @@ const animationFn: WebGLRendererProps['animationFn'] = ({}) => {
   }
 }
 
-const ftBoxGeometryLoad: BoxGeometryEmits['load'] = (geometry) => {
+const ftBoxGeometryLoad = ({geometry}: BoxGeometryLoadEvent) => {
   geometryRef.value = geometry
-  return geometry
 }
 
 const ftMeshBasicMaterialLoad = (e: MeshBasicMateriaLoadEvent) => {

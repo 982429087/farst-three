@@ -21,7 +21,7 @@ export const meshProps = buildProps({
     type: definePropType<Material>(Object),
   },
   options: {
-    type: definePropType<ThreeOptions<Mesh>>(Object),
+    type: definePropType<MeshOptions>(Object),
     default: () => ({}),
   },
 })
@@ -38,3 +38,4 @@ export type MeshLoadEvent = {
 export type MeshProps = ExtractPropTypes<typeof meshProps>
 export type MeshInstance = InstanceType<typeof MeshComponent>
 export type MeshEmits = typeof meshEmits
+export type MeshOptions = ThreeOptions<Mesh>

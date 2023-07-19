@@ -4,12 +4,12 @@
       <FtGroup @load="groupLoad">
         <FtMesh>
           <FtBoxGeometry></FtBoxGeometry>
-          <FtMeshLambertMaterial v-for="item in 6" :key="item">
-            <FtTextureLoader url="/Material_1741/basecolor.jpg" :type="'map'"></FtTextureLoader>
+          <FtMeshLambertMaterial :options="materialOptions" v-for="item in 6" :key="item">
+            <FtTextureLoader url="/Material_1741/height.png" :type="'bumpMap'"></FtTextureLoader>
           </FtMeshLambertMaterial>
         </FtMesh>
-        <FtAmbientLight :color="0x0000dd" :intensity="0.4" />
-        <FtPointLight :color="0xff00ee" :intensity="1" @load="pointlightLoad" />
+        <!-- <FtAmbientLight :color="0xffffff" :intensity="0.4" /> -->
+        <FtPointLight :color="0xffffff" :intensity="1" @load="pointlightLoad" />
       </FtGroup>
       <FtOrthographicCamera
         :left="-size"
@@ -37,7 +37,8 @@ import {
   WebGLRendererProps,
 } from '@farst-three/components'
 import { useGui } from '@farst-three/hooks'
-import { CameraHelper } from 'three'
+import { ThreeOptions } from '@farst-three/utils'
+import { CameraHelper, MeshLambertMaterial } from 'three'
 import { ref, shallowRef } from 'vue'
 
 const cameraHelper = shallowRef<CameraHelper>()
@@ -48,6 +49,9 @@ const othCameraOptions = ref({
   position: {
     set: [0, 1, 4],
   },
+})
+const materialOptions = shallowRef<ThreeOptions<MeshLambertMaterial>>({
+  bumpScale: 2
 })
 
 const { gui } = useGui()
