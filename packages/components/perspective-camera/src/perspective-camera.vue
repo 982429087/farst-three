@@ -8,7 +8,12 @@ import { provide } from '@vue/runtime-core'
 import { PerspectiveCamera } from 'three'
 import { debounce } from 'lodash-es'
 import { perspectiveCameraInjectionKey } from '@farst-three/constants/injection'
-import { useScene, useSceneRef, useSetRenderCamera } from '@farst-three/hooks'
+import {
+  useOptions,
+  useScene,
+  useSceneRef,
+  useSetRenderCamera,
+} from '@farst-three/hooks'
 import {
   perspectiveCameraEmits,
   perspectiveCameraProps,
@@ -40,6 +45,9 @@ const resize = () => {
 const dOb = debounce(() => resize(), 5)
 const observer = new ResizeObserver(dOb)
 observer.observe(container)
+
+useOptions(props.options, camera, scene)
+
 onBeforeUnmount(() => {
   scene.remove(camera)
   observer.unobserve(container)

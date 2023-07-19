@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import {
-  BoxGeometryEmits,
+  BoxGeometryLoadEvent,
   MeshLoadEvent,
   PerspectiveCameraLoadEvent,
 } from '@farst-three/components'
@@ -33,9 +33,8 @@ const geometryRef = shallowRef<BoxGeometry>()
 
 const { gui } = useGui()
 const meshBasicParamsFn = {
-
-    color: new Color(Math.random() * 0x00ffff),
-  }
+  color: new Color(Math.random() * 0x00ffff),
+}
 
 const cameraLoad = ({ camera }: PerspectiveCameraLoadEvent) => {
   camera.position.z = 5
@@ -56,7 +55,6 @@ const cameraLoad = ({ camera }: PerspectiveCameraLoadEvent) => {
   gui.add(camera, 'zoom', 1, 20, 0.1).onChange(() => {
     camera.updateProjectionMatrix()
   })
-
 
 }
 
@@ -84,7 +82,6 @@ const loadMesh = ({ mesh }: MeshLoadEvent) => {
         m.wireframe = val
       })
     })
-  return mesh
 }
 
 function animationFn() {
@@ -94,9 +91,8 @@ function animationFn() {
   }
 }
 
-const ftBoxGeometryLoad: BoxGeometryEmits['load'] = (geometry) => {
+const ftBoxGeometryLoad = ({ geometry }: BoxGeometryLoadEvent) => {
   geometryRef.value = geometry
-  return geometry
 }
 
 const ftMeshBasicMaterialLoad = (e: MeshBasicMateriaLoadEvent) => {

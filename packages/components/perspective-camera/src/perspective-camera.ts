@@ -1,4 +1,5 @@
-import { buildProps } from '@farst-three/utils'
+import { buildProps, definePropType } from '@farst-three/utils'
+import type { ThreeOptions } from '@farst-three/utils'
 import type { PerspectiveCamera, Scene } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
@@ -24,6 +25,10 @@ export const perspectiveCameraProps = buildProps({
   isRenderCamera: {
     type: Boolean,
     default: true,
+  },
+  options: {
+    type: definePropType<ThreeOptions<PerspectiveCamera>>(Object),
+    default: () => ({}),
   },
 })
 export const perspectiveCameraEmits = {

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <slot />
-  </div>
+  <slot />
 </template>
 
 <script lang="ts" setup>
@@ -18,7 +16,6 @@ defineOptions({
 const props = defineProps(sphereGeometryProps)
 const emit = defineEmits(sphereGeometryEmits)
 
-// init here
 let scene = useScene()
 let mesh = useMesh()
 let geometry = new SphereGeometry(
