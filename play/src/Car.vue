@@ -2,6 +2,7 @@
   <div class="farst-three">
     <FtScene>
       <FtGroup
+        @load="def.resolve"
         :options="{
           position: {
             y: 0.2,
@@ -10,9 +11,7 @@
       >
         <FtMesh>
           <FtBoxGeometry :width="2" :height="0.2" :depth="1"></FtBoxGeometry>
-          <FtMeshLambertMaterial
-            :params="{ color: 0x1890ff }"
-          />
+          <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
         </FtMesh>
         <FtMesh v-for="(item, index) in wheels" :key="index" :options="item">
           <FtCylinderGeometry
@@ -40,7 +39,7 @@
         <FtMesh
           :options="{
             position: {
-              set: [-1.05,0,-0.2],
+              set: [-1.05, 0, -0.2],
             },
           }"
         >
@@ -61,10 +60,7 @@
         :far="10"
         :options="othCameraOptions"
       />
-      <FtDirectionalLight
-        :color="0xffffff"
-        :intensity="0.5"
-      />
+      <FtDirectionalLight :color="0xffffff" :intensity="0.5" />
       <FtAmbientLight :color="0xffffff" />
       <FtAxesHelper />
       <FtGridHelper
@@ -82,13 +78,16 @@
 
 <script setup lang="ts">
 import {
+  GroupLoadEvent,
   MeshOptions,
   OrthographicCameraOptions,
   WebGLRendererLoadEvent,
 } from '@farst-three/components'
-import { Scene } from 'three'
+import { Deferred } from '@farst-three/utils'
+import { MathUtils, Scene } from 'three'
 import { ref, shallowRef } from 'vue'
 
+const def = new Deferred<GroupLoadEvent>()
 const size = 4
 const showControl = ref(true)
 
@@ -139,9 +138,22 @@ const wheels = ref<MeshOptions[]>([
 ])
 
 const animationFn = (e: WebGLRendererLoadEvent) => {
+  def.promise.then(({ group }) => {
+    const delta = 1
 
+    const speed = ((2 * Math.PI) / 360) * delta
+    group.children.forEach((item) => {
+      if (item.name === 'wheel') {
+        item.rotation.y += MathUtils.degToRad(delta)
+      }
+    })
+    group.position.x -= speed
+
+    if (group.position.x < -10) {
+      group.position.x = 10
+    }
+  })
 }
-
 </script>
 
 <style lang="scss" scoped>

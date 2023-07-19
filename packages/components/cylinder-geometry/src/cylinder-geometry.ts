@@ -5,10 +5,6 @@ import type { ExtractPropTypes } from 'vue'
 import type CylinderGeometryComponent from './cylinder-geometry.vue'
 
 export const cylinderGeometryProps = buildProps({
-  options: {
-    type: definePropType<ThreeOptions<CylinderGeometry>>(Object),
-    default: () => ({}),
-  },
   radiusTop: Number,
   radiusBottom: Number,
   height: Number,
@@ -17,6 +13,10 @@ export const cylinderGeometryProps = buildProps({
   openEnded: Boolean,
   thetaStart: Number,
   thetaLength: Number,
+  options: {
+    type: definePropType<ThreeOptions<CylinderGeometry>>(Object),
+    default: () => ({}),
+  },
 })
 export const cylinderGeometryEmits = {
   load: (e: CylinderGeometryLoadEvent) => e,
