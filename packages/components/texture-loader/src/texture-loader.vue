@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount } from 'vue'
 import { LoadingManager, TextureLoader } from 'three'
-import { useMaterial, useScene } from '@farst-three/hooks'
+import { useMaterial, useOptions, useScene } from '@farst-three/hooks'
 import { textureLoaderEmits, textureLoaderProps } from './texture-loader'
 
 defineOptions({
@@ -22,18 +22,17 @@ let textureLoader = new TextureLoader(loadingManager)
 
 textureLoader.setCrossOrigin('Anonymous')
 
-emit('load', { textureLoader, material, scene })
-
 if (!props.url) {
   console.error('component `<texture-loader />` props `url` is required')
 }
 
 let texture = textureLoader.load(
   props.url,
-  props.onLoad,
-  props.onProgress,
-  props.onError
+  props.load,
+  props.progress,
+  props.error
 )
+emit('load', { textureLoader, material, scene, texture })
 
 loadingManager.onStart = (url: string, loaded: number, total: number) => {
   emit('managerStart', url, loaded, total)
@@ -51,6 +50,7 @@ if (material) {
   ;(material as any)[props.type] = texture
 }
 
+useOptions(props.options, texture, scene)
 onBeforeUnmount(() => {
   ;(material as any)[props.type] = null
   texture.dispose()

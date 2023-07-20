@@ -39,6 +39,23 @@
           ></FtTextureLoader>
         </FtMeshLambertMaterial>
       </FtMesh>
+      <FtMesh :options="{
+          position: {
+            z: 1,
+          },
+        }">
+        <FtBoxGeometry :width="1" :height="1" :depth="1"></FtBoxGeometry>
+        <FtMeshLambertMaterial :options="{
+          transparent: true,
+          opacity: 0.3,
+          side: DoubleSide,
+        }" @load="alphMaterialLoad">
+          <FtTextureLoader
+            url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_opacity.jpg"
+            :type="'alphaMap'"
+          ></FtTextureLoader>
+        </FtMeshLambertMaterial>
+      </FtMesh>
       <FtOrthographicCamera
         :left="-size"
         :right="size"
@@ -61,10 +78,12 @@
 
 <script setup lang="ts">
 import {
+MeshLambertMaterialLoadEvent,
   OrthographicCameraLoadEvent,
   WebGLRendererProps,
 } from '@farst-three/components'
-import { CameraHelper } from 'three'
+import { useGui } from '@farst-three/hooks'
+import { CameraHelper, DoubleSide, FrontSide, BackSide } from 'three'
 import { ref, shallowRef } from 'vue'
 
 const cameraHelper = shallowRef<CameraHelper>()
@@ -87,6 +106,31 @@ const animationFn: WebGLRendererProps['animationFn'] = ({}) => {
 const cameraLoad = ({ camera, scene }: OrthographicCameraLoadEvent) => {
   // camera.position.set(1, 0.5, 2)
   camera.lookAt(scene.position)
+}
+
+const {gui} = useGui()
+function alphMaterialLoad ({material}: MeshLambertMaterialLoadEvent) {
+  const params = {
+    opacity: 1,
+    transparent: true,
+    side: DoubleSide,
+  }
+  gui.add(params, 'transparent').onChange((v) => {
+    material.transparent = v
+    material.needsUpdate = true
+  })
+  gui.add(params, 'opacity').onChange((v) => {
+    material.opacity = v
+    material.needsUpdate = true
+  })
+  gui.add(params, 'side',
+  {
+    FrontSide: FrontSide,
+    BackSide: BackSide,
+    DoubleSide: DoubleSide,
+  }).onChange((v) => {
+    material.side = v
+  })
 }
 
 </script>

@@ -30,7 +30,7 @@ export type Options<T> = {
     ? Options<T[P]>
     : T[P] extends AnyFun
     ? OptionFunction<T>
-    : any[] | string | number
+    : T[P]
 }
 
 export type ThreeOptions<T> = DeepPartial<Options<T>>
