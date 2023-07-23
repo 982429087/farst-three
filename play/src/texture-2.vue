@@ -35,8 +35,8 @@
               },
               wrapS: RepeatWrapping,
               wrapT: MirroredRepeatWrapping,
-              ClampToEdgeWrapping: 1001,
-              MirroredRepeatWrapping: 1002,
+              // ClampToEdgeWrapping: 1001,
+              // MirroredRepeatWrapping: 1002,
               offset: new Vector2(0.3, 0.1),
               rotation: Math.PI / 4,
               center: {
