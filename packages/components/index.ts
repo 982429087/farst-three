@@ -13,8 +13,10 @@ export * from './ambient-light'
 export * from './point-light'
 export * from './group'
 export * from './texture-loader'
+export * from './cube-texture-loader'
 export * from './directional-light'
 export * from './cylinder-geometry'
+export * from './mesh-standard-material'
 
 // 插件
 export * from './axes-helper'

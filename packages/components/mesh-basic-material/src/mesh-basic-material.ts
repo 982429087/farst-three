@@ -21,12 +21,12 @@ export const meshBasicMaterialProps = buildProps({
   },
 })
 export const meshBasicMaterialEmits = {
-  load: (e: MeshBasicMateriaLoadEvent) => e,
+  load: (e: MeshBasicMaterialLoadEvent) => e,
 }
 
-export type MeshBasicMateriaLoadEvent = {
+export type MeshBasicMaterialLoadEvent = {
   mesh: Mesh
-  material: Material
+  material: MeshBasicMaterial
   scene: Scene
 }
 

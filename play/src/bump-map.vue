@@ -4,40 +4,39 @@
       <FtMesh
         :options="{
           position: {
-            x: 1.5,
+            x: -1,
           },
         }"
-        @load="({ mesh }) => (emesh = mesh)"
       >
         <FtBoxGeometry :width="1" :height="1" :depth="1"></FtBoxGeometry>
         <FtMeshLambertMaterial>
           <FtTextureLoader
-            url="\textures\sword.png"
+            url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
             :type="'map'"
-            :options="{
-              minFilter: NearestFilter,
-              magFilter: NearestFilter,
-            }"
-            @load="textureLoad"
           ></FtTextureLoader>
         </FtMeshLambertMaterial>
       </FtMesh>
       <FtMesh
         :options="{
           position: {
-            x: -1.5,
+            x: 1,
           },
         }"
       >
         <FtBoxGeometry :width="1" :height="1" :depth="1"></FtBoxGeometry>
-        <FtMeshLambertMaterial>
+        <FtMeshLambertMaterial
+          :options="{
+            bumpScale: 2,
+          }"
+          @load="lbasicMaterialLoad"
+        >
           <FtTextureLoader
-            url="/Material_1741/height.png"
+            url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
             :type="'map'"
-            :options="{
-              minFilter: NearestFilter,
-              magFilter: NearestFilter,
-            }"
+          ></FtTextureLoader>
+          <FtTextureLoader
+            url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_ambientOcclusion.jpg"
+            :type="'bumpMap'"
           ></FtTextureLoader>
         </FtMeshLambertMaterial>
       </FtMesh>
@@ -51,7 +50,7 @@
         :options="othCameraOptions"
       />
       <FtDirectionalLight :color="0xffffff" :intensity="0.5" />
-      <FtAmbientLight :color="0xffffff" />
+      <FtAmbientLight :color="0xffffff" :intensity="0.5" />
 
       <FtWebglRenderer :params="{ antialias: true }" :animationFn="animationFn">
         <FtOrbitControls v-if="showControl" />
@@ -61,22 +60,17 @@
 </template>
 
 <script setup lang="ts">
-import { TextureLoadEvent, WebGLRendererProps } from '@farst-three/components'
-import { useGui } from '@farst-three/hooks'
 import {
-  CameraHelper,
-  LinearFilter,
-  LinearMipMapLinearFilter,
-  Mesh,
-  NearestFilter,
-  Texture,
-} from 'three'
+  MeshLambertMaterialLoadEvent,
+  WebGLRendererProps,
+} from '@farst-three/components'
+import { useGui } from '@farst-three/hooks'
+import { CameraHelper } from 'three'
 import { ref, shallowRef } from 'vue'
 
 const cameraHelper = shallowRef<CameraHelper>()
 const size = 4
 const showControl = ref(true)
-const emesh = shallowRef<Mesh>()
 
 const othCameraOptions = ref({
   position: {
@@ -90,39 +84,11 @@ const animationFn: WebGLRendererProps['animationFn'] = ({}) => {
   }
 }
 
-let texture: Texture
-function textureLoad(e: TextureLoadEvent) {
-  texture = e.texture
-}
 const { gui } = useGui()
 
-const params = {
-  minFilter: NearestFilter,
-  magFilter: NearestFilter,
+function lbasicMaterialLoad({ material }: MeshLambertMaterialLoadEvent) {
+  gui.add(material, 'bumpScale', 0, 20, 0.1)
 }
-// gui
-//   .add(params, 'minFilter', {
-//     LinearMipMapNearestFilter: LinearMipMapNearestFilter,
-//     LinearFilter: LinearFilter,
-//     NearestFilter: NearestFilter,
-//   })
-//   .onChange((v) => {
-//     texture.minFilter = v
-//     texture.needsUpdate = true
-//     emesh.value.material.map = texture
-//   })
-gui
-  .add(params, 'magFilter', {
-    LinearMipMapLinearFilter: LinearMipMapLinearFilter,
-    LinearFilter: LinearFilter,
-    NearestFilter: NearestFilter,
-  })
-  .onChange((v) => {
-    texture.magFilter = v
-    texture.needsUpdate = true
-    // todo 这样重新赋值有点问题
-    ;(emesh.value!.material as any).map = texture
-  })
 </script>
 
 <style lang="scss" scoped>

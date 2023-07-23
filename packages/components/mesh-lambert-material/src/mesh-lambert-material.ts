@@ -26,7 +26,7 @@ export const meshLambertMaterialEmits = {
 
 export type MeshLambertMaterialLoadEvent = {
   mesh: Mesh
-  material: Material
+  material: MeshLambertMaterial
   scene: Scene
 }
 export type MeshLambertMaterialEmits = typeof meshLambertMaterialEmits

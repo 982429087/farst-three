@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, provide } from 'vue'
 import { BoxGeometry } from 'three'
-import { useMesh, useScene } from '@farst-three/hooks'
+import { useMesh, useOptions, useScene } from '@farst-three/hooks'
 import { geometryInjectionKey } from '@farst-three/constants/injection'
 import { boxGeometryEmits, boxGeometryProps } from './box-geometry'
 defineOptions({
@@ -31,6 +31,8 @@ mesh.geometry = geometry
 mesh.geometry.computeBoundingBox()
 emit('load', { geometry, mesh, scene })
 provide(geometryInjectionKey, geometry)
+
+useOptions(props.options, geometry, scene)
 
 onBeforeUnmount(() => {
   geometry.dispose()

@@ -24,8 +24,10 @@ declare module '@vue/runtime-core' {
     FtPointLight: typeof import('@farst-three/components')['FtPointLight']
     FtGroup: typeof import('@farst-three/components')['FtGroup']
     FtTextureLoader: typeof import('@farst-three/components')['FtTextureLoader']
+    FtCubeTextureLoader: typeof import('@farst-three/components')['FtCubeTextureLoader']
     FtDirectionalLight: typeof import('@farst-three/components')['FtDirectionalLight']
     FtCylinderGeometry: typeof import('@farst-three/components')['FtCylinderGeometry']
+    FtMeshStandardMaterial: typeof import('@farst-three/components')['FtMeshStandardMaterial']
   }
 }
 
