@@ -1,7 +1,6 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type {
-  Material,
   Mesh,
   MeshBasicMaterial,
   MeshBasicMaterialParameters,
@@ -16,7 +15,7 @@ export const meshBasicMaterialProps = buildProps({
     type: definePropType<MeshBasicMaterialParameters>(Object),
   },
   options: {
-    type: definePropType<ThreeOptions<MeshBasicMaterial>>(Object),
+    type: definePropType<MeshBasicMaterialOptions>(Object),
     default: () => ({}),
   },
 })
@@ -37,3 +36,4 @@ export type MeshBasicMaterialInstance = InstanceType<
   typeof MeshBasicMaterialComponent
 >
 export type MeshBasicMaterialEmits = typeof meshBasicMaterialEmits
+export type MeshBasicMaterialOptions = ThreeOptions<MeshBasicMaterial>

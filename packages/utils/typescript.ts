@@ -26,7 +26,7 @@ export type DeepPartial<T> = {
 
 export type OptionFunction<T> = (scene: Scene, instance: T) => any
 export type Options<T> = {
-  [P in keyof T]: T[P] extends Record<string, any>
+  -readonly [P in keyof T]: T[P] extends Record<string, any>
     ? Options<T[P]>
     : T[P] extends AnyFun
     ? OptionFunction<T>

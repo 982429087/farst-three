@@ -1,24 +1,29 @@
 export * from './scene'
-export * from './perspective-camera'
 export * from './webgl-renderer'
-export * from './box-geometry'
 export * from './mesh'
-export * from './mesh-basic-material'
+export * from './group'
+// 相机
+export * from './perspective-camera'
 export * from './orthographic-camera'
-export * from './tube-geometry'
-export * from './sphere-geometry'
+// 材质
+export * from './mesh-basic-material'
 export * from './mesh-lambert-material'
 export * from './mesh-phong-material'
-export * from './plane-geometry'
+export * from './mesh-standard-material'
+// 灯光
+export * from './directional-light'
 export * from './ambient-light'
 export * from './point-light'
-export * from './group'
+// 几何体
+export * from './box-geometry'
+export * from './cylinder-geometry'
+export * from './torus-geometry'
+export * from './plane-geometry'
+export * from './tube-geometry'
+export * from './sphere-geometry'
+// 加载器
 export * from './texture-loader'
 export * from './cube-texture-loader'
-export * from './directional-light'
-export * from './cylinder-geometry'
-export * from './mesh-standard-material'
-
 // 插件
 export * from './axes-helper'
 export * from './grid-helper'
