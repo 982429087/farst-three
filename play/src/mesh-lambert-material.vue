@@ -3,26 +3,26 @@
     <FtScene>
       <FtMesh :options="planeOps">
         <FtPlaneGeometry :width="1" :height="1"></FtPlaneGeometry>
-        <FtMeshBasicMaterial :options="params"></FtMeshBasicMaterial>
+        <FtMeshLambertMaterial :options="params"></FtMeshLambertMaterial>
       </FtMesh>
       <FtMesh :options="sphereOps">
         <FtSphereGeometry :radius="0.5" :widthSegments="16" :heightSegments="16"></FtSphereGeometry>
-        <FtMeshBasicMaterial :options="params"></FtMeshBasicMaterial>
+        <FtMeshLambertMaterial :options="params"></FtMeshLambertMaterial>
       </FtMesh>
       <FtMesh :options="boxOps">
         <FtBoxGeometry :width="1" :height="1" :depth="1"></FtBoxGeometry>
-        <FtMeshBasicMaterial :options="params"></FtMeshBasicMaterial>
+        <FtMeshLambertMaterial :options="params"></FtMeshLambertMaterial>
       </FtMesh>
       <FtMesh :options="torusOps">
         <FtTorusGeometry :radius="0.4" :tube="0.2" :radial-segments="16" :tubular-segments="32"></FtTorusGeometry>
-        <FtMeshBasicMaterial :options="params"></FtMeshBasicMaterial>
+        <FtMeshLambertMaterial :options="params"></FtMeshLambertMaterial>
       </FtMesh>
       <FtPerspectiveCamera :fov="75" :near="0.01" :far="100" :options="{
         position: {
           set: [0.1, 1, 3],
         },
       }" />
-      <FtDirectionalLight :color="0xffffff" :intensity="0.7" :options="{ position: { set: [1, 2, 4] } }" />
+      <FtDirectionalLight :color="0xffffff" :intensity="0.7" :options="directionOpts" />
       <FtAmbientLight :color="0xffffff" :intensity="0.5" />
       <FtWebglRenderer :params="{ antialias: true }" :animationFn="animationFn">
         <FtOrbitControls />
@@ -65,6 +65,9 @@ const torusOps = ref<MeshOptions>({
     x: 1.5,
   },
 })
+
+const directionOpts = reactive({ position: { set: [2, 2, 2] } })
+
 const animationFn = ({ }: WebGLRendererLoadEvent) => {
   const elapsedTime = clock.getElapsedTime()
   planeOps.rotation = {
