@@ -10,6 +10,7 @@ export * from './mesh-basic-material'
 export * from './mesh-lambert-material'
 export * from './mesh-phong-material'
 export * from './mesh-standard-material'
+export * from './mesh-matcap-material'
 // 灯光
 export * from './directional-light'
 export * from './ambient-light'
