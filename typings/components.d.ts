@@ -31,6 +31,7 @@ declare module '@vue/runtime-core' {
     FtMeshPhongMaterial: typeof import('@farst-three/components')['FtMeshPhongMaterial']
     FtTorusGeometry: typeof import('@farst-three/components')['FtTorusGeometry']
     FtMeshMatcapMaterial: typeof import('@farst-three/components')['FtMeshMatcapMaterial']
+    FtMeshDepthMaterial: typeof import('@farst-three/components')['FtMeshDepthMaterial']
   }
 }
 

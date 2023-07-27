@@ -46,15 +46,14 @@
 import {
   BoxGeometryLoadEvent,
   CameraHelperLoadEvent,
+  MeshBasicMaterialLoadEvent,
   MeshEmits,
   OrbitControlsLoadEvent,
   OrthographicCameraLoadEvent,
   PerspectiveCameraLoadEvent,
   WebGLRendererProps,
 } from '@farst-three/components'
-import FtMeshBasicMaterial, {
-  MeshBasicMateriaLoadEvent,
-} from '@farst-three/components/mesh-basic-material'
+
 import { useGui } from '@farst-three/hooks'
 import { BoxGeometry, CameraHelper, Color, Mesh } from 'three'
 import { ref, shallowRef } from 'vue'
@@ -120,7 +119,7 @@ const ftBoxGeometryLoad = ({geometry}: BoxGeometryLoadEvent) => {
   geometryRef.value = geometry
 }
 
-const ftMeshBasicMaterialLoad = (e: MeshBasicMateriaLoadEvent) => {
+const ftMeshBasicMaterialLoad = (e: MeshBasicMaterialLoadEvent) => {
   //
 }
 

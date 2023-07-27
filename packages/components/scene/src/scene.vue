@@ -8,15 +8,16 @@
 import { onBeforeUnmount, onMounted, provide, ref } from 'vue'
 import { Scene } from 'three'
 import { storeServiceInjectionKey } from '@farst-three/constants/injection'
-import { StoreService, useNamespace } from '@farst-three/hooks'
+import { StoreService, useNamespace, useOptions } from '@farst-three/hooks'
+import { sceneEmits, sceneProps } from './scene'
 
 defineOptions({
   name: 'FtScene',
 })
 
-// defineProps(sceneProps)
+const props = defineProps(sceneProps)
+const emit = defineEmits(sceneEmits)
 
-// init here
 const ready = ref(false)
 const ns = useNamespace('scene')
 const sceneRef = ref<HTMLDivElement>()
@@ -26,7 +27,9 @@ onMounted(() => {
   ready.value = true
 })
 let storeService = new StoreService(scene, sceneRef)
+emit('load', { scene })
 provide(storeServiceInjectionKey, storeService)
+useOptions(props.options, scene, scene)
 
 onBeforeUnmount(() => {
   sceneRef.value?.remove()

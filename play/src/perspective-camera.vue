@@ -18,12 +18,11 @@
 <script setup lang="ts">
 import {
   BoxGeometryLoadEvent,
+  MeshBasicMaterialLoadEvent,
   MeshLoadEvent,
   PerspectiveCameraLoadEvent,
 } from '@farst-three/components'
-import FtMeshBasicMaterial, {
-  MeshBasicMateriaLoadEvent,
-} from '@farst-three/components/mesh-basic-material'
+
 import { useGui, useIntersect } from '@farst-three/hooks'
 import { BoxGeometry, Color, Mesh, MeshBasicMaterial } from 'three'
 import { shallowRef } from 'vue'
@@ -95,7 +94,7 @@ const ftBoxGeometryLoad = ({ geometry }: BoxGeometryLoadEvent) => {
   geometryRef.value = geometry
 }
 
-const ftMeshBasicMaterialLoad = (e: MeshBasicMateriaLoadEvent) => {
+const ftMeshBasicMaterialLoad = (e: MeshBasicMaterialLoadEvent) => {
   //
 }
 
