@@ -64,6 +64,7 @@ export type TextureType =
   | 'roughnessMap'
   | 'metalnessMap'
   | 'alphaMap'
+  | 'gradientMap'
 export type TextureLoadEvent = {
   scene: Scene
   textureLoader: TextureLoader

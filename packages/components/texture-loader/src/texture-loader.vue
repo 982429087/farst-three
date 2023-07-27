@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount } from 'vue'
+import { nextTick, onBeforeUnmount } from 'vue'
 import { LoadingManager, TextureLoader } from 'three'
 import { useMaterial, useOptions, useScene } from '@farst-three/hooks'
 import { textureLoaderEmits, textureLoaderProps } from './texture-loader'
@@ -32,6 +32,7 @@ let texture = textureLoader.load(
   props.progress,
   props.error
 )
+
 emit('load', { textureLoader, material, scene, texture })
 
 loadingManager.onStart = (url: string, loaded: number, total: number) => {
@@ -46,14 +47,18 @@ loadingManager.onProgress = (url: string, loaded: number, total: number) => {
 loadingManager.onError = (url: string) => {
   emit('managerError', url)
 }
-if (material) {
-  ;(material as any)[props.type] = texture
-}
-
 useOptions(props.options, texture, scene)
+
+// 异步赋值保证之前的修改都生效
+nextTick(() => {
+  if (material) {
+    ;(material as any)[props.type] = texture
+  }
+})
+
 onBeforeUnmount(() => {
-  ;(material as any)[props.type] = null
   texture.dispose()
+  ;(material as any)[props.type] = null
   ;(material as any) = null
   ;(scene as any) = null
   ;(loadingManager as any) = null
