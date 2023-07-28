@@ -63,7 +63,7 @@ export function useOptions<T extends Record<string, any>, R extends AnyFun>(
         },
         { instance, options }
       )
-      console.log(`setAllKeys ${lastKey.join('.')}`, instance)
+      console.log(`setAllKeys ${instance.type} ${lastKey.join('.')}`, options)
     }
   }
 
