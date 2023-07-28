@@ -52,7 +52,7 @@ export const cubeTextureLoaderEmits = {
   managerError: (url: string) => isString(url),
 }
 
-export type CubeTextureType = 'envMap'
+export type CubeTextureType = 'envMap' | 'roughnessMap'
 
 export type CubeTextureLoadEvent = {
   scene: Scene
