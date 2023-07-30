@@ -28,6 +28,7 @@ export * from './sphere-geometry'
 // 加载器
 export * from './texture-loader'
 export * from './cube-texture-loader'
+export * from './rgbe-loader'
 // 插件
 export * from './axes-helper'
 export * from './grid-helper'

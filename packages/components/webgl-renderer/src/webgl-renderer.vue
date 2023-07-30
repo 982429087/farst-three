@@ -6,7 +6,12 @@
 import { onBeforeUnmount, provide, watch } from 'vue'
 import { WebGLRenderer } from 'three'
 import { debounce } from 'lodash-es'
-import { useScene, useSceneRef, useStoreService } from '@farst-three/hooks'
+import {
+  useOptions,
+  useScene,
+  useSceneRef,
+  useStoreService,
+} from '@farst-three/hooks'
 import {
   animationServiceInjectionKey,
   rendererInjectionKey,
@@ -76,7 +81,7 @@ observer.observe(container)
 
 emit('load', { renderer, scene, camera })
 provide(rendererInjectionKey, renderer)
-
+useOptions(props.options, renderer, scene)
 onBeforeUnmount(() => {
   animationService.off('propsFn')
   observer.unobserve(container)

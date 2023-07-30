@@ -1,4 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
+import type { ThreeOptions } from '@farst-three/utils'
 import type {
   Camera,
   Scene,
@@ -28,6 +29,10 @@ export const webGLRendererProps = buildProps({
     type: Number,
     default: 1,
   },
+  options: {
+    type: definePropType<WebglRendererOptions>(Object),
+    default: () => ({}),
+  },
 })
 export const webglRendererEmits = {
   load: (e: WebGLRendererLoadEvent) => e,
@@ -41,3 +46,4 @@ export type WebGLRendererLoadEvent = {
 export type WebGLRendererProps = ExtractPropTypes<typeof webGLRendererProps>
 export type WebGLRendererInstance = InstanceType<typeof WebglRendererComponent>
 export type WebglRendererEmits = typeof webglRendererEmits
+export type WebglRendererOptions = ThreeOptions<WebGLRenderer>

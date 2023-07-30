@@ -31,10 +31,6 @@ export const textureLoaderProps = buildProps({
     type: definePropType<TextureType>(String),
     default: 'map',
   },
-  update: {
-    type: Boolean,
-    default: false,
-  },
   options: {
     type: definePropType<TextureLoaderOptions>(Object),
     default: () => ({}),

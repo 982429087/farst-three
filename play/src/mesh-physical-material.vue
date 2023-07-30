@@ -1,6 +1,8 @@
 <template>
   <div class="farst-three">
-    <FtScene>
+    <FtScene :options="{
+      background: () => new Color(0xffffff),
+    }">
       <FtMesh :options="{
         position: {
           x: -1
@@ -34,15 +36,15 @@
       }">
         <FtSphereGeometry :radius=".5" :width-segments="64" :height-segments="64"></FtSphereGeometry>
         <FtMeshPhysicalMaterial :options="phymaterialOptions">
-          <FtTextureLoader url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+          <!-- <FtTextureLoader url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
             :type="'map'">
-          </FtTextureLoader>
+          </FtTextureLoader> -->
           <FtTextureLoader url="/textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_roughness.jpg"
             type="roughnessMap">
           </FtTextureLoader>
-          <FtTextureLoader url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_metallic.jpg"
+          <!-- <FtTextureLoader url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_metallic.jpg"
             type="metalnessMap">
-          </FtTextureLoader>
+          </FtTextureLoader> -->
           <FtCubeTextureLoader :urls="[
             '/textures/fullscreen/1.left.jpg',
             '/textures/fullscreen/1.right.jpg',
@@ -62,6 +64,7 @@
       <FtAmbientLight :color="0xffffff" :intensity="0.5" />
       <FtWebglRenderer :params="{ antialias: true }" :animationFn="animationFn">
         <FtOrbitControls />
+        <FtGridHelper></FtGridHelper>
       </FtWebglRenderer>
     </FtScene>
   </div>
@@ -70,6 +73,7 @@
 <script setup lang="ts">
 import { MeshPhysicalMaterialOptions, MeshStandardMaterialOptions, WebGLRendererLoadEvent } from '@farst-three/components'
 import { useGui } from '@farst-three/hooks'
+import { Color } from 'three'
 import { ref } from 'vue'
 
 const materialOptions = ref<MeshStandardMaterialOptions>({
@@ -79,14 +83,12 @@ const materialOptions = ref<MeshStandardMaterialOptions>({
 })
 
 const phymaterialOptions = ref<MeshPhysicalMaterialOptions>({
-  clearcoat: 1,
+  clearcoat: true,
   envMapIntensity: 1,
   roughness: 0,
   transmission: 1,
-  ior: 1.5,
-  thickness: 0.1,
-  specularColor: 0x00ffff,
-  specularIntensity: 1,
+  ior: 1,
+  thickness: 1.0,
 })
 
 const animationFn = ({ }: WebGLRendererLoadEvent) => {
@@ -96,9 +98,9 @@ const animationFn = ({ }: WebGLRendererLoadEvent) => {
 const { gui } = useGui()
 
 gui.add(phymaterialOptions.value, 'roughness', 0, 1, 0.1)
-gui.add(phymaterialOptions.value, 'clearcoat', 0, 1, 0.1)
+gui.add(phymaterialOptions.value, 'clearcoat')
 gui.add(phymaterialOptions.value, 'transmission', 0, 1, 0.1)
-gui.add(phymaterialOptions.value, 'ior', 1, 2.33, 0.05)
+gui.add(phymaterialOptions.value, 'ior', 1, 2.33, 0.1)
 gui.add(phymaterialOptions.value, 'thickness', 0, 1, 0.1)
 
 </script>
