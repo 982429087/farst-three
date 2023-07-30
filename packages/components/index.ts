@@ -14,6 +14,7 @@ export * from './mesh-matcap-material'
 export * from './mesh-depth-material'
 export * from './mesh-toon-material'
 export * from './mesh-physical-material'
+export * from './shadow-material'
 // 灯光
 export * from './directional-light'
 export * from './ambient-light'

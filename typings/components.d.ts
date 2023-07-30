@@ -35,6 +35,7 @@ declare module '@vue/runtime-core' {
     FtMeshToonMaterial: typeof import('@farst-three/components')['FtMeshToonMaterial']
     FtMeshPhysicalMaterial: typeof import('@farst-three/components')['FtMeshPhysicalMaterial']
     FtRgbeLoader: typeof import('@farst-three/components')['FtRgbeLoader']
+    FtShadowMaterial: typeof import('@farst-three/components')['FtShadowMaterial']
   }
 }
 
