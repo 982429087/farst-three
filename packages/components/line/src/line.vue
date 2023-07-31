@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount, provide } from 'vue'
+import { onBeforeUnmount, provide, watch } from 'vue'
 import { Line } from 'three'
 import {
   CountService,
@@ -40,8 +40,20 @@ if (group === null) {
 provide(object3dInjectionKey, line)
 provide(materialServiceInjectionKey, materialService)
 
+watch(
+  () => materialService.aollections,
+  (v) => {
+    if (line) {
+      if (v.length === 1) {
+        line.material = v[0]
+      } else if (v.length > 1) {
+        line.material = v as any
+      }
+    }
+  },
+  { deep: true }
+)
 useOptions(props.options, line, scene)
-
 onBeforeUnmount(() => {
   if (group === null) {
     scene?.remove(line)

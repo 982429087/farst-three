@@ -37,6 +37,8 @@ declare module '@vue/runtime-core' {
     FtRgbeLoader: typeof import('@farst-three/components')['FtRgbeLoader']
     FtShadowMaterial: typeof import('@farst-three/components')['FtShadowMaterial']
     FtLine: typeof import('@farst-three/components')['FtLine']
+    FtBufferGeometry: typeof import('@farst-three/components')['FtBufferGeometry']
+    FtLineBasicMaterial: typeof import('@farst-three/components')['FtLineBasicMaterial']
   }
 }
 

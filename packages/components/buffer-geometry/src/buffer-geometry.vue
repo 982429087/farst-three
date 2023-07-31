@@ -21,13 +21,13 @@ let obj3d = useObj3d()
 let scene = useScene()
 
 let geometry = new BufferGeometry()
-obj3d.geometry = geometry
-obj3d.geometry.computeBoundingBox()
+
 emit('load', { geometry, obj3d, scene })
 provide(geometryInjectionKey, geometry)
 
 useOptions(props.options, geometry, scene)
-
+obj3d.geometry = geometry
+obj3d.geometry.computeBoundingBox()
 onBeforeUnmount(() => {
   geometry.dispose()
   ;(geometry as any) = null

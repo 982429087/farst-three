@@ -1,6 +1,11 @@
 <template>
   <div class="farst-three">
     <FtScene @load="sceneLoad">
+      <FtLine>
+        <FtLineBasicMaterial :params="{ vertexColors: true }" />
+
+        <FtBufferGeometry @load="bufferGeoLoad" :options="buffgeoOpts"></FtBufferGeometry>
+      </FtLine>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -25,35 +30,37 @@
 </template>
 
 <script setup lang="ts">
-import { SceneLoadEvent, WebGLRendererLoadEvent } from '@farst-three/components'
 import {
-  BufferGeometry,
-  Float32BufferAttribute,
-  Line,
-  LineBasicMaterial,
-} from 'three'
+  SceneLoadEvent,
+  WebGLRendererLoadEvent,
+  BufferGeometryOptions,
+} from '@farst-three/components'
+import { BufferGeometryLoadEvent } from '@farst-three/components/buffer-geometry'
+import { Float32BufferAttribute } from 'three'
+import { reactive } from 'vue'
 
 const animationFn = ({}: WebGLRendererLoadEvent) => {}
-
-function sceneLoad({ scene }: SceneLoadEvent) {
-  const gemotry = new BufferGeometry()
-  const material = new LineBasicMaterial({ vertexColors: true })
-  const position = []
-  const colors = []
-  const numbers = 100000
-  const r = 4
-  for (let i = 0; i < numbers; i++) {
-    const x = Math.random() * r - r / 2
-    const y = Math.random() * r - r / 2
-    const z = Math.random() * r - r / 2
-    position.push(x, y, z)
-    colors.push(x / r + 0.5, y / r + 0.5, z / r + 0.5)
-  }
-  gemotry.setAttribute('position', new Float32BufferAttribute(position, 3))
-  gemotry.setAttribute('color', new Float32BufferAttribute(colors, 3))
-  const line = new Line(gemotry, material)
-  scene.add(line)
+const position: number[] = []
+const colors: number[] = []
+const numbers = 10000
+const r = 4
+for (let i = 0; i < numbers; i++) {
+  const x = Math.random() * r - r / 2
+  const y = Math.random() * r - r / 2
+  const z = Math.random() * r - r / 2
+  position.push(x, y, z)
+  colors.push(x / r + 0.5, y / r + 0.5, z / r + 0.5)
 }
+const buffgeoOpts = reactive<BufferGeometryOptions>({
+  // setAttribute: ['color', new Float32BufferAttribute(colors, 3)],
+  attributes: {
+    position: () => new Float32BufferAttribute(position, 3),
+    color: () => new Float32BufferAttribute(colors, 3)
+  },
+})
+
+function sceneLoad({ scene }: SceneLoadEvent) {}
+function bufferGeoLoad({ geometry }: BufferGeometryLoadEvent) {}
 </script>
 
 <style lang="scss" scoped>
