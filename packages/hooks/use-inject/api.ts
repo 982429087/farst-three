@@ -4,7 +4,7 @@ import {
   groupInjectionKey,
   materialInjectKey,
   materialServiceInjectionKey,
-  meshInjectionKey,
+  object3dInjectionKey,
   rendererInjectionKey,
   storeServiceInjectionKey,
 } from '@farst-three/constants/injection'
@@ -31,8 +31,8 @@ export function useScene() {
   return useInjection<StoreService>(storeServiceInjectionKey).getScene()
 }
 
-export function useMesh() {
-  return useInjection<Mesh>(meshInjectionKey)
+export function useObj3d() {
+  return useInjection<Mesh>(object3dInjectionKey)
 }
 
 export function useGeometry() {

@@ -7,7 +7,7 @@ import { onBeforeUnmount, provide } from 'vue'
 import { MeshDepthMaterial } from 'three'
 import {
   useMaterialService,
-  useMesh,
+  useObj3d,
   useOptions,
   useScene,
 } from '@farst-three/hooks'
@@ -25,12 +25,12 @@ const props = defineProps(meshDepthMaterialProps)
 const emit = defineEmits(meshDepthMaterialEmits)
 
 let scene = useScene()
-let mesh = useMesh()
+let obj3d = useObj3d()
 let materialService = useMaterialService()
 let material = new MeshDepthMaterial(props.params)
 materialService.addCount(material)
 
-emit('load', { scene, material, mesh })
+emit('load', { scene, material, obj3d })
 provide(materialInjectKey, material)
 useOptions(props.options, material, scene)
 
@@ -38,7 +38,7 @@ onBeforeUnmount(() => {
   materialService.subCount(material)
   material.dispose()
   ;(scene as any) = null
-  ;(mesh as any) = null
+  ;(obj3d as any) = null
   ;(material as any) = null
   ;(materialService as any) = null
 })

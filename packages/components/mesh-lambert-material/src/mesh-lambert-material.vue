@@ -7,7 +7,7 @@ import { onBeforeUnmount, provide } from 'vue'
 import { MeshLambertMaterial } from 'three'
 import {
   useMaterialService,
-  useMesh,
+  useObj3d,
   useOptions,
   useScene,
 } from '@farst-three/hooks'
@@ -25,14 +25,14 @@ const props = defineProps(meshLambertMaterialProps)
 const emit = defineEmits(meshLambertMaterialEmits)
 
 // init here 必须添加光源才有效果
-const mesh = useMesh()
+const obj3d = useObj3d()
 const scene = useScene()
 const materialService = useMaterialService()
 
 const material = new MeshLambertMaterial(props.params)
 materialService.addCount(material)
 
-emit('load', { mesh, material, scene })
+emit('load', { obj3d, material, scene })
 provide(materialInjectKey, material)
 useOptions(props.options, material, scene)
 

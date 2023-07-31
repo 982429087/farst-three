@@ -1,6 +1,6 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
-import type { CylinderGeometry, Mesh, Scene } from 'three'
+import type { CylinderGeometry, Mesh, Object3D, Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type CylinderGeometryComponent from './cylinder-geometry.vue'
 
@@ -25,7 +25,7 @@ export const cylinderGeometryEmits = {
 export type CylinderGeometryLoadEvent = {
   scene: Scene
   geometry: CylinderGeometry
-  mesh: Mesh
+  obj3d: Object3D
 }
 export type CylinderGeometryEmits = typeof cylinderGeometryEmits
 export type CylinderGeometryProps = ExtractPropTypes<

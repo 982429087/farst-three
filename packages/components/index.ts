@@ -1,6 +1,7 @@
 export * from './scene'
 export * from './webgl-renderer'
 export * from './mesh'
+export * from './line'
 export * from './group'
 // 相机
 export * from './perspective-camera'

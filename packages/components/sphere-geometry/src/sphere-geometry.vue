@@ -6,7 +6,7 @@
 import { onBeforeUnmount, provide } from 'vue'
 import { SphereGeometry } from 'three'
 import { geometryInjectionKey } from '@farst-three/constants/injection'
-import { useMesh, useScene } from '@farst-three/hooks'
+import { useObj3d, useScene } from '@farst-three/hooks'
 import { sphereGeometryEmits, sphereGeometryProps } from './sphere-geometry'
 
 defineOptions({
@@ -17,7 +17,7 @@ const props = defineProps(sphereGeometryProps)
 const emit = defineEmits(sphereGeometryEmits)
 
 let scene = useScene()
-let mesh = useMesh()
+let obj3d = useObj3d()
 let geometry = new SphereGeometry(
   props.radius,
   props.widthSegments,
@@ -27,15 +27,15 @@ let geometry = new SphereGeometry(
   props.thetaStart,
   props.thetaLength
 )
-mesh.geometry = geometry
-mesh.geometry.computeBoundingBox()
-emit('load', { geometry, scene, mesh })
+obj3d.geometry = geometry
+obj3d.geometry.computeBoundingBox()
+emit('load', { geometry, scene, obj3d })
 provide(geometryInjectionKey, geometry)
 
 onBeforeUnmount(() => {
   geometry.dispose()
   ;(scene as any) = null
   ;(geometry as any) = null
-  ;(mesh as any) = null
+  ;(obj3d as any) = null
 })
 </script>

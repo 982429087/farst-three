@@ -1,6 +1,6 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
-import type { Mesh, PlaneGeometry, Scene } from 'three'
+import type { Object3D, PlaneGeometry, Scene } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
 import type PlaneGeometryComponent from './plane-geometry.vue'
@@ -21,7 +21,7 @@ export const planeGeometryEmits = {
 
 export type PlaneGeometryLoadEvent = {
   geometry: PlaneGeometry
-  mesh: Mesh
+  obj3d: Object3D
   scene: Scene
 }
 export type PlaneGeometryEmits = typeof planeGeometryEmits

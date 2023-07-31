@@ -13,7 +13,7 @@ import {
 } from '@farst-three/hooks'
 import {
   materialServiceInjectionKey,
-  meshInjectionKey,
+  object3dInjectionKey,
 } from '@farst-three/constants/injection'
 import { meshEmits, meshProps } from './mesh'
 import type { Material } from 'three'
@@ -28,8 +28,8 @@ const emit = defineEmits(meshEmits)
 // init here
 let scene = useScene()
 let group = useGroup()
-let mesh = new Mesh(props.geometry, props.material)
 let materialService = new CountService<Material>()
+let mesh = new Mesh(props.geometry, props.material)
 
 emit('load', { mesh, scene, group })
 if (group === null) {
@@ -37,7 +37,7 @@ if (group === null) {
 } else {
   group.add(mesh)
 }
-provide(meshInjectionKey, mesh)
+provide(object3dInjectionKey, mesh)
 provide(materialServiceInjectionKey, materialService)
 
 watch(

@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, provide } from 'vue'
 import { CylinderGeometry } from 'three'
-import { useMesh, useOptions, useScene } from '@farst-three/hooks'
+import { useObj3d, useOptions, useScene } from '@farst-three/hooks'
 import { geometryInjectionKey } from '@farst-three/constants'
 import {
   cylinderGeometryEmits,
@@ -21,7 +21,7 @@ const emit = defineEmits(cylinderGeometryEmits)
 
 // init here
 let scene = useScene()
-let mesh = useMesh()
+let obj3d = useObj3d()
 let geometry = new CylinderGeometry(
   props.radiusTop,
   props.radiusBottom,
@@ -32,9 +32,9 @@ let geometry = new CylinderGeometry(
   props.thetaStart,
   props.thetaLength
 )
-mesh.geometry = geometry
-mesh.geometry.computeBoundingBox()
-emit('load', { geometry, mesh, scene })
+obj3d.geometry = geometry
+obj3d.geometry.computeBoundingBox()
+emit('load', { geometry, obj3d, scene })
 provide(geometryInjectionKey, geometry)
 
 useOptions(props.options, geometry, scene)
@@ -42,7 +42,7 @@ useOptions(props.options, geometry, scene)
 onBeforeUnmount(() => {
   geometry.dispose()
   ;(scene as any) = null
-  ;(mesh as any) = null
+  ;(obj3d as any) = null
   ;(geometry as any) = null
 })
 </script>

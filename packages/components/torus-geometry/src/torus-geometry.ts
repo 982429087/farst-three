@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import type { Mesh, Scene, TorusGeometry } from 'three'
+import type { Object3D, Scene, TorusGeometry } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type TorusGeometryComponent from './torus-geometry.vue'
@@ -22,7 +22,7 @@ export const torusGeometryEmits = {
 export type TorusGeometryLoadEvent = {
   scene: Scene
   geometry: TorusGeometry
-  mesh: Mesh
+  obj3d: Object3D
 }
 export type TorusGeometryEmits = typeof torusGeometryEmits
 export type TorusGeometryProps = ExtractPropTypes<typeof torusGeometryProps>

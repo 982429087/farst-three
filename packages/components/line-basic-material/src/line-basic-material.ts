@@ -3,6 +3,7 @@ import type {
   LineBasicMaterial,
   LineBasicMaterialParameters,
   Mesh,
+  Object3D,
   Scene,
 } from 'three'
 import type { ExtractPropTypes } from 'vue'
@@ -23,7 +24,7 @@ export const lineBasicMaterialEmits = {
 }
 
 export type LineBasicMaterialLoadEvent = {
-  mesh: Mesh
+  obj3d: Object3D
   material: LineBasicMaterial
   scene: Scene
 }

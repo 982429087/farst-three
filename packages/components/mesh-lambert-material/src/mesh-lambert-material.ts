@@ -1,10 +1,9 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type {
-  Material,
-  Mesh,
   MeshLambertMaterial,
   MeshLambertMaterialParameters,
+  Object3D,
   Scene,
 } from 'three'
 
@@ -25,7 +24,7 @@ export const meshLambertMaterialEmits = {
 }
 
 export type MeshLambertMaterialLoadEvent = {
-  mesh: Mesh
+  obj3d: Object3D
   material: MeshLambertMaterial
   scene: Scene
 }

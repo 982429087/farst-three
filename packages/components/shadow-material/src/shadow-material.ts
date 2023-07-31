@@ -1,6 +1,6 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import type {
-  Mesh,
+  Object3D,
   Scene,
   ShadowMaterial,
   ShadowMaterialParameters,
@@ -25,7 +25,7 @@ export const shadowMaterialEmits = {
 export type ShadowMaterialLoadEvent = {
   scene: Scene
   material: ShadowMaterial
-  mesh: Mesh
+  obj3d: Object3D
 }
 export type ShadowMaterialEmits = typeof shadowMaterialEmits
 export type ShadowMaterialProps = ExtractPropTypes<typeof shadowMaterialProps>

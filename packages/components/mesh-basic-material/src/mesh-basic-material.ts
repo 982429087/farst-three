@@ -4,6 +4,7 @@ import type {
   Mesh,
   MeshBasicMaterial,
   MeshBasicMaterialParameters,
+  Object3D,
   Scene,
 } from 'three'
 
@@ -24,7 +25,7 @@ export const meshBasicMaterialEmits = {
 }
 
 export type MeshBasicMaterialLoadEvent = {
-  mesh: Mesh
+  obj3d: Object3D
   material: MeshBasicMaterial
   scene: Scene
 }

@@ -1,5 +1,5 @@
 import { buildProps } from '@farst-three/utils'
-import type { Mesh, Scene, SphereGeometry } from 'three'
+import type { Object3D, Scene, SphereGeometry } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
 import type SphereGeometryComponent from './sphere-geometry.vue'
@@ -22,7 +22,7 @@ export const sphereGeometryEmits = {
 
 export type SphereGeometryLoadEvents = {
   scene: Scene
-  mesh: Mesh
+  obj3d: Object3D
   geometry: SphereGeometry
 }
 export type SphereGeometryEmits = typeof sphereGeometryEmits

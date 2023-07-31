@@ -1,6 +1,6 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
-import type { BoxGeometry, Mesh, Scene } from 'three'
+import type { BoxGeometry, Object3D, Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type BoxGeometryComponent from './box-geometry.vue'
 
@@ -23,7 +23,7 @@ export const boxGeometryEmits = {
 
 export type BoxGeometryLoadEvent = {
   scene: Scene
-  mesh: Mesh
+  obj3d: Object3D
   geometry: BoxGeometry
 }
 export type BoxGeometryProps = ExtractPropTypes<typeof boxGeometryProps>

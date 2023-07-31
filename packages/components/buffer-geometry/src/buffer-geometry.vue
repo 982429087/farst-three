@@ -4,29 +4,23 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, provide } from 'vue'
-import { BoxGeometry } from 'three'
+import { BufferGeometry } from 'three'
 import { useObj3d, useOptions, useScene } from '@farst-three/hooks'
-import { geometryInjectionKey } from '@farst-three/constants/injection'
-import { boxGeometryEmits, boxGeometryProps } from './box-geometry'
+import { geometryInjectionKey } from '@farst-three/constants'
+import { bufferGeometryEmits, bufferGeometryProps } from './buffer-geometry'
+
 defineOptions({
-  name: 'FtBoxGeometry',
+  name: 'FtBufferGeometry',
 })
 
-const props = defineProps(boxGeometryProps)
-const emit = defineEmits(boxGeometryEmits)
+const props = defineProps(bufferGeometryProps)
+const emit = defineEmits(bufferGeometryEmits)
 
 // init here
 let obj3d = useObj3d()
 let scene = useScene()
-let geometry = new BoxGeometry(
-  props.width,
-  props.height,
-  props.depth,
-  props.widthSegments,
-  props.heightSegments,
-  props.depthSegments
-)
 
+let geometry = new BufferGeometry()
 obj3d.geometry = geometry
 obj3d.geometry.computeBoundingBox()
 emit('load', { geometry, obj3d, scene })

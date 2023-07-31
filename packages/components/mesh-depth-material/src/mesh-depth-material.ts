@@ -1,8 +1,8 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import type {
-  Mesh,
   MeshDepthMaterial,
   MeshDepthMaterialParameters,
+  Object3D,
   Scene,
 } from 'three'
 import type { ExtractPropTypes } from 'vue'
@@ -25,7 +25,7 @@ export const meshDepthMaterialEmits = {
 export type MeshDepthMaterialLoadEvent = {
   scene: Scene
   material: MeshDepthMaterial
-  mesh: Mesh
+  obj3d: Object3D
 }
 export type MeshDepthMaterialEmits = typeof meshDepthMaterialEmits
 export type MeshDepthMaterialProps = ExtractPropTypes<

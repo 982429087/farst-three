@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, provide } from 'vue'
 import { TubeGeometry } from 'three'
-import { useMesh, useScene } from '@farst-three/hooks'
+import { useObj3d, useScene } from '@farst-three/hooks'
 import { geometryInjectionKey } from '@farst-three/constants/injection'
 import { tubeGeometryEmits, tubeGeometryProps } from './tube-geometry'
 
@@ -17,7 +17,7 @@ const props = defineProps(tubeGeometryProps)
 const emit = defineEmits(tubeGeometryEmits)
 
 // init here
-let mesh = useMesh()
+let obj3d = useObj3d()
 let scene = useScene()
 let geometry = new TubeGeometry(
   props.path,
@@ -27,15 +27,15 @@ let geometry = new TubeGeometry(
   props.closed
 )
 
-mesh.geometry = geometry
-mesh.geometry.computeBoundingBox()
-emit('load', { geometry, mesh, scene })
+obj3d.geometry = geometry
+obj3d.geometry.computeBoundingBox()
+emit('load', { geometry, obj3d, scene })
 provide(geometryInjectionKey, geometry)
 
 onBeforeUnmount(() => {
   geometry.dispose()
   ;(scene as any) = null
-  ;(mesh as any) = null
+  ;(obj3d as any) = null
   ;(geometry as any) = null
 })
 </script>
