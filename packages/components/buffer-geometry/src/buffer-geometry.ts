@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import type { BufferGeometry, Mesh, Object3D, Scene } from 'three'
+import type { BufferGeometry, Object3D, Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type BufferGeometryComponent from './buffer-geometry.vue'

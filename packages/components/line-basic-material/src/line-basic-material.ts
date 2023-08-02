@@ -2,7 +2,6 @@ import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   LineBasicMaterial,
   LineBasicMaterialParameters,
-  Mesh,
   Object3D,
   Scene,
 } from 'three'

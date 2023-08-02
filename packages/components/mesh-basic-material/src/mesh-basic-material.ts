@@ -1,7 +1,6 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type {
-  Mesh,
   MeshBasicMaterial,
   MeshBasicMaterialParameters,
   Object3D,

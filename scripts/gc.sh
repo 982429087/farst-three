@@ -85,7 +85,7 @@ import type ${NAME}Component from './$INPUT_NAME.vue'
 
 export const ${SMALL_HUMP}Props = buildProps({
   options: {
-    type: definePropType<ThreeOptions<${NAME}>>(Object),
+    type: definePropType<${NAME}Options>(Object),
     default: () => ({}),
   },
 })

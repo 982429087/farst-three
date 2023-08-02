@@ -32,8 +32,8 @@ import type { OrthographicCamera } from 'three'
 defineOptions({
   name: 'FtThumbnail',
 })
-
-const props = defineProps(thumbnailProps)
+let camera: OrthographicCamera | null = null
+const props = defineProps(thumbnailProps as any)
 const emit = defineEmits(thumbnailEmits)
 
 // init here
@@ -42,7 +42,6 @@ const bindProps = useBindProps(props, orthographicCameraProps)
 const onEmits = useOnEmits(emit, orthographicCameraEmits)
 
 const container = useSceneRef()
-let camera: OrthographicCamera
 
 const cameraLoad = (e: OrthographicCameraLoadEvent) => {
   camera = e.camera

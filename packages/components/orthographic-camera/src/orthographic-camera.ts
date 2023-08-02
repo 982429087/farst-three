@@ -21,7 +21,7 @@ export const orthographicCameraProps = buildProps({
     default: true,
   },
   options: {
-    type: definePropType<ThreeOptions<OrthographicCamera>>(Object),
+    type: definePropType<OrthographicCameraOptions>(Object),
     default: () => ({}),
   },
 })
