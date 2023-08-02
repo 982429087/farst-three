@@ -1,0 +1,7 @@
+@use 'mixins/mixins' as *;
+
+@include b(dat-gui) {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

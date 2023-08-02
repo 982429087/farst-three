@@ -33,6 +33,7 @@ defineOptions({
   name: 'FtThumbnail',
 })
 let camera: OrthographicCamera | null = null
+// TODO 类型过深导致打包出问题
 const props = defineProps(thumbnailProps as any)
 const emit = defineEmits(thumbnailEmits)
 
