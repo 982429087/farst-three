@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount } from 'vue'
 import { PointLight } from 'three'
-import { useGroup, useScene } from '@farst-three/hooks'
+import { useGroup, useOptions, useScene } from '@farst-three/hooks'
 import { pointLightEmits, pointLightProps } from './point-light'
 
 defineOptions({
@@ -26,6 +26,7 @@ let pointLight = new PointLight(
 )
 
 emit('load', { scene, light: pointLight })
+useOptions(props.options, pointLight, scene)
 if (group === null) {
   scene.add(pointLight)
 } else {
