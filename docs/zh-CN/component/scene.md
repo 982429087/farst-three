@@ -17,20 +17,20 @@ scene/basic
 
 ## Scene API
 
-### Affix Attributes
+### Scene Attributes
 
 | Name      | Description             | Type            | Default | Required |
 | --------- | ----------------------- | --------------- | ------- | -------- |
 | `options` | Scene实例上的属性和方法 | ^[SceneOptions] | `{}`    | No       |
 
 
-### Affix Events
+### Scene Events
 
 | Name   | Description             | Type                                     |
 | ------ | ----------------------- | ---------------------------------------- |
 | `load` | scene实例创建后触发方法 | ^[Function]`(e: SceneLoadEvent) => void` |
 
-### Affix Slots
+### Scene Slots
 
 | Name      | Description |
 | --------- | ----------- |

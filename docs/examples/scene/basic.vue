@@ -1,6 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
-    <FtScene>
+    <FtScene :options="{ background: () => new Color('rgb(100, 100, 100)') }">
       <FtMesh>
         <FtBoxGeometry />
         <FtMeshBasicMaterial :params="{ color: '#abcdef' }" />
@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
+import { Color } from 'three'
 import {
   FtBoxGeometry,
   FtMesh,
