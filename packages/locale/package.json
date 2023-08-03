@@ -1,7 +1,7 @@
 {
   "name": "@farst-three/locale",
   "version": "0.0.5",
-  "description": "Element Plus locale",
+  "description": "Farst Three locale",
   "license": "MIT",
   "main": "index.ts",
   "module": "index.ts",

@@ -1,6 +1,6 @@
 {
   "core": {
-    "text": "核心",
+    "text": "渲染",
     "children": [
       {
         "link": "/scene",

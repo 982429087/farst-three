@@ -13,10 +13,10 @@ const { url, text } = useEditLink()
       target="_blank"
       rel="noopener noreferrer"
     >
-      {{ text }}
+      <!-- {{ text }}
       <ElIcon :size="16" style="vertical-align: text-top; line-height: 24px">
         <i-ri-external-link-line />
-      </ElIcon>
+      </ElIcon> -->
     </a>
   </div>
 </template>

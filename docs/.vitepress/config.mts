@@ -43,7 +43,7 @@ languages.forEach((lang) => {
 
 export const config: UserConfig = {
   title: 'Farst Three',
-  description: 'a Vue 3 based component library for designers and developers',
+  description: 'a vue3 encapsulation of threejs',
   lastUpdated: true,
   head,
   themeConfig: {

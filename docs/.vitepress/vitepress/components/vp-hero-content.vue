@@ -4,7 +4,7 @@
   </div>
   <el-divider style="margin-bottom: 0" />
   <div class="text-center py-6 text-xs">
-    <p class="mb-1">
+    <!-- <p class="mb-1">
       Released under the
       <a
         href="https://opensource.org/licenses/MIT"
@@ -19,8 +19,8 @@
         href="https://github.com/farst-three"
         target="_blank"
         rel="noopener noreferer"
-        >Element Plus</a
+        >Farst Three</a
       >
-    </p>
+    </p> -->
   </div>
 </template>

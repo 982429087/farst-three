@@ -89,7 +89,7 @@ You need to inject the teleport markup close to the `<body>` tag.
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Element Plus</title>
+    <title>Farst Three</title>
     <!--preload-links-->
   </head>
   <body>

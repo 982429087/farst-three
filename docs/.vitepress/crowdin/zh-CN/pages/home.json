@@ -11,7 +11,7 @@
   "10": "链接",
   "11": "GitHub",
   "12": "更新日志",
-  "13": "Element UI for Vue 2",
+  "13": "Farst Three",
   "14": "自定义主题",
   "15": "Gitter",
   "16": "建议反馈",
@@ -20,9 +20,9 @@
   "19": "讨论区",
   "20": "成为赞助商！",
   "21": "请通过此邮箱联系我们",
-  "title_release": "Element Plus stable release is coming",
-  "title": "Element Plus",
-  "title_sub": "a Vue 3 based component library for designers and developers",
+  "title_release": "Farst Three stable release is coming",
+  "title": "Farst Three",
+  "title_sub": "a vue3 encapsulation of threejs",
   "china_mirror": "China Mirror 🇨🇳",
   "discord": "Discord"
 }

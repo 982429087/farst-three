@@ -9,7 +9,7 @@ const homeLang = computed(() => homeLocale[lang.value])
 
 <template>
   <div class="cards">
-    <ul class="container">
+    <!-- <ul class="container">
       <li>
         <div class="card">
           <guide-svg w="40" m="y-12" />
@@ -36,7 +36,7 @@ const homeLang = computed(() => homeLocale[lang.value])
           <a :href="`/${lang}/resource/index.html`"> {{ homeLang['5'] }} </a>
         </div>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 

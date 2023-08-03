@@ -13,7 +13,7 @@ const homeLang = computed(() => homeLocale[lang.value])
 
 <template>
   <footer class="footer" :class="{ 'is-home': isHome }">
-    <div class="footer-main">
+    <!-- <div class="footer-main">
       <h4>{{ homeLang['10'] }}</h4>
       <a
         href="https://github.com/farst-three/farst-three"
@@ -75,7 +75,7 @@ const homeLang = computed(() => homeLocale[lang.value])
       >
         {{ homeLang['18'] }}
       </a>
-    </div>
+    </div> -->
   </footer>
 </template>
 
