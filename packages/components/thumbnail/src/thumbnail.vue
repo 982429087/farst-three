@@ -37,7 +37,6 @@ let camera: OrthographicCamera | null = null
 const props = defineProps(thumbnailProps as any)
 const emit = defineEmits(thumbnailEmits)
 
-// init here
 let animationService = useAnimationService()
 const bindProps = useBindProps(props, orthographicCameraProps)
 const onEmits = useOnEmits(emit, orthographicCameraEmits)

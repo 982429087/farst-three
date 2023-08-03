@@ -1,10 +1,23 @@
 {
-  "data": {
-    "text": "",
+  "core": {
+    "text": "核心",
     "children": [
       {
         "link": "/scene",
         "text": "Scene"
+      },
+      {
+        "link": "/webgl-renderer",
+        "text": "WebGLRenderer"
+      }
+    ]
+  },
+  "camera": {
+    "text": "相机",
+    "children": [
+      {
+        "link": "/orthographic-camera",
+        "text": "OrthographicCamera"
       }
     ]
   }

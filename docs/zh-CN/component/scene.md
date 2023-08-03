@@ -17,20 +17,20 @@ scene/basic
 
 ## Scene API
 
-### Scene Attributes
+### Attributes
 
-| Name      | Description             | Type            | Default | Required |
-| --------- | ----------------------- | --------------- | ------- | -------- |
-| `options` | Scene实例上的属性和方法 | ^[SceneOptions] | `{}`    | No       |
+| Name      | Description                                                                                | Type            | Default | Required |
+| --------- | ------------------------------------------------------------------------------------------ | --------------- | ------- | -------- |
+| `options` | [Scene](https://threejs.org/docs/index.html?q=scene#api/zh/scenes/Scene)实例上的属性和方法 | ^[SceneOptions] | `{}`    | No       |
 
 
-### Scene Events
+### Events
 
 | Name   | Description             | Type                                     |
 | ------ | ----------------------- | ---------------------------------------- |
 | `load` | scene实例创建后触发方法 | ^[Function]`(e: SceneLoadEvent) => void` |
 
-### Scene Slots
+### Slots
 
 | Name      | Description |
 | --------- | ----------- |

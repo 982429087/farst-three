@@ -7,7 +7,7 @@ import type GroupComponent from './group.vue'
 
 export const groupProps = buildProps({
   options: {
-    type: definePropType<ThreeOptions<Group>>(Object),
+    type: definePropType<GroupOptions>(Object),
     default: () => ({}),
   },
 })
@@ -22,3 +22,4 @@ export type GroupLoadEvent = {
 export type GroupEmits = typeof groupEmits
 export type GroupProps = ExtractPropTypes<typeof groupProps>
 export type GroupInstance = InstanceType<typeof GroupComponent>
+export type GroupOptions = ThreeOptions<Group>

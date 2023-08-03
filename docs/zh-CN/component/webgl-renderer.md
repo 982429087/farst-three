@@ -1,46 +1,65 @@
 ---
-title: Scene
+title: WebGLRender
 lang: zh-CN
 ---
 
-# Scene
+# WebGLRender
 
-场景能够让你在什么地方、摆放什么东西来交给three.js来渲染，这是你放置物体、灯光和摄像机的地方。
+WebGL Render 用WebGL渲染出你精心制作的场景。
 ## 基础用法
 
-默认情况下，词缀固定在页面的顶部。
+:::demo
 
-:::demo 你可以设置`offset`属性来改变偏移顶部，默认值为0。
-
-scene/basic
+webgl-renderer/basic
 
 :::
 
 
-## Scene API
+## 裁剪
 
-### Affix Attributes
+:::demo
 
-| Name      | Description             | Type            | Default | Required |
-| --------- | ----------------------- | --------------- | ------- | -------- |
-| `options` | Scene实例上的属性和方法 | ^[SceneOptions] | `{}`    | No       |
+webgl-renderer/thumbnail
+
+:::
 
 
-### Affix Events
+## API
 
-| Name   | Description             | Type                                     |
-| ------ | ----------------------- | ---------------------------------------- |
-| `load` | scene实例创建后触发方法 | ^[Function]`(e: SceneLoadEvent) => void` |
+### Attributes
 
-### Affix Exposes
+| Name                     | Description                    | Type                                            | Default     | Required |
+| ------------------------ | ------------------------------ | ----------------------------------------------- | ----------- | -------- |
+| `animationFn`            | requestAnimationFrame 中的回调 | ^[Function]`(e: WebGLRendererLoadEvent) => any` | `undefined` | No       |
+| `params`                 | webglrenderer 构造函数参数     | ^[WebGLRendererParameters]                      | `undefined` | No       |
+| `scissor`                | 是否开启裁剪                   | ^[boolean]                                      | `false`     | No       |
+| `scissorClearColor`      | 裁剪颜色                       | ^[string]                                       | `#999999`   | No       |
+| `scissorClearColorAlpha` | 裁剪透明度                     | ^[number]                                       | `1`         | No       |
+| `options`                | WebGLRenderer的实例上的属性    | ^[WebglRendererOptions]                         | `{}`        | No       |
+
+
+### Events
+
+| Name   | Description                       | Type                                             |
+| ------ | --------------------------------- | ------------------------------------------------ |
+| `load` | webGLRrenderer 实例创建后触发方法 | ^[Function]`(e: WebGLRendererLoadEvent) => void` |
+
+<!-- ### Exposes
 
 | Method       | Description                 | Type                    |
 | ------------ | --------------------------- | ----------------------- |
 | `update`     | update affix state manually | ^[Function]`() => void` |
-| `updateRoot` | update rootRect info        | ^[Function]`() => void` |
+| `updateRoot` | update rootRect info        | ^[Function]`() => void` | -->
 
-### Affix Slots
+### Provide
+
+| Key                    | Description       | Type             |
+| ---------------------- | ----------------- | ---------------- |
+| `rendererInjectionKey` | webGLRenderer实例 | ^[WebGLRenderer] |
+
+### Slots
 
 | Name      | Description |
 | --------- | ----------- |
 | `default` | 默认插槽    |
+

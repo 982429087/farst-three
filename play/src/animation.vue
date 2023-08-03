@@ -81,7 +81,8 @@ function meshLoad({ mesh }: MeshLoadEvent) {
     },
   }
   gui.add(params, 'rotate')
-  gui.add(mesh.scale, 'x', 1, 3, 0.1).onChange(val => {
+  gui.add(mesh.scale, 'x', 1, 3, 0.1)
+  .onChange(val => {
     // 放大
     console.log(val)
   })
