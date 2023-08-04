@@ -18,6 +18,10 @@
       {
         "link": "/orthographic-camera",
         "text": "OrthographicCamera"
+      },
+      {
+        "link": "/perspective-camera",
+        "text": "PerspectiveCamera"
       }
     ]
   }
