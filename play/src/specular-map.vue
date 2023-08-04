@@ -107,7 +107,6 @@ function lbasicMaterialLoad({ material }: MeshPhongMaterialLoadEvent) {
   gui.addColor({color: 0x00ffff}, 'color').onChange((val) => {
     material.specular = new Color(val)
   })
-
 }
 </script>
 

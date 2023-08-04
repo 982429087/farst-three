@@ -24,6 +24,37 @@
         "text": "PerspectiveCamera"
       }
     ]
+  },
+  "geometry": {
+    "text": "几何体",
+    "children": [
+      {
+        "link": "/plane-geometry",
+        "text": "PlaneGeometry"
+      },
+      {
+        "link": "/box-geometry",
+        "text": "BoxGeometry"
+      }
+    ]
+  },
+  "group": {
+    "text": "合并几何体",
+    "children": [
+      {
+        "link": "/group",
+        "text": "Group"
+      }
+    ]
+  },
+  "texture": {
+    "text": "纹理",
+    "children": [
+      {
+        "link": "/texture-loader",
+        "text": "TextureLoader"
+      }
+    ]
   }
 }
 

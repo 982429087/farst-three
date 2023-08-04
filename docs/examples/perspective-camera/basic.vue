@@ -1,5 +1,5 @@
 <template>
-  <div class="farst-three">
+  <div ref="domRef" class="farst-three">
     <FtScene>
       <FtMesh @load="loadMesh">
         <FtBoxGeometry @load="ftBoxGeometryLoad">
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { shallowRef } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { Color } from 'three'
 import { useGui, useIntersect } from '@farst-three/hooks'
 import {
@@ -53,7 +53,8 @@ import type {
 const meshRef = shallowRef<Mesh>()
 const geometryRef = shallowRef<BoxGeometry>()
 
-const { gui } = useGui()
+const domRef = ref<HTMLDivElement>()
+const { gui } = useGui(domRef)
 const meshBasicParamsFn = {
   color: new Color(Math.random() * 0x00ffff),
 }
@@ -94,16 +95,11 @@ const loadMesh = ({ mesh }: MeshLoadEvent) => {
   gui.add(mesh, 'visible')
 
   gui.addColor(params, 'color').onChange((color: string) => {
-    if (Array.isArray(mesh.material)) {
-      ;(mesh.material as MeshBasicMaterial[]).forEach((m) => {
-        m.color.set(color)
-      })
-    }
+    ;(mesh.material as MeshBasicMaterial).color.set(color)
   })
   gui.add(mesh.material as MeshBasicMaterial, 'wireframe').onChange((val) => {
-    ;(mesh.material as MeshBasicMaterial[]).forEach((m) => {
-      m.wireframe = val
-    })
+    console.log(val)
+    ;(mesh.material as MeshBasicMaterial).wireframe = val
   })
 }
 

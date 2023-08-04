@@ -38,7 +38,6 @@ export const textureLoaderProps = buildProps({
 })
 export const textureLoaderEmits = {
   load: (e: TextureLoadEvent) => e,
-  'update:update': (e: boolean) => true,
   managerLoad: () => true,
   managerStart: (url: string, loaded: number, total: number) =>
     isString(url) && isNumber(loaded) && isNumber(total),

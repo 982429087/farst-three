@@ -41,7 +41,6 @@ import type { Scene } from 'three'
 import type {
   OrthographicCameraLoadEvent,
   OrthographicCameraOptions,
-  WebGLRendererLoadEvent,
 } from '@farst-three/components'
 
 const frustumSize = 4
