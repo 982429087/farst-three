@@ -39,7 +39,7 @@
     ]
   },
   "group": {
-    "text": "合并几何体",
+    "text": "组",
     "children": [
       {
         "link": "/group",
@@ -53,6 +53,14 @@
       {
         "link": "/texture-loader",
         "text": "TextureLoader"
+      },
+      {
+        "link": "/cube-texture-loader",
+        "text": "CubeTextureLoader"
+      },
+      {
+        "link": "/rgbe-loader",
+        "text": "RgbeLoader"
       }
     ]
   }
