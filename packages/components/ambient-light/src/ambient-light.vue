@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount } from 'vue'
 import { AmbientLight } from 'three'
-import { useGroup, useScene } from '@farst-three/hooks'
+import { useGroup, useOptions, useScene } from '@farst-three/hooks'
 import { ambientLightEmits, ambientLightProps } from './ambient-light'
 import type { Group, Scene } from 'three'
 
@@ -26,6 +26,7 @@ let ambientLight: AmbientLight | null = new AmbientLight(
 )
 
 emit('load', { scene, light: ambientLight })
+useOptions(props.options, ambientLight, scene)
 if (group === null) {
   scene.add(ambientLight)
 } else {

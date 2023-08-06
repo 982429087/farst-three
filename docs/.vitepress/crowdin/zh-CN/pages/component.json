@@ -63,6 +63,23 @@
         "text": "RgbeLoader"
       }
     ]
+  },
+  "light": {
+    "text": "光",
+    "children": [
+      {
+        "link": "/ambient-light",
+        "text": "AmbientLight"
+      },
+      {
+        "link": "/directional-light",
+        "text": "DirectionalLight"
+      },
+      {
+        "link": "/hemisphere-light",
+        "text": "hemisphere-light"
+      }
+    ]
   }
 }
 

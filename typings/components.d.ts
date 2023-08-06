@@ -39,6 +39,9 @@ declare module '@vue/runtime-core' {
     FtLine: typeof import('@farst-three/components')['FtLine']
     FtBufferGeometry: typeof import('@farst-three/components')['FtBufferGeometry']
     FtLineBasicMaterial: typeof import('@farst-three/components')['FtLineBasicMaterial']
+    FtDirectionalLightHelper: typeof import('@farst-three/components')['FtDirectionalLightHelper']
+    FtHemisphereLight: typeof import('@farst-three/components')['FtHemisphereLight']
+    FtHemisphereLightHelper: typeof import('@farst-three/components')['FtHemisphereLightHelper']
   }
 }
 

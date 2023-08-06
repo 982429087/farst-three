@@ -1,7 +1,9 @@
 import {
   animationServiceInjectionKey,
+  directionalLightInjectionKey,
   geometryInjectionKey,
   groupInjectionKey,
+  hemisphereLightInjectionKey,
   materialInjectKey,
   materialServiceInjectionKey,
   object3dInjectionKey,
@@ -11,7 +13,15 @@ import {
 import { useInjection } from '@farst-three/hooks'
 import type { AnimationService } from '@farst-three/components'
 import type { CountService, StoreService } from '@farst-three/hooks'
-import type { BufferGeometry, Group, Material, Mesh, Renderer } from 'three'
+import type {
+  BufferGeometry,
+  DirectionalLight,
+  Group,
+  HemisphereLight,
+  Material,
+  Mesh,
+  Renderer,
+} from 'three'
 
 export function useStoreService() {
   return useInjection<StoreService>(storeServiceInjectionKey)
@@ -57,4 +67,10 @@ export function useMaterial() {
 
 export function useMaterialService() {
   return useInjection<CountService<Material>>(materialServiceInjectionKey)
+}
+export function useDirectionalLight() {
+  return useInjection<DirectionalLight>(directionalLightInjectionKey)
+}
+export function useHemisphereLight() {
+  return useInjection<HemisphereLight>(hemisphereLightInjectionKey)
 }

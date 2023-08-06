@@ -14,7 +14,7 @@ export const directionalLightProps = buildProps({
   },
   intensity: Number,
   options: {
-    type: definePropType<ThreeOptions<DirectionalLight>>(Object),
+    type: definePropType<DirectionalLightOptions>(Object),
     default: () => ({}),
   },
 })

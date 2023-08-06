@@ -1,4 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
+import type { ThreeOptions } from '@farst-three/utils'
 import type { AmbientLight, ColorRepresentation, Scene } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
@@ -9,6 +10,10 @@ export const ambientLightProps = buildProps({
     type: definePropType<ColorRepresentation>([Object, String, Number]),
   },
   intensity: Number,
+  options: {
+    type: definePropType<AmbientLightOptions>(Object),
+    default: () => ({}),
+  },
 })
 export const ambientLightEmits = {
   load: (e: AmbientLightLoadEvent) => e,
@@ -21,3 +26,4 @@ export type AmbientLightLoadEvent = {
 export type AmbientLightEmits = typeof ambientLightEmits
 export type AmbientLightProps = ExtractPropTypes<typeof ambientLightProps>
 export type AmbientLightInstance = InstanceType<typeof AmbientLightComponent>
+export type AmbientLightOptions = ThreeOptions<AmbientLight>
