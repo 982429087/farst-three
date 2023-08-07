@@ -3,9 +3,10 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount } from 'vue'
+import { onBeforeUnmount, provide } from 'vue'
 import { DirectionalLight } from 'three'
 import { useOptions, useScene } from '@farst-three/hooks'
+import { directionalLightInjectionKey } from '@farst-three/constants'
 import {
   directionalLightEmits,
   directionalLightProps,
@@ -23,6 +24,7 @@ let scene = useScene()
 
 let light = new DirectionalLight(props.color, props.intensity)
 scene.add(light)
+provide(directionalLightInjectionKey, light)
 useOptions(props.options, light, scene)
 emit('load', { light, scene })
 onBeforeUnmount(() => {

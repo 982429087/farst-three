@@ -12,7 +12,7 @@ import type RgbeLoaderComponent from './rgbe-loader.vue'
 
 export const rgbeLoaderProps = buildProps({
   options: {
-    type: definePropType<ThreeOptions<RGBELoader>>(Object),
+    type: definePropType<RgbeLoaderOptions>(Object),
     default: () => ({}),
   },
   url: {

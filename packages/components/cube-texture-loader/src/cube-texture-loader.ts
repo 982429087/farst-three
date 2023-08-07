@@ -32,10 +32,6 @@ export const cubeTextureLoaderProps = buildProps({
     type: definePropType<CubeTextureType>(String),
     default: 'map',
   },
-  update: {
-    type: Boolean,
-    default: false,
-  },
   options: {
     type: definePropType<CubeTextureLoaderOptions>(Object),
     default: () => ({}),
@@ -43,7 +39,6 @@ export const cubeTextureLoaderProps = buildProps({
 })
 export const cubeTextureLoaderEmits = {
   load: (e: CubeTextureLoadEvent) => e,
-  'update:update': (e: boolean) => isBoolean(e),
   managerLoad: () => true,
   managerStart: (url: string, loaded: number, total: number) =>
     isString(url) && isNumber(loaded) && isNumber(total),
