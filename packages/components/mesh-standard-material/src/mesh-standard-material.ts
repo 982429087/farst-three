@@ -11,7 +11,7 @@ import type MeshStandardMaterialComponent from './mesh-standard-material.vue'
 
 export const meshStandardMaterialProps = buildProps({
   options: {
-    type: definePropType<ThreeOptions<MeshStandardMaterial>>(Object),
+    type: definePropType<MeshStandardMaterialOptions>(Object),
     default: () => ({}),
   },
   params: {

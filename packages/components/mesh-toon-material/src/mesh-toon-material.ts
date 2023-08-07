@@ -14,7 +14,7 @@ export const meshToonMaterialProps = buildProps({
     type: definePropType<MeshToonMaterialParameters>(Object),
   },
   options: {
-    type: definePropType<ThreeOptions<MeshToonMaterial>>(Object),
+    type: definePropType<MeshToonMaterialOptions>(Object),
     default: () => ({}),
   },
 })

@@ -11,7 +11,7 @@ import type MeshPhongMaterialComponent from './mesh-phong-material.vue'
 
 export const meshPhongMaterialProps = buildProps({
   options: {
-    type: definePropType<ThreeOptions<MeshPhongMaterial>>(Object),
+    type: definePropType<MeshPhongMaterialOptions>(Object),
     default: () => ({}),
   },
   params: {

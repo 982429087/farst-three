@@ -14,7 +14,7 @@ export const meshPhysicalMaterialProps = buildProps({
     type: definePropType<MeshPhysicalMaterialParameters>(Object),
   },
   options: {
-    type: definePropType<ThreeOptions<MeshPhysicalMaterial>>(Object),
+    type: definePropType<MeshPhysicalMaterialOptions>(Object),
     default: () => ({}),
   },
 })

@@ -73,6 +73,22 @@
       {
         "link": "/mesh-depth-material",
         "text": "MeshDepthMaterial"
+      },
+      {
+        "link": "/mesh-phong-material",
+        "text": "MeshPhongMaterial"
+      },
+      {
+        "link": "/mesh-toon-material",
+        "text": "MeshToonMaterial"
+      },
+      {
+        "link": "/mesh-standard-material",
+        "text": "MeshStandardMaterial"
+      },
+      {
+        "link": "/mesh-physical-material",
+        "text": "MeshPhysicalMaterial"
       }
     ]
   },
