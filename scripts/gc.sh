@@ -13,7 +13,7 @@ done
 
 firstResult=$(echo ${result:0:1} | tr '[A-Z]' '[a-z]')
 SMALL_HUMP=$firstResult${result:1}
-
+# ---👆 ---
 
 FILE_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")/../packages" && pwd)
 
@@ -33,13 +33,14 @@ if [ -d "$DIRNAME" ]; then
 fi
 
 NORMALIZED_NAME=""
-for i in $(echo $NAME | sed 's/[_|-]\([a-z]\)/\ \1/;s/^\([a-z]\)/\ \1/'); do
+for i in $(echo $NAME | sed 's/[_|-]\([a-z]\)/\ \1/g;s/^\([a-z]\)/\ \1/g'); do
   C=$(echo "${i:0:1}" | tr "[:lower:]" "[:upper:]")
+  echo $i
   NORMALIZED_NAME="$NORMALIZED_NAME${C}${i:1}"
 done
 NAME=$NORMALIZED_NAME
-# echo $NAME AaaBbb
-# echo $INPUT_NAME aaa-bbb
+# echo $NAME AaaBbbCcc
+# echo $INPUT_NAME aaa-bbb-ccc
 # echo $SMALL_HUMP aaaBbb
 mkdir -p "$DIRNAME"
 mkdir -p "$DIRNAME/src"
