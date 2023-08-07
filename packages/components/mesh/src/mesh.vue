@@ -14,7 +14,7 @@ import {
 import {
   materialServiceInjectionKey,
   object3dInjectionKey,
-} from '@farst-three/constants/injection'
+} from '@farst-three/constants'
 import { meshEmits, meshProps } from './mesh'
 import type { Material } from 'three'
 
@@ -25,7 +25,6 @@ defineOptions({
 const props = defineProps(meshProps)
 const emit = defineEmits(meshEmits)
 
-// init here
 let scene = useScene()
 let group = useGroup()
 let materialService = new CountService<Material>()

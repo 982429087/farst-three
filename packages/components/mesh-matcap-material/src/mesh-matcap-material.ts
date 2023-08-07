@@ -11,7 +11,7 @@ import type MeshMatcapMaterialComponent from './mesh-matcap-material.vue'
 
 export const meshMatcapMaterialProps = buildProps({
   options: {
-    type: definePropType<ThreeOptions<MeshMatcapMaterial>>(Object),
+    type: definePropType<MeshMatcapMaterialOptions>(Object),
     default: () => ({}),
   },
   params: {

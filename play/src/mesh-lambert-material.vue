@@ -6,11 +6,7 @@
         <FtMeshLambertMaterial :options="params"></FtMeshLambertMaterial>
       </FtMesh>
       <FtMesh :options="sphereOps">
-        <FtSphereGeometry
-          :radius="0.5"
-          :widthSegments="16"
-          :heightSegments="16"
-        ></FtSphereGeometry>
+        <FtSphereGeometry :radius="0.5" :widthSegments="16" :heightSegments="16"></FtSphereGeometry>
         <FtMeshLambertMaterial :options="params"></FtMeshLambertMaterial>
       </FtMesh>
       <FtMesh :options="boxOps">
@@ -18,29 +14,15 @@
         <FtMeshLambertMaterial :options="params"></FtMeshLambertMaterial>
       </FtMesh>
       <FtMesh :options="torusOps">
-        <FtTorusGeometry
-          :radius="0.4"
-          :tube="0.2"
-          :radial-segments="16"
-          :tubular-segments="32"
-        ></FtTorusGeometry>
+        <FtTorusGeometry :radius="0.4" :tube="0.2" :radial-segments="16" :tubular-segments="32"></FtTorusGeometry>
         <FtMeshLambertMaterial :options="params"></FtMeshLambertMaterial>
       </FtMesh>
-      <FtPerspectiveCamera
-        :fov="75"
-        :near="0.01"
-        :far="100"
-        :options="{
-          position: {
-            set: [0.1, 1, 3],
-          },
-        }"
-      />
-      <FtDirectionalLight
-        :color="0xffffff"
-        :intensity="0.7"
-        :options="directionOpts"
-      />
+      <FtPerspectiveCamera :fov="75" :near="0.01" :far="100" :options="{
+        position: {
+          set: [0.1, 1, 3],
+        },
+      }" />
+      <FtDirectionalLight :color="0xffffff" :intensity="0.7" :options="directionOpts" />
       <FtAmbientLight :color="0xffffff" :intensity="0.5" />
       <FtWebglRenderer :params="{ antialias: true }" :animationFn="animationFn">
         <FtOrbitControls />
@@ -51,7 +33,7 @@
 
 <script setup lang="ts">
 import {
-DirectionalLightOptions,
+  DirectionalLightOptions,
   MeshBasicMaterialOptions,
   MeshOptions,
   WebGLRendererLoadEvent,
@@ -99,7 +81,7 @@ const directionOpts = reactive<DirectionalLightOptions>({
   intensity: 0.7,
 })
 
-const animationFn = ({}: WebGLRendererLoadEvent) => {
+const animationFn = ({ }: WebGLRendererLoadEvent) => {
   //
 }
 

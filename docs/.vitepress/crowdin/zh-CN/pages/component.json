@@ -25,6 +25,23 @@
       }
     ]
   },
+  "object": {
+    "text": "物体",
+    "children": [
+      {
+        "link": "/mesh",
+        "text": "Mesh"
+      },
+      {
+        "link": "/line",
+        "text": "Line"
+      },
+      {
+        "link": "/group",
+        "text": "Group"
+      }
+    ]
+  },
   "geometry": {
     "text": "几何体",
     "children": [
@@ -38,12 +55,24 @@
       }
     ]
   },
-  "group": {
-    "text": "组",
+  "material": {
+    "text": "材质",
     "children": [
       {
-        "link": "/group",
-        "text": "Group"
+        "link": "/mesh-basic-material",
+        "text": "MeshBasicMaterial"
+      },
+      {
+        "link": "/mesh-lambert-material",
+        "text": "MeshLambertMaterial"
+      },
+      {
+        "link": "/mesh-matcap-material",
+        "text": "MeshMatcapMaterial"
+      },
+      {
+        "link": "/mesh-depth-material",
+        "text": "MeshDepthMaterial"
       }
     ]
   },

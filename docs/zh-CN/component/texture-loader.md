@@ -15,6 +15,13 @@ texture-loader/basic
 
 :::
 
+## 纹理显示算法
+
+:::demo
+
+texture-loader/filter
+
+:::
 
 
 ## API

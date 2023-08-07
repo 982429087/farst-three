@@ -15,7 +15,7 @@ export const meshLambertMaterialProps = buildProps({
     type: definePropType<MeshLambertMaterialParameters>(Object),
   },
   options: {
-    type: definePropType<ThreeOptions<MeshLambertMaterial>>(Object),
+    type: definePropType<MeshLambertMaterialOptions>(Object),
     default: () => ({}),
   },
 })
@@ -35,3 +35,4 @@ export type MeshLambertMaterialProps = ExtractPropTypes<
 export type MeshLambertMaterialInstance = InstanceType<
   typeof MeshLambertMaterialComponent
 >
+export type MeshLambertMaterialOptions = ThreeOptions<MeshLambertMaterial>
