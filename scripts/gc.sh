@@ -35,7 +35,6 @@ fi
 NORMALIZED_NAME=""
 for i in $(echo $NAME | sed 's/[_|-]\([a-z]\)/\ \1/g;s/^\([a-z]\)/\ \1/g'); do
   C=$(echo "${i:0:1}" | tr "[:lower:]" "[:upper:]")
-  echo $i
   NORMALIZED_NAME="$NORMALIZED_NAME${C}${i:1}"
 done
 NAME=$NORMALIZED_NAME
