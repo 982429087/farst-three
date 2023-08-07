@@ -29,7 +29,7 @@ Clearcoat类似于车漆，碳纤，具有反光特性的面
 
 .ior非金属材质所设置的折射率，范围由1.0到2.333。默认为1.5
 
-thickness曲面下体积的厚度。如果值为0，则材质为薄壁。默认值为O。
+thickness曲面下体积的厚度。如果值为0，则材质为薄壁。默认值为0。
 :::demo
 
 mesh-physical-material/basic

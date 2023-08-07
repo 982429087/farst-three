@@ -63,6 +63,7 @@ import { ref, shallowRef } from 'vue'
 import {
   FtAmbientLight,
   FtBoxGeometry,
+  FtCylinderGeometry,
   FtDirectionalLight,
   FtMesh,
   FtMeshLambertMaterial,

@@ -23,6 +23,15 @@ texture-loader/filter
 
 :::
 
+## 属性控制
+
+:::demo
+
+texture-loader/options
+
+:::
+
+
 
 ## API
 

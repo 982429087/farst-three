@@ -75,7 +75,7 @@ animate()
 const resize = () => {
   renderer.setSize(container.offsetWidth, container.offsetHeight)
 }
-const dOb = debounce(() => resize(), 5)
+const dOb = debounce(() => resize(), 0)
 const observer = new ResizeObserver(dOb)
 observer.observe(container)
 
