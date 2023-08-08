@@ -29,6 +29,10 @@
     "text": "物体",
     "children": [
       {
+        "link": "/points",
+        "text": "Points"
+      },
+      {
         "link": "/mesh",
         "text": "Mesh"
       },

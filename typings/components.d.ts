@@ -42,6 +42,8 @@ declare module '@vue/runtime-core' {
     FtDirectionalLightHelper: typeof import('@farst-three/components')['FtDirectionalLightHelper']
     FtHemisphereLight: typeof import('@farst-three/components')['FtHemisphereLight']
     FtHemisphereLightHelper: typeof import('@farst-three/components')['FtHemisphereLightHelper']
+    FtPointLightHelper: typeof import('@farst-three/components')['FtPointLightHelper']
+    FtPoints: typeof import('@farst-three/components')['FtPoints']
   }
 }
 

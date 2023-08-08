@@ -12,7 +12,7 @@ export function useOptions<T extends Record<string, any>, R extends AnyFun>(
 ) {
   let lastValue: any
   /**
-   * 只允许最后一层是普通值或者函数，对象类型将被解析无法赋值
+   * 只允许最后一层是普通值、者函数、数组，对象类型将被解析无法赋值
    * @param ops
    * @param lastKey
    */
@@ -63,6 +63,7 @@ export function useOptions<T extends Record<string, any>, R extends AnyFun>(
         },
         { instance, options }
       )
+      // eslint-disable-next-line no-console
       console.log(`setAllKeys ${instance.type} ${lastKey.join('.')}`, options)
     }
   }

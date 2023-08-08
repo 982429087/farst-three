@@ -1,8 +1,10 @@
 export * from './scene'
 export * from './webgl-renderer'
+// 物体
 export * from './mesh'
 export * from './line'
 export * from './group'
+export * from './points'
 // 相机
 export * from './perspective-camera'
 export * from './orthographic-camera'
@@ -41,4 +43,5 @@ export * from './orbit-controls'
 export * from './camera-helper'
 export * from './directional-light-helper'
 export * from './hemisphere-light-helper'
+export * from './point-light-helper'
 export * from './thumbnail'

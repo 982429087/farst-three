@@ -3,9 +3,10 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount } from 'vue'
+import { onBeforeUnmount, provide } from 'vue'
 import { PointLight } from 'three'
 import { useGroup, useOptions, useScene } from '@farst-three/hooks'
+import { pointLightInjectionKey } from '@farst-three/constants'
 import { pointLightEmits, pointLightProps } from './point-light'
 
 defineOptions({
@@ -26,6 +27,7 @@ let pointLight = new PointLight(
 )
 
 emit('load', { scene, light: pointLight })
+provide(pointLightInjectionKey, pointLight)
 useOptions(props.options, pointLight, scene)
 if (group === null) {
   scene.add(pointLight)
