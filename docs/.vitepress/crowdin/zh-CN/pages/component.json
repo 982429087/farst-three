@@ -127,6 +127,10 @@
       {
         "link": "/hemisphere-light",
         "text": "hemisphere-light"
+      },
+      {
+        "link": "/point-light",
+        "text": "PointLight"
       }
     ]
   }

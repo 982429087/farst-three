@@ -28,6 +28,7 @@ provide(geometryInjectionKey, geometry)
 useOptions(props.options, geometry, scene)
 obj3d.geometry = geometry
 obj3d.geometry.computeBoundingBox()
+
 onBeforeUnmount(() => {
   geometry.dispose()
   ;(geometry as any) = null

@@ -19,6 +19,7 @@ export * from './mesh-toon-material'
 export * from './mesh-physical-material'
 export * from './shadow-material'
 export * from './line-basic-material'
+export * from './points-material'
 // 灯光
 export * from './directional-light'
 export * from './ambient-light'
