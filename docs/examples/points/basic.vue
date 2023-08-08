@@ -13,22 +13,22 @@
         <FtPlaneGeometry :width="10" :height="10" />
         <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
       </FtMesh>
-      <FtPoints :options="pointYellowOpts">
+      <FtMesh :options="pointYellowOpts">
         <FtSphereGeometry
           :radius="0.05"
           :width-segments="64"
           :height-segments="64"
         />
         <FtMeshBasicMaterial :params="{ color: 0xf3ae3d }" />
-      </FtPoints>
-      <FtPoints :options="pointGreenOpts">
+      </FtMesh>
+      <FtMesh :options="pointGreenOpts">
         <FtSphereGeometry
           :radius="0.05"
           :width-segments="64"
           :height-segments="64"
         />
         <FtMeshBasicMaterial :params="{ color: 0xa1fc8f }" />
-      </FtPoints>
+      </FtMesh>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -157,10 +157,10 @@ const pointLightGreenOpts = reactive<PointLightOptions>({
 })
 
 const pointGreenOpts = reactive<PointsOptions>({
-  position: { set: [-1, 1, 2] },
+  position: {},
 })
 const pointYellowOpts = reactive<PointsOptions>({
-  position: { set: [1, 1, 2] },
+  position: {},
 })
 
 const plhOpts = reactive<DirectionalLightHelperOptions>({
@@ -168,10 +168,10 @@ const plhOpts = reactive<DirectionalLightHelperOptions>({
 })
 
 function pointLightGreenLoad(e: PointLightLoadEvent) {
-  // ;(pointGreenOpts.position as Vector3)!.copy = () => e.light.position
+  ;(pointGreenOpts.position as Vector3)!.copy = () => e.light.position
 }
 function pointLightYellowLoad(e: PointLightLoadEvent) {
-  // ;(pointYellowOpts.position as Vector3)!.copy = () => e.light.position
+  ;(pointYellowOpts.position as Vector3)!.copy = () => e.light.position
 }
 
 const animationFn = () => {
@@ -191,18 +191,10 @@ lightFolder.addColor({ color: 0x1890ff }, 'color').onChange((val) => {
 })
 lightFolder.open()
 
-const boxPosition = boxOpts.position as Vector3
-const boxFolder = gui.addFolder('方块')
-boxFolder.add(boxPosition, 'x', -20, 20, 0.1).onChange(() => {
-  plhOpts.update = () => []
-})
-boxFolder.add(boxPosition, 'y', -20, 20, 0.1).onChange(() => {
-  plhOpts.update = () => []
-})
-boxFolder.add(boxPosition, 'z', -20, 20, 0.1).onChange(() => {
-  plhOpts.update = () => []
-})
-boxFolder.open()
+const pointlightFolder = gui.addFolder('pointLightYellow')
+// pointlightFolder.add()
+
+pointlightFolder.open()
 </script>
 
 <style lang="scss" scoped>
