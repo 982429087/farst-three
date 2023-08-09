@@ -44,6 +44,7 @@ declare module '@vue/runtime-core' {
     FtHemisphereLightHelper: typeof import('@farst-three/components')['FtHemisphereLightHelper']
     FtPointLightHelper: typeof import('@farst-three/components')['FtPointLightHelper']
     FtPoints: typeof import('@farst-three/components')['FtPoints']
+    FtPointsMaterial: typeof import('@farst-three/components')['FtPointsMaterial']
   }
 }
 
