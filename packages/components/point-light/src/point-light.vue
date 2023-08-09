@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, provide } from 'vue'
 import { PointLight } from 'three'
-import { useGroup, useOptions, useScene } from '@farst-three/hooks'
+import { useOptions, useScene } from '@farst-three/hooks'
 import { pointLightInjectionKey } from '@farst-three/constants'
 import { pointLightEmits, pointLightProps } from './point-light'
 
@@ -18,7 +18,6 @@ const emit = defineEmits(pointLightEmits)
 
 // init here
 let scene = useScene()
-let group = useGroup()
 let pointLight = new PointLight(
   props.color,
   props.intensity,
@@ -29,20 +28,12 @@ let pointLight = new PointLight(
 emit('load', { scene, light: pointLight })
 provide(pointLightInjectionKey, pointLight)
 useOptions(props.options, pointLight, scene)
-if (group === null) {
-  scene.add(pointLight)
-} else {
-  group.add(pointLight)
-}
+scene.add(pointLight)
+
 onBeforeUnmount(() => {
-  if (group === null) {
-    scene.remove(pointLight)
-  } else {
-    group.remove(pointLight)
-  }
+  scene.remove(pointLight)
   pointLight.dispose()
   ;(scene as any) = null
-  ;(group as any) = null
   ;(pointLight as any) = null
 })
 </script>

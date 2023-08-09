@@ -8,6 +8,7 @@ import {
   materialServiceInjectionKey,
   object3dInjectionKey,
   pointLightInjectionKey,
+  rectAreaLightInjectionKey,
   rendererInjectionKey,
   storeServiceInjectionKey,
 } from '@farst-three/constants/injection'
@@ -22,6 +23,7 @@ import type {
   Material,
   Mesh,
   PointLight,
+  RectAreaLight,
   Renderer,
 } from 'three'
 
@@ -78,4 +80,7 @@ export function useHemisphereLight() {
 }
 export function usePointLight() {
   return useInjection<PointLight>(pointLightInjectionKey)
+}
+export function useRectAreaLight() {
+  return useInjection<RectAreaLight>(rectAreaLightInjectionKey)
 }

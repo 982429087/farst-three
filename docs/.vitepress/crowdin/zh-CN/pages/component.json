@@ -126,11 +126,15 @@
       },
       {
         "link": "/hemisphere-light",
-        "text": "hemisphere-light"
+        "text": "HemisphereLight"
       },
       {
         "link": "/point-light",
         "text": "PointLight"
+      },
+      {
+        "link": "/rect-area-light",
+        "text": "RectAreaLight"
       }
     ]
   }

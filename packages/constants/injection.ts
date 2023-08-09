@@ -19,3 +19,4 @@ export const directionalLightInjectionKey = Symbol(
 )
 export const hemisphereLightInjectionKey = Symbol('hemisphereLightInjectionKey')
 export const pointLightInjectionKey = Symbol('pointLightInjectionKey')
+export const rectAreaLightInjectionKey = Symbol('rectAreaLightInjectionKey')
