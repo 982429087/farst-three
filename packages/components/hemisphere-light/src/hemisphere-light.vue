@@ -30,6 +30,7 @@ useOptions(props.options, light, scene)
 scene.add(light)
 
 onBeforeUnmount(() => {
+  scene.remove(light)
   light.dispose()
   ;(scene as any) = null
   ;(light as any) = null

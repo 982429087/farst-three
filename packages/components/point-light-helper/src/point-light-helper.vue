@@ -25,6 +25,8 @@ emit('load', { scene, helper })
 useOptions(props.options, helper, scene)
 scene.add(helper)
 onBeforeUnmount(() => {
+  pointLight.remove(helper)
+  scene.remove(helper)
   helper.dispose()
   ;(scene as any) = null
   ;(pointLight as any) = null

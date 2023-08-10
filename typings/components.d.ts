@@ -47,6 +47,7 @@ declare module '@vue/runtime-core' {
     FtPointsMaterial: typeof import('@farst-three/components')['FtPointsMaterial']
     FtRectAreaLight: typeof import('@farst-three/components')['FtRectAreaLight']
     FtRectAreaLightHelper: typeof import('@farst-three/components')['FtRectAreaLightHelper']
+    FtSpotLight: typeof import('@farst-three/components')['FtSpotLight']
   }
 }
 

@@ -26,6 +26,7 @@ export * from './ambient-light'
 export * from './point-light'
 export * from './hemisphere-light'
 export * from './rect-area-light'
+export * from './spot-light'
 // 几何体
 export * from './box-geometry'
 export * from './cylinder-geometry'

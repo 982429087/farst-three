@@ -10,6 +10,7 @@ import {
   pointLightInjectionKey,
   rectAreaLightInjectionKey,
   rendererInjectionKey,
+  spotLightInjectionKey,
   storeServiceInjectionKey,
 } from '@farst-three/constants/injection'
 import { useInjection } from '@farst-three/hooks'
@@ -25,6 +26,7 @@ import type {
   PointLight,
   RectAreaLight,
   Renderer,
+  SpotLight,
 } from 'three'
 
 export function useStoreService() {
@@ -83,4 +85,7 @@ export function usePointLight() {
 }
 export function useRectAreaLight() {
   return useInjection<RectAreaLight>(rectAreaLightInjectionKey)
+}
+export function useSpotLight() {
+  return useInjection<SpotLight>(spotLightInjectionKey)
 }
