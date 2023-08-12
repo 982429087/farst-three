@@ -43,22 +43,27 @@ spot-light/basic
 
 ### Attributes
 
-| Name          | Description  | Type                      | Default     | Required |
-| ------------- | ------------ | ------------------------- | ----------- | -------- |
-| `skyColor`    | 构造函数参数 | ^[ColorRepresentation]    | `undefined` | No       |
-| `options`     | 实例属性     | ^[SpotLightOptions] | `{}`        | No       |
+| Name        | Description  | Type                   | Default     | Required |
+| ----------- | ------------ | ---------------------- | ----------- | -------- |
+| `color`     | 构造函数参数 | ^[ColorRepresentation] | `undefined` | No       |
+| `intensity` | 构造函数参数 | ^[number]              | `undefined` | No       |
+| `distance`  | 构造函数参数 | ^[number]              | `undefined` | No       |
+| `angle`     | 构造函数参数 | ^[number]              | `undefined` | No       |
+| `penumbra`  | 构造函数参数 | ^[number]              | `undefined` | No       |
+| `decay`     | 构造函数参数 | ^[number]              | `undefined` | No       |
+| `options`   | 实例属性     | ^[SpotLightOptions]    | `{}`        | No       |
 
 ### Events
 
-| Name   | Description        | Type                                               |
-| ------ | ------------------ | -------------------------------------------------- |
-| `load` | 实例创建后触发方法   | ^[Function]`(e: HemisphereLightLoadEvent) => void` |
+| Name   | Description        | Type                                         |
+| ------ | ------------------ | -------------------------------------------- |
+| `load` | 实例创建后触发方法 | ^[Function]`(e: SpotLightLoadEvent) => void` |
 
 ### Provide
 
-| Key                           | Description         | Type               |
-| ----------------------------- | ------------------- | ------------------ |
-| `hemisphereLightInjectionKey` | HemisphereLight实例 | ^[HemisphereLight] |
+| Key                     | Description   | Type          |
+| ----------------------- | ------------- | ------------- |
+| `spotLightInjectionKey` | SpotLight实例 | ^[ SpotLight] |
 
 ### Slots
 
