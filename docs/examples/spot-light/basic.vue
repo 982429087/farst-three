@@ -20,8 +20,8 @@
           },
         }"
       />
-      <FtSpotLight :options="soptLightOpts">
-        <FtSpotLightHelper :options="spothOpts" />
+      <FtSpotLight :options="soptLightOpts" @load="soptLightLoad">
+        <!-- <FtSpotLightHelper :options="spothOpts" @load="spotLightHelperload" /> -->
       </FtSpotLight>
       <FtAmbientLight
         :options="lightOptions"
@@ -46,8 +46,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { Color, DoubleSide } from 'three'
+import { reactive, ref, shallowRef } from 'vue'
+import { CameraHelper, Color, DoubleSide } from 'three'
 import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
@@ -63,13 +63,21 @@ import {
   FtSpotLightHelper,
   FtWebglRenderer,
 } from '@farst-three/components'
-import type { DirectionalLightShadow, Vector3 } from 'three'
+import type {
+  PerspectiveCamera,
+  SpotLight,
+  SpotLightHelper,
+  SpotLightShadow,
+  Vector3,
+} from 'three'
 import type {
   AmbientLightOptions,
   DirectionalLightHelperOptions,
   DirectionalLightOptions,
   MeshLoadEvent,
   MeshOptions,
+  SpotLightHelperLoadEvent,
+  SpotLightLoadEvent,
   SpotLightOptions,
 } from '@farst-three/components'
 const domRef = ref<HTMLDivElement>()
@@ -111,9 +119,24 @@ const soptLightOpts = reactive<SpotLightOptions>({
   angle: Math.PI / 4,
   penumbra: 0.05,
   decay: 2,
-  color: () => new Color(0xff00ff),
+  color: () => new Color(0xfffff0),
+  shadow: {
+    camera: {
+      near: 1,
+      far: 2,
+      fov: 75,
+    },
+  },
 })
 
+const soptLightInstance = shallowRef<SpotLight>()
+const soptShadowCameraHelper = shallowRef<any>()
+const soptLightLoad = ({ light, scene }: SpotLightLoadEvent) => {
+  soptLightInstance.value = light
+  const helper = new CameraHelper(light.shadow!.camera)
+  scene.add(helper)
+  soptShadowCameraHelper.value = helper
+}
 const spothOpts = reactive<DirectionalLightHelperOptions>({
   update: () => [],
 })
@@ -123,7 +146,16 @@ function meshlaod({ mesh }: MeshLoadEvent) {
 }
 
 const animationFn = () => {
-  //
+  const shadow = soptLightOpts.shadow as SpotLightShadow
+  const camera = shadow.camera as PerspectiveCamera
+  if (soptLightInstance.value) {
+    // soptLightInstance.value.shadow.camera.near = camera.near
+    soptLightInstance.value.shadow.camera.far = camera.far
+    // soptLightInstance.value.shadow.camera.fov = camera.fov
+  }
+  if (soptShadowCameraHelper.value) {
+    soptShadowCameraHelper.value.update()
+  }
 }
 
 const { gui } = useGui(domRef)
@@ -146,6 +178,13 @@ const position = soptLightOpts.position as Vector3
 soptLightFolder.add(position, 'x', -30, 30).name('x')
 soptLightFolder.add(position, 'y', -30, 30).name('y')
 soptLightFolder.add(position, 'z', -30, 30).name('z')
+
+const shadowFolder = gui.addFolder('阴影')
+const shadowCamera = (soptLightOpts.shadow as SpotLightShadow)
+  .camera as PerspectiveCamera
+shadowFolder.add(shadowCamera, 'near', 0.01, 10, 0.1)
+shadowFolder.add(shadowCamera, 'far', 0.01, 100, 0.1)
+shadowFolder.add(shadowCamera, 'fov').name('fov')
 </script>
 
 <style lang="scss" scoped>
