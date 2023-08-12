@@ -135,6 +135,10 @@
       {
         "link": "/rect-area-light",
         "text": "RectAreaLight"
+      },
+      {
+        "link": "/spot-light",
+        "text": "SpotLight"
       }
     ]
   }
