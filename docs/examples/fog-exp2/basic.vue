@@ -1,17 +1,142 @@
 <template>
   <div ref="domRef" class="farst-three">
-    <FtScene>
-      <FtMesh :options="boxOpts" @load="boxLoad">
+    <FtScene
+      :options="{
+        background: 0xe0e0e0,
+      }"
+      @load="(e) => (sceneInsance = e.scene)"
+    >
+      <FtMesh :options="boxOpts" @load="boxmeshLoad">
         <FtBoxGeometry :width="1" :height="1" :depth="1" />
         <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
       </FtMesh>
-      <FtMesh :options="wallOps">
-        <FtPlaneGeometry :width="10" :height="10" />
-        <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
-      </FtMesh>
+
       <FtMesh :options="floorOps">
-        <FtPlaneGeometry :width="10" :height="10" />
-        <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
+        <FtPlaneGeometry :width="1000" :height="500" />
+        <FtMeshMatcapMaterial :params="{ side: DoubleSide }" />
+      </FtMesh>
+      <FtMesh
+        :options="{
+          rotation: {
+            x: -Math.PI / 2,
+          },
+          receiveShadow: true,
+          position: {
+            y: -0.01,
+            z: 250,
+          },
+        }"
+      >
+        <FtPlaneGeometry :width="1000" :height="500" />
+        <FtMeshMatcapMaterial
+          :params="{ color: new Color(0xe0e0e0), side: DoubleSide, fog: false }"
+        />
+      </FtMesh>
+      <FtMesh
+        v-for="item in 300"
+        :key="item"
+        :options="{
+          position: {
+            set: [(Math.random() - 0.5) * 50, 1, Math.random() * -50],
+          },
+          rotation: {
+            set: [
+              Math.random() * Math.PI,
+              Math.random() * Math.PI,
+              Math.random() * Math.PI,
+            ],
+          },
+          scale: {
+            set: [
+              Math.random() * 0.3 + 0.5,
+              Math.random() * 0.3 + 0.5,
+              Math.random() * 0.3 + 0.5,
+            ],
+          },
+        }"
+      >
+        <FtTorusGeometry
+          :radius="Math.random()"
+          :tube="Math.abs(Math.random() - 0.5)"
+          :radial-segments="64"
+        />
+        <FtMeshLambertMaterial :params="{ color: 0xffffff }">
+          <FtTextureLoader
+            url="\textures\matcaps\BA472D_CA6E67-256px.png"
+            :type="'map'"
+          />
+        </FtMeshLambertMaterial>
+      </FtMesh>
+      <FtMesh
+        v-for="item in 300"
+        :key="item"
+        :options="{
+          position: {
+            set: [(Math.random() - 0.5) * 50, 1, Math.random() * 50],
+          },
+          rotation: {
+            set: [
+              Math.random() * Math.PI,
+              Math.random() * Math.PI,
+              Math.random() * Math.PI,
+            ],
+          },
+          scale: {
+            set: [
+              Math.random() * 0.3 + 0.5,
+              Math.random() * 0.3 + 0.5,
+              Math.random() * 0.3 + 0.5,
+            ],
+          },
+        }"
+      >
+        <FtTorusGeometry
+          :radius="Math.random()"
+          :tube="Math.abs(Math.random() - 0.5)"
+          :radial-segments="64"
+        />
+        <FtMeshLambertMaterial
+          :options="{ fog: false }"
+          :params="{ color: 0xffffff }"
+        >
+          <FtTextureLoader
+            url="\textures\matcaps\BA472D_CA6E67-256px.png"
+            :type="'map'"
+          />
+        </FtMeshLambertMaterial>
+      </FtMesh>
+      <FtMesh
+        :options="{
+          position: {
+            y: 9,
+          },
+          rotation: {
+            z: -Math.PI / 4,
+          },
+        }"
+      >
+        <FtRingGeometry
+          :inner-radius="10"
+          :outer-radius="50"
+          :theta-segments="4"
+          :phi-segments="8"
+        />
+        <FtMeshLambertMaterial
+          :params="{
+            color: 0x666666,
+            side: DoubleSide,
+            fog: false,
+          }"
+        >
+          <FtTextureLoader
+            url="\textures\large_sandstone_blocks\large_sandstone_blocks_diff_2k.jpg"
+            :type="'map'"
+            :options="{
+              rotation: Math.PI / 4,
+              wrapT: RepeatWrapping,
+            }"
+          />
+        </FtMeshLambertMaterial>
       </FtMesh>
 
       <FtPerspectiveCamera
@@ -24,20 +149,13 @@
           },
         }"
       />
-      <FtDirectionalLight
-        :options="directionalLightOptions"
-        :color="0xffffaa"
-        :intensity="0.95"
-      >
-        <FtDirectionalLightHelper :options="dlhOpts" />
-      </FtDirectionalLight>
       <FtAmbientLight
         :options="lightOptions"
-        :color="0xffffff"
+        :color="0xe0e0e0"
         :intensity="0.95"
       />
-
-      <FtGridHelper />
+      <FtFogExp2 :color="0xe0e0e0" :density="0.01" :options="fogOpts" />
+      <FtGridHelper :size="1000" :divisions="1000" />
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -55,133 +173,90 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { Color, DoubleSide } from 'three'
+import { Color, DoubleSide, MeshLambertMaterial, RepeatWrapping } from 'three'
 import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
-  FtDirectionalLight,
-  FtDirectionalLightHelper,
+  FtFog,
+  FtFogExp2,
   FtGridHelper,
   FtMesh,
   FtMeshLambertMaterial,
+  FtMeshMatcapMaterial,
   FtOrbitControls,
   FtPerspectiveCamera,
   FtPlaneGeometry,
+  FtRingGeometry,
   FtScene,
+  FtTextureLoader,
+  FtTorusGeometry,
   FtWebglRenderer,
 } from '@farst-three/components'
-import type { DirectionalLightShadow, Vector3 } from 'three'
+import type { Material, Mesh, MeshMatcapMaterial, Scene } from 'three'
+
 import type {
   AmbientLightOptions,
-  DirectionalLightHelperOptions,
-  DirectionalLightOptions,
+  FogExp2Options,
+  FogOptions,
   MeshLoadEvent,
   MeshOptions,
 } from '@farst-three/components'
 const domRef = ref<HTMLDivElement>()
 const boxOpts = reactive<MeshOptions>({
   position: {
-    z: -1,
+    z: 0,
     x: 0,
-    y: 0,
+    y: 1,
   },
   castShadow: true,
-})
-const wallOps = reactive<MeshOptions>({
-  position: {
-    y: 4,
-    z: -5,
-  },
-  receiveShadow: true,
 })
 const floorOps = reactive<MeshOptions>({
   rotation: {
     x: -Math.PI / 2,
   },
   receiveShadow: true,
-
   position: {
-    y: -1,
+    y: -0.01,
+    z: -250,
   },
 })
+const sceneInsance = ref<Scene>()
+const meshInsance = ref<Mesh>()
 
 const lightOptions = reactive<AmbientLightOptions>({
   position: { set: [1, 2, 4] },
   intensity: 0.95,
   visible: true,
-  color: () => new Color(0x1890ff),
+  color: () => new Color(0xffffff),
 })
 
-const directionalLightOptions = reactive<DirectionalLightOptions>({
-  intensity: 0.95,
-  visible: true,
-  color: () => new Color(0xffffaa),
-  castShadow: true,
-  position: {
-    x: 0,
-    y: 3,
-    z: 0,
-  },
-  shadow: {
-    mapSize: {
-      x: 512,
-      y: 512,
-    },
-    radius: 0,
-  },
-})
-
-const dlhOpts = reactive<DirectionalLightHelperOptions>({
-  update: () => [],
+const fogOpts = reactive<FogExp2Options>({
+  color: () => new Color(0xe0e0e0),
+  density: 0.05,
 })
 
 const animationFn = () => {
   //
 }
 
-function boxLoad({ mesh }: MeshLoadEvent) {
-  directionalLightOptions.target = () => mesh
-}
-
 const { gui } = useGui(domRef)
-const lightFolder = gui.addFolder('环境光')
-lightFolder.add(lightOptions, 'intensity', 0, 1, 0.01)
-lightFolder.add(lightOptions, 'visible')
-lightFolder.addColor({ color: 0x1890ff }, 'color').onChange((val) => {
-  lightOptions.color = () => new Color(val)
+const boxFolder = gui.addFolder('box')
+boxFolder.add({ fog: true }, 'fog').onChange((val) => {
+  const material = new MeshLambertMaterial({ color: 0x1890ff })
+  material.fog = val
+  boxOpts.material = () => material
 })
-lightFolder.open()
-const directionalFolder = gui.addFolder('平行光')
-directionalFolder.add(directionalLightOptions, 'intensity', 0, 1, 0.01)
-directionalFolder.add(directionalLightOptions, 'visible')
-directionalFolder.addColor({ color: 0xffffaa }, 'color').onChange((val) => {
-  directionalLightOptions.color = () => new Color(val)
+gui.addColor({ color: 0xe0e0e0 }, 'color').onChange((color) => {
+  fogOpts.color = (scene: Scene) => {
+    scene.background = new Color(color)
+    return new Color(color)
+  }
 })
-const position = directionalLightOptions.position as Vector3
-directionalFolder.add(position, 'x', -20, 20, 0.1)
-directionalFolder.add(position, 'y', -20, 20, 0.1)
-directionalFolder.add(position, 'z', -20, 20, 0.1)
-
-directionalFolder.open()
-const boxPosition = boxOpts.position as Vector3
-const boxFolder = gui.addFolder('方块')
-boxFolder.add(boxPosition, 'x', -20, 20, 0.1).onChange(() => {
-  dlhOpts.update = () => []
-})
-boxFolder.add(boxPosition, 'y', -20, 20, 0.1).onChange(() => {
-  dlhOpts.update = () => []
-})
-boxFolder.add(boxPosition, 'z', -20, 20, 0.1).onChange(() => {
-  dlhOpts.update = () => []
-})
-boxFolder.open()
-
-const shadowFolder = gui.addFolder('阴影')
-const shadow = directionalLightOptions.shadow as DirectionalLightShadow
-shadowFolder.add(shadow.mapSize, 'x', [512, 1024, 2048, 4096])
-shadowFolder.add(shadow.mapSize, 'y', [512, 1024, 2048, 4096])
-shadowFolder.add(shadow, 'radius', 0, 30, 1)
+gui.add(fogOpts, 'density', 0, 0.1)
+function boxmeshLoad(e: MeshLoadEvent) {
+  meshInsance.value = e.mesh
+}
 </script>
 
 <style lang="scss" scoped>

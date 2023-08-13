@@ -54,3 +54,4 @@ export * from './thumbnail'
 
 // 雾气
 export * from './fog'
+export * from './fog-exp2'
