@@ -141,6 +141,19 @@
         "text": "SpotLight"
       }
     ]
+  },
+  "fog": {
+    "text": "雾",
+    "children": [
+      {
+        "link": "/fog",
+        "text": "Fog"
+      },
+      {
+        "link": "/fog-exp2",
+        "text": "FogExp2"
+      }
+    ]
   }
 }
 

@@ -35,6 +35,7 @@ export * from './plane-geometry'
 export * from './tube-geometry'
 export * from './sphere-geometry'
 export * from './buffer-geometry'
+export * from './ring-geometry'
 // 加载器
 export * from './texture-loader'
 export * from './cube-texture-loader'
@@ -50,3 +51,6 @@ export * from './point-light-helper'
 export * from './rect-area-light-helper'
 export * from './spot-light-helper'
 export * from './thumbnail'
+
+// 雾气
+export * from './fog'

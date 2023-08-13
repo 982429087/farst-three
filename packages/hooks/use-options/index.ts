@@ -63,8 +63,6 @@ export function useOptions<T extends Record<string, any>, R extends AnyFun>(
         },
         { instance, options }
       )
-      // eslint-disable-next-line no-console
-      console.log(`setAllKeys ${instance.type} ${lastKey.join('.')}`, options)
     }
   }
 
