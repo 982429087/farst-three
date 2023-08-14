@@ -9,11 +9,27 @@ lang: zh-CN
 
 
 
-## 基础用法
+<!-- ## 基础用法
 
 :::demo
 
 points/basic
+
+:::
+
+## 点阵几何体
+
+:::demo
+
+points/point-material
+
+::: -->
+
+## 点阵波纹
+
+:::demo
+
+points/lattice-ripple
 
 :::
 

@@ -1,13 +1,15 @@
-import { buildProps } from '@farst-three/utils'
+import { buildProps, definePropType } from '@farst-three/utils'
+import type { ThreeOptions } from '@farst-three/utils'
 import type { Object3D, Scene, SphereGeometry } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
 import type SphereGeometryComponent from './sphere-geometry.vue'
 
-/**
- * radius?: number | undefined, widthSegments?: number | undefined, heightSegments?: number | undefined, phiStart?: number | undefined, phiLength?: number | undefined, thetaStart?: number | undefined, thetaLength?: number | undefined
- */
 export const sphereGeometryProps = buildProps({
+  options: {
+    type: definePropType<SphereGeometryOptions>(Object),
+    default: () => ({}),
+  },
   radius: Number,
   widthSegments: Number,
   heightSegments: Number,
@@ -30,3 +32,4 @@ export type SphereGeometryProps = ExtractPropTypes<typeof sphereGeometryProps>
 export type SphereGeometryInstance = InstanceType<
   typeof SphereGeometryComponent
 >
+export type SphereGeometryOptions = ThreeOptions<SphereGeometry>

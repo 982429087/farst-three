@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, provide, ref } from 'vue'
-import { Scene } from 'three'
+import { REVISION, Scene } from 'three'
 import { storeServiceInjectionKey } from '@farst-three/constants/injection'
 import { StoreService, useNamespace, useOptions } from '@farst-three/hooks'
 import { sceneEmits, sceneProps } from './scene'
@@ -30,7 +30,8 @@ let storeService = new StoreService(scene, sceneRef)
 emit('load', { scene })
 provide(storeServiceInjectionKey, storeService)
 useOptions(props.options, scene, scene)
-
+// eslint-disable-next-line no-console
+console.log('当前threejs版本号:', REVISION)
 onBeforeUnmount(() => {
   sceneRef.value?.remove()
   scene.clear()
