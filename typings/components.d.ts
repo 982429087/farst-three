@@ -52,6 +52,8 @@ declare module '@vue/runtime-core' {
     FtFog: typeof import('@farst-three/components')['FtFog']
     FtRingGeometry: typeof import('@farst-three/components')['FtRingGeometry']
     FtFogExp2: typeof import('@farst-three/components')['FtFogExp2']
+    FtSprite: typeof import('@farst-three/components')['FtSprite']
+    FtSpriteMaterial: typeof import('@farst-three/components')['FtSpriteMaterial']
   }
 }
 

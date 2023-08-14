@@ -43,6 +43,10 @@
       {
         "link": "/group",
         "text": "Group"
+      },
+      {
+        "link": "/sprite",
+        "text": "Sprite"
       }
     ]
   },

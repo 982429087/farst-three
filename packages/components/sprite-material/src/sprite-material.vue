@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, provide } from 'vue'
-import { ShadowMaterial } from 'three'
+import { SpriteMaterial } from 'three'
 import {
   useMaterialService,
   useObj3d,
@@ -12,31 +12,31 @@ import {
   useScene,
 } from '@farst-three/hooks'
 import { materialInjectKey } from '@farst-three/constants'
-import { shadowMaterialEmits, shadowMaterialProps } from './shadow-material'
+import { spriteMaterialEmits, spriteMaterialProps } from './sprite-material'
 
 defineOptions({
-  name: 'FtShadowMaterial',
+  name: 'FtSpriteMaterial',
 })
 
-const props = defineProps(shadowMaterialProps)
-const emit = defineEmits(shadowMaterialEmits)
+const props = defineProps(spriteMaterialProps)
+const emit = defineEmits(spriteMaterialEmits)
 
+// init here
 let scene = useScene()
 let obj3d = useObj3d()
 let materialService = useMaterialService()
-let material = new ShadowMaterial(props.params)
+let material = new SpriteMaterial(props.params)
 materialService.addCount(material)
-emit('load', { material, obj3d, scene })
+emit('load', { scene, obj3d, material })
 provide(materialInjectKey, material)
-
 useOptions(props.options, material, scene)
 
 onBeforeUnmount(() => {
   materialService.subCount(material)
   material.dispose()
   ;(scene as any) = null
-  ;(material as any) = null
   ;(obj3d as any) = null
   ;(materialService as any) = null
+  ;(material as any) = null
 })
 </script>
