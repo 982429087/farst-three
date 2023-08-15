@@ -7,6 +7,8 @@ import { onBeforeUnmount, provide, watch } from 'vue'
 import { Mesh } from 'three'
 import {
   CountService,
+  EventKey,
+  useEventService,
   useGroup,
   useOptions,
   useScene,
@@ -28,9 +30,18 @@ const emit = defineEmits(meshEmits)
 let scene = useScene()
 let group = useGroup()
 let materialService = new CountService<Material>()
+// const eventService = useEventService()
 let mesh = new Mesh(props.geometry, props.material)
 
 emit('load', { mesh, scene, group })
+
+if (props.onHover) {
+  // TODO: 事件处理
+  // eventService.on(EventKey.HOVER, () => {
+  //   // emit('hover', { mesh, scene, group })
+  // })
+}
+
 if (group === null) {
   scene.add(mesh)
 } else {

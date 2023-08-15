@@ -8,6 +8,7 @@ export const object3dInjectionKey = Symbol('object3dInjectionKey')
 export const geometryInjectionKey = Symbol('geometryInjectionKey')
 export const rendererInjectionKey = Symbol('rendererInjectionKey')
 export const storeServiceInjectionKey = Symbol('storeServiceInjectionKey')
+export const eventServiceInjectionKey = Symbol('eventServiceInjectionKey')
 export const animationServiceInjectionKey = Symbol(
   'animationServiceInjectionKey'
 )

@@ -1,6 +1,7 @@
 import {
   animationServiceInjectionKey,
   directionalLightInjectionKey,
+  eventServiceInjectionKey,
   geometryInjectionKey,
   groupInjectionKey,
   hemisphereLightInjectionKey,
@@ -15,7 +16,11 @@ import {
 } from '@farst-three/constants/injection'
 import { useInjection } from '@farst-three/hooks'
 import type { AnimationService } from '@farst-three/components'
-import type { CountService, StoreService } from '@farst-three/hooks'
+import type {
+  CountService,
+  EventService,
+  StoreService,
+} from '@farst-three/hooks'
 import type {
   BufferGeometry,
   DirectionalLight,
@@ -45,6 +50,9 @@ export function useSceneRef() {
 
 export function useScene() {
   return useInjection<StoreService>(storeServiceInjectionKey).getScene()
+}
+export function useEventService() {
+  return useInjection<EventService>(eventServiceInjectionKey)
 }
 
 export function useObj3d() {

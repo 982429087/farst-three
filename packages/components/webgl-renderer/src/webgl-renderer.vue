@@ -7,6 +7,7 @@ import { onBeforeUnmount, provide, watch } from 'vue'
 import { WebGLRenderer } from 'three'
 import { debounce } from 'lodash-es'
 import {
+  useEventService,
   useOptions,
   useScene,
   useSceneRef,
@@ -39,9 +40,11 @@ watch(
   },
   { immediate: true }
 )
-if (!camera) throw new Error('没有找到主渲染相机!')
-
-const animationService = new AnimationService()
+if (!camera) throw new Error('<webgl-renderer /> 没有找到主渲染相机!')
+// renderer 子组件的函数渲染
+let animationService = new AnimationService()
+// 事件处理函数
+let eventService = useEventService()
 provide(animationServiceInjectionKey, animationService)
 
 const dpr = window.devicePixelRatio || 1
@@ -53,7 +56,8 @@ container.appendChild(renderer.domElement)
 if (props.animationFn) animationService.on('propsFn', props.animationFn)
 
 function animate() {
-  if (!camera) throw new Error('没有找到主渲染相机!')
+  if (!camera) throw new Error('<webgl-renderer /> 没有找到主渲染相机!')
+  // 裁剪逻辑
   if (props.scissor) {
     renderer.setScissorTest(true)
     renderer.setScissor(0, 0, container.offsetWidth, container.offsetHeight)
@@ -65,8 +69,11 @@ function animate() {
     renderer.setPixelRatio(dpr)
     renderer.setSize(container.offsetWidth, container.offsetHeight)
   }
-  renderer?.render(scene, camera)
+  // 动画处理逻辑
   animationService.emit({ renderer, scene, camera })
+  // 执行事件逻辑
+  eventService.calculate()
+  renderer.render(scene, camera)
   requestAnimationFrame(animate)
 }
 
@@ -90,5 +97,7 @@ onBeforeUnmount(() => {
   renderer.dispose()
   ;(scene as any) = null
   ;(renderer as any) = null
+  ;(eventService as any) = null
+  ;(animationService as any) = null
 })
 </script>

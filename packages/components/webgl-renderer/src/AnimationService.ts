@@ -32,7 +32,7 @@ export class AnimationService {
     this._animationFunMap.clear()
   }
 
-  getanimationFunMap() {
+  getAnimationFunMap() {
     return this._animationFunMap
   }
 }

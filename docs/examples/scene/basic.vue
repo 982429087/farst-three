@@ -1,7 +1,7 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene :options="{ background: () => new Color('rgb(100, 100, 100)') }">
-      <FtMesh>
+      <FtMesh @hover="meshHover">
         <FtBoxGeometry />
         <FtMeshBasicMaterial :params="{ color: '#abcdef' }" />
       </FtMesh>
@@ -52,6 +52,10 @@ const othCameraOptions = ref<OrthographicCameraOptions>({
   },
   lookAt: (scene: Scene) => scene.position,
 })
+
+function meshHover() {
+  console.log('meshHover')
+}
 
 const animationFn: WebGLRendererProps['animationFn'] = () => {
   if (cameraHelper.value) {
