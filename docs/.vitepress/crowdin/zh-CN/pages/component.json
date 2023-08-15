@@ -158,6 +158,15 @@
         "text": "FogExp2"
       }
     ]
+  },
+  "event": {
+    "text": "事件",
+    "children": [
+      {
+        "link": "/event",
+        "text": "Event"
+      }
+    ]
   }
 }
 

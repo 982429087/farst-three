@@ -9,7 +9,7 @@ lang: zh-CN
 
 
 
-<!-- ## 基础用法
+## 基础用法
 
 :::demo
 
@@ -23,7 +23,7 @@ points/basic
 
 points/point-material
 
-::: -->
+:::
 
 ## 点阵波纹
 

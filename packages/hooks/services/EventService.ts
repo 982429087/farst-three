@@ -1,17 +1,19 @@
+import { ref } from 'vue'
 import { Raycaster, Vector2 } from 'three'
 import { isEmpty } from '@farst-three/utils'
-import type { Camera, Event, Intersection, Object3D, Scene } from 'three'
 import type { Ref } from 'vue'
+import type { Camera, Event, Intersection, Object3D, Scene } from 'three'
 export type FunsEvent<T> = {
   scene: Scene
   camera: Camera
-  target: T
+  targets: T[]
 }
 export type Funs = <T>(e: FunsEvent<T>) => void
+
 type MiddleEvent = {
   scene: Scene
   camera: Camera
-  target: Intersection<Object3D<Event>>[]
+  targets: Intersection<Object3D<Event>>[]
 }
 type MiddleFuns = (e: MiddleEvent) => void
 
@@ -25,29 +27,51 @@ export class EventService {
     [EventKey.CLICK, []],
     [EventKey.HOVER, []],
   ])
-  sceneRef: Ref<HTMLDivElement | undefined>
+  sceneRef: Ref<HTMLDivElement | undefined> = ref()
   scene: Scene
-  pointer = new Vector2(10000, 10000)
-  raycaster = new Raycaster()
+  pointer: Vector2 = new Vector2(10000, 10000)
+  raycaster: Raycaster | undefined
+  global: boolean
 
-  constructor(scene: Scene, sceneRef: Ref<HTMLDivElement | undefined>) {
+  constructor(scene: Scene, global = false) {
     this.scene = scene
+    this.global = global
+    if (global) {
+      this.raycaster = new Raycaster()
+    }
+  }
+
+  setSceneRef(sceneRef: Ref<HTMLDivElement | undefined>) {
     this.sceneRef = sceneRef
   }
 
-  on(key: EventKey, callback: Funs, name: string) {
+  on(key: EventKey, callback: Funs, name: string, instance: Object3D) {
     const funs = this._FunMap.get(key)
+    let hoverLastValueLength = 0
     if (funs) {
       if (funs.length === 0) {
         this.addHoverListeners()
       }
       this._FunMap.set(key, [
         ...funs,
-        (e: MiddleEvent) => {
-          callback({
-            ...e,
-            target: e.target.filter((item) => item.object.name === name),
-          })
+        (e) => {
+          let targets: Intersection<Object3D<Event>>[] = []
+          if (this.global) {
+            targets = e.targets.filter((item) => item.object.name === name)
+          } else {
+            const raycaster = new Raycaster()
+            targets = this.genIntersects(raycaster, e.camera, [instance!])
+          }
+          if (key === EventKey.HOVER) {
+            if (hoverLastValueLength !== targets.length) {
+              callback({
+                ...e,
+                targets,
+              })
+            }
+          }
+
+          hoverLastValueLength = targets.length
         },
       ])
     } else {
@@ -101,15 +125,15 @@ export class EventService {
   mousemove(e: MouseEvent) {
     const dom = this.sceneRef.value
     if (dom) {
-      this.pointer.x = (e.clientX / dom.offsetWidth) * 2 - 1
-      this.pointer.y = -(e.clientY / dom.offsetHeight) * 2 + 1
+      this.pointer.x = (e.offsetX / dom.offsetWidth) * 2 - 1
+      this.pointer.y = -(e.offsetY / dom.offsetHeight) * 2 + 1
     }
   }
 
   addHoverListeners() {
     const dom = this.sceneRef.value
     if (dom) {
-      dom.addEventListener('mousemove', this.mousemove, false)
+      dom.addEventListener('mousemove', this.mousemove.bind(this), false)
     }
   }
 
@@ -119,15 +143,32 @@ export class EventService {
       dom.removeEventListener('mousemove', this.mousemove, false)
     }
   }
-  calculateIntersects(camera: Camera) {
-    this.raycaster.setFromCamera(this.pointer, camera)
-    const intersect = this.raycaster.intersectObjects(this.scene.children, true)
-    this.emit(EventKey.HOVER, { scene: this.scene, camera, target: intersect })
+
+  genIntersects(
+    raycaster: Raycaster,
+    camera: Camera,
+    objects: Object3D<Event>[]
+  ) {
+    raycaster.setFromCamera(this.pointer, camera)
+    return raycaster.intersectObjects(objects, true)
   }
 
-  calculate() {
+  calculateIntersects(camera: Camera) {
+    let intersect: Intersection<Object3D<Event>>[] = []
+    if (this.raycaster) {
+      intersect = this.genIntersects(
+        this.raycaster,
+        camera,
+        this.scene.children
+      )
+    }
+
+    this.emit(EventKey.HOVER, { scene: this.scene, camera, targets: intersect })
+  }
+
+  calculate(camera: Camera) {
     if (!this.isEmpty(EventKey.HOVER)) {
-      this.calculateIntersects(this.scene.children[0] as Camera)
+      this.calculateIntersects(camera)
     }
   }
 }

@@ -18,6 +18,7 @@ import {
   object3dInjectionKey,
 } from '@farst-three/constants'
 import { meshEmits, meshProps } from './mesh'
+import type { FunsEvent } from '@farst-three/hooks'
 import type { Material } from 'three'
 
 defineOptions({
@@ -30,16 +31,22 @@ const emit = defineEmits(meshEmits)
 let scene = useScene()
 let group = useGroup()
 let materialService = new CountService<Material>()
-// const eventService = useEventService()
+const eventService = useEventService()
 let mesh = new Mesh(props.geometry, props.material)
 
 emit('load', { mesh, scene, group })
 
+const name = props.options.name as string
+
 if (props.onHover) {
-  // TODO: 事件处理
-  // eventService.on(EventKey.HOVER, () => {
-  //   // emit('hover', { mesh, scene, group })
-  // })
+  eventService.on(
+    EventKey.HOVER,
+    (e) => {
+      emit('hover', e as FunsEvent<Mesh>)
+    },
+    name,
+    mesh
+  )
 }
 
 if (group === null) {

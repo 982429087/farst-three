@@ -72,7 +72,7 @@ function animate() {
   // 动画处理逻辑
   animationService.emit({ renderer, scene, camera })
   // 执行事件逻辑
-  eventService.calculate()
+  eventService.calculate(camera)
   renderer.render(scene, camera)
   requestAnimationFrame(animate)
 }

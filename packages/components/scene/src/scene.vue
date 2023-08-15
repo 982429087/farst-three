@@ -31,15 +31,17 @@ const ns = useNamespace('scene')
 const sceneRef = ref<HTMLDivElement>()
 let scene = new Scene()
 
-onMounted(() => {
-  ready.value = true
-})
 let storeService = new StoreService(scene, sceneRef)
-let eventService = new EventService(scene, sceneRef)
+let eventService = new EventService(scene)
 emit('load', { scene })
 provide(storeServiceInjectionKey, storeService)
 provide(eventServiceInjectionKey, eventService)
 useOptions(props.options, scene, scene)
+
+onMounted(() => {
+  eventService.setSceneRef(sceneRef)
+  ready.value = true
+})
 
 onBeforeUnmount(() => {
   sceneRef.value?.remove()
