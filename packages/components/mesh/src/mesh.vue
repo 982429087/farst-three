@@ -49,6 +49,17 @@ if (props.onHover) {
   )
 }
 
+if (props.onClick) {
+  eventService.on(
+    EventKey.CLICK,
+    (e) => {
+      emit('click', e as FunsEvent<Mesh>)
+    },
+    name,
+    mesh
+  )
+}
+
 if (group === null) {
   scene.add(mesh)
 } else {

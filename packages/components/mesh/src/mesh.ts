@@ -28,11 +28,15 @@ export const meshProps = buildProps({
   onHover: {
     type: definePropType<FunsEvent<Mesh>>(Function),
   },
+  onClick: {
+    type: definePropType<FunsEvent<Mesh>>(Function),
+  },
 })
 
 export const meshEmits = {
   load: (e: MeshLoadEvent) => e,
   hover: (e: FunsEvent<Mesh>) => e,
+  click: (e: FunsEvent<Mesh>) => e,
 }
 
 export type MeshLoadEvent = {

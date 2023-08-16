@@ -6,7 +6,12 @@
       }"
       @load="(e) => (sceneInsance = e.scene)"
     >
-      <FtMesh :options="boxOpts" @hover="meshHover" @load="boxmeshLoad">
+      <FtMesh
+        :options="boxOpts"
+        @hover="meshHover"
+        @click="meshClick"
+        @load="boxmeshLoad"
+      >
         <FtBoxGeometry :width="1" :height="1" :depth="1" />
         <FtMeshLambertMaterial
           :options="boxMaterialOpts"
@@ -189,6 +194,8 @@ function boxmeshLoad(e: MeshLoadEvent) {
 }
 
 function meshHover(e: FunsEvent<Mesh>) {
+  console.log(e, 'meshHover')
+
   if (e.targets.length) {
     boxMaterialOpts.opacity = 0.1
   } else {
@@ -196,11 +203,17 @@ function meshHover(e: FunsEvent<Mesh>) {
   }
 }
 function meshHover2(e: FunsEvent<Mesh>) {
+  console.log(e, 'meshHover2')
+
   if (e.targets.length) {
     boxMaterialOpts2.opacity = 0.1
   } else {
     boxMaterialOpts2.opacity = 1
   }
+}
+
+function meshClick(e: FunsEvent<Mesh>) {
+  console.log('点我')
 }
 </script>
 
