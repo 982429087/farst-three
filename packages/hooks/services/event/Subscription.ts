@@ -24,4 +24,8 @@ export default class Subscription {
   clear() {
     this._subscriber = []
   }
+
+  get subscriber() {
+    return this._subscriber
+  }
 }

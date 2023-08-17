@@ -1,4 +1,4 @@
-import type { Camera, Intersection, Object3D, Scene } from 'three'
+import type { Camera, Event, Intersection, Object3D, Scene } from 'three'
 
 export type FunsEvent<T> = {
   scene: Scene
