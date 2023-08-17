@@ -53,8 +53,10 @@ export class EventService {
 
   on(key: EventKey, callback: Funs, name: string, instance: Object3D) {
     const funs = this._FunMap.get(key)
+    // 利用闭包来保存变量
     let hoverLastValueLength = 0
     if (funs) {
+      // 开始监听的条件是
       if (funs.length === 0 && key === EventKey.HOVER) {
         this.addHoverListeners()
       }

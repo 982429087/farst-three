@@ -42,7 +42,7 @@ if (props.onHover) {
   eventService.on(
     EventKey.HOVER,
     (e) => {
-      emit('hover', e as FunsEvent<Mesh>)
+      emit('hover', e as unknown as FunsEvent<Mesh>)
     },
     name,
     mesh
@@ -53,7 +53,7 @@ if (props.onClick) {
   eventService.on(
     EventKey.CLICK,
     (e) => {
-      emit('click', e as FunsEvent<Mesh>)
+      emit('click', e as unknown as FunsEvent<Mesh>)
     },
     name,
     mesh
