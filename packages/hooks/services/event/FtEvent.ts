@@ -2,22 +2,27 @@ import { ref } from 'vue'
 import { Raycaster, Vector2 } from 'three'
 import Subscription from './Subscription'
 import type { Camera, Event, Intersection, Object3D, Scene } from 'three'
-import type { Funs, MiddleEvent } from './type'
+import type { EventOptions, Funs, FunsEvent, OnEventOptions } from './type'
 import type { Ref } from 'vue'
 export default class FtEvent {
   sub = new Subscription()
-  global: boolean
+  options: EventOptions
   sceneRef: Ref<HTMLDivElement | undefined> = ref()
   scene: Scene
   pointer: Vector2 = new Vector2(10000, 10000)
   raycaster: Raycaster | undefined
   camera: Camera | undefined
 
-  constructor(scene: Scene, global: boolean) {
-    this.global = global
+  constructor(scene: Scene, options: EventOptions) {
+    this.options = options
     this.scene = scene
-    if (global) {
-      this.raycaster = new Raycaster()
+    if (options.global) {
+      this.raycaster = new Raycaster(
+        options.origin,
+        options.direction,
+        options.near,
+        options.far
+      )
     }
   }
 
@@ -27,28 +32,40 @@ export default class FtEvent {
   setCamera(camera: Camera) {
     this.camera = camera
   }
-  on<T>(callback: Funs<T>, name: string, instance: Object3D) {
+  on(callback: Funs, name: string, instance: Object3D, opts?: OnEventOptions) {
     let hoverLastValueLength = 0
     if (this.sub.subscriber.length === 0) {
       this.addListeners()
     }
-    const middleFun = (event: MiddleEvent) => {
+    const middleFun = (event: FunsEvent) => {
       let targets: Intersection<Object3D<Event>>[] = []
-      if (this.global) {
+      if (this.options.global) {
         targets = event.targets.filter((item) => item.object.name === name)
       } else {
-        const raycaster = new Raycaster()
+        const globalOpts = this.options ? this.options : {}
+        const hereOpts = opts ? opts : {}
+        const onOpts = {
+          ...globalOpts,
+          ...hereOpts,
+        }
+        const raycaster = new Raycaster(
+          onOpts.origin,
+          onOpts.direction,
+          onOpts.near,
+          onOpts.far
+        )
         targets = this.genIntersects(
           raycaster,
           event.camera,
           [instance!],
-          this.pointer
+          this.pointer,
+          onOpts
         )
       }
       if (hoverLastValueLength !== targets.length) {
         callback({
           ...event,
-          targets: targets as unknown as T[],
+          targets,
         })
         hoverLastValueLength = targets.length
       }
@@ -56,11 +73,11 @@ export default class FtEvent {
     this.sub.on(middleFun)
   }
 
-  emit(e: MiddleEvent) {
+  emit(e: FunsEvent) {
     this.sub.emit(e)
   }
 
-  off(fun: Funs<any>) {
+  off(fun: Funs) {
     this.sub.off(fun)
   }
 
@@ -68,10 +85,16 @@ export default class FtEvent {
     raycaster: Raycaster,
     camera: Camera,
     objects: Object3D<Event>[],
-    pointer: Vector2
+    pointer: Vector2,
+    options: EventOptions
   ) {
     raycaster.setFromCamera(pointer, camera)
-    return raycaster.intersectObjects(objects, true)
+    const recursive = options.recursive ?? true
+    return raycaster.intersectObjects(
+      objects,
+      recursive,
+      options.optionalTarget
+    )
   }
 
   addListeners() {
@@ -95,11 +118,13 @@ export default class FtEvent {
   calculateIntersects() {
     let mouseIntersect: Intersection<Object3D<Event>>[] = []
     if (this.raycaster) {
+      const objects = this.options.objects || this.scene.children
       mouseIntersect = this.genIntersects(
         this.raycaster,
         this.camera!,
-        this.scene.children,
-        this.pointer
+        objects,
+        this.pointer,
+        this.options
       )
     }
 

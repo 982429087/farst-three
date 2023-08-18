@@ -33,7 +33,7 @@ let scene = new Scene()
 
 let storeService = new StoreService(scene, sceneRef)
 // 处理事件函数
-let eventService = new EventService(scene, props.globalEvent)
+let eventService = new EventService(scene, props.eventOptions)
 emit('load', { scene })
 provide(storeServiceInjectionKey, storeService)
 provide(eventServiceInjectionKey, eventService)

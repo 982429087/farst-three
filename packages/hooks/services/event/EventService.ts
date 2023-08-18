@@ -3,7 +3,7 @@ import Hover from './Hover'
 import { EventType } from './type'
 import Click from './Click'
 import type FtEvent from './FtEvent'
-import type { Funs } from './type'
+import type { EventOptions, Funs, OnEventOptions } from './type'
 import type { Ref } from 'vue'
 import type { Camera, Object3D, Scene } from 'three'
 
@@ -12,15 +12,15 @@ export class EventService {
   sceneRef: Ref<HTMLDivElement | undefined> = ref()
   scene: Scene
   camera: Camera | undefined
-  global: boolean
+  options: EventOptions
   instanceMap: Map<EventType, FtEvent> = new Map()
 
-  constructor(scene: Scene, global = true) {
+  constructor(scene: Scene, options: EventOptions) {
     this.scene = scene
-    this.global = global
+    this.options = options
     // 注册事件, 每次有新的事件类型，就从这里注册
-    this.instanceMap.set(EventType.HOVER, new Hover(scene, global))
-    this.instanceMap.set(EventType.CLICK, new Click(scene, global))
+    this.instanceMap.set(EventType.HOVER, new Hover(scene, options))
+    this.instanceMap.set(EventType.CLICK, new Click(scene, options))
   }
 
   setSceneRef(sceneRef: Ref<HTMLDivElement | undefined>) {
@@ -34,11 +34,17 @@ export class EventService {
     })
   }
 
-  on<T>(type: EventType, callback: Funs<T>, name: string, instance: Object3D) {
-    this.instanceMap.get(type)?.on(callback, name, instance)
+  on(
+    type: EventType,
+    callback: Funs,
+    name: string,
+    instance: Object3D,
+    opts?: OnEventOptions
+  ) {
+    this.instanceMap.get(type)?.on(callback, name, instance, opts)
   }
 
-  off(type: EventType, callback: Funs<any>) {
+  off(type: EventType, callback: Funs) {
     this.instanceMap.get(type)?.off(callback)
   }
 

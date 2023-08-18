@@ -1,4 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
+import type { EventOptions } from '@farst-three/hooks'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { Scene } from 'three'
 
@@ -13,9 +14,9 @@ export const sceneProps = buildProps({
     type: definePropType<SceneOptions>(Object),
     default: () => ({}),
   },
-  globalEvent: {
-    type: definePropType<boolean>(Boolean),
-    default: false,
+  eventOptions: {
+    type: definePropType<EventOptions>(Object),
+    default: () => ({}),
   },
 })
 

@@ -11,19 +11,19 @@ export function uesEvent<T extends Object3D>(
   instance: T,
   eventService: EventService
 ) {
-  const hover: Funs<T> = (e) => emit('hover', e)
-  const click: Funs<T> = (e) => emit('click', e)
+  const hover: Funs = (e) => emit('hover', e)
+  const click: Funs = (e) => emit('click', e)
 
   if (props.onHover) {
-    eventService.on<T>(EventType.HOVER, hover, name, instance)
+    eventService.on(EventType.HOVER, hover, name, instance, props.eventOptions)
   }
 
   if (props.onClick) {
-    eventService.on<T>(EventType.CLICK, click, name, instance)
+    eventService.on(EventType.CLICK, click, name, instance, props.eventOptions)
   }
 
   onBeforeUnmount(() => {
-    eventService.off(EventType.HOVER, hover)
-    eventService.off(EventType.CLICK, click)
+    if (props.onHover) eventService.off(EventType.HOVER, hover)
+    if (props.onClick) eventService.off(EventType.CLICK, click)
   })
 }

@@ -1,7 +1,7 @@
 import { Raycaster } from 'three'
 import FtEvent from './FtEvent'
 import type { Event, Intersection, Object3D } from 'three'
-import type { Funs, MiddleEvent } from './type'
+import type { Funs, FunsEvent, OnEventOptions } from './type'
 
 export default class Click extends FtEvent {
   addListeners() {
@@ -14,27 +14,39 @@ export default class Click extends FtEvent {
     dom.removeEventListener('pointerdown', this.hanlder, false)
   }
 
-  on<T>(callback: Funs<T>, name: string, instance: Object3D) {
+  on(callback: Funs, name: string, instance: Object3D, opts?: OnEventOptions) {
     if (this.sub.subscriber.length === 0) {
       this.addListeners()
     }
-    const middleFun = (event: MiddleEvent) => {
+    const middleFun = (event: FunsEvent) => {
       let targets: Intersection<Object3D<Event>>[] = []
-      if (this.global) {
+      if (this.options.global) {
         targets = event.targets.filter((item) => item.object.name === name)
       } else {
-        const raycaster = new Raycaster()
+        const globalOpts = this.options ? this.options : {}
+        const hereOpts = opts ? opts : {}
+        const onOpts = {
+          ...globalOpts,
+          ...hereOpts,
+        }
+        const raycaster = new Raycaster(
+          onOpts.origin,
+          onOpts.direction,
+          onOpts.near,
+          onOpts.far
+        )
         targets = this.genIntersects(
           raycaster,
           event.camera,
           [instance!],
-          this.pointer
+          this.pointer,
+          onOpts
         )
       }
       if (targets.length) {
         callback({
           ...event,
-          targets: targets as unknown as T[],
+          targets,
         })
       }
     }

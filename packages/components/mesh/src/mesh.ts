@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import type { FunsEvent } from '@farst-three/hooks'
+import type { FunsEvent, OnEventOptions } from '@farst-three/hooks'
 import type { ThreeOptions } from '@farst-three/utils'
 import type {
   BufferGeometry,
@@ -14,9 +14,7 @@ import type MeshComponent from './mesh.vue'
 
 export const meshProps = buildProps({
   geometry: {
-    type: definePropType<BufferGeometry<NormalBufferAttributes> | undefined>(
-      Object
-    ),
+    type: definePropType<BufferGeometry<NormalBufferAttributes>>(Object),
   },
   material: {
     type: definePropType<Material>(Object),
@@ -25,18 +23,22 @@ export const meshProps = buildProps({
     type: definePropType<MeshOptions>(Object),
     default: () => ({}),
   },
+  eventOptons: {
+    type: definePropType<OnEventOptions>(Object),
+    default: () => ({}),
+  },
   onHover: {
-    type: definePropType<FunsEvent<Mesh>>(Function),
+    type: definePropType<FunsEvent>(Function),
   },
   onClick: {
-    type: definePropType<FunsEvent<Mesh>>(Function),
+    type: definePropType<FunsEvent>(Function),
   },
 })
 
 export const meshEmits = {
   load: (e: MeshLoadEvent) => e,
-  hover: (e: FunsEvent<Mesh>) => e,
-  click: (e: FunsEvent<Mesh>) => e,
+  hover: (e: FunsEvent) => e,
+  click: (e: FunsEvent) => e,
 }
 
 export type MeshLoadEvent = {
