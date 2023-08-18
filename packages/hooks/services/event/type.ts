@@ -1,4 +1,3 @@
-import type Hover from './Hover'
 import type { Camera, Event, Intersection, Object3D, Scene } from 'three'
 
 export type FunsEvent<T> = {
@@ -6,7 +5,7 @@ export type FunsEvent<T> = {
   camera: Camera
   targets: T[]
 }
-export type Funs = <T>(e: FunsEvent<T>) => void
+export type Funs<T> = (e: FunsEvent<T>) => void
 
 export type MiddleEvent = {
   scene: Scene
@@ -18,5 +17,3 @@ export enum EventType {
   HOVER = 'hover',
   CLICK = 'click',
 }
-
-export type EventInstance = Hover

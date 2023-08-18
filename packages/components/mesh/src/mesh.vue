@@ -7,8 +7,8 @@ import { onBeforeUnmount, provide, watch } from 'vue'
 import { Mesh } from 'three'
 import {
   CountService,
-  // EventKey,
-  // useEventService,
+  uesEvent,
+  useEventService,
   useGroup,
   useOptions,
   useScene,
@@ -18,7 +18,6 @@ import {
   object3dInjectionKey,
 } from '@farst-three/constants'
 import { meshEmits, meshProps } from './mesh'
-// import type { FunsEvent } from '@farst-three/hooks'
 import type { Material } from 'three'
 
 defineOptions({
@@ -31,34 +30,11 @@ const emit = defineEmits(meshEmits)
 let scene = useScene()
 let group = useGroup()
 let materialService = new CountService<Material>()
-// const eventService = useEventService()
+let eventService = useEventService()
+let name = props.options.name as string
 let mesh = new Mesh(props.geometry, props.material)
 
 emit('load', { mesh, scene, group })
-
-// const name = props.options.name as string
-
-// if (props.onHover) {
-//   eventService.on(
-//     EventKey.HOVER,
-//     (e) => {
-//       emit('hover', e as unknown as FunsEvent<Mesh>)
-//     },
-//     name,
-//     mesh
-//   )
-// }
-
-// if (props.onClick) {
-//   eventService.on(
-//     EventKey.CLICK,
-//     (e) => {
-//       emit('click', e as unknown as FunsEvent<Mesh>)
-//     },
-//     name,
-//     mesh
-//   )
-// }
 
 if (group === null) {
   scene.add(mesh)
@@ -83,6 +59,7 @@ watch(
 )
 
 useOptions(props.options, mesh, scene)
+uesEvent(props, emit, name, mesh, eventService)
 
 onBeforeUnmount(() => {
   if (group === null) {
@@ -95,5 +72,7 @@ onBeforeUnmount(() => {
   ;(group as any) = null
   ;(mesh as any) = null
   ;(materialService as any) = null
+  ;(eventService as any) = null
+  ;(name as any) = null
 })
 </script>
