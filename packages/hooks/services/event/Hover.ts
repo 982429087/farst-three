@@ -15,7 +15,7 @@ export default class Hover {
   raycaster: Raycaster | undefined
   camera: Camera | undefined
 
-  constructor(scene: Scene, global = false) {
+  constructor(scene: Scene, global: boolean) {
     this.global = global
     this.scene = scene
     if (global) {

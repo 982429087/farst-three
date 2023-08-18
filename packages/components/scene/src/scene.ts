@@ -13,6 +13,10 @@ export const sceneProps = buildProps({
     type: definePropType<SceneOptions>(Object),
     default: () => ({}),
   },
+  globalEvent: {
+    type: definePropType<boolean>(Boolean),
+    default: false,
+  },
 })
 
 export type SceneLoadEvent = {

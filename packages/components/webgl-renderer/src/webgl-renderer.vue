@@ -46,6 +46,7 @@ let animationService = new AnimationService()
 // 事件处理函数
 let eventService = useEventService()
 eventService.setCamera(camera)
+
 provide(animationServiceInjectionKey, animationService)
 
 const dpr = window.devicePixelRatio || 1
@@ -73,7 +74,7 @@ function animate() {
   // 动画处理逻辑
   animationService.emit({ renderer, scene, camera })
   // 执行事件逻辑
-  eventService.calculate()
+  // eventService.calculate()
   renderer.render(scene, camera)
   requestAnimationFrame(animate)
 }

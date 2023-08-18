@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, provide, ref } from 'vue'
-import { REVISION, Scene } from 'three'
+import { Scene } from 'three'
 import {
   eventServiceInjectionKey,
   storeServiceInjectionKey,
@@ -32,7 +32,8 @@ const sceneRef = ref<HTMLDivElement>()
 let scene = new Scene()
 
 let storeService = new StoreService(scene, sceneRef)
-let eventService = new EventService(scene)
+// 处理事件函数
+let eventService = new EventService(scene, props.globalEvent)
 emit('load', { scene })
 provide(storeServiceInjectionKey, storeService)
 provide(eventServiceInjectionKey, eventService)
@@ -53,5 +54,5 @@ onBeforeUnmount(() => {
 })
 
 // eslint-disable-next-line no-console
-console.log('当前threejs版本号:', REVISION)
+// console.log('当前threejs版本号:', REVISION)
 </script>
