@@ -33,6 +33,16 @@ points/lattice-ripple
 
 :::
 
+
+## 雪花
+
+:::demo
+
+points/snow
+
+:::
+
+
 ## API
 
 ### Attributes
