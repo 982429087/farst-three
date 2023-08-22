@@ -22,6 +22,7 @@ export * from './shadow-material'
 export * from './line-basic-material'
 export * from './points-material'
 export * from './sprite-material'
+export * from './shader-material'
 // 灯光
 export * from './directional-light'
 export * from './ambient-light'

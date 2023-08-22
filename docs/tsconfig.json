@@ -19,5 +19,5 @@
     "jsx": "preserve"
   },
   "include": ["**/*", ".vitepress/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/*.vert", "**/*.frag"]
 }

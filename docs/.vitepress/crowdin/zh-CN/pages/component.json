@@ -97,6 +97,10 @@
       {
         "link": "/mesh-physical-material",
         "text": "MeshPhysicalMaterial"
+      },
+      {
+        "link": "/shader-material",
+        "text": "ShaderMaterial"
       }
     ]
   },
@@ -168,5 +172,6 @@
       }
     ]
   }
+
 }
 
