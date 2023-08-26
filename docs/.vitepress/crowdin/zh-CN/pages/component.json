@@ -169,9 +169,11 @@
       {
         "link": "/event",
         "text": "Event"
+      },
+      {
+        "link": "/collision-detection",
+        "text": "碰撞检测"
       }
     ]
   }
-
 }
-
