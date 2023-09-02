@@ -17,6 +17,14 @@ shader-material/basic
 
 :::
 
+## 自定义雾化和着色
+
+:::demo
+
+shader-material/star-tunnel
+
+:::
+
 ## API
 
 ### Attributes
