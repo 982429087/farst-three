@@ -2,12 +2,14 @@
   <div ref="domRef" class="farst-three">
     <FtScene>
       <FtMesh
+        :dragabled="true"
         :options="{
           position: {
-            x: 4,
+            x: -4,
             y: 3,
           },
         }"
+        @load="({ mesh }) => (box = mesh)"
       >
         <FtBoxGeometry :width="4" :height="4" :depth="4" />
         <FtMeshLambertMaterial>
@@ -19,10 +21,11 @@
       <FtMesh
         :options="{
           position: {
-            x: -4,
+            x: 4,
             y: 3,
           },
         }"
+        @load="({ mesh }) => (blueBox = mesh)"
       >
         <FtBoxGeometry :width="4" :height="4" :depth="4" />
         <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
@@ -49,18 +52,22 @@
           },
         }"
       >
-        <FtOrbitControls />
+        <FtOrbitControls :options="orbitControls" />
       </FtWebglRenderer>
+      <FtDragControls @load="dragControlsLoad" />
     </FtScene>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { Material, type Mesh, Raycaster, Vector3 } from 'three'
 import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
+  FtDirectionalLight,
+  FtDragControls,
   FtGridHelper,
   FtMesh,
   FtMeshLambertMaterial,
@@ -70,10 +77,75 @@ import {
   FtTextureLoader,
   FtWebglRenderer,
 } from '@farst-three/components'
+import type {
+  DragControlsLoadEvent,
+  DragControlsOptions,
+} from '@farst-three/components'
+
 const domRef = ref<HTMLDivElement>()
+let box: Mesh | null
+box = null
+let blueBox: Mesh | null
+blueBox = null
+
+const orbitControls = reactive<DragControlsOptions>({
+  enabled: () => true,
+})
+
+let flag = false
+function calculate() {
+  if (box && blueBox) {
+    //网格中心
+    const centerCoord = box.position.clone()
+    //顶点坐标
+    const { position } = box.geometry.attributes
+    //顶点向量
+    const vertices: Vector3[] = []
+    for (let i = 0; i < position.count; i++) {
+      vertices.push(
+        new Vector3(position.getX(i), position.getY(i), position.getZ(i))
+      )
+    }
+
+    for (const vertex of vertices) {
+      //获取网格在应用变换以后的世界坐标
+      const worldCoord = vertex.clone().applyMatrix4(box.matrixWorld)
+      //获取由中心指向顶点的向量
+      const dir = worldCoord.clone().sub(centerCoord)
+      //发射射线
+      const raycaster = new Raycaster(centerCoord, dir.clone().normalize())
+      const intersects = raycaster.intersectObjects([blueBox], true)
+      if (intersects.length) {
+        if (intersects[0].distance <= dir.length()) {
+          flag = true
+        } else {
+          flag = false
+        }
+      }
+    }
+
+    if (!flag) {
+      box.position.x += 0.01
+    } else {
+      box.position.x -= 0.01
+    }
+    if (box.position.x <= -4) {
+      flag = false
+    }
+  }
+}
 
 const animationFn = () => {
-  //
+  calculate()
+}
+
+function dragControlsLoad(e: DragControlsLoadEvent) {
+  e.dragControls.addEventListener('dragstart', () => {
+    orbitControls.enabled = false
+  })
+  e.dragControls.addEventListener('dragend', () => {
+    orbitControls.enabled = true
+  })
 }
 
 const { gui } = useGui(domRef)

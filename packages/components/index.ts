@@ -53,6 +53,7 @@ export * from './hemisphere-light-helper'
 export * from './point-light-helper'
 export * from './rect-area-light-helper'
 export * from './spot-light-helper'
+export * from './drag-controls'
 export * from './thumbnail'
 
 // 雾气

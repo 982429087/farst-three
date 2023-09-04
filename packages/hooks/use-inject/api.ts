@@ -1,6 +1,7 @@
 import {
   animationServiceInjectionKey,
   directionalLightInjectionKey,
+  dragServiceInjectionKey,
   eventServiceInjectionKey,
   geometryInjectionKey,
   groupInjectionKey,
@@ -24,10 +25,12 @@ import type {
 import type {
   BufferGeometry,
   DirectionalLight,
+  Event,
   Group,
   HemisphereLight,
   Material,
   Mesh,
+  Object3D,
   PointLight,
   RectAreaLight,
   Renderer,
@@ -96,4 +99,8 @@ export function useRectAreaLight() {
 }
 export function useSpotLight() {
   return useInjection<SpotLight>(spotLightInjectionKey)
+}
+
+export function useDragService() {
+  return useInjection<CountService<Object3D<Event>>>(dragServiceInjectionKey)
 }

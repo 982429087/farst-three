@@ -1,4 +1,5 @@
-import { buildProps } from '@farst-three/utils'
+import { buildProps, definePropType } from '@farst-three/utils'
+import type { ThreeOptions } from '@farst-three/utils'
 import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import type { ExtractPropTypes } from 'vue'
 import type OrbitControlsComponent from './orbit-controls.vue'
@@ -7,6 +8,10 @@ import type { Camera, Renderer } from 'three'
 export const orbitControlsProps = buildProps({
   modelValue: {
     type: Object,
+  },
+  options: {
+    type: definePropType<DragControlsOptions>(Object),
+    default: () => ({}),
   },
 })
 
@@ -22,3 +27,4 @@ export type OrbitControlsLoadEvent = {
   camera: Camera
   renderer: Renderer
 }
+export type DragControlsOptions = ThreeOptions<OrbitControls>

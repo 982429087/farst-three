@@ -8,6 +8,7 @@ import { Mesh } from 'three'
 import {
   CountService,
   uesEvent,
+  useDragService,
   useEventService,
   useGroup,
   useOptions,
@@ -29,6 +30,7 @@ const emit = defineEmits(meshEmits)
 
 let scene = useScene()
 let group = useGroup()
+const dragService = useDragService()
 let materialService = new CountService<Material>()
 let eventService = useEventService()
 let name = props.options.name as string
@@ -56,6 +58,15 @@ watch(
     }
   },
   { deep: true }
+)
+
+watch(
+  () => props.dragabled,
+  (v) => {
+    if (v) dragService.addCount(mesh)
+    else dragService.subCount(mesh)
+  },
+  { immediate: true }
 )
 
 useOptions(props.options, mesh, scene)

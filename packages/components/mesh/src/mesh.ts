@@ -33,6 +33,10 @@ export const meshProps = buildProps({
   onClick: {
     type: definePropType<FunsEvent>(Function),
   },
+  dragabled: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 export const meshEmits = {
