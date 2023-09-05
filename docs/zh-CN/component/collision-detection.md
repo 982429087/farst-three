@@ -9,11 +9,19 @@ lang: zh-CN
 
 
 
-## 基础用法
+## 射线
 
 :::demo
 
 collision-detection/basic
+
+:::
+
+## 包围盒
+
+:::demo
+
+collision-detection/bounding-box
 
 :::
 
