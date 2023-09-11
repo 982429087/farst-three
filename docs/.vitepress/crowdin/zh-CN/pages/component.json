@@ -173,6 +173,10 @@
       {
         "link": "/collision-detection",
         "text": "碰撞检测"
+      },
+      {
+        "link": "/game-demo",
+        "text": "游戏场景"
       }
     ]
   }
