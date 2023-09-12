@@ -10,7 +10,7 @@ export const orbitControlsProps = buildProps({
     type: Object,
   },
   options: {
-    type: definePropType<DragControlsOptions>(Object),
+    type: definePropType<OrbitControlsOptions>(Object),
     default: () => ({}),
   },
 })
@@ -27,4 +27,4 @@ export type OrbitControlsLoadEvent = {
   camera: Camera
   renderer: Renderer
 }
-export type DragControlsOptions = ThreeOptions<OrbitControls>
+export type OrbitControlsOptions = ThreeOptions<OrbitControls>

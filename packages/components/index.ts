@@ -59,3 +59,6 @@ export * from './thumbnail'
 // 雾气
 export * from './fog'
 export * from './fog-exp2'
+// 声音
+export * from './audio'
+export * from './pointer-lock-controls'

@@ -56,6 +56,8 @@ declare module '@vue/runtime-core' {
     FtSpriteMaterial: typeof import('@farst-three/components')['FtSpriteMaterial']
     FtShaderMaterial: typeof import('@farst-three/components')['FtShaderMaterial']
     FtDragControls: typeof import('@farst-three/components')['FtDragControls']
+    FtAudio: typeof import('@farst-three/components')['FtAudio']
+    FtPointerLockControls: typeof import('@farst-three/components')['FtPointerLockControls']
   }
 }
 
