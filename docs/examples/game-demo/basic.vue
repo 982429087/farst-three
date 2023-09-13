@@ -46,6 +46,7 @@
             z: -95,
           },
         }"
+        @load="({ group }) => (blokGroup = group)"
       >
         <FtMesh
           v-for="item in 8"
@@ -75,9 +76,10 @@
         :far="500"
         :options="{
           position: {
-            set: [0.01, 40, 40],
+            set: [0.01, 20, 40],
           },
         }"
+        @load="({ camera }) => (renderCamera = camera)"
       />
       <FtPointerLockControls :options="pointerlCOptions" />
       <FtAudio
@@ -94,7 +96,7 @@
           },
         }"
       >
-        <FtOrbitControls />
+        <!-- <FtOrbitControls /> -->
       </FtWebglRenderer>
     </FtScene>
   </div>
@@ -102,7 +104,8 @@
 
 <script setup lang="ts">
 import { reactive, ref, shallowRef } from 'vue'
-import { Clock, type Mesh } from 'three'
+import { Clock, Vector3 } from 'three'
+import gsap from 'gsap'
 import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
@@ -122,6 +125,7 @@ import {
   FtTextureLoader,
   FtWebglRenderer,
 } from '@farst-three/components'
+import type { Audio, Group, Mesh, PerspectiveCamera } from 'three'
 import type {
   AudioLoaderOnLoad,
   DirectionalLightOptions,
@@ -130,6 +134,8 @@ const domRef = ref<HTMLDivElement>()
 const startSound = ref(false)
 const showMask = ref(true)
 const bollMesh = shallowRef<Mesh>()
+const renderCamera = shallowRef<PerspectiveCamera>()
+const blokGroup = shallowRef<Group>()
 const directionLightOPtions = ref<DirectionalLightOptions>({
   position: {
     x: 5,
@@ -152,8 +158,9 @@ const bollOptions = ref({
 const pointerlCOptions = ref({
   moveForward: [0],
 })
-
-const bufferOnload: AudioLoaderOnLoad = (sound, buffer) => {
+let sound: Audio<GainNode>
+const bufferOnload: AudioLoaderOnLoad = (s, buffer) => {
+  sound = s
   sound.setBuffer(buffer)
   sound.setPlaybackRate(1)
   sound.setVolume(0.5)
@@ -168,29 +175,35 @@ function start() {
 const move = {
   up: false,
   down: false,
+  waiting: false,
+  lock: false,
+  stoped: false,
 }
 //键盘按下事件
 document.onkeydown = (e) => {
+  console.log(e.code)
+  if (showMask.value) return
   switch (e.code) {
-    case 'ArrowUp':
-      //1前进
+    case 'KeyW':
       move.up = true
 
       break
-    case 'ArrowDown':
+    case 'KeyS':
       //后退
       move.down = true
       break
   }
 }
 document.onkeyup = (e) => {
+  if (showMask.value) return
+
   switch (e.code) {
-    case 'ArrowUp':
+    case 'KeyW':
       //1前进
       move.up = false
 
       break
-    case 'ArrowDown':
+    case 'KeyS':
       //后退
       move.down = false
       break
@@ -202,14 +215,61 @@ const animationFn = () => {
   const boxPositon = bollOptions.value.position as any
   const lightPosition = directionLightOPtions.value.position as any
   const distance = timeDelta * 10
-  if (move.up) {
-    boxPositon.z -= distance
-    lightPosition.z -= distance
-    pointerlCOptions.value.moveForward = [distance]
-  }
-  if (move.down) {
-    boxPositon.z += distance
-    lightPosition.z += distance
+
+  if (move.waiting) {
+    if (move.lock) return
+    if (!renderCamera.value) return
+    move.lock = true
+
+    const start = gsap.to(renderCamera.value.position, {
+      duration: 0.5,
+      x: 120,
+      y: -15,
+      z: -30,
+      onUpdate: () => {
+        if (!renderCamera.value) return
+        renderCamera.value.lookAt(new Vector3(0, -20, -60))
+      },
+      onReverseComplete() {
+        move.waiting = false
+        move.stoped = true
+      },
+    })
+    const tl = gsap.timeline({})
+    if (!blokGroup.value) return
+    blokGroup.value.children.forEach((item, index) => {
+      tl.to(item.position, {
+        duration: 1,
+        delay: -0.5,
+        y: -5,
+        keyframes: {
+          '90%': {
+            onComplete() {
+              if (sound) sound.play()
+            },
+          },
+        },
+        onComplete() {
+          if (index === blokGroup.value!.children.length - 1) {
+            start.reverse()
+          }
+        },
+      })
+    })
+  } else {
+    if (move.up) {
+      boxPositon.z -= distance
+      lightPosition.z -= distance
+      pointerlCOptions.value.moveForward = [distance]
+      if (bollMesh.value!.position.z <= -6 && !move.stoped) {
+        move.waiting = true
+      }
+    }
+    if (move.down) {
+      boxPositon.z += distance
+      lightPosition.z += distance
+      pointerlCOptions.value.moveForward = [-distance]
+    }
   }
 }
 </script>
