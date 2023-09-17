@@ -179,5 +179,14 @@
         "text": "游戏场景"
       }
     ]
+  },
+  "3d": {
+    "text": "模型",
+    "children": [
+      {
+        "link": "/g-l-t-f-loader",
+        "text": "GLTFLoader"
+      }
+    ]
   }
 }

@@ -55,10 +55,11 @@ export * from './rect-area-light-helper'
 export * from './spot-light-helper'
 export * from './drag-controls'
 export * from './thumbnail'
+export * from './pointer-lock-controls'
+export * from './g-l-t-f-loader'
 
 // 雾气
 export * from './fog'
 export * from './fog-exp2'
 // 声音
 export * from './audio'
-export * from './pointer-lock-controls'
