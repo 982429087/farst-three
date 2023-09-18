@@ -24,6 +24,10 @@ export const gLTFLoaderProps = buildProps({
   error: {
     type: definePropType<(event: ErrorEvent) => void>(Function),
   },
+  decoderPath: {
+    type: String,
+    default: '',
+  },
 })
 export const gLTFLoaderEmits = {
   load: (e: GLTFLoaderLoadEvent) => e,
@@ -31,7 +35,7 @@ export const gLTFLoaderEmits = {
 
 export type GLTFLoaderLoadEvent = {
   scene: Scene
-  fltfLoader: GLTFLoader
+  gltfLoader: GLTFLoader
 }
 export type GLTFLoaderEmits = typeof gLTFLoaderEmits
 export type GLTFLoaderProps = ExtractPropTypes<typeof gLTFLoaderProps>

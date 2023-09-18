@@ -16,6 +16,7 @@
         }"
       />
       <FtGLTFLoader :url="url" :load="gltfLoad" />
+      <FtGLTFLoader :url="url2" :load="glbLoad" decoder-path="/draco/" />
       <FtAmbientLight />
       <FtWebglRenderer
         :params="{ antialias: true, logarithmicDepthBuffer: true }"
@@ -54,6 +55,7 @@ const url = new URL(
   '/models/batman_arkham_knight_batmobile/scene.gltf',
   import.meta.url
 ).href
+const url2 = new URL('/models/LittlestTokyo.glb', import.meta.url).href
 console.log(url)
 
 const animationFn = () => {
@@ -61,6 +63,9 @@ const animationFn = () => {
 }
 function gltfLoad(e: GLTF) {
   e.scene.scale.set(1.2, 1.2, 1.2)
+}
+function glbLoad(e: GLTF) {
+  e.scene.scale.set(0.05, 0.05, 0.05)
 }
 const { gui } = useGui(domRef)
 </script>
