@@ -5,7 +5,6 @@ lang: zh-CN
 
 # GLTFLoader
 
-[]()
 
 
 
