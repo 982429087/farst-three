@@ -56,8 +56,19 @@ export default defineConfig(async ({ mode }) => {
       onlyFiles: true,
     }))
   )
-
+  let index = 0
   return {
+    build: {
+      rollupOptions: {
+        output: {
+          chunkFileNames(chunkInfo) {
+            console.log(chunkInfo.exports, chunkInfo.name, ++index)
+
+            return `${chunkInfo.name}-${index}`
+          },
+        },
+      },
+    },
     ssr: {
       noExternal: ['lodash-es', 'dat.gui'],
     },
