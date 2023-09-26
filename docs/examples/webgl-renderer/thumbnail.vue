@@ -27,6 +27,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { Color } from 'three'
+import { isClient } from '@vueuse/core'
 import {
   FtBoxGeometry,
   FtMesh,
@@ -44,7 +45,7 @@ import type {
 } from '@farst-three/components'
 
 const frustumSize = 4
-const aspect = window.innerWidth / window.innerHeight
+const aspect = isClient ? window.innerWidth / window.innerHeight : 1
 
 const meshBasicParams = {
   color: new Color(Math.random() * 0x00ffff),

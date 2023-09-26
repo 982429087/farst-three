@@ -6,6 +6,7 @@
 import { onBeforeUnmount, provide, watch } from 'vue'
 import { WebGLRenderer } from 'three'
 import { debounce } from 'lodash-es'
+import { isClient } from '@vueuse/core'
 import {
   useEventService,
   useOptions,
@@ -49,7 +50,7 @@ eventService.setCamera(camera)
 
 provide(animationServiceInjectionKey, animationService)
 
-const dpr = window.devicePixelRatio || 1
+const dpr = isClient ? window.devicePixelRatio || 1 : 1
 
 let renderer = new WebGLRenderer(props.params)
 renderer.setSize(container.offsetWidth, container.offsetHeight)

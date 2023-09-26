@@ -58,6 +58,9 @@ export default defineConfig(async ({ mode }) => {
   )
 
   return {
+    ssr: {
+      noExternal: ['lodash-es', 'dat.gui'],
+    },
     server: {
       host: true,
       https: !!env.HTTPS,
