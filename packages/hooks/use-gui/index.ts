@@ -1,14 +1,16 @@
 import { isRef, onBeforeUnmount, onMounted } from 'vue'
-import { GUI } from 'dat.gui'
 import type { Ref } from 'vue'
-import type { GUIParams } from 'dat.gui'
+import type { GUI, GUIParams } from 'dat.gui'
 
 export function useGui(
   container: Ref<HTMLElement | undefined> | HTMLElement = document.body,
   option?: GUIParams
 ) {
-  const gui = new GUI({ autoPlace: false, ...option })
-  onMounted(() => {
+  let gui = {} as GUI
+  onMounted(async () => {
+    const { GUI } = await import('dat.gui')
+    gui = new GUI({ autoPlace: false, ...option })
+
     gui.domElement.classList.add('ft-dat-gui')
     let element: HTMLElement
     if (isRef(container)) {

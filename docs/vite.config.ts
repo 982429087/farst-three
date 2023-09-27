@@ -59,10 +59,26 @@ export default defineConfig(async ({ mode }) => {
   let index = 0
   return {
     build: {
+      minify: false,
       rollupOptions: {
         output: {
+          manualChunks(id) {
+            try {
+              if (id.includes('node_modules')) {
+                const name = id.split('node_modules/')[1].split('/')
+                if (name[0] == '.pnpm') {
+                  return name[1]
+                } else {
+                  return name[0]
+                }
+              }
+            } catch (error) {
+              console.error(error)
+            }
+          },
           chunkFileNames(chunkInfo) {
-            console.log(chunkInfo.exports, chunkInfo.name, ++index)
+            const i = ++index
+            if (i === 2) console.log(chunkInfo.modules, chunkInfo.name)
 
             return `${chunkInfo.name}-${index}`
           },
