@@ -39,7 +39,8 @@
     "docs:crowdin-credentials": "pnpm run -C docs crowdin-credentials",
     "stub": "pnpm run -r --parallel stub",
     "prepare": "husky install",
-    "postinstall": "pnpm stub && concurrently \"pnpm gen:version\" \"pnpm run -C internal/metadata dev\""
+    "postinstall": "pnpm stub && concurrently \"pnpm gen:version\" \"pnpm run -C internal/metadata dev\"",
+    "rm:nm": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
@@ -117,9 +118,9 @@
     "type-fest": "^2.14.0",
     "typescript": "^4.7.4",
     "unplugin-element-plus": "^0.4.0",
-    "unplugin-vue-macros": "^0.11.2",
+    "unplugin-vue-macros": "0.11.2",
     "vitest": "0.12.6",
-    "vue": "^3.2.37",
+    "vue": "3.2.37",
     "vue-router": "^4.0.16",
     "vue-tsc": "^0.38.2"
   },

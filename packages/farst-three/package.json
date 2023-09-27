@@ -51,7 +51,7 @@
   ],
   "peerDependencies": {
     "three": "^0.153.0",
-    "vue": "^3.2.0"
+    "vue": "3.2.0"
   },
   "dependencies": {
     "@ctrl/tinycolor": "^3.4.1",
@@ -73,7 +73,7 @@
   "devDependencies": {
     "@types/node": "*",
     "csstype": "^2.6.20",
-    "vue": "^3.2.37",
+    "vue": "3.2.37",
     "vue-router": "^4.0.16"
   },
   "vetur": {

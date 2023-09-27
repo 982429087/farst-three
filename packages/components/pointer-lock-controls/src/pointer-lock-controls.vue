@@ -21,7 +21,7 @@ const emit = defineEmits(pointerLockControlsEmits)
 // init here
 let scene = useScene()
 let storeService = useStoreService()
-let pointerLockControls: PointerLockControls
+let pointerLockControls = {} as PointerLockControls
 
 watch(
   [() => storeService.renderCamera.value, () => storeService.sceneRef.value],

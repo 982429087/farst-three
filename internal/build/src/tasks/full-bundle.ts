@@ -76,8 +76,8 @@ async function buildFullEntry(minify: boolean) {
   })
   await writeBundles(bundle, [
     {
-      format: 'umd',
-      file: path.resolve(
+      format: 'commonjs',
+      dir: path.resolve(
         epOutput,
         'dist',
         formatBundleFilename('index.full', minify, 'js')
@@ -92,7 +92,7 @@ async function buildFullEntry(minify: boolean) {
     },
     {
       format: 'esm',
-      file: path.resolve(
+      dir: path.resolve(
         epOutput,
         'dist',
         formatBundleFilename('index.full', minify, 'mjs')
@@ -125,8 +125,8 @@ async function buildFullLocale(minify: boolean) {
       })
       await writeBundles(bundle, [
         {
-          format: 'umd',
-          file: path.resolve(
+          format: 'commonjs',
+          dir: path.resolve(
             epOutput,
             'dist/locale',
             formatBundleFilename(filename, minify, 'js')
@@ -138,7 +138,7 @@ async function buildFullLocale(minify: boolean) {
         },
         {
           format: 'esm',
-          file: path.resolve(
+          dir: path.resolve(
             epOutput,
             'dist/locale',
             formatBundleFilename(filename, minify, 'mjs')
