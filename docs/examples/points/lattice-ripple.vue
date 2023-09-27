@@ -48,7 +48,6 @@ import {
   Fog,
   SRGBColorSpace,
 } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtBufferGeometry,
   FtGridHelper,
@@ -112,7 +111,6 @@ const animationFn = () => {
     position: () => new Float32BufferAttribute(ppp, 3),
   }
 }
-const { gui } = useGui(domRef)
 </script>
 
 <style lang="scss" scoped>

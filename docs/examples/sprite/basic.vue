@@ -55,7 +55,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { SRGBColorSpace, type Vector3 } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtOrbitControls,
   FtPerspectiveCamera,
@@ -81,8 +80,6 @@ for (let x = -10; x < 10; x++) {
 const animationFn = () => {
   //
 }
-
-const { gui } = useGui(domRef)
 </script>
 
 <style lang="scss" scoped>

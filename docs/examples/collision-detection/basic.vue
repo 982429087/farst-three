@@ -62,7 +62,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Material, type Mesh, Raycaster, Vector3 } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -147,8 +146,6 @@ function dragControlsLoad(e: DragControlsLoadEvent) {
     orbitControls.enabled = true
   })
 }
-
-const { gui } = useGui(domRef)
 </script>
 
 <style lang="scss" scoped>

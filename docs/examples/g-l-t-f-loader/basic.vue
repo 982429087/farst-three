@@ -37,7 +37,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Color } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtAxesHelper,
@@ -62,7 +61,6 @@ const animationFn = () => {
 function gltfLoad(e: GLTF) {
   e.scene.scale.set(1.2, 1.2, 1.2)
 }
-const { gui } = useGui(domRef)
 </script>
 
 <style lang="scss" scoped>

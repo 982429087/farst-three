@@ -69,7 +69,7 @@ const cameraHelper = shallowRef<CameraHelper>()
 const size = 4
 const currentCamera = ref('OrthographicCamera')
 
-const { gui } = useGui(domRef)
+const { guiPromise } = useGui(domRef)
 
 const meshBasicParamsFn = {
   color: new Color(Math.random() * 0x00ffff),
@@ -78,30 +78,32 @@ const meshBasicParamsFn = {
 const cameraLoad = ({ camera, scene }: OrthographicCameraLoadEvent) => {
   camera.position.set(1, 0.5, 2)
   camera.lookAt(scene.position)
-  gui.add(camera.position, 'x', -10, 10, 0.1)
-  gui.add(camera, 'zoom', 0.1, 4, 0.1).onChange(() => {
-    camera.updateProjectionMatrix()
-    cameraHelper.value?.update()
+  guiPromise.then((gui) => {
+    gui.add(camera.position, 'x', -10, 10, 0.1)
+    gui.add(camera, 'zoom', 0.1, 4, 0.1).onChange(() => {
+      camera.updateProjectionMatrix()
+      cameraHelper.value?.update()
+    })
+    gui.add(camera, 'near', 0.001, 4, 0.01).onChange(() => {
+      camera.updateProjectionMatrix()
+      cameraHelper.value?.update()
+    })
+    gui.add(camera, 'far', 0.1, 40, 0.1).onChange((val) => {
+      camera.far = val
+      camera.updateProjectionMatrix()
+      cameraHelper.value?.update()
+    })
+    const parsms = {
+      switchCamera() {
+        if (currentCamera.value === 'PerspectiveCamera') {
+          currentCamera.value = 'OrthographicCamera'
+        } else {
+          currentCamera.value = 'PerspectiveCamera'
+        }
+      },
+    }
+    gui.add(parsms, 'switchCamera').name('切换相机')
   })
-  gui.add(camera, 'near', 0.001, 4, 0.01).onChange(() => {
-    camera.updateProjectionMatrix()
-    cameraHelper.value?.update()
-  })
-  gui.add(camera, 'far', 0.1, 40, 0.1).onChange((val) => {
-    camera.far = val
-    camera.updateProjectionMatrix()
-    cameraHelper.value?.update()
-  })
-  const parsms = {
-    switchCamera() {
-      if (currentCamera.value === 'PerspectiveCamera') {
-        currentCamera.value = 'OrthographicCamera'
-      } else {
-        currentCamera.value = 'PerspectiveCamera'
-      }
-    },
-  }
-  gui.add(parsms, 'switchCamera').name('切换相机')
 }
 
 const loadMesh: MeshEmits['load'] = (e) => {

@@ -73,10 +73,10 @@ function animate() {
     renderer.setSize(container.offsetWidth, container.offsetHeight)
   }
   // 动画处理逻辑
-  animationService.emit({ renderer, scene, camera })
+  animationService?.emit({ renderer, scene, camera })
   // 执行事件逻辑
   // eventService.calculate()
-  renderer.render(scene, camera)
+  renderer?.render(scene, camera)
   requestAnimationFrame(animate)
 }
 

@@ -141,8 +141,10 @@ const pointMaterialOpts = reactive<PointsMaterialOptions>({
   size: 0.05,
 })
 
-const { gui } = useGui(domRef)
-gui.add(pointMaterialOpts, 'size', 0.05, 0.5, 0.01)
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  gui.add(pointMaterialOpts, 'size', 0.05, 0.5, 0.01)
+})
 </script>
 
 <style lang="scss" scoped>

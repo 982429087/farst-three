@@ -129,17 +129,19 @@ const animationFn: WebGLRendererProps['animationFn'] = () => {
   }
 }
 
-const { gui } = useGui(domRef)
+const { guiPromise } = useGui(domRef)
 
 function lbasicMaterialLoad({ material }: MeshStandardMaterialLoadEvent) {
-  gui.add(material, 'metalness', 0, 1, 0.1).onChange((val) => {
-    material.metalness = val
-  })
-  gui.add(material, 'roughness', 0, 1, 0.1).onChange((val) => {
-    material.roughness = val
-  })
-  gui.add(material, 'envMapIntensity', 0, 1, 0.1).onChange((val) => {
-    material.envMapIntensity = val
+  guiPromise.then((gui) => {
+    gui.add(material, 'metalness', 0, 1, 0.1).onChange((val) => {
+      material.metalness = val
+    })
+    gui.add(material, 'roughness', 0, 1, 0.1).onChange((val) => {
+      material.roughness = val
+    })
+    gui.add(material, 'envMapIntensity', 0, 1, 0.1).onChange((val) => {
+      material.envMapIntensity = val
+    })
   })
 }
 </script>

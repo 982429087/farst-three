@@ -158,33 +158,35 @@ const animationFn = () => {
   }
 }
 
-const { gui } = useGui(domRef)
-const boxFolder = gui.addFolder('物体')
-const boxPosition = boxOpts.position as Vector3
-boxFolder
-  .add(boxPosition, 'x', -30, 30)
-  .name('box x')
-  .onChange(() => (spothOpts.update = () => []))
-const soptLightFolder = gui.addFolder('点光源')
-soptLightFolder.add(soptLightOpts, 'intensity', 0, 1).name('强度')
-soptLightFolder
-  .add(soptLightOpts, 'distance', 0, 100)
-  .name('距离')
-  .onChange(() => (spothOpts.update = () => []))
-soptLightFolder.add(soptLightOpts, 'angle', 0, Math.PI * 2).name('角度')
-soptLightFolder.add(soptLightOpts, 'penumbra', 0, 1).name('半影')
-soptLightFolder.add(soptLightOpts, 'decay', 0, 2).name('衰减')
-const position = soptLightOpts.position as Vector3
-soptLightFolder.add(position, 'x', -30, 30).name('x')
-soptLightFolder.add(position, 'y', -30, 30).name('y')
-soptLightFolder.add(position, 'z', -30, 30).name('z')
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  const boxFolder = gui.addFolder('物体')
+  const boxPosition = boxOpts.position as Vector3
+  boxFolder
+    .add(boxPosition, 'x', -30, 30)
+    .name('box x')
+    .onChange(() => (spothOpts.update = () => []))
+  const soptLightFolder = gui.addFolder('点光源')
+  soptLightFolder.add(soptLightOpts, 'intensity', 0, 1).name('强度')
+  soptLightFolder
+    .add(soptLightOpts, 'distance', 0, 100)
+    .name('距离')
+    .onChange(() => (spothOpts.update = () => []))
+  soptLightFolder.add(soptLightOpts, 'angle', 0, Math.PI * 2).name('角度')
+  soptLightFolder.add(soptLightOpts, 'penumbra', 0, 1).name('半影')
+  soptLightFolder.add(soptLightOpts, 'decay', 0, 2).name('衰减')
+  const position = soptLightOpts.position as Vector3
+  soptLightFolder.add(position, 'x', -30, 30).name('x')
+  soptLightFolder.add(position, 'y', -30, 30).name('y')
+  soptLightFolder.add(position, 'z', -30, 30).name('z')
 
-const shadowFolder = gui.addFolder('阴影')
-const shadowCamera = (soptLightOpts.shadow as SpotLightShadow)
-  .camera as PerspectiveCamera
-shadowFolder.add(shadowCamera, 'near', 0.01, 10, 0.1)
-shadowFolder.add(shadowCamera, 'far', 0.01, 100, 0.1)
-shadowFolder.add(shadowCamera, 'fov').name('fov')
+  const shadowFolder = gui.addFolder('阴影')
+  const shadowCamera = (soptLightOpts.shadow as SpotLightShadow)
+    .camera as PerspectiveCamera
+  shadowFolder.add(shadowCamera, 'near', 0.01, 10, 0.1)
+  shadowFolder.add(shadowCamera, 'far', 0.01, 100, 0.1)
+  shadowFolder.add(shadowCamera, 'fov').name('fov')
+})
 </script>
 
 <style lang="scss" scoped>

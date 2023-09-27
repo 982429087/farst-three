@@ -56,10 +56,8 @@ export default defineConfig(async ({ mode }) => {
       onlyFiles: true,
     }))
   )
-  let index = 0
   return {
     build: {
-      minify: false,
       rollupOptions: {
         output: {
           manualChunks(id) {
@@ -76,17 +74,11 @@ export default defineConfig(async ({ mode }) => {
               console.error(error)
             }
           },
-          chunkFileNames(chunkInfo) {
-            const i = ++index
-            if (i === 2) console.log(chunkInfo.modules, chunkInfo.name)
-
-            return `${chunkInfo.name}-${index}`
-          },
         },
       },
     },
     ssr: {
-      noExternal: ['lodash-es', 'dat.gui'],
+      noExternal: ['lodash-es', 'dat.gui', 'three'],
     },
     server: {
       host: true,

@@ -73,7 +73,6 @@ import {
   type Scene,
   Vector3,
 } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -140,8 +139,6 @@ function dragControlsLoad(e: DragControlsLoadEvent) {
     orbitControls.enabled = true
   })
 }
-
-const { gui } = useGui(domRef)
 </script>
 
 <style lang="scss" scoped>

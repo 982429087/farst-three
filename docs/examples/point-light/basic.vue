@@ -190,31 +190,33 @@ function boxLoad({ mesh }: MeshLoadEvent) {
   //
 }
 
-const { gui } = useGui(domRef)
-const lightFolder = gui.addFolder('环境光')
-lightFolder.add(lightOptions, 'intensity', 0, 1, 0.01)
-lightFolder.add(lightOptions, 'visible')
-lightFolder.addColor({ color: 0x1890ff }, 'color').onChange((val) => {
-  lightOptions.color = () => new Color(val)
-})
-lightFolder.open()
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  const lightFolder = gui.addFolder('环境光')
+  lightFolder.add(lightOptions, 'intensity', 0, 1, 0.01)
+  lightFolder.add(lightOptions, 'visible')
+  lightFolder.addColor({ color: 0x1890ff }, 'color').onChange((val) => {
+    lightOptions.color = () => new Color(val)
+  })
+  lightFolder.open()
 
-const pointlightFolder = gui.addFolder('pointLightYellow')
-pointlightFolder.add(pointLightYellowOpts, 'intensity', -10, 10, 0.1)
-const position = pointLightYellowOpts.position as Vector3
-const pointPosition = pointYellowOpts.position as Vector3
-pointlightFolder.add(position, 'x', -10, 10, 0.1).onChange((val) => {
-  pointPosition.x = val
+  const pointlightFolder = gui.addFolder('pointLightYellow')
+  pointlightFolder.add(pointLightYellowOpts, 'intensity', -10, 10, 0.1)
+  const position = pointLightYellowOpts.position as Vector3
+  const pointPosition = pointYellowOpts.position as Vector3
+  pointlightFolder.add(position, 'x', -10, 10, 0.1).onChange((val) => {
+    pointPosition.x = val
+  })
+  pointlightFolder.add(position, 'y', -10, 10, 0.1).onChange((val) => {
+    pointPosition.y = val
+  })
+  pointlightFolder.add(position, 'z', -10, 10, 0.1).onChange((val) => {
+    pointPosition.z = val
+  })
+  pointlightFolder.add(pointLightYellowOpts, 'distance', 0, 20, 0.1)
+  pointlightFolder.add(pointLightYellowOpts, 'decay', 0, 20, 0.1)
+  pointlightFolder.open()
 })
-pointlightFolder.add(position, 'y', -10, 10, 0.1).onChange((val) => {
-  pointPosition.y = val
-})
-pointlightFolder.add(position, 'z', -10, 10, 0.1).onChange((val) => {
-  pointPosition.z = val
-})
-pointlightFolder.add(pointLightYellowOpts, 'distance', 0, 20, 0.1)
-pointlightFolder.add(pointLightYellowOpts, 'decay', 0, 20, 0.1)
-pointlightFolder.open()
 </script>
 
 <style lang="scss" scoped>

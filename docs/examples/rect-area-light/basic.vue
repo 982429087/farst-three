@@ -104,7 +104,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Color, DoubleSide } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -159,8 +158,6 @@ const lightOptions = reactive<AmbientLightOptions>({
 const animationFn = () => {
   //
 }
-
-const { gui } = useGui(domRef)
 </script>
 
 <style lang="scss" scoped>

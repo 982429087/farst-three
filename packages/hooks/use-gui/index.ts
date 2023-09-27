@@ -1,4 +1,5 @@
 import { isRef, onBeforeUnmount, onMounted } from 'vue'
+import { Deferred } from '@farst-three/utils'
 import type { Ref } from 'vue'
 import type { GUI, GUIParams } from 'dat.gui'
 
@@ -6,11 +7,11 @@ export function useGui(
   container: Ref<HTMLElement | undefined> | HTMLElement = document.body,
   option?: GUIParams
 ) {
-  let gui = {} as GUI
+  const guiDef = new Deferred<GUI>()
   onMounted(async () => {
     const { GUI } = await import('dat.gui')
-    gui = new GUI({ autoPlace: false, ...option })
-
+    const gui = new GUI({ autoPlace: false, ...option })
+    guiDef.resolve(gui)
     gui.domElement.classList.add('ft-dat-gui')
     let element: HTMLElement
     if (isRef(container)) {
@@ -21,9 +22,9 @@ export function useGui(
     element.appendChild(gui.domElement)
   })
   onBeforeUnmount(() => {
-    gui.destroy()
+    guiDef.promise.then((res) => res.destroy())
   })
   return {
-    gui,
+    guiPromise: guiDef.promise,
   }
 }

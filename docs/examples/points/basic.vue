@@ -45,7 +45,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Color, Float32BufferAttribute, Fog, SRGBColorSpace } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtBufferGeometry,
   FtGridHelper,
@@ -112,8 +111,6 @@ const animationFn = () => {
   position.x = time * 0.25
   position.y = time * 0.25
 }
-
-const { gui } = useGui(domRef)
 </script>
 
 <style lang="scss" scoped>
