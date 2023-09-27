@@ -83,8 +83,10 @@ import type {
 
 const domRef = ref<HTMLDivElement>()
 let box: Mesh | null
+// eslint-disable-next-line prefer-const
 box = null
 let blueBox: Mesh | null
+// eslint-disable-next-line prefer-const
 blueBox = null
 
 const orbitControls = reactive<DragControlsOptions>({

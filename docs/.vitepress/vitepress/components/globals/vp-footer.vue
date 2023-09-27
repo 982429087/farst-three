@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useLang } from '../../composables/lang'
-import homeLocale from '../../../i18n/pages/home.json'
+// import { computed } from 'vue'
+// import { useLang } from '../../composables/lang'
+// import homeLocale from '../../../i18n/pages/home.json'
 
 defineProps<{
   isHome?: boolean
 }>()
 
-const lang = useLang()
-const homeLang = computed(() => homeLocale[lang.value])
+// const lang = useLang()
+// const homeLang = computed(() => homeLocale[lang.value])
 </script>
 
 <template>

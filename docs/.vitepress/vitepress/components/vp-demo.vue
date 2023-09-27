@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref, toRef } from 'vue'
-import { isClient, useClipboard, useToggle } from '@vueuse/core'
+import { computed, getCurrentInstance, ref } from 'vue'
+import { useClipboard, useToggle } from '@vueuse/core'
 import { CaretTop } from '@element-plus/icons-vue'
 import { useLang } from '../composables/lang'
-import { useSourceCode } from '../composables/source-code'
-import { usePlayground } from '../composables/use-playground'
+// import { useSourceCode } from '../composables/source-code'
+// import { usePlayground } from '../composables/use-playground'
 
 import demoBlockLocale from '../../i18n/component/demo-block.json'
 
@@ -28,7 +28,7 @@ const { copy, isSupported } = useClipboard({
 
 const [sourceVisible, toggleSourceVisible] = useToggle()
 const lang = useLang()
-const demoSourceUrl = useSourceCode(toRef(props, 'path'))
+// const demoSourceUrl = useSourceCode(toRef(props, 'path'))
 
 const sourceCodeRef = ref<HTMLButtonElement>()
 const formatPathDemos = computed(() => {
@@ -47,11 +47,11 @@ const decodedDescription = computed(() =>
   decodeURIComponent(props.description!)
 )
 
-const onPlaygroundClick = () => {
-  const { link } = usePlayground(props.rawSource)
-  if (!isClient) return
-  window.open(link)
-}
+// const onPlaygroundClick = () => {
+//   const { link } = usePlayground(props.rawSource)
+//   if (!isClient) return
+//   window.open(link)
+// }
 
 const onSourceVisibleKeydown = (e: KeyboardEvent) => {
   if (['Enter', 'Space'].includes(e.code)) {

@@ -18,6 +18,7 @@ export class AnimationService {
     if (this._animationFunMap.has(key)) {
       this._animationFunMap.delete(key)
     } else {
+      // eslint-disable-next-line no-console
       console.warn(`AnimationService off(): ${key} not found`)
     }
   }
