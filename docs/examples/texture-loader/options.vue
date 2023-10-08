@@ -117,38 +117,40 @@ const animationFn: WebGLRendererProps['animationFn'] = () => {
   })
 }
 
-const { gui } = useGui(domRef)
+const { guiPromise } = useGui(domRef)
 
 function textLaoder(e: TextureLoadEvent) {
   const texture = e.texture
   deferred.resolve(e)
-  gui.add(texture.repeat, 'x', 0, 10, 0.1).name('repeatx')
-  gui.add(texture.repeat, 'y', 0, 10, 0.1).name('repeatY')
+  guiPromise.then((gui) => {
+    gui.add(texture.repeat, 'x', 0, 10, 0.1).name('repeatx')
+    gui.add(texture.repeat, 'y', 0, 10, 0.1).name('repeatY')
 
-  gui
-    .add(texture, 'wrapS', {
-      ClampToEdgeWrapping,
-      RepeatWrapping,
-      MirroredRepeatWrapping,
-    })
-    .onChange((val) => {
-      texture.wrapS = val
-      texture.needsUpdate = true
-    })
-  gui
-    .add(texture, 'wrapT', {
-      ClampToEdgeWrapping,
-      RepeatWrapping,
-      MirroredRepeatWrapping,
-    })
-    .onChange((val) => {
-      texture.wrapT = val
-      texture.needsUpdate = true
-    })
-  gui.add(texture.offset, 'x', 0, 1, 0.1).name('offsetx')
-  gui.add(texture, 'rotation', 0, Math.PI, 0.1)
-  gui.add(texture.center, 'x', 0, 1, 0.1).name('centerx')
-  gui.add(texture.center, 'y', 0, 1, 0.1).name('centerY')
+    gui
+      .add(texture, 'wrapS', {
+        ClampToEdgeWrapping,
+        RepeatWrapping,
+        MirroredRepeatWrapping,
+      })
+      .onChange((val) => {
+        texture.wrapS = val
+        texture.needsUpdate = true
+      })
+    gui
+      .add(texture, 'wrapT', {
+        ClampToEdgeWrapping,
+        RepeatWrapping,
+        MirroredRepeatWrapping,
+      })
+      .onChange((val) => {
+        texture.wrapT = val
+        texture.needsUpdate = true
+      })
+    gui.add(texture.offset, 'x', 0, 1, 0.1).name('offsetx')
+    gui.add(texture, 'rotation', 0, Math.PI, 0.1)
+    gui.add(texture.center, 'x', 0, 1, 0.1).name('centerx')
+    gui.add(texture.center, 'y', 0, 1, 0.1).name('centerY')
+  })
 }
 
 function lbasicMaterialLoad({ material }: MeshStandardMaterialLoadEvent) {

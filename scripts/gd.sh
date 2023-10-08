@@ -106,7 +106,10 @@ const animationFn = () => {
   //
 }
 
-const { gui } = useGui(domRef)
+const { guiPromise } = useGui(domRef)
+guiPromise.then(gui => {
+  //
+})
 </script>
 
 <style lang="scss" scoped>

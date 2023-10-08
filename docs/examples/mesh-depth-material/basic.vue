@@ -58,7 +58,6 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtDirectionalLight,
@@ -88,13 +87,11 @@ const caneraOps = reactive<PerspectiveCameraOptions>({
     return [scene.position]
   },
 })
-const { gui } = useGui(domRef)
 
 const animationFn = () => {
   //
 }
 const pos = caneraOps.position as Vector3
-gui.add(pos, 'z', 0, 10, 0.1)
 </script>
 
 <style lang="scss" scoped>

@@ -54,52 +54,55 @@ const meshRef = shallowRef<Mesh>()
 const geometryRef = shallowRef<BoxGeometry>()
 
 const domRef = ref<HTMLDivElement>()
-const { gui } = useGui(domRef)
+const { guiPromise } = useGui(domRef)
 const meshBasicParamsFn = {
   color: new Color(Math.random() * 0x00ffff),
 }
 
 const cameraLoad = ({ camera }: PerspectiveCameraLoadEvent) => {
   camera.position.z = 5
-  gui.add(camera.position, 'x', 0, 1)
-  gui
-    .add(camera, 'fov')
-    .min(-4)
-    .max(100)
-    .step(0.01)
-    .onChange(() => {
+  guiPromise.then((gui) => {
+    gui.add(camera.position, 'x', 0, 1)
+    gui
+      .add(camera, 'fov')
+      .min(-4)
+      .max(100)
+      .step(0.01)
+      .onChange(() => {
+        camera.updateProjectionMatrix()
+      })
+    gui.add(camera, 'aspect', -4, 4, 0.01).onChange(() => {
       camera.updateProjectionMatrix()
     })
-  gui.add(camera, 'aspect', -4, 4, 0.01).onChange(() => {
-    camera.updateProjectionMatrix()
-  })
-  gui.add(camera, 'near', -10, 4, 0.01).onChange(() => {
-    camera.updateProjectionMatrix()
-    console.log(useIntersect(camera, meshRef.value!.geometry))
-  })
-  gui.add(camera, 'far', 1, 200, 1).onChange(() => {
-    camera.updateProjectionMatrix()
-  })
-  gui.add(camera, 'zoom', 1, 20, 0.1).onChange(() => {
-    camera.updateProjectionMatrix()
+    gui.add(camera, 'near', -10, 4, 0.01).onChange(() => {
+      camera.updateProjectionMatrix()
+      console.log(useIntersect(camera, meshRef.value!.geometry))
+    })
+    gui.add(camera, 'far', 1, 200, 1).onChange(() => {
+      camera.updateProjectionMatrix()
+    })
+    gui.add(camera, 'zoom', 1, 20, 0.1).onChange(() => {
+      camera.updateProjectionMatrix()
+    })
   })
 }
 
 const loadMesh = ({ mesh }: MeshLoadEvent) => {
   meshRef.value = mesh
+  guiPromise.then((gui) => {
+    const params = {
+      color: '#1890ff',
+      wirefarme: false,
+    }
+    gui.add(mesh, 'visible')
 
-  const params = {
-    color: '#1890ff',
-    wirefarme: false,
-  }
-  gui.add(mesh, 'visible')
-
-  gui.addColor(params, 'color').onChange((color: string) => {
-    ;(mesh.material as MeshBasicMaterial).color.set(color)
-  })
-  gui.add(mesh.material as MeshBasicMaterial, 'wireframe').onChange((val) => {
-    console.log(val)
-    ;(mesh.material as MeshBasicMaterial).wireframe = val
+    gui.addColor(params, 'color').onChange((color: string) => {
+      ;(mesh.material as MeshBasicMaterial).color.set(color)
+    })
+    gui.add(mesh.material as MeshBasicMaterial, 'wireframe').onChange((val) => {
+      console.log(val)
+      ;(mesh.material as MeshBasicMaterial).wireframe = val
+    })
   })
 }
 

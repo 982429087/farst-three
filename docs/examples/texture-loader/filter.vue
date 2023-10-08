@@ -107,35 +107,36 @@ let texture: Texture
 function textureLoad(e: TextureLoadEvent) {
   texture = e.texture
 }
-const { gui } = useGui(domRef)
-
-const params = {
-  minFilter: NearestFilter, // 当贴图大于物体表面时，需要设置纹理的minFilter属性为NearestFilter 选择最近像素
-  magFilter: NearestFilter, // 当贴图小于物体表面时，需要设置纹理的magFilter属性为NearestFilter 选择4个像素混合
-}
-// gui
-//   .add(params, 'minFilter', {
-//     LinearMipMapNearestFilter: LinearMipMapNearestFilter,
-//     LinearFilter: LinearFilter,
-//     NearestFilter: NearestFilter,
-//   })
-//   .onChange((v) => {
-//     texture.minFilter = v
-//     texture.needsUpdate = true
-//     emesh.value.material.map = texture
-//   })
-gui
-  .add(params, 'magFilter', {
-    LinearMipMapLinearFilter,
-    LinearFilter,
-    NearestFilter,
-  })
-  .onChange((v) => {
-    texture.magFilter = v
-    texture.needsUpdate = true
-    // todo 这样重新赋值有点问题
-    ;(emesh.value!.material as any).map = texture
-  })
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  const params = {
+    minFilter: NearestFilter, // 当贴图大于物体表面时，需要设置纹理的minFilter属性为NearestFilter 选择最近像素
+    magFilter: NearestFilter, // 当贴图小于物体表面时，需要设置纹理的magFilter属性为NearestFilter 选择4个像素混合
+  }
+  // gui
+  //   .add(params, 'minFilter', {
+  //     LinearMipMapNearestFilter: LinearMipMapNearestFilter,
+  //     LinearFilter: LinearFilter,
+  //     NearestFilter: NearestFilter,
+  //   })
+  //   .onChange((v) => {
+  //     texture.minFilter = v
+  //     texture.needsUpdate = true
+  //     emesh.value.material.map = texture
+  //   })
+  gui
+    .add(params, 'magFilter', {
+      LinearMipMapLinearFilter,
+      LinearFilter,
+      NearestFilter,
+    })
+    .onChange((v) => {
+      texture.magFilter = v
+      texture.needsUpdate = true
+      // todo 这样重新赋值有点问题
+      ;(emesh.value!.material as any).map = texture
+    })
+})
 </script>
 
 <style lang="scss" scoped>

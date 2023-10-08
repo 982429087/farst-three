@@ -93,11 +93,13 @@ const animationFn = () => {
   //
 }
 
-const { gui } = useGui(domRef)
-gui.add(lightOptions, 'intensity', 0, 1, 0.01)
-gui.add(lightOptions, 'visible')
-gui.addColor({ color: 0x1890ff }, 'color').onChange((val) => {
-  lightOptions.color = () => new Color(val)
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  gui.add(lightOptions, 'intensity', 0, 1, 0.01)
+  gui.add(lightOptions, 'visible')
+  gui.addColor({ color: 0x1890ff }, 'color').onChange((val) => {
+    lightOptions.color = () => new Color(val)
+  })
 })
 </script>
 

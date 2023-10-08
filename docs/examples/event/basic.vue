@@ -65,7 +65,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Color } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -143,8 +142,6 @@ const boxMaterialOpts2 = reactive<MeshLambertMaterialOptions>({
 const animationFn = () => {
   //
 }
-
-const { gui } = useGui(domRef)
 
 function meshHover2(e: FunsEvent) {
   console.log(e, 'box-mesh2')

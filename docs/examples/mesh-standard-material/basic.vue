@@ -112,11 +112,12 @@ const animationFn = () => {
   //
 }
 
-const { gui } = useGui(domRef)
-
-gui.add(materialOptions.value, 'metalness', 0, 1, 0.1)
-gui.add(materialOptions.value, 'roughness', 0, 1, 0.1)
-gui.add(materialOptions.value, 'envMapIntensity', 0, 1, 0.1)
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  gui.add(materialOptions.value, 'metalness', 0, 1, 0.1)
+  gui.add(materialOptions.value, 'roughness', 0, 1, 0.1)
+  gui.add(materialOptions.value, 'envMapIntensity', 0, 1, 0.1)
+})
 </script>
 
 <style lang="scss" scoped>

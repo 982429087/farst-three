@@ -143,13 +143,15 @@ const animationFn = () => {
   //
 }
 
-const { gui } = useGui(domRef)
+const { guiPromise } = useGui(domRef)
 
-gui.add(phymaterialOptions.value, 'roughness', 0, 1, 0.1)
-gui.add(phymaterialOptions.value, 'clearcoat')
-gui.add(phymaterialOptions.value, 'transmission', 0, 1, 0.1)
-gui.add(phymaterialOptions.value, 'ior', 1, 2.33, 0.1)
-gui.add(phymaterialOptions.value, 'thickness', 0, 1, 0.1)
+guiPromise.then((gui) => {
+  gui.add(phymaterialOptions.value, 'roughness', 0, 1, 0.1)
+  gui.add(phymaterialOptions.value, 'clearcoat')
+  gui.add(phymaterialOptions.value, 'transmission', 0, 1, 0.1)
+  gui.add(phymaterialOptions.value, 'ior', 1, 2.33, 0.1)
+  gui.add(phymaterialOptions.value, 'thickness', 0, 1, 0.1)
+})
 </script>
 
 <style lang="scss" scoped>

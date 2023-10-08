@@ -144,16 +144,17 @@ function sceneLoad(e: SceneLoadEvent) {
   //     })
 }
 
-const { gui } = useGui(domRef)
-
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  gui
+    .add({ gradientMap: 'three' }, 'gradientMap', ['three', 'five'])
+    .onChange((val) => {
+      whoIsShow.value = val
+    })
+})
 const animationFn = () => {
   //
 }
-gui
-  .add({ gradientMap: 'three' }, 'gradientMap', ['three', 'five'])
-  .onChange((val) => {
-    whoIsShow.value = val
-  })
 </script>
 
 <style lang="scss" scoped>

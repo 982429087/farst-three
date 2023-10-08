@@ -56,8 +56,30 @@ export default defineConfig(async ({ mode }) => {
       onlyFiles: true,
     }))
   )
-
   return {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            try {
+              if (id.includes('node_modules')) {
+                const name = id.split('node_modules/')[1].split('/')
+                if (name[0] == '.pnpm') {
+                  return name[1]
+                } else {
+                  return name[0]
+                }
+              }
+            } catch (error) {
+              console.error(error)
+            }
+          },
+        },
+      },
+    },
+    ssr: {
+      noExternal: ['lodash-es', 'dat.gui', 'three'],
+    },
     server: {
       host: true,
       https: !!env.HTTPS,

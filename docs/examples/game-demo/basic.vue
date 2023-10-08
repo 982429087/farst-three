@@ -106,7 +106,6 @@
 import { reactive, ref, shallowRef } from 'vue'
 import { Clock, Vector3 } from 'three'
 import gsap from 'gsap'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtAudio,
@@ -166,7 +165,6 @@ const bufferOnload: AudioLoaderOnLoad = (s, buffer) => {
   sound.setVolume(0.5)
   sound.play()
 }
-const { gui } = useGui(domRef)
 
 function start() {
   showMask.value = false

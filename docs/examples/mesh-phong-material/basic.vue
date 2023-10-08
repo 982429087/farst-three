@@ -65,14 +65,15 @@ const caneraOps = reactive<PerspectiveCameraOptions>({
     z: 3.5,
   },
 })
-const { gui } = useGui(domRef)
-
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  gui.addColor({ specular: '#ffff00' }, 'specular').onChange((val) => {
+    phongOpts.specular = () => new Color(val)
+  })
+})
 const animationFn = () => {
   //
 }
-gui.addColor({ specular: '#ffff00' }, 'specular').onChange((val) => {
-  phongOpts.specular = () => new Color(val)
-})
 </script>
 
 <style lang="scss" scoped>

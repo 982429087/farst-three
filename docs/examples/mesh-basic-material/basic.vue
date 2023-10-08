@@ -120,15 +120,17 @@ const animationFn = () => {
   }
 }
 
-const { gui } = useGui(domRef)
-gui.addColor({ color: 0x1890ff }, 'color').onChange((v) => {
-  params.value.color = new Color(v)
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  gui.addColor({ color: 0x1890ff }, 'color').onChange((v) => {
+    params.value.color = new Color(v)
+  })
+  gui.add(params.value, 'opacity', 0, 1, 0.01)
+  gui.add(params.value, 'transparent').onChange((v) => {
+    // params.value.transparent = v
+  })
+  gui.add(params.value, 'wireframe').name('线框')
 })
-gui.add(params.value, 'opacity', 0, 1, 0.01)
-gui.add(params.value, 'transparent').onChange((v) => {
-  // params.value.transparent = v
-})
-gui.add(params.value, 'wireframe').name('线框')
 </script>
 
 <style lang="scss" scoped>

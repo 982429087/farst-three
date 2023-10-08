@@ -240,20 +240,23 @@ const animationFn = () => {
   //
 }
 
-const { gui } = useGui(domRef)
-const boxFolder = gui.addFolder('box')
-boxFolder.add({ fog: true }, 'fog').onChange((val) => {
-  const material = new MeshLambertMaterial({ color: 0x1890ff })
-  material.fog = val
-  boxOpts.material = () => material
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  const boxFolder = gui.addFolder('box')
+  boxFolder.add({ fog: true }, 'fog').onChange((val) => {
+    const material = new MeshLambertMaterial({ color: 0x1890ff })
+    material.fog = val
+    boxOpts.material = () => material
+  })
+  gui.addColor({ color: 0xe0e0e0 }, 'color').onChange((color) => {
+    fogOpts.color = (scene: Scene) => {
+      scene.background = new Color(color)
+      return new Color(color)
+    }
+  })
+  gui.add(fogOpts, 'density', 0, 0.1)
 })
-gui.addColor({ color: 0xe0e0e0 }, 'color').onChange((color) => {
-  fogOpts.color = (scene: Scene) => {
-    scene.background = new Color(color)
-    return new Color(color)
-  }
-})
-gui.add(fogOpts, 'density', 0, 0.1)
+
 function boxmeshLoad(e: MeshLoadEvent) {
   meshInsance.value = e.mesh
 }

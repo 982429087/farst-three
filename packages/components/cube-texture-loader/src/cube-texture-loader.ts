@@ -1,7 +1,6 @@
 import {
   buildProps,
   definePropType,
-  isBoolean,
   isNumber,
   isString,
 } from '@farst-three/utils'

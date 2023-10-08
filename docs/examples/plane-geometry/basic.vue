@@ -71,21 +71,23 @@ const currentCamera = ref('OrthographicCamera')
 const showControl = ref(true)
 const size = 4
 
-const { gui } = useGui()
+const { guiPromise } = useGui()
 
 const cameraLoad = ({ camera, scene }: OrthographicCameraLoadEvent) => {
   camera.position.set(1, 0.5, 2)
   camera.lookAt(scene.position)
-  const parsms = {
-    switchCamera() {
-      if (currentCamera.value === 'PerspectiveCamera') {
-        currentCamera.value = 'OrthographicCamera'
-      } else {
-        currentCamera.value = 'PerspectiveCamera'
-      }
-    },
-  }
-  gui.add(parsms, 'switchCamera')
+  guiPromise.then((gui) => {
+    const parsms = {
+      switchCamera() {
+        if (currentCamera.value === 'PerspectiveCamera') {
+          currentCamera.value = 'OrthographicCamera'
+        } else {
+          currentCamera.value = 'PerspectiveCamera'
+        }
+      },
+    }
+    gui.add(parsms, 'switchCamera')
+  })
 }
 
 const animationFn: WebGLRendererProps['animationFn'] = () => {

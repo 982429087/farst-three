@@ -20,7 +20,7 @@ const isExternal = computed(() => props.href && /^[a-z]+:/i.test(props.href))
   >
     <slot />
     <ElIcon v-if="isExternal && !noIcon">
-      <i-ri-external-link-line class="link-icon" />
+      <!--<i-ri-external-link-line class="link-icon" />-->
     </ElIcon>
   </component>
 </template>

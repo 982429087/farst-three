@@ -144,44 +144,46 @@ function boxLoad({ mesh }: MeshLoadEvent) {
   directionalLightOptions.target = () => mesh
 }
 
-const { gui } = useGui(domRef)
-const lightFolder = gui.addFolder('环境光')
-lightFolder.add(lightOptions, 'intensity', 0, 1, 0.01)
-lightFolder.add(lightOptions, 'visible')
-lightFolder.addColor({ color: 0x1890ff }, 'color').onChange((val) => {
-  lightOptions.color = () => new Color(val)
-})
-lightFolder.open()
-const directionalFolder = gui.addFolder('平行光')
-directionalFolder.add(directionalLightOptions, 'intensity', 0, 1, 0.01)
-directionalFolder.add(directionalLightOptions, 'visible')
-directionalFolder.addColor({ color: 0xffffaa }, 'color').onChange((val) => {
-  directionalLightOptions.color = () => new Color(val)
-})
-const position = directionalLightOptions.position as Vector3
-directionalFolder.add(position, 'x', -20, 20, 0.1)
-directionalFolder.add(position, 'y', -20, 20, 0.1)
-directionalFolder.add(position, 'z', -20, 20, 0.1)
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  const lightFolder = gui.addFolder('环境光')
+  lightFolder.add(lightOptions, 'intensity', 0, 1, 0.01)
+  lightFolder.add(lightOptions, 'visible')
+  lightFolder.addColor({ color: 0x1890ff }, 'color').onChange((val) => {
+    lightOptions.color = () => new Color(val)
+  })
+  lightFolder.open()
+  const directionalFolder = gui.addFolder('平行光')
+  directionalFolder.add(directionalLightOptions, 'intensity', 0, 1, 0.01)
+  directionalFolder.add(directionalLightOptions, 'visible')
+  directionalFolder.addColor({ color: 0xffffaa }, 'color').onChange((val) => {
+    directionalLightOptions.color = () => new Color(val)
+  })
+  const position = directionalLightOptions.position as Vector3
+  directionalFolder.add(position, 'x', -20, 20, 0.1)
+  directionalFolder.add(position, 'y', -20, 20, 0.1)
+  directionalFolder.add(position, 'z', -20, 20, 0.1)
 
-directionalFolder.open()
-const boxPosition = boxOpts.position as Vector3
-const boxFolder = gui.addFolder('方块')
-boxFolder.add(boxPosition, 'x', -20, 20, 0.1).onChange(() => {
-  dlhOpts.update = () => []
-})
-boxFolder.add(boxPosition, 'y', -20, 20, 0.1).onChange(() => {
-  dlhOpts.update = () => []
-})
-boxFolder.add(boxPosition, 'z', -20, 20, 0.1).onChange(() => {
-  dlhOpts.update = () => []
-})
-boxFolder.open()
+  directionalFolder.open()
+  const boxPosition = boxOpts.position as Vector3
+  const boxFolder = gui.addFolder('方块')
+  boxFolder.add(boxPosition, 'x', -20, 20, 0.1).onChange(() => {
+    dlhOpts.update = () => []
+  })
+  boxFolder.add(boxPosition, 'y', -20, 20, 0.1).onChange(() => {
+    dlhOpts.update = () => []
+  })
+  boxFolder.add(boxPosition, 'z', -20, 20, 0.1).onChange(() => {
+    dlhOpts.update = () => []
+  })
+  boxFolder.open()
 
-const shadowFolder = gui.addFolder('阴影')
-const shadow = directionalLightOptions.shadow as DirectionalLightShadow
-shadowFolder.add(shadow.mapSize, 'x', [512, 1024, 2048, 4096])
-shadowFolder.add(shadow.mapSize, 'y', [512, 1024, 2048, 4096])
-shadowFolder.add(shadow, 'radius', 0, 30, 1)
+  const shadowFolder = gui.addFolder('阴影')
+  const shadow = directionalLightOptions.shadow as DirectionalLightShadow
+  shadowFolder.add(shadow.mapSize, 'x', [512, 1024, 2048, 4096])
+  shadowFolder.add(shadow.mapSize, 'y', [512, 1024, 2048, 4096])
+  shadowFolder.add(shadow, 'radius', 0, 30, 1)
+})
 </script>
 
 <style lang="scss" scoped>

@@ -118,17 +118,19 @@ const animationFn = () => {
   //
 }
 
-const { gui } = useGui(domRef)
-gui.addColor({ color: 0x1890ff }, 'color').onChange((v) => {
-  directionOpts.color = new Color(v)
+const { guiPromise } = useGui(domRef)
+guiPromise.then((gui) => {
+  gui.addColor({ color: 0x1890ff }, 'color').onChange((v) => {
+    directionOpts.color = new Color(v)
+  })
+
+  const position = directionOpts.position as Vector3
+  gui.add(position, 'x', -10, 10, 0.1)
+  gui.add(position, 'y', -10, 10, 0.1)
+  gui.add(position, 'z', -10, 10, 0.1)
+
+  gui.add(directionOpts, 'intensity', 0, 1, 0.1)
 })
-
-const position = directionOpts.position as Vector3
-gui.add(position, 'x', -10, 10, 0.1)
-gui.add(position, 'y', -10, 10, 0.1)
-gui.add(position, 'z', -10, 10, 0.1)
-
-gui.add(directionOpts, 'intensity', 0, 1, 0.1)
 </script>
 
 <style lang="scss" scoped>
