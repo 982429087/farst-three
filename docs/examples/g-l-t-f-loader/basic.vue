@@ -62,6 +62,10 @@ const animationFn = () => {
 }
 function gltfLoad(e: GLTF) {
   e.scene.scale.set(1.2, 1.2, 1.2)
+  e.scene.traverse((child) => {
+    console.log(child.name === 'Object687')
+  })
+  e.scene.getObjectByName('Object687')
 }
 function glbLoad(e: GLTF) {
   e.scene.scale.set(0.05, 0.05, 0.05)
