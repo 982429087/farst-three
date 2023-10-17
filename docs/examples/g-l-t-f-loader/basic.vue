@@ -46,14 +46,15 @@ import {
   FtPerspectiveCamera,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useEffectComposer,
+} from 'farst-three'
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 const domRef = ref<HTMLDivElement>()
 const url = new URL(
   '/models/batman_arkham_knight_batmobile/scene.gltf',
   import.meta.url
 ).href
-console.log(url)
+const { composer } = useEffectComposer()
 
 const animationFn = () => {
   //
