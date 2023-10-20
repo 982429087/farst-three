@@ -11,7 +11,7 @@
           },
         }"
       />
-      <FtMesh>
+      <!-- <FtMesh>
         <FtMeshPhysicalMaterial :options="phymaterialOptions">
           <FtRgbeLoader
             :type="'envMap'"
@@ -19,7 +19,7 @@
             :load="rgbeLoad"
           />
         </FtMeshPhysicalMaterial>
-      </FtMesh>
+      </FtMesh> -->
 
       <FtMesh>
         <FtSphereGeometry
@@ -50,6 +50,7 @@ import { reactive, ref } from 'vue'
 
 import {
   AdditiveBlending,
+  Clock,
   Color,
   DoubleSide,
   EquirectangularReflectionMapping,
@@ -99,15 +100,9 @@ const rgbeLoad: RGBELoaderOnLoad = (e) => {
   e.mapping = EquirectangularReflectionMapping
 }
 
+const clock = new Clock()
 const materialParams = reactive<ShaderMaterialParameters>({
-  uniforms: {
-    size: {
-      value: 20.0,
-    },
-    color: {
-      value: new Color(0xffffff),
-    },
-  },
+  uniforms: {},
   vertexColors: true,
   vertexShader,
   fragmentShader,

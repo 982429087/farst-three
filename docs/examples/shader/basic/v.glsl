@@ -98,7 +98,7 @@ uniform float uDistort;
 
 vec3 distort(vec3 p){
   float noise=cnoise(p+iTime);
-  p+=noise*normal*.3*uDistort;
+  p+=noise*normal*.3;
   return p;
 }
 
