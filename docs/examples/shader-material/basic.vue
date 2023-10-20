@@ -56,6 +56,8 @@ import {
   FtWebglRenderer,
 } from '@farst-three/components'
 
+import vertexShader from './basic/vertexShader.glsl?raw'
+import fragmentShader from './basic/fragmentShader.glsl?raw'
 import type { DeepPartial, OptionFunction, Options } from '@farst-three/utils'
 import type {
   NormalBufferAttributes,
@@ -129,26 +131,8 @@ const materialParams = reactive<ShaderMaterialParameters>({
     },
   },
   vertexColors: true,
-  vertexShader: `
-    uniform float size;
-    varying float vSize;
-    varying vec3 vColor;
-    void main(){
-      vSize = size;
-      vColor = color;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      gl_PointSize = size;
-    }
-  `,
-  fragmentShader: `
-    varying vec3 vColor;
-    uniform vec3 color;
-    uniform sampler2D pointTexture;
-    void main(){
-      vec4 color = vec4(color * vColor, 1.0) * texture2D(pointTexture, gl_PointCoord);
-      gl_FragColor = color;
-    }
-  `,
+  vertexShader,
+  fragmentShader,
   depthTest: true, // 深度测试
   depthWrite: false, // 材质是否对深度缓冲区有影响
   blending: AdditiveBlending,

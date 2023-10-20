@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import MarkdownIt from 'markdown-it'
 import { useToc } from '../../composables/use-toc'
 import { useActiveSidebarLinks } from '../../composables/active-bar'
 
-import sponsorLocale from '../../../i18n/component/sponsor.json'
-import { useLang } from '../../composables/lang'
+// import sponsorLocale from '../../../i18n/component/sponsor.json'
+// import { useLang } from '../../composables/lang'
 // import SponsorsButton from '../sponsors/sponsors-button.vue'
 // import SponsorRightTextList from '../sponsors/right-richtext-list.vue'
 // import SponsorRightLogoSmallList from '../sponsors/right-logo-small-list.vue'
@@ -17,8 +17,8 @@ const headers = useToc()
 const marker = ref()
 const container = ref()
 useActiveSidebarLinks(container, marker)
-const lang = useLang()
-const sponsor = computed(() => sponsorLocale[lang.value])
+// const lang = useLang()
+// const sponsor = computed(() => sponsorLocale[lang.value])
 </script>
 
 <template>

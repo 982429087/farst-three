@@ -18,7 +18,7 @@ import {
 } from './mesh-standard-material'
 
 defineOptions({
-  name: 'FtMeshStandard-material',
+  name: 'FtMeshStandardMaterial',
 })
 
 const props = defineProps(meshStandardMaterialProps)

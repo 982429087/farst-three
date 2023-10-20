@@ -9,6 +9,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+// import glsl from 'vite-plugin-glsl'
 import {
   docPackage,
   epPackage,
@@ -18,7 +19,6 @@ import {
 import { MarkdownTransform } from './.vitepress/plugins/markdown-transform'
 
 import type { Alias } from 'vite'
-
 const alias: Alias[] = [
   {
     find: '~/',
@@ -91,6 +91,7 @@ export default defineConfig(async ({ mode }) => {
       alias,
     },
     plugins: [
+      // glsl(),  package.json 中必须包含 "type": "module"
       VueMacros({
         setupComponent: false,
         setupSFC: false,

@@ -51,6 +51,8 @@ import {
   FtTextureLoader,
   FtWebglRenderer,
 } from '@farst-three/components'
+import vertexShader from './star/v.glsl?raw'
+import fragmentShader from './star/f.glsl?raw'
 import type { DeepPartial, OptionFunction, Options } from '@farst-three/utils'
 import type {
   BufferGeometry,
@@ -124,30 +126,8 @@ const materialParams: ShaderMaterialParameters = {
       value: 40,
     },
   },
-  vertexShader: `
-    varying float cameraDistance;
-    void main(){
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
-      vec4 worldPosition = modelMatrix * vec4(position,1.0);
-      vec3 viewVector = cameraPosition - worldPosition.xyz;
-      cameraDistance = length(viewVector);
-      gl_PointSize = 200.0 / cameraDistance;
-    }
-  `,
-  fragmentShader: `
-    uniform vec3 color;
-    uniform sampler2D pointTexture;
-
-    uniform vec3 fogColor;
-    uniform float fogNear,fogFar;
-    void main(){
-      vec4 color = vec4(color, 1.0) * texture2D(pointTexture, gl_PointCoord);
-      gl_FragColor = color;
-      float depth = gl_FragCoord.z / gl_FragCoord.w;
-      float fogFactor = smoothstep(fogNear,fogFar,depth);
-      gl_FragColor.rgb = mix(gl_FragColor.rgb,fogColor,fogFactor);
-    }
-  `,
+  vertexShader,
+  fragmentShader,
 }
 
 const copyPosition = [...positions]

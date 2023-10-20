@@ -2,7 +2,6 @@ import { Frustum, Matrix4 } from 'three'
 import type { BufferGeometry, Camera } from 'three'
 
 export function useIntersect(camera: Camera, geometry: BufferGeometry) {
-  console.log(camera, geometry)
   const frustum = new Frustum()
   camera.updateMatrixWorld()
   frustum.setFromProjectionMatrix(

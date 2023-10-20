@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useEditLink } from '../../composables/edit-link'
 
-const { url, text } = useEditLink()
+const { url } = useEditLink()
 </script>
 
 <template>

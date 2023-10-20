@@ -2,10 +2,10 @@
 import { computed } from 'vue'
 import { inBrowser, useData } from 'vitepress'
 
-import VPNavbarSearch from './navbar/vp-search.vue'
+// import VPNavbarSearch from './navbar/vp-search.vue'
 import VPNavbarMenu from './navbar/vp-menu.vue'
-import VPNavbarThemeToggler from './navbar/vp-theme-toggler.vue'
-import VPNavbarTranslation from './navbar/vp-translation.vue'
+// import VPNavbarThemeToggler from './navbar/vp-theme-toggler.vue'
+// import VPNavbarTranslation from './navbar/vp-translation.vue'
 import VPNavbarSocialLinks from './navbar/vp-social-links.vue'
 import VPNavbarHamburger from './navbar/vp-hamburger.vue'
 

@@ -18,7 +18,7 @@ import {
 } from './mesh-phong-material'
 
 defineOptions({
-  name: 'FtMeshPhong-material',
+  name: 'FtMeshPhongMaterial',
 })
 
 const props = defineProps(meshPhongMaterialProps)
