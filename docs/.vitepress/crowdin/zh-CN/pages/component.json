@@ -192,5 +192,14 @@
         "text": "鲨鱼"
       }
     ]
+  },
+  "shader": {
+    "text": "着色器",
+    "children": [
+      {
+        "link": "/shader",
+        "text": "shader"
+      }
+    ]
   }
 }

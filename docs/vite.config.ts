@@ -91,7 +91,7 @@ export default defineConfig(async ({ mode }) => {
       alias,
     },
     plugins: [
-      // glsl(),  package.json 中必须包含 "type": "module"
+      // glsl(), // package.json 中必须包含 "type": "module"
       VueMacros({
         setupComponent: false,
         setupSFC: false,
