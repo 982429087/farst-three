@@ -15,6 +15,9 @@ lang: zh-CN
 
 shader/basic
 
+>>>tabs
+[shader/basic/f,shader/basic/v]
+>>>
 :::
 
 ## API

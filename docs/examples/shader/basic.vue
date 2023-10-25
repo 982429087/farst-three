@@ -27,7 +27,11 @@
           :width-segments="64"
           :height-segments="64"
         />
-        <FtShaderMaterial :params="materialParams" />
+        <FtShaderMaterial
+          :options="shaderMaterialOpts"
+          :params="materialParams"
+          @load="shaderMaterialLoad"
+        />
       </FtMesh>
 
       <FtWebglRenderer
@@ -73,6 +77,7 @@ import type {
   MeshPhysicalMaterialOptions,
   RGBELoaderOnLoad,
   SceneOptions,
+  ShaderMaterialLoadEvent,
 } from '@farst-three/components'
 
 const domRef = ref<HTMLDivElement>()
@@ -112,8 +117,24 @@ const materialParams = reactive<ShaderMaterialParameters>({
   transparent: true,
 })
 
+const shaderMaterialOpts = reactive({
+  uniforms: {
+    iTime: () => ({
+      value: 0,
+    }),
+  },
+})
+let shaderMaterInstance
+function shaderMaterialLoad(e: ShaderMaterialLoadEvent) {
+  shaderMaterInstance = e.material
+}
 const animationFn = () => {
-  //
+  const time = performance.now() / 1000
+  if (shaderMaterInstance) {
+    shaderMaterialOpts.uniforms.iTime = () => ({
+      value: time,
+    })
+  }
 }
 </script>
 

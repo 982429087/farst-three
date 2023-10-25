@@ -1,5 +1,3 @@
-// #include "/node_modules/lygia/generative/cnoise.glsl"
-
 float mod289(const in float x){return x-floor(x*(1./289.))*289.;}
 vec2 mod289(const in vec2 x){return x-floor(x*(1./289.))*289.;}
 vec3 mod289(const in vec3 x){return x-floor(x*(1./289.))*289.;}
