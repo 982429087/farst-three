@@ -47,7 +47,7 @@ import {
   FtPerspectiveCamera,
   FtScene,
   FtWebglRenderer,
-  useEffectComposer,
+  // useEffectComposer,
 } from 'farst-three'
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 const domRef = ref<HTMLDivElement>()
@@ -57,7 +57,7 @@ const url = new URL(
 ).href
 const url2 = new URL('/models/LittlestTokyo.glb', import.meta.url).href
 console.log(url)
-const { composer } = useEffectComposer()
+// const { composer } = useEffectComposer()
 
 const animationFn = () => {
   //
