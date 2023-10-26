@@ -205,5 +205,14 @@
         "text": "NoisyPlane"
       }
     ]
+  },
+  "other": {
+    "text": "其他",
+    "children": [
+      {
+        "link": "/refraction-mesh",
+        "text": "反光材质"
+      }
+    ]
   }
 }

@@ -86,4 +86,8 @@ onBeforeUnmount(() => {
   ;(eventService as any) = null
   ;(name as any) = null
 })
+
+defineExpose({
+  mesh,
+})
 </script>

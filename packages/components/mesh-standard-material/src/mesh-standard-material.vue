@@ -44,4 +44,8 @@ onBeforeUnmount(() => {
   ;(materialService as any) = null
   ;(obj3d as any) = null
 })
+
+defineExpose({
+  material,
+})
 </script>
