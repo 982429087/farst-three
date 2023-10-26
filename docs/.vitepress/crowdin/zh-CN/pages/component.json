@@ -198,7 +198,11 @@
     "children": [
       {
         "link": "/shader",
-        "text": "shader"
+        "text": "noise"
+      },
+      {
+        "link": "/noisy-plane",
+        "text": "NoisyPlane"
       }
     ]
   }

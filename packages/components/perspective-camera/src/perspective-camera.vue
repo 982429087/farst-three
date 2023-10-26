@@ -3,8 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount } from 'vue'
-import { provide } from '@vue/runtime-core'
+import { onBeforeUnmount, provide } from 'vue'
 import { PerspectiveCamera } from 'three'
 import { debounce } from 'lodash-es'
 import { perspectiveCameraInjectionKey } from '@farst-three/constants/injection'

@@ -103,4 +103,8 @@ onBeforeUnmount(() => {
   ;(eventService as any) = null
   ;(animationService as any) = null
 })
+
+defineExpose({
+  renderer,
+})
 </script>

@@ -61,6 +61,10 @@ onBeforeUnmount(() => {
   ;(dragService as any) = null
 })
 
+defineExpose({
+  scene,
+})
+
 // eslint-disable-next-line no-console
 // console.log('当前threejs版本号:', REVISION)
 </script>

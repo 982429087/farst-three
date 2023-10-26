@@ -57,11 +57,12 @@ import {
   FtScene,
   FtWebglRenderer,
 } from '@farst-three/components'
+import type { Ref } from 'vue'
 import type {
   DirectionalLightOptions,
   MeshOptions,
 } from '@farst-three/components'
-const domRef = ref<HTMLDivElement>()
+const domRef = ref<HTMLElement>()
 const boxOpts = reactive<MeshOptions>({
   position: {
     z: -1,
