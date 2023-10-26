@@ -13,6 +13,13 @@ import { buildConfigEntries, target } from '../build-info'
 
 import type { OutputOptions } from 'rollup'
 
+// -- https://github.com/vuejs/core/issues/8303
+const __defProp = Object.defineProperty
+const __name = (target: any, value: any) =>
+  __defProp(target, 'name', { value, configurable: true })
+;(globalThis as any).__name = __name
+// --
+
 export const buildModules = async () => {
   const input = excludeFiles(
     await glob('**/*.{js,ts,vue}', {

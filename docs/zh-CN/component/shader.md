@@ -5,9 +5,6 @@ lang: zh-CN
 
 # Shader
 
-[]()
-
-
 
 ## 基础用法
 

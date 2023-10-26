@@ -5,8 +5,6 @@ lang: zh-CN
 
 # Shark
 
-[]()
-
 
 
 ## 基础用法

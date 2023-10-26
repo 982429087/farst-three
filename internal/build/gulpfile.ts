@@ -61,6 +61,6 @@ export default series(
   ),
 
   parallel(copyTypesDefinitions, copyFiles)
-)
+) as any
 
 export * from './src'

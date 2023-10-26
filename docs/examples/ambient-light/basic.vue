@@ -57,7 +57,6 @@ import {
   FtScene,
   FtWebglRenderer,
 } from '@farst-three/components'
-import type { Ref } from 'vue'
 import type {
   DirectionalLightOptions,
   MeshOptions,

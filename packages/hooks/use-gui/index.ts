@@ -4,7 +4,7 @@ import type { Ref } from 'vue'
 import type { GUI, GUIParams } from 'dat.gui'
 
 export function useGui(
-  container: Ref<HTMLElement> | HTMLElement = document.body,
+  container: Ref<HTMLElement | undefined> | HTMLElement = document.body,
   option?: GUIParams
 ) {
   const guiDef = new Deferred<GUI>()
