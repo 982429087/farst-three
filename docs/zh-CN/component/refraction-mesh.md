@@ -5,8 +5,6 @@ lang: zh-CN
 
 # RefractionMesh
 
-[]()
-
 
 
 ## 基础用法

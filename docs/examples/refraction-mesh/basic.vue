@@ -19,7 +19,7 @@
         <FtMeshStandardMaterial
           ref="standardMaterialRef"
           :params="{
-            color: '#000000',
+            color: '#ffffff',
             roughness: 0,
             metalness: 1,
             flatShading: true,
@@ -91,6 +91,7 @@ import type {
   MeshOptions,
   MeshStandardMaterialInstance,
   MeshStandardMaterialLoadEvent,
+  MeshStandardMaterialOptions,
   PointLightOptions,
   SceneInstance,
   SceneLoadEvent,
@@ -108,9 +109,10 @@ const cubeRT = new WebGLCubeRenderTarget(256, {
   minFilter: LinearMipmapLinearFilter,
 })
 const cubeCamera = new CubeCamera(0.1, 2000, cubeRT)
-const materialOptions = reactive({
+const materialOptions = reactive<MeshStandardMaterialOptions>({
   // envMap: () => cubeRT.texture,
   // needsUpdate: true,
+  opacity: 0.5,
 })
 const torusGeomeryOpts = reactive<TorusGeometryOptions>({})
 const sceneOpts = reactive<SceneOptions>({
