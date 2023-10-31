@@ -17,6 +17,7 @@
         />
         <FtMeshPhysicalMaterial :options="pmOpts" />
       </FtMesh>
+
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -62,6 +63,7 @@ import type {
   PointLightOptions,
   SceneInstance,
   WebGLRendererInstance,
+  WebGLRendererLoadEvent,
 } from '@farst-three/components'
 import type { Vector3 } from 'three'
 
@@ -71,7 +73,7 @@ const webGLRender = shallowRef<WebGLRendererInstance>()
 const uTime = { value: 0 }
 const uNoiseCoef = { value: 5 }
 const uDelta = { value: new Vector2(1 / 200, 1 / 200) }
-// 荧光效果
+// FullScreenQuad 是 ThreeJS 封装的一个平面容器，用于保存渲染结果的纹理。
 const fsQuad = new FullScreenQuad()
 
 const dispRT = new WebGLRenderTarget(512, 512, {
@@ -101,22 +103,6 @@ const normMat = new ShaderMaterial({
   fragmentShader: fNormal,
 })
 
-function renderDisp() {
-  renderMat(dispMat, dispRT)
-  renderMat(normMat, normRT)
-}
-
-function renderMat(mat: any, target: any) {
-  if (webGLRender.value) {
-    const renderer = webGLRender.value.renderer
-    fsQuad.material = mat
-    const oldTarget = renderer.getRenderTarget()
-    renderer.setRenderTarget(target)
-    fsQuad.render(renderer)
-    renderer.setRenderTarget(oldTarget)
-  }
-}
-
 const pmOpts = reactive<MeshPhysicalMaterialOptions>({
   displacementMap: () => dispRT.texture,
   displacementScale: 15,
@@ -139,7 +125,7 @@ const point3Opts = genPointOpts()
 const point4Opts = genPointOpts()
 const startTime = Date.now()
 
-function animationFn() {
+function animationFn({ renderer, scene }: WebGLRendererLoadEvent) {
   uTime.value = (Date.now() - startTime) * 0.0003
   const time = Date.now() * 0.001
   renderDisp()
@@ -152,6 +138,22 @@ function animationFn() {
   ;(point3Opts.position as Vector3).y = Math.cos(time * 0.6) * d
   ;(point4Opts.position as Vector3).x = Math.sin(time * 0.7) * d
   ;(point4Opts.position as Vector3).y = Math.cos(time * 0.8) * d
+}
+
+function renderDisp() {
+  renderMat(dispMat, dispRT)
+  renderMat(normMat, normRT)
+}
+
+function renderMat(mat: any, target: any) {
+  if (webGLRender.value) {
+    const renderer = webGLRender.value.renderer
+    fsQuad.material = mat
+    const oldTarget = renderer.getRenderTarget()
+    renderer.setRenderTarget(target)
+    fsQuad.render(renderer)
+    renderer.setRenderTarget(oldTarget)
+  }
 }
 </script>
 

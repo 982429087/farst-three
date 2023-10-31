@@ -60,6 +60,10 @@
       {
         "link": "/box-geometry",
         "text": "BoxGeometry"
+      },
+      {
+        "link": "/text-geometry",
+        "text": "TextGeometry"
       }
     ]
   },

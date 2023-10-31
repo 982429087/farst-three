@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, shallowRef } from 'vue'
+import { onBeforeUnmount, onMounted, reactive, ref, shallowRef } from 'vue'
 import { Color } from 'three'
 import {
   FtAmbientLight,
@@ -80,44 +80,44 @@ function glbLoad(gltf: GLTF) {
   })
 }
 
-onMounted(() => {
-  window.addEventListener(
-    'wheel',
-    (e) => {
-      e.stopPropagation()
-      e.preventDefault()
-      if (modelLoaded) {
-        let body2001: any
-        let body3001: any
-        let body4001: any
-        let body2002: any
-        let body3002: any
-        let body4002: any
-        gscene.value?.traverse((obj: any) => {
-          if (obj.name === 'body_2001') {
-            body2001 = obj
-          } else if (obj.name === 'body_3001') {
-            body3001 = obj
-          } else if (obj.name === 'body_4001') {
-            body4001 = obj
-          } else if (obj.name === 'body_2002') {
-            body2002 = obj
-          } else if (obj.name === 'body_3002') {
-            body3002 = obj
-          } else if (obj.name === 'body_4002') {
-            body4002 = obj
-          }
-        })
-        body2001.position.x += e.deltaY / 4
-        body3001.position.x += e.deltaY / 2
-        body4001.position.x += e.deltaY
-        body2002.position.y += e.deltaY / 4
-        body3002.position.y += e.deltaY / 2
-        body4002.position.y += e.deltaY
+function handleWheel(e: WheelEvent) {
+  e.stopPropagation()
+  e.preventDefault()
+  if (modelLoaded) {
+    let body2001: any
+    let body3001: any
+    let body4001: any
+    let body2002: any
+    let body3002: any
+    let body4002: any
+    gscene.value?.traverse((obj: any) => {
+      if (obj.name === 'body_2001') {
+        body2001 = obj
+      } else if (obj.name === 'body_3001') {
+        body3001 = obj
+      } else if (obj.name === 'body_4001') {
+        body4001 = obj
+      } else if (obj.name === 'body_2002') {
+        body2002 = obj
+      } else if (obj.name === 'body_3002') {
+        body3002 = obj
+      } else if (obj.name === 'body_4002') {
+        body4002 = obj
       }
-    },
-    { passive: false }
-  )
+    })
+    body2001.position.x += e.deltaY / 4
+    body3001.position.x += e.deltaY / 2
+    body4001.position.x += e.deltaY
+    body2002.position.y += e.deltaY / 4
+    body3002.position.y += e.deltaY / 2
+    body4002.position.y += e.deltaY
+  }
+}
+onMounted(() => {
+  window.addEventListener('wheel', handleWheel, { passive: false })
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('wheel', handleWheel)
 })
 </script>
 

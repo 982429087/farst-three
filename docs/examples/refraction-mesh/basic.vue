@@ -16,7 +16,7 @@
       </FtMesh>
 
       <FtMesh ref="meshRef" :options="{ position: { set: [0, -20, 20] } }">
-        <FtMeshStandardMaterial
+        <FtMeshPhysicalMaterial
           ref="standardMaterialRef"
           :params="{
             color: '#ffffff',
@@ -25,7 +25,6 @@
             flatShading: true,
           }"
           :options="materialOptions"
-          @load="meshStandardMaterialLoad"
         />
         <FtTorusGeometry
           :radius="8"
@@ -35,7 +34,6 @@
           :options="torusGeomeryOpts"
         />
       </FtMesh>
-
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -76,6 +74,7 @@ import {
   FtAmbientLight,
   FtGridHelper,
   FtMesh,
+  FtMeshPhysicalMaterial,
   FtMeshStandardMaterial,
   FtOrbitControls,
   FtPerspectiveCamera,
@@ -89,6 +88,7 @@ import type { Vector3 } from 'three'
 import type {
   MeshInstance,
   MeshOptions,
+  MeshPhysicalMaterialOptions,
   MeshStandardMaterialInstance,
   MeshStandardMaterialLoadEvent,
   MeshStandardMaterialOptions,
@@ -109,10 +109,14 @@ const cubeRT = new WebGLCubeRenderTarget(256, {
   minFilter: LinearMipmapLinearFilter,
 })
 const cubeCamera = new CubeCamera(0.1, 2000, cubeRT)
-const materialOptions = reactive<MeshStandardMaterialOptions>({
-  // envMap: () => cubeRT.texture,
-  // needsUpdate: true,
-  opacity: 0.5,
+const materialOptions = reactive<MeshPhysicalMaterialOptions>({
+  envMap: () => cubeRT.texture,
+  ior: 1.5,
+  clearcoat: true,
+  metalness: 0,
+  roughness: 0.5,
+  transmission: 1,
+  thickness: 1.0,
 })
 const torusGeomeryOpts = reactive<TorusGeometryOptions>({})
 const sceneOpts = reactive<SceneOptions>({
@@ -156,10 +160,6 @@ const animationFn = ({ renderer, scene }: WebGLRendererLoadEvent) => {
 
 function sceneLoad({ scene }: SceneLoadEvent) {
   scene.add(cubeCamera)
-}
-function meshStandardMaterialLoad({ material }: MeshStandardMaterialLoadEvent) {
-  material.envMap = cubeRT.texture
-  material.needsUpdate = true
 }
 </script>
 

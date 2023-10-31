@@ -39,6 +39,7 @@ export * from './tube-geometry'
 export * from './sphere-geometry'
 export * from './buffer-geometry'
 export * from './ring-geometry'
+export * from './text-geometry'
 // 加载器
 export * from './texture-loader'
 export * from './cube-texture-loader'
