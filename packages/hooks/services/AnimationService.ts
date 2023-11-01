@@ -7,9 +7,13 @@ export type AnimationFunsParams = {
 }
 
 export type AnimationFuns = (e: AnimationFunsParams) => void
-
+export const effectComposer = 'effectComposer'
 export class AnimationService {
   private _animationFunMap: Map<string, AnimationFuns> = new Map()
+
+  hasComposer() {
+    return this._animationFunMap.has(effectComposer)
+  }
   on(key: string, callback: AnimationFuns) {
     this._animationFunMap.set(key, callback)
   }

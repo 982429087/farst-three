@@ -6,7 +6,9 @@
 import { onBeforeUnmount, provide, shallowRef, watch } from 'vue'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { debounce } from 'lodash'
+import { Vector2 } from 'three'
 import {
+  effectComposer,
   useAnimationService,
   useScene,
   useSceneRef,
@@ -41,13 +43,18 @@ watch(
     immediate: true,
   }
 )
-animationService.on('effectComposer', () => {
+
+// effect render 执行的时候是 不能执行 webglrenderer 的 render 的
+animationService.on(effectComposer, () => {
   composer.value?.render()
 })
 
 const resize = () => {
-  if (composer.value) {
-    composer.value.setSize(container.offsetWidth, container.offsetHeight)
+  const renderer = store.getRenderer()
+
+  if (composer.value && renderer) {
+    const size = renderer.getSize(new Vector2())
+    composer.value.setSize(size.x, size.y)
   }
 }
 const dOb = debounce(() => resize(), 0)
@@ -56,6 +63,7 @@ observer.observe(container)
 
 onBeforeUnmount(() => {
   composer.value?.dispose()
+  animationService.off(effectComposer)
   ;(scene as any) = null
   ;(composer as any) = null
 })

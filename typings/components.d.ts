@@ -62,6 +62,9 @@ declare module '@vue/runtime-core' {
     FtTextGeometry: typeof import('@farst-three/components')['FtTextGeometry']
     FtInstancedMesh: typeof import('@farst-three/components')['FtInstancedMesh']
     FtEffectComposer: typeof import('@farst-three/components')['FtEffectComposer']
+    FtRenderPass: typeof import('@farst-three/components')['FtRenderPass']
+    FtUnrealBloomPass: typeof import('@farst-three/components')['FtUnrealBloomPass']
+    FtHalftonePass: typeof import('@farst-three/components')['FtHalftonePass']
   }
 }
 

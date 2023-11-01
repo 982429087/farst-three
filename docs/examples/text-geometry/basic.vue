@@ -69,18 +69,23 @@
         }"
       />
       <FtOrbitControls />
-      <FtEffectComposer />
+      <FtEffectComposer>
+        <FtRenderPass />
+        <FtUnrealBloomPass />
+        <FtHalftonePass />
+      </FtEffectComposer>
     </FtScene>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { MathUtils, Object3D, Vector3 } from 'three'
 import {
   FtAmbientLight,
   FtBoxGeometry,
   FtEffectComposer,
+  FtHalftonePass,
   FtInstancedMesh,
   FtMesh,
   FtMeshPhongMaterial,
@@ -88,8 +93,10 @@ import {
   FtOrbitControls,
   FtPerspectiveCamera,
   FtPointLight,
+  FtRenderPass,
   FtScene,
   FtTextGeometry,
+  FtUnrealBloomPass,
   FtWebglRenderer,
 } from '@farst-three/components'
 import type { FunsEvent } from '@farst-three/hooks'
