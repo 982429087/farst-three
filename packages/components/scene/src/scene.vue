@@ -16,6 +16,7 @@ import {
   CountService,
   EventService,
   StoreService,
+  uesEvent,
   useNamespace,
   useOptions,
 } from '@farst-three/hooks'
@@ -47,6 +48,7 @@ useOptions(props.options, scene, scene)
 
 onMounted(() => {
   eventService.setSceneRef(sceneRef)
+  uesEvent(props, emit, scene.children, eventService)
   ready.value = true
 })
 

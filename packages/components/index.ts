@@ -2,6 +2,7 @@ export * from './scene'
 export * from './webgl-renderer'
 // 物体
 export * from './mesh'
+export * from './instanced-mesh'
 export * from './line'
 export * from './group'
 export * from './points'

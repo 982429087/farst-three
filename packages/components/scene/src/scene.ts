@@ -1,4 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
+import { eventEmits, eventProps } from '@farst-three/hooks'
 import type { EventOptions } from '@farst-three/hooks'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { Scene } from 'three'
@@ -8,6 +9,7 @@ import type SceneComponent from './scene.vue'
 
 export const sceneEmits = {
   load: (e: SceneLoadEvent) => e,
+  ...eventEmits,
 }
 export const sceneProps = buildProps({
   options: {
@@ -16,8 +18,11 @@ export const sceneProps = buildProps({
   },
   eventOptions: {
     type: definePropType<EventOptions>(Object),
-    default: () => ({}),
+    default: () => ({
+      allTheTime: true,
+    }),
   },
+  ...eventProps,
 })
 
 export type SceneLoadEvent = {

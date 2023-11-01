@@ -1,4 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
+import { eventEmits, eventProps } from '@farst-three/hooks'
 import type { FunsEvent, OnEventOptions } from '@farst-three/hooks'
 import type { ThreeOptions } from '@farst-three/utils'
 import type {
@@ -27,12 +28,7 @@ export const meshProps = buildProps({
     type: definePropType<OnEventOptions>(Object),
     default: () => ({}),
   },
-  onHover: {
-    type: definePropType<FunsEvent>(Function),
-  },
-  onClick: {
-    type: definePropType<FunsEvent>(Function),
-  },
+  ...eventProps,
   dragabled: {
     type: Boolean,
     default: false,
@@ -41,8 +37,7 @@ export const meshProps = buildProps({
 
 export const meshEmits = {
   load: (e: MeshLoadEvent) => e,
-  hover: (e: FunsEvent) => e,
-  click: (e: FunsEvent) => e,
+  ...eventEmits,
 }
 
 export type MeshLoadEvent = {

@@ -37,11 +37,10 @@ export class EventService {
   on(
     type: EventType,
     callback: Funs,
-    name: string,
-    instance: Object3D,
+    instance: Object3D | Object3D[],
     opts?: OnEventOptions
   ) {
-    this.instanceMap.get(type)?.on(callback, name, instance, opts)
+    this.instanceMap.get(type)?.on(callback, instance, opts)
   }
 
   off(type: EventType, callback: Funs) {

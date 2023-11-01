@@ -1,7 +1,7 @@
 import { ref } from 'vue'
-import { Raycaster, Vector2 } from 'three'
+import { Plane, Raycaster, Vector2, Vector3 } from 'three'
 import Subscription from './Subscription'
-import type { Camera, Event, Intersection, Object3D, Scene } from 'three'
+import type { Camera, Event, Object3D, Scene } from 'three'
 import type { EventOptions, Funs, FunsEvent, OnEventOptions } from './type'
 import type { Ref } from 'vue'
 export default class FtEvent {
@@ -9,65 +9,57 @@ export default class FtEvent {
   options: EventOptions
   sceneRef: Ref<HTMLDivElement | undefined> = ref()
   scene: Scene
-  pointer: Vector2 = new Vector2(10000, 10000)
+  pointer: Vector2 = new Vector2(10000000, 10000000)
   raycaster: Raycaster | undefined
   camera: Camera | undefined
+  position = new Vector3(0, 0, 0)
+  plane = new Plane(new Vector3(0, 0, 1), 0)
 
   constructor(scene: Scene, options: EventOptions) {
     this.options = options
     this.scene = scene
-    if (options.global) {
-      this.raycaster = new Raycaster(
-        options.origin,
-        options.direction,
-        options.near,
-        options.far
-      )
-    }
   }
 
   setSceneRef(sceneRef: Ref<HTMLDivElement | undefined>) {
     this.sceneRef = sceneRef
   }
+
   setCamera(camera: Camera) {
     this.camera = camera
   }
-  on(callback: Funs, name: string, instance: Object3D, opts?: OnEventOptions) {
-    let hoverLastValueLength = 0
+
+  on(callback: Funs, instance: Object3D | Object3D[], opts?: OnEventOptions) {
     if (this.sub.subscriber.length === 0) {
       this.addListeners()
     }
     const middleFun = (event: FunsEvent) => {
-      let targets: Intersection<Object3D<Event>>[] = []
-      if (this.options.global) {
-        targets = event.targets.filter((item) => item.object.name === name)
-      } else {
-        const globalOpts = this.options ? this.options : {}
-        const hereOpts = opts ? opts : {}
-        const onOpts = {
-          ...globalOpts,
-          ...hereOpts,
-        }
-        const raycaster = new Raycaster(
-          onOpts.origin,
-          onOpts.direction,
-          onOpts.near,
-          onOpts.far
-        )
-        targets = this.genIntersects(
-          raycaster,
-          event.camera,
-          [instance!],
-          this.pointer,
-          onOpts
-        )
+      const globalOpts = this.options ? this.options : {}
+      const hereOpts = opts ? opts : {}
+      const onOpts = {
+        ...globalOpts,
+        ...hereOpts,
       }
-      if (hoverLastValueLength !== targets.length) {
+      const raycaster = new Raycaster(
+        onOpts.origin,
+        onOpts.direction,
+        onOpts.near,
+        onOpts.far
+      )
+      this.updatePosition(raycaster)
+      const targets = this.genIntersects(
+        raycaster,
+        event.camera,
+        Array.isArray(instance) ? instance : [instance],
+        this.pointer,
+        onOpts
+      )
+      // 只有在有交集的时候才触发
+      if (targets.length || opts?.allTheTime) {
         callback({
           ...event,
           targets,
+          position: this.position,
         })
-        hoverLastValueLength = targets.length
       }
     }
     this.sub.on(middleFun)
@@ -79,6 +71,15 @@ export default class FtEvent {
 
   off(fun: Funs) {
     this.sub.off(fun)
+  }
+
+  updatePosition(raycaster: Raycaster) {
+    if (!raycaster || !this.camera) return
+    const coords = new Vector2(this.pointer.x, this.pointer.y)
+
+    raycaster.setFromCamera(coords, this.camera)
+    this.camera.getWorldDirection(this.plane.normal)
+    raycaster.ray.intersectPlane(this.plane, this.position)
   }
 
   genIntersects(
@@ -112,26 +113,11 @@ export default class FtEvent {
     this.pointer.x = (e.offsetX / dom.offsetWidth) * 2 - 1
     this.pointer.y = -(e.offsetY / dom.offsetHeight) * 2 + 1
 
-    this.calculateIntersects()
-  }
-
-  calculateIntersects() {
-    let mouseIntersect: Intersection<Object3D<Event>>[] = []
-    if (this.raycaster) {
-      const objects = this.options.objects || this.scene.children
-      mouseIntersect = this.genIntersects(
-        this.raycaster,
-        this.camera!,
-        objects,
-        this.pointer,
-        this.options
-      )
-    }
-
     this.emit({
       scene: this.scene,
       camera: this.camera!,
-      targets: mouseIntersect,
+      targets: [],
+      position: this.position,
     })
   }
 

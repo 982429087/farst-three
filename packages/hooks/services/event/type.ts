@@ -11,6 +11,7 @@ export type FunsEvent = {
   scene: Scene
   camera: Camera
   targets: Intersection<Object3D<Event>>[]
+  position?: Vector3
 }
 export type Funs = (e: FunsEvent) => void
 
@@ -22,7 +23,6 @@ export enum EventType {
 export type EventInstance = FtEvent
 
 export type EventOptions = {
-  global?: boolean
   origin?: Vector3
   direction?: Vector3
   near?: number
@@ -30,6 +30,7 @@ export type EventOptions = {
   recursive?: boolean
   optionalTarget?: Intersection<Object3D<Event>>[]
   objects?: Object3D<Event>[]
+  allTheTime?: boolean
 }
 
 export type OnEventOptions = Omit<EventOptions, 'global'>

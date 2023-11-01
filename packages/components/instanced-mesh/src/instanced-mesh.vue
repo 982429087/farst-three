@@ -4,7 +4,11 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, provide, watch } from 'vue'
-import { Mesh } from 'three'
+import { InstancedMesh } from 'three'
+import {
+  materialServiceInjectionKey,
+  object3dInjectionKey,
+} from '@farst-three/constants'
 import {
   CountService,
   uesEvent,
@@ -13,26 +17,22 @@ import {
   useOptions,
   useScene,
 } from '@farst-three/hooks'
-import {
-  materialServiceInjectionKey,
-  object3dInjectionKey,
-} from '@farst-three/constants'
-import { meshEmits, meshProps } from './mesh'
+import { instancedMeshEmits, instancedMeshProps } from './instanced-mesh'
 import type { Material } from 'three'
 
 defineOptions({
-  name: 'FtMesh',
+  name: 'FtInstancedMesh',
 })
 
-const props = defineProps(meshProps)
-const emit = defineEmits(meshEmits)
+const props = defineProps(instancedMeshProps)
+const emit = defineEmits(instancedMeshEmits)
 
+// init here
 let scene = useScene()
 let group = useGroup()
 const dragService = useDragService()
 let materialService = new CountService<Material>()
-
-let mesh = new Mesh(props.geometry, props.material)
+let mesh = new InstancedMesh(props.geometry, props.material, props.count)
 
 emit('load', { mesh, scene, group })
 

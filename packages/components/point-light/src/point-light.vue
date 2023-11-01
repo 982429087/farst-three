@@ -36,4 +36,8 @@ onBeforeUnmount(() => {
   ;(scene as any) = null
   ;(pointLight as any) = null
 })
+
+defineExpose({
+  light: pointLight,
+})
 </script>
