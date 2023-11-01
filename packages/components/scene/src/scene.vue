@@ -8,11 +8,13 @@
 import { onBeforeUnmount, onMounted, provide, ref } from 'vue'
 import { Scene } from 'three'
 import {
+  animationServiceInjectionKey,
   dragServiceInjectionKey,
   eventServiceInjectionKey,
   storeServiceInjectionKey,
 } from '@farst-three/constants'
 import {
+  AnimationService,
   CountService,
   EventService,
   StoreService,
@@ -40,10 +42,13 @@ let dragService = new CountService<Object3D<Event>>()
 let storeService = new StoreService(scene, sceneRef)
 // 处理事件函数
 let eventService = new EventService(scene, props.eventOptions)
+const animationService = new AnimationService()
 emit('load', { scene })
 provide(dragServiceInjectionKey, dragService)
 provide(storeServiceInjectionKey, storeService)
 provide(eventServiceInjectionKey, eventService)
+provide(animationServiceInjectionKey, animationService)
+
 useOptions(props.options, scene, scene)
 
 onMounted(() => {

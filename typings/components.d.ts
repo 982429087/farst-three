@@ -61,6 +61,7 @@ declare module '@vue/runtime-core' {
     FtGLTFLoader: typeof import('@farst-three/components')['FtGLTFLoader']
     FtTextGeometry: typeof import('@farst-three/components')['FtTextGeometry']
     FtInstancedMesh: typeof import('@farst-three/components')['FtInstancedMesh']
+    FtEffectComposer: typeof import('@farst-three/components')['FtEffectComposer']
   }
 }
 

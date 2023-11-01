@@ -1,6 +1,6 @@
 import { shallowRef } from 'vue'
 import type { Ref, ShallowRef } from 'vue'
-import type { Camera, Scene } from 'three'
+import type { Camera, Scene, WebGLRenderer } from 'three'
 
 // 公用部分内容都在这里
 export class StoreService {
@@ -10,10 +10,20 @@ export class StoreService {
   sceneRef: Ref<HTMLDivElement | undefined>
   // 场景实例
   scene: Scene
+  // 渲染器
+  renderer: ShallowRef<WebGLRenderer | undefined> = shallowRef()
 
   constructor(scene: Scene, sceneRef: Ref<HTMLDivElement | undefined>) {
     this.scene = scene
     this.sceneRef = sceneRef
+  }
+
+  setRenderer(renderer: WebGLRenderer) {
+    this.renderer.value = renderer
+  }
+
+  getRenderer() {
+    return this.renderer.value
   }
 
   setRenderCamera(renderCamera: Camera) {

@@ -65,3 +65,6 @@ export * from './fog'
 export * from './fog-exp2'
 // 声音
 export * from './audio'
+
+// 后期处理
+export * from './effect-composer'

@@ -67,9 +67,9 @@
             enabled: true,
           },
         }"
-      >
-        <FtOrbitControls />
-      </FtWebglRenderer>
+      />
+      <FtOrbitControls />
+      <FtEffectComposer />
     </FtScene>
   </div>
 </template>
@@ -80,6 +80,7 @@ import { MathUtils, Object3D, Vector3 } from 'three'
 import {
   FtAmbientLight,
   FtBoxGeometry,
+  FtEffectComposer,
   FtInstancedMesh,
   FtMesh,
   FtMeshPhongMaterial,

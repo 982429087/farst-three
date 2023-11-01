@@ -5,4 +5,3 @@ export const FtWebglRenderer = withInstall(WebglRenderer)
 export default FtWebglRenderer
 
 export * from './src/webgl-renderer'
-export * from './src/AnimationService'

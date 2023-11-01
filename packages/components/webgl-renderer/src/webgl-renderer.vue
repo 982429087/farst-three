@@ -8,18 +8,15 @@ import { WebGLRenderer } from 'three'
 import { debounce } from 'lodash-es'
 import { isClient } from '@vueuse/core'
 import {
+  useAnimationService,
   useEventService,
   useOptions,
   useScene,
   useSceneRef,
   useStoreService,
 } from '@farst-three/hooks'
-import {
-  animationServiceInjectionKey,
-  rendererInjectionKey,
-} from '@farst-three/constants/injection'
+import { rendererInjectionKey } from '@farst-three/constants/injection'
 import { webGLRendererProps, webglRendererEmits } from './webgl-renderer'
-import { AnimationService } from './AnimationService'
 import type { Camera } from 'three'
 
 defineOptions({
@@ -42,17 +39,16 @@ watch(
   { immediate: true }
 )
 if (!camera) throw new Error('<webgl-renderer /> 没有找到主渲染相机!')
-// renderer 子组件的函数渲染
-let animationService = new AnimationService()
+
 // 事件处理函数
 let eventService = useEventService()
+let animationService = useAnimationService()
 eventService.setCamera(camera)
-
-provide(animationServiceInjectionKey, animationService)
 
 const dpr = isClient ? window.devicePixelRatio || 1 : 1
 
 let renderer = new WebGLRenderer(props.params)
+storeService.setRenderer(renderer)
 renderer.setSize(container.offsetWidth, container.offsetHeight)
 container.appendChild(renderer.domElement)
 
@@ -90,8 +86,11 @@ const observer = new ResizeObserver(dOb)
 observer.observe(container)
 
 emit('load', { renderer, scene, camera })
+
 provide(rendererInjectionKey, renderer)
+
 useOptions(props.options, renderer, scene)
+
 onBeforeUnmount(() => {
   animationService.off('propsFn')
   observer.unobserve(container)

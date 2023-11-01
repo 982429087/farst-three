@@ -2,6 +2,7 @@ import {
   animationServiceInjectionKey,
   directionalLightInjectionKey,
   dragServiceInjectionKey,
+  effectComposerInjectionKey,
   eventServiceInjectionKey,
   geometryInjectionKey,
   groupInjectionKey,
@@ -15,9 +16,10 @@ import {
   spotLightInjectionKey,
   storeServiceInjectionKey,
 } from '@farst-three/constants/injection'
-import { useInjection } from '@farst-three/hooks'
-import type { AnimationService } from '@farst-three/components'
+import { useInjection, useRefInjection } from '@farst-three/hooks'
+import type { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import type {
+  AnimationService,
   CountService,
   EventService,
   StoreService,
@@ -103,4 +105,8 @@ export function useSpotLight() {
 
 export function useDragService() {
   return useInjection<CountService<Object3D<Event>>>(dragServiceInjectionKey)
+}
+
+export function useEffectComposer() {
+  return useRefInjection<EffectComposer>(effectComposerInjectionKey).value
 }
