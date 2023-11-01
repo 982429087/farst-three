@@ -5,10 +5,10 @@
       <FtMesh>
         <FtTextGeometry
           :url="'/font/helvetikerRegularTypeface.json'"
-          :text="'this is font text'"
+          :text="'farst-three'"
           :params="{
-            size: 10,
-            height: 0.5,
+            size: 30,
+            height: 5,
           }"
           :center="true"
         />
@@ -33,6 +33,8 @@
         />
       </FtInstancedMesh>
       <!-- 灯光 -->
+      <FtPointLight color="0xff6000" />
+
       <FtPointLight
         :color="0xff6000"
         :intensity="0.85"
@@ -46,6 +48,16 @@
       <FtPointLight ref="lightRef" color="#0060ff" :intensity="0.5" />
 
       <FtAmbientLight :color="0x808080" />
+      <FtEffectComposer>
+        <FtRenderPass />
+        <FtUnrealBloomPass :strength="1" />
+        <FtHalftonePass
+          :params="{
+            radius: 1,
+            scatter: 0,
+          }"
+        />
+      </FtEffectComposer>
       <!-- 相机 -->
       <FtPerspectiveCamera
         :fov="75"
@@ -69,11 +81,6 @@
         }"
       />
       <FtOrbitControls />
-      <FtEffectComposer>
-        <FtRenderPass />
-        <FtUnrealBloomPass />
-        <FtHalftonePass />
-      </FtEffectComposer>
     </FtScene>
   </div>
 </template>
