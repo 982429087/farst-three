@@ -44,7 +44,7 @@ watch(
   }
 )
 
-// effect render 执行的时候是 不能执行 webglrenderer 的 render 的
+// effect render 执行的时候是，不能执行 webglrenderer的render方法
 animationService.on(effectComposer, () => {
   composer.value?.render()
 })

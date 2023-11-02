@@ -34,7 +34,6 @@
       </FtInstancedMesh>
       <!-- 灯光 -->
       <FtPointLight color="0xff6000" />
-
       <FtPointLight
         :color="0xff6000"
         :intensity="0.85"
@@ -46,7 +45,6 @@
         :options="{ position: { x: -100 } }"
       />
       <FtPointLight ref="lightRef" color="#0060ff" :intensity="0.5" />
-
       <FtAmbientLight :color="0x808080" />
       <FtEffectComposer>
         <FtRenderPass />

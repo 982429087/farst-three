@@ -72,7 +72,7 @@ function animate() {
   animationService?.emit({ renderer, scene, camera })
   // 执行事件逻辑
   // eventService.calculate()
-  if (!animationService.hasComposer()) renderer?.render(scene, camera)
+  if (!animationService?.hasComposer()) renderer?.render(scene, camera)
   requestAnimationFrame(animate)
 }
 

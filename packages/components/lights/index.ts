@@ -1,0 +1,6 @@
+export * from './directional-light'
+export * from './ambient-light'
+export * from './point-light'
+export * from './hemisphere-light'
+export * from './rect-area-light'
+export * from './spot-light'
