@@ -5,7 +5,12 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, watch } from 'vue'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { useOptions, useScene, useStoreService } from '@farst-three/hooks'
+import {
+  useAnimationService,
+  useOptions,
+  useScene,
+  useStoreService,
+} from '@farst-three/hooks'
 import { orbitControlsEmits, orbitControlsProps } from './orbit-controls'
 import type { Camera } from 'three'
 defineOptions({
@@ -19,6 +24,7 @@ const emit = defineEmits(orbitControlsEmits)
 let scene = useScene()
 let storeService = useStoreService()
 let renderer = storeService.getRenderer()
+const animationService = useAnimationService()
 
 let camera: Camera | undefined = storeService.getRenderCamera()
 let controls: OrbitControls | undefined
@@ -34,7 +40,9 @@ watch(
   },
   { immediate: true }
 )
-
+animationService.on('controls', () => {
+  controls?.update()
+})
 onBeforeUnmount(() => {
   controls?.dispose()
   ;(renderer as any) = null

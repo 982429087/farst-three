@@ -39,6 +39,14 @@ spot-light/basic
 
 :::
 
+## 基础用法2
+
+:::demo
+
+spot-light/basic2
+
+:::
+
 ## API
 
 ### Attributes

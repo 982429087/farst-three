@@ -16,6 +16,9 @@ export const webGLRendererProps = buildProps({
   },
   params: {
     type: definePropType<WebGLRendererParameters>(Object),
+    default: () => ({
+      antialias: true,
+    }),
   },
   scissor: {
     type: Boolean,
@@ -31,7 +34,11 @@ export const webGLRendererProps = buildProps({
   },
   options: {
     type: definePropType<WebglRendererOptions>(Object),
-    default: () => ({}),
+    default: () => ({
+      shadowMap: {
+        enabled: true,
+      },
+    }),
   },
 })
 export const webglRendererEmits = {

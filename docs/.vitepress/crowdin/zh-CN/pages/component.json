@@ -55,15 +55,19 @@
     "children": [
       {
         "link": "/plane-geometry",
-        "text": "PlaneGeometry"
+        "text": "PlaneGeometry 平面"
       },
       {
         "link": "/box-geometry",
-        "text": "BoxGeometry"
+        "text": "BoxGeometry 立方"
       },
       {
         "link": "/text-geometry",
-        "text": "TextGeometry"
+        "text": "TextGeometry 文字"
+      },
+      {
+        "link": "/torus-geometry",
+        "text": "TorusGeometry 圆环"
       }
     ]
   },

@@ -1,9 +1,11 @@
 ---
-title: TextGeometry
+title: TorusGeometry
 lang: zh-CN
 ---
 
-# TextGeometry
+# TorusGeometry
+
+[]()
 
 
 
@@ -11,7 +13,7 @@ lang: zh-CN
 
 :::demo
 
-text-geometry/basic
+torus-geometry/basic
 
 :::
 

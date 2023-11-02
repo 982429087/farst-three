@@ -23,6 +23,7 @@ importers:
       '@pnpm/logger': ^4.0.0
       '@pnpm/types': ^8.4.0
       '@popperjs/core': npm:@sxzz/popperjs-es@^2.11.7
+      '@types/chroma-js': ^2.4.2
       '@types/dat.gui': ^0.7.10
       '@types/fs-extra': ^9.0.13
       '@types/gulp': ^4.0.9
@@ -41,6 +42,7 @@ importers:
       async-validator: ^4.2.5
       c8: ^7.11.3
       chalk: ^5.0.1
+      chroma-js: ^2.4.2
       concurrently: ^7.2.2
       consola: ^2.15.3
       csstype: ^2.6.20
@@ -97,6 +99,7 @@ importers:
       '@types/lodash-es': 4.17.9
       '@vueuse/core': 9.13.0_vue@3.3.7
       async-validator: 4.2.5
+      chroma-js: 2.4.2
       dat.gui: 0.7.9
       dayjs: 1.11.10
       escape-html: 1.0.3
@@ -118,6 +121,7 @@ importers:
       '@pnpm/find-workspace-packages': 4.0.43_@pnpm+logger@4.0.0
       '@pnpm/logger': 4.0.0
       '@pnpm/types': 8.10.0
+      '@types/chroma-js': 2.4.2
       '@types/dat.gui': 0.7.10
       '@types/fs-extra': 9.0.13
       '@types/gulp': 4.0.14
@@ -2048,7 +2052,7 @@ packages:
     peerDependencies:
       vue: ^3.2.0
     dependencies:
-      vue: 3.3.7
+      vue: 3.3.7_typescript@4.9.5
     dev: false
 
   /@esbuild-kit/cjs-loader/2.4.4:
@@ -3894,6 +3898,10 @@ packages:
     resolution: {integrity: sha512-VOVRLM1mBxIRxydiViqPcKn6MIxZytrbMpd6RJLIWKxUNr3zux8no0Oc7kJx0WAPIitgZ0gkrDS+btlqQpubpw==}
     dev: true
 
+  /@types/chroma-js/2.4.2:
+    resolution: {integrity: sha512-gbiHvCuBS9aXkE3OEDfS69bscNLTYtbbx2TQf6WyOu+4eCH1AH1gPSiDGF2UzwkRFAbqKNsC5F0mY0xcaEHCbg==}
+    dev: true
+
   /@types/clean-css/4.2.7:
     resolution: {integrity: sha512-lcoZHjUAANLTACLGi+O/0pN+oKQAQ8zAMWJSxiBRNLxqZG/WE8hfXJUs1eYwJOvOnDJrvxU1kR77UiVJ3+9N0Q==}
     dependencies:
@@ -4465,7 +4473,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vue: 3.3.7
+      vue: 3.3.7_typescript@4.9.5
 
   /@vitest/ui/0.16.0:
     resolution: {integrity: sha512-RwXYTFA2tVwUhuuTcdAaK5kIq+I3pnvNQUojPThZPZhS7ttKXkCgWwud0KXwnR04ofKc3HXEuzWPf6s7JD1vgw==}
@@ -4645,7 +4653,7 @@ packages:
     dependencies:
       '@vue/compiler-ssr': 3.3.7
       '@vue/shared': 3.3.7
-      vue: 3.3.7
+      vue: 3.3.7_typescript@4.9.5
 
   /@vue/shared/3.3.4:
     resolution: {integrity: sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==}
@@ -5868,6 +5876,10 @@ packages:
   /chownr/2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
+
+  /chroma-js/2.4.2:
+    resolution: {integrity: sha512-U9eDw6+wt7V8z5NncY2jJfZa+hUH8XEj8FQHgFJTrUFnJfXYf4Ml4adI2vXZOjqRDpFWtYVWypDfZwnJ+HIR4A==}
+    dev: false
 
   /ci-info/2.0.0:
     resolution: {integrity: sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==}
@@ -13710,7 +13722,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      vue: 3.3.7
+      vue: 3.3.7_typescript@4.9.5
     dev: false
 
   /vue-eslint-parser/9.3.1_eslint@8.50.0:
@@ -13737,7 +13749,7 @@ packages:
       vue: ^3.2.0
     dependencies:
       '@vue/devtools-api': 6.5.0
-      vue: 3.3.7
+      vue: 3.3.7_typescript@4.9.5
     dev: true
 
   /vue-tsc/0.38.9_typescript@4.9.5:
@@ -13778,7 +13790,6 @@ packages:
       '@vue/server-renderer': 3.3.7_vue@3.3.7
       '@vue/shared': 3.3.7
       typescript: 4.9.5
-    dev: true
 
   /w3c-hr-time/1.0.2:
     resolution: {integrity: sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ==}
