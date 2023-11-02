@@ -23,10 +23,8 @@ import {
   orthographicCameraProps,
 } from '@farst-three/components'
 import { thumbnailEmits, thumbnailProps } from './thumbnail'
-import type {
-  AnimationFunsParams,
-  OrthographicCameraLoadEvent,
-} from '@farst-three/components'
+import type { AnimationFunsParams } from '@farst-three/hooks'
+import type { OrthographicCameraLoadEvent } from '@farst-three/components'
 import type { OrthographicCamera } from 'three'
 
 defineOptions({

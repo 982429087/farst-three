@@ -1,4 +1,4 @@
-import { FtScene } from '@farst-three/components/scene'
+import { FtScene } from '@farst-three/components/core/scene'
 
 import type { Plugin } from 'vue'
 

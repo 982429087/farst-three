@@ -1,6 +1,6 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import { eventEmits, eventProps } from '@farst-three/hooks'
-import type { FunsEvent, OnEventOptions } from '@farst-three/hooks'
+import type { OnEventOptions } from '@farst-three/hooks'
 import type { ThreeOptions } from '@farst-three/utils'
 import type {
   BufferGeometry,

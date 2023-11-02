@@ -1,6 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import { eventEmits, eventProps } from '@farst-three/hooks'
-import type { FunsEvent } from '@farst-three/hooks'
 import type {
   BufferGeometry,
   Group,

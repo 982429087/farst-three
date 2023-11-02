@@ -4,7 +4,7 @@ import {
   orthographicCameraEmits,
   orthographicCameraProps,
 } from '@farst-three/components'
-import type { AnimationFunsParams } from '@farst-three/components'
+import type { AnimationFunsParams } from '@farst-three/hooks'
 import type { ExtractPropTypes } from 'vue'
 import type Thumbnail from './thumbnail.vue'
 
