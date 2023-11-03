@@ -97,7 +97,6 @@
         :animation-fn="animationFn"
       >
         <FtOrbitControls />
-        <FtGridHelper />
       </FtWebglRenderer>
     </FtScene>
   </div>
