@@ -32,8 +32,6 @@ const liquidEffect = new LiquidEffect(renderer)
 liquidEffect.renderer = renderer
 animation.on('liquid', update)
 
-console.log(props.params)
-
 const material = new MeshPhysicalMaterial(props.params)
 material.onBeforeCompile = (shader) => {
   shader.uniforms.hmap = { value: liquidEffect!.hMap.texture }
