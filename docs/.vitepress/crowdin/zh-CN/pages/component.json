@@ -220,6 +220,10 @@
       {
         "link": "/refraction-mesh",
         "text": "反光材质"
+      },
+      {
+        "link": "/liquid-plane",
+        "text": "水滴面"
       }
     ]
   }

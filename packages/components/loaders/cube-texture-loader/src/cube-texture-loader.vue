@@ -50,6 +50,7 @@ loadingManager.onProgress = (url: string, loaded: number, total: number) => {
 loadingManager.onError = (url: string) => {
   emit('managerError', url)
 }
+
 if (material) {
   ;(material as any)[props.type] = texture
 }

@@ -20,6 +20,7 @@ export const sceneProps = buildProps({
     type: definePropType<EventOptions>(Object),
     default: () => ({
       allTheTime: true,
+      recursive: true,
     }),
   },
   ...eventProps,

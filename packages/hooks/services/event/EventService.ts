@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import Hover from './Hover'
 import { EventType } from './type'
 import Click from './Click'
+import { HoverPosition } from './HoverPosition'
 import type FtEvent from './FtEvent'
 import type { EventOptions, Funs, OnEventOptions } from './type'
 import type { Ref } from 'vue'
@@ -21,6 +22,10 @@ export class EventService {
     // 注册事件, 每次有新的事件类型，就从这里注册
     this.instanceMap.set(EventType.HOVER, new Hover(scene, options))
     this.instanceMap.set(EventType.CLICK, new Click(scene, options))
+    this.instanceMap.set(
+      EventType.HOVERPOSITION,
+      new HoverPosition(scene, options)
+    )
   }
 
   setSceneRef(sceneRef: Ref<HTMLDivElement | undefined>) {

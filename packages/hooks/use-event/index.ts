@@ -14,10 +14,14 @@ export const eventProps = {
   onClick: {
     type: definePropType<FunsEvent>(Function),
   },
+  onHoverPosition: {
+    type: definePropType<FunsEvent>(Function),
+  },
 }
 export const eventEmits = {
   hover: (e: FunsEvent) => e,
   click: (e: FunsEvent) => e,
+  onHoverPosition: (e: FunsEvent) => e,
 }
 
 export function uesEvent<T extends Object3D | Object3D[]>(
@@ -28,6 +32,7 @@ export function uesEvent<T extends Object3D | Object3D[]>(
 ) {
   const hover: Funs = (e) => emit('hover', e)
   const click: Funs = (e) => emit('click', e)
+  const hoverPosition: Funs = (e) => emit('hoverPosition', e)
   const es = eventService || useEventService()
   if (props.onHover) {
     es.on(EventType.HOVER, hover, instance, props.eventOptions)
@@ -37,8 +42,13 @@ export function uesEvent<T extends Object3D | Object3D[]>(
     es.on(EventType.CLICK, click, instance, props.eventOptions)
   }
 
+  if (props.onHoverPosition) {
+    es.on(EventType.HOVERPOSITION, hoverPosition, instance, props.eventOptions)
+  }
+
   onBeforeUnmount(() => {
     if (props.onHover) es.off(EventType.HOVER, hover)
     if (props.onClick) es.off(EventType.CLICK, click)
+    if (props.onHoverPosition) es.off(EventType.HOVERPOSITION, hoverPosition)
   })
 }

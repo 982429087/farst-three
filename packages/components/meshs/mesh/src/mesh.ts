@@ -28,11 +28,11 @@ export const meshProps = buildProps({
     type: definePropType<OnEventOptions>(Object),
     default: () => ({}),
   },
-  ...eventProps,
   dragabled: {
     type: Boolean,
     default: false,
   },
+  ...eventProps,
 })
 
 export const meshEmits = {

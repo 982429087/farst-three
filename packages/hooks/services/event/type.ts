@@ -18,6 +18,7 @@ export type Funs = (e: FunsEvent) => void
 export enum EventType {
   HOVER = 'hover',
   CLICK = 'click',
+  HOVERPOSITION = 'hoverPosition',
 }
 
 export type EventInstance = FtEvent

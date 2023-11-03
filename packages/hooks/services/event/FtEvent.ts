@@ -10,7 +10,7 @@ export default class FtEvent {
   sceneRef: Ref<HTMLDivElement | undefined> = ref()
   scene: Scene
   pointer: Vector2 = new Vector2(10000000, 10000000)
-  raycaster: Raycaster | undefined
+  raycaster: Raycaster
   camera: Camera | undefined
   position = new Vector3(0, 0, 0)
   plane = new Plane(new Vector3(0, 0, 1), 0)
@@ -18,6 +18,12 @@ export default class FtEvent {
   constructor(scene: Scene, options: EventOptions) {
     this.options = options
     this.scene = scene
+    this.raycaster = new Raycaster(
+      options.origin,
+      options.direction,
+      options.near,
+      options.far
+    )
   }
 
   setSceneRef(sceneRef: Ref<HTMLDivElement | undefined>) {
@@ -28,30 +34,30 @@ export default class FtEvent {
     this.camera = camera
   }
 
-  on(callback: Funs, instance: Object3D | Object3D[], opts?: OnEventOptions) {
-    if (this.sub.subscriber.length === 0) {
-      this.addListeners()
-    }
-    const middleFun = (event: FunsEvent) => {
-      const globalOpts = this.options ? this.options : {}
-      const hereOpts = opts ? opts : {}
-      const onOpts = {
-        ...globalOpts,
-        ...hereOpts,
-      }
-      const raycaster = new Raycaster(
-        onOpts.origin,
-        onOpts.direction,
-        onOpts.near,
-        onOpts.far
-      )
-      this.updatePosition(raycaster)
+  setRaycasterOptions(opts?: OnEventOptions) {
+    const onOpts = opts ? opts : {}
+    const raycaster = this.raycaster
+    if (onOpts.origin && onOpts.direction)
+      raycaster.set(onOpts.origin, onOpts.direction)
+
+    if (onOpts.near) raycaster.near = onOpts.near
+    if (onOpts.far) raycaster.far = onOpts.far
+  }
+
+  genMiddleFn(
+    callback: Funs,
+    instance: Object3D | Object3D[],
+    opts?: OnEventOptions
+  ) {
+    return (event: FunsEvent) => {
+      const raycaster = this.raycaster
+      // 这个步骤会阻塞shader的执行
       const targets = this.genIntersects(
         raycaster,
         event.camera,
         Array.isArray(instance) ? instance : [instance],
         this.pointer,
-        onOpts
+        opts
       )
       // 只有在有交集的时候才触发
       if (targets.length || opts?.allTheTime) {
@@ -62,7 +68,13 @@ export default class FtEvent {
         })
       }
     }
-    this.sub.on(middleFun)
+  }
+
+  on(callback: Funs, instance: Object3D | Object3D[], opts?: OnEventOptions) {
+    if (this.sub.subscriber.length === 0) this.addListeners() // 设置事件监听
+    this.setRaycasterOptions(opts) // 设置射线参数
+    const middleFun = this.genMiddleFn(callback, instance, opts) // 生成中间函数
+    this.sub.on(middleFun) // 订阅事件
   }
 
   emit(e: FunsEvent) {
@@ -73,6 +85,7 @@ export default class FtEvent {
     this.sub.off(fun)
   }
 
+  // 更新射线位置
   updatePosition(raycaster: Raycaster) {
     if (!raycaster || !this.camera) return
     const coords = new Vector2(this.pointer.x, this.pointer.y)
@@ -81,20 +94,20 @@ export default class FtEvent {
     this.camera.getWorldDirection(this.plane.normal)
     raycaster.ray.intersectPlane(this.plane, this.position)
   }
-
+  // 生成交集
   genIntersects(
     raycaster: Raycaster,
     camera: Camera,
     objects: Object3D<Event>[],
     pointer: Vector2,
-    options: EventOptions
+    options?: EventOptions
   ) {
     raycaster.setFromCamera(pointer, camera)
-    const recursive = options.recursive ?? true
+    const recursive = options?.recursive ?? false
     return raycaster.intersectObjects(
       objects,
       recursive,
-      options.optionalTarget
+      options?.optionalTarget
     )
   }
 

@@ -1,6 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
-    <FtScene @hover="sceneHover">
+    <FtScene @hover-position="sceneHover">
       <!-- 文字 -->
       <FtMesh>
         <FtTextGeometry
