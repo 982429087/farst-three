@@ -224,6 +224,10 @@
       {
         "link": "/liquid-plane",
         "text": "水滴面"
+      },
+      {
+        "link": "/geo-plane",
+        "text": "geojson地图"
       }
     ]
   }

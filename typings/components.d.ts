@@ -66,7 +66,7 @@ declare module '@vue/runtime-core' {
     FtUnrealBloomPass: typeof import('@farst-three/components')['FtUnrealBloomPass']
     FtHalftonePass: typeof import('@farst-three/components')['FtHalftonePass']
     FtLiquidPlane: typeof import('@farst-three/components')['FtLiquidPlane']
+    FtGeoPlane: typeof import('@farst-three/components')['FtGeoPlane']
   }
 }
-
 export {}

@@ -54,7 +54,7 @@ const resize = () => {
 
   if (composer.value && renderer) {
     const size = renderer.getSize(new Vector2())
-    composer.value.setSize(size.x, size.y)
+    composer.value?.setSize(size.x, size.y)
   }
 }
 const dOb = debounce(() => resize(), 0)
