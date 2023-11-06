@@ -7,12 +7,11 @@ import {
   Vector2,
   WebGLRenderTarget,
 } from 'three'
-// https://github.com/mrdoob/three.js/blob/master/examples/jsm/postprocessing/EffectComposer.js
+// https://github.com/mrdoob/three.js/blob/master/examples/jsm/postprocessing/Pass.js
 import { FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass'
 import type { Material, WebGLMultipleRenderTargets, WebGLRenderer } from 'three'
 
 // shaders from https://github.com/evanw/webgl-water
-
 export class LiquidEffect {
   renderer: WebGLRenderer
   width = 512
@@ -25,9 +24,10 @@ export class LiquidEffect {
     format: RGBAFormat,
     depthBuffer: false,
   }
+  // 在离屏缓冲区中先渲染某些效果，最后做为纹理渲染到屏幕上
   hMap = new WebGLRenderTarget(this.width, this.height, this.targetOptions)
   hMap1 = new WebGLRenderTarget(this.width, this.height, this.targetOptions)
-  fsQuad = new FullScreenQuad()
+  fsQuad = new FullScreenQuad() // 渲染全屏的图像、效果、或着色器
   copyMat: ShaderMaterial | undefined
   updateMat: ShaderMaterial | undefined
   normalsMat: ShaderMaterial | undefined
@@ -64,6 +64,7 @@ export class LiquidEffect {
         delta: new Uniform(this.delta),
       },
       vertexShader: defaultVertexShader,
+      // 高斯模糊效果 采样贴图后的像素点周围的像素点的颜色值，然后取平均值，作为当前像素点的颜色值
       fragmentShader: `
         uniform sampler2D tDiffuse;
         uniform vec2 delta;
@@ -94,6 +95,9 @@ export class LiquidEffect {
         delta: new Uniform(this.delta),
       },
       vertexShader: defaultVertexShader,
+      // 生成法线贴图  法线贴图是一种特殊的纹理，它可以用来模拟凹凸的表面细节
+      // cross 在计算机图形学中，向量的叉积常用于计算表面法线。给定一个平面上的两个向量，它们的叉积将生成垂直于该平面的法线向量。这对于光照和投影等图形渲染任务非常重要。
+      // normalizes a vector. 标准化一个向量
       fragmentShader: `
         uniform sampler2D tDiffuse;
         uniform vec2 delta;
@@ -102,6 +106,7 @@ export class LiquidEffect {
           vec4 texel = texture2D(tDiffuse, vUv);
           vec3 dx = vec3(delta.x, texture2D(tDiffuse, vec2(vUv.x + delta.x, vUv.y)).r - texel.r, 0.0);
           vec3 dy = vec3(0.0, texture2D(tDiffuse, vec2(vUv.x, vUv.y + delta.y)).r - texel.r, delta.y);
+
           texel.ba = normalize(cross(dy, dx)).xz;
           gl_FragColor = texel;
         }
@@ -116,6 +121,7 @@ export class LiquidEffect {
         strength: { value: 0.5 },
       },
       vertexShader: defaultVertexShader,
+      // 根据一个中心点、半径和强度来在图像中创建一个圆形的波浪效果
       fragmentShader: `
         const float PI = 3.1415926535897932384626433832795;
         uniform sampler2D tDiffuse;
@@ -134,9 +140,13 @@ export class LiquidEffect {
       `,
     })
   }
+
+  // 整体逻辑是在替换texture，因为有两个texture hMap和hMap1
+  // 每次更新后都会出现一个新的texture，然后替换掉旧的texture
+  // 每次shader中采样的texture都是上一次更新后的texture，所以每次的坐标变化都是根据上一次的texture来计算的
+  // 所以会有一个连续的效果
   update() {
     this.updateHMap()
-    // this.updateHMap();
     this.updateHMapNormals()
   }
 
@@ -174,10 +184,10 @@ export class LiquidEffect {
     target: WebGLRenderTarget | WebGLMultipleRenderTargets | null
   ) {
     this.fsQuad.material = mat
-    const oldTarget = this.renderer.getRenderTarget()
-    this.renderer.setRenderTarget(target)
-    this.fsQuad.render(this.renderer)
-    this.renderer.setRenderTarget(oldTarget)
+    const oldTarget = this.renderer.getRenderTarget() // 渲染器当前的渲染目标，是屏幕
+    this.renderer.setRenderTarget(target) // 指定渲染结果将被绘制到哪个缓冲区或纹理上，而不是默认的屏幕帧缓冲区
+    this.fsQuad.render(this.renderer) // 只是调用了renderer的render方法，参数是内部的mesh和camera
+    this.renderer.setRenderTarget(oldTarget) // 恢复渲染目标为屏幕
   }
 
   swapBuffers() {
