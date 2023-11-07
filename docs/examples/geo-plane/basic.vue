@@ -15,7 +15,7 @@
         @load="cameraLoad"
       />
       <FtWebglRenderer
-        :params="{ antialias: true }"
+        :params="{ antialias: true, alpha: true }"
         :options="{
           shadowMap: {
             enabled: true,

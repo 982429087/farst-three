@@ -5,3 +5,4 @@ export const FtTextGeometry = withInstall(TextGeometry)
 export default FtTextGeometry
 
 export * from './src/text-geometry'
+export * from './src/use-text-geometry'
