@@ -7,6 +7,7 @@ export function useCSS2D(scene: Scene, camera: Camera, container: HTMLElement) {
   labelRenderer.domElement.style.position = 'absolute'
   labelRenderer.domElement.style.top = '0px'
   labelRenderer.domElement.style.pointerEvents = 'none'
+  labelRenderer.domElement.className = 'label-container'
   container.appendChild(labelRenderer.domElement)
 
   const resize = () => {

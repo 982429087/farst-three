@@ -25,10 +25,7 @@ import {
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
-import {
-  CSS2DObject,
-  CSS2DRenderer,
-} from 'three/examples/jsm/renderers/CSS2DRenderer'
+import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer'
 import { geoMercator } from 'd3'
 import type { Scene } from 'three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
@@ -313,9 +310,10 @@ export function useGeo(scene: Scene) {
   }
 
   function createTextPoint(x: number, z: number, areaName: string) {
+    // 标签
     const tag = document.createElement('div')
     // tag.innerHTML = name
-    // tag.className = className
+    tag.className = 'label-item'
     tag.style.pointerEvents = 'none'
     // tag.style.visibility = 'hidden'
     tag.style.position = 'absolute'
