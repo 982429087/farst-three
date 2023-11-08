@@ -1,6 +1,7 @@
 // from https://github.com/spite/THREE.MeshLine/blob/master/src/THREE.MeshLine.js
 
 import { Color, ShaderChunk, ShaderMaterial, UniformsLib, Vector2 } from 'three'
+import type { ShaderMaterialParameters } from 'three'
 ;(ShaderChunk as any)['meshline_vert'] = [
   '',
   ShaderChunk.logdepthbuf_pars_vertex,
@@ -121,9 +122,17 @@ import { Color, ShaderChunk, ShaderMaterial, UniformsLib, Vector2 } from 'three'
   '}',
 ].join('\n')
 
+export type MeshLineMaterialParameters = ShaderMaterialParameters & {
+  useMap: number
+  color: string | number | Color
+  resolution: Vector2
+  sizeAttenuation: number
+  lineWidth: number
+}
+
 export class MeshLineMaterial extends ShaderMaterial {
   isMeshLineMaterial: boolean
-  constructor(parameters: any) {
+  constructor(parameters: MeshLineMaterialParameters) {
     super({
       uniforms: Object.assign({}, UniformsLib.fog, {
         lineWidth: { value: 1 },

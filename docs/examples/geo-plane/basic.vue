@@ -4,12 +4,12 @@
   <div ref="domRef" class="farst-three">
     <FtScene>
       <FtPerspectiveCamera
-        :fov="75"
+        :fov="45"
         :near="0.01"
-        :far="100000"
+        :far="2050"
         :options="{
           position: {
-            set: [-0.45, -2.1, 5.6],
+            set: [3.53, 74.82, 112.39],
           },
         }"
         @load="cameraLoad"
@@ -23,8 +23,30 @@
         }"
       >
         <FtGeoPlane :url="'/jinghuacity.json'" />
-        <FtOrbitControls />
-        <FtAmbientLight :color="0xffffff" :intensity="1" />
+        <!--             autoRotate: true,
+            autoRotateSpeed: 0.5, -->
+        <FtOrbitControls
+          :options="{
+            enableDamping: true,
+            enableZoom: true,
+            minDistance: 1,
+            maxDistance: 2000,
+            maxPolarAngle: (Math.PI / 180) * 75,
+            enablePan: true,
+          }"
+        />
+        <FtAmbientLight :color="0x02518d" :intensity="0.8" />
+        <FtDirectionalLight
+          :color="0x02518d"
+          :intensity="0.5"
+          :options="{ position: { set: [100, 10, -100] } }"
+        />
+        <FtDirectionalLight
+          :color="0x02518d"
+          :intensity="0.8"
+          :options="{ position: { set: [100, 10, 100] } }"
+        />
+        <FtAxesHelper :size="10000" />
       </FtWebglRenderer>
     </FtScene>
   </div>
@@ -34,9 +56,12 @@
 import { ref, shallowRef } from 'vue'
 import {
   FtAmbientLight,
+  FtAxesHelper,
+  FtDirectionalLight,
   FtGeoPlane,
   FtOrbitControls,
   FtPerspectiveCamera,
+  FtPointLight,
   FtScene,
   FtWebglRenderer,
 } from '@farst-three/components'

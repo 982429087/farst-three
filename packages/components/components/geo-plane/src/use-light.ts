@@ -10,39 +10,41 @@ import type { Camera, Mesh, Scene, WebGLRenderer } from 'three'
 export function useLight(
   scene: Scene,
   camera: Camera,
-  renderer: WebGLRenderer
-) {
-  const BLOOM_SCENE = 1 // 光晕场景
-  const bloomLayer = new Layers() // 光晕层次-创建一个图层对象
-  bloomLayer.set(BLOOM_SCENE) // 先把光晕层次设置光晕场景的层次1
-  const darkMaterial = new MeshBasicMaterial({ color: 'black' }) // 跟辉光光晕有关的变量
-
-  const materials: Record<string, any> = {} // 跟辉光光晕有关的变量
-  const params = {
+  renderer: WebGLRenderer,
+  options = {
+    sceneIndex: 1,
     exposure: 0, // 暴露
     bloomStrength: 0.78, // 光晕强度
     bloomThreshold: 0, // 光晕阈值
     bloomRadius: 0.1, // 光晕半径
   }
+) {
+  const container = renderer.domElement
+  const WIDTH = container.offsetWidth
+  const HEIGHT = container.offsetHeight
+
+  const BLOOM_SCENE = options.sceneIndex // 光晕场景
+  const bloomLayer = new Layers() // 光晕层次-创建一个图层对象
+  bloomLayer.set(BLOOM_SCENE) // 先把光晕层次设置光晕场景的层次1
+  const darkMaterial = new MeshBasicMaterial({ color: 'black' }) // 跟辉光光晕有关的变量
+
+  const materials: Record<string, any> = {} // 跟辉光光晕有关的变量
 
   const effectFXAA = new ShaderPass(FXAAShader)
-  effectFXAA.uniforms['resolution'].value.set(
-    0.6 / window.innerWidth,
-    0.6 / window.innerHeight
-  ) // 渲染区域Canvas画布宽高度
+  effectFXAA.uniforms['resolution'].value.set(0.6 / WIDTH, 0.6 / HEIGHT) // 渲染区域Canvas画布宽高度
   effectFXAA.renderToScreen = true
   // 去掉锯齿---1
   const renderScene = new RenderPass(scene, camera) // RenderPass这个通道会在当前场景（scene）和摄像机（camera）的基础上渲染出一个新场景，新建：
   // 添加光晕效果---2
   const bloomPass = new UnrealBloomPass( // UnrealBloomPass通道可实现一个泛光效果。
-    new Vector2(window.innerWidth, window.innerHeight),
+    new Vector2(WIDTH, HEIGHT),
     1.5,
     0.4,
     0.85
   )
-  bloomPass.threshold = params.bloomThreshold
-  bloomPass.strength = params.bloomStrength
-  bloomPass.radius = params.bloomRadius
+  bloomPass.threshold = options.bloomThreshold
+  bloomPass.strength = options.bloomStrength
+  bloomPass.radius = options.bloomRadius
   // 添加光晕效果---2
   // 着色器通道容器--放进容器里
   const bloomComposer = new EffectComposer(renderer) // EffectComposer可以理解为着色器通道容器，着色器通道按照先后顺序添加进来并执行
@@ -89,7 +91,6 @@ export function useLight(
       bloomComposer.render(); 渲染通道的集合
       再把纹理还给场景里的几何体，然后删除刚给上的黑色纹理
       finalComposer.render(); 在渲染一遍
-
    */
   function render() {
     scene.traverse((obj) => {
