@@ -1,0 +1,11 @@
+@use 'mixins/mixins' as *;
+
+@include b(dom-marker-item) {
+  color: #fff;
+}
+
+@include b(dom-marker-container) {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+}

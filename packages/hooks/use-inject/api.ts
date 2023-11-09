@@ -11,12 +11,14 @@ import {
   materialServiceInjectionKey,
   object3dInjectionKey,
   pointLightInjectionKey,
+  projectionInjectionKey,
   rectAreaLightInjectionKey,
   rendererInjectionKey,
   spotLightInjectionKey,
   storeServiceInjectionKey,
 } from '@farst-three/constants/injection'
 import { useInjection, useRefInjection } from '@farst-three/hooks'
+import type { GeoProjection } from 'd3'
 import type { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import type {
   AnimationService,
@@ -109,4 +111,8 @@ export function useDragService() {
 
 export function useEffectComposer() {
   return useRefInjection<EffectComposer>(effectComposerInjectionKey).value
+}
+
+export function useProjection() {
+  return useInjection<GeoProjection>(projectionInjectionKey)
 }
