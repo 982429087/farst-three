@@ -1,5 +1,4 @@
 export * from './liquid-plane'
-export * from './geo-plane'
 export * from './mesh-line'
 export * from './geo-json-plane'
 export * from './projection'

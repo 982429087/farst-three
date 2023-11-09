@@ -91,21 +91,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue'
-import { FileLoader, PerspectiveCamera } from 'three'
+import { shallowRef } from 'vue'
+import { FileLoader } from 'three'
 import {
   FtAmbientLight,
-  FtAxesHelper,
   FtDiffusionWave,
   FtDirectionalLight,
   FtDomMarker,
   FtDomMarkerRenderer,
   FtGeoJsonPlane,
-  FtGeoPlane,
   FtMarkPoint,
   FtOrbitControls,
   FtPerspectiveCamera,
-  FtPointLight,
   FtProjection,
   FtReflectorPlane,
   FtRotationPlane,
