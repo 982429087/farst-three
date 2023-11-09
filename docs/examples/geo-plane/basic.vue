@@ -85,7 +85,6 @@
           :intensity="0.8"
           :options="{ position: { set: [100, 10, 100] } }"
         />
-        <FtAxesHelper :size="10000" />
       </FtWebglRenderer>
     </FtScene>
   </div>
