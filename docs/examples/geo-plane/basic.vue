@@ -19,7 +19,7 @@
           },
         }"
       >
-        <!-- <FtProjection
+        <FtProjection
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
         >
@@ -60,10 +60,10 @@
               },
             }"
           />
-        </FtProjection> -->
-        <FtGeoPlane />
-        <!--             autoRotate: true,
-            autoRotateSpeed: 0.5, -->
+          <FtUpParticle />
+        </FtProjection>
+        <!-- <FtGeoPlane /> -->
+
         <FtOrbitControls
           :options="{
             enableDamping: true,
@@ -111,6 +111,7 @@ import {
   FtReflectorPlane,
   FtRotationPlane,
   FtScene,
+  FtUpParticle,
   FtWebglRenderer,
 } from '@farst-three/components'
 import type { FeatureCollection, Geometry } from '@turf/turf'

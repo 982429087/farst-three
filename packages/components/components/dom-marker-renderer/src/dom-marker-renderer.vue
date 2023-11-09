@@ -32,5 +32,6 @@ animation.on('dom-marker', () => {
 emit('load', { scene })
 onBeforeUnmount(() => {
   dispose()
+  animation.off('dom-marker')
 })
 </script>

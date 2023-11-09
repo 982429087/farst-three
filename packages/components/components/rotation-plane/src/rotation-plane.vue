@@ -27,5 +27,6 @@ useOptions(props.meshOptions, mesh, scene)
 
 onBeforeUnmount(() => {
   dispose()
+  animation.off('rotation-plane')
 })
 </script>

@@ -1,4 +1,4 @@
-import { cloneDeep, isObject } from 'lodash'
+import { merge } from 'lodash'
 import {
   DoubleSide,
   Mesh,
@@ -13,30 +13,10 @@ export function usePatricle(scene: Scene) {
   function random(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
-  function deepMerge(target: any, source: any) {
-    target = cloneDeep(target)
-    for (const key in source) {
-      if (key in target) {
-        // 对象的处理
-        if (isObject(source[key])) {
-          if (!isObject(target[key])) {
-            target[key] = source[key]
-          } else {
-            target[key] = deepMerge(target[key], source[key])
-          }
-        } else {
-          target[key] = source[key]
-        }
-      } else {
-        target[key] = source[key]
-      }
-    }
-    return target
-  }
 
   function createSequenceFrame(opt: any) {
     // 默认参数
-    const options = deepMerge(
+    const options = merge(
       {
         image: '',
         width: 200, // 显示的宽度

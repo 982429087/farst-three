@@ -25,5 +25,6 @@ emit('load', { scene })
 
 onBeforeUnmount(() => {
   dispose()
+  animation.off('diffusion-wave')
 })
 </script>

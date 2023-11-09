@@ -42,5 +42,6 @@ emit('load', { scene })
 
 onBeforeUnmount(() => {
   if (destroy) destroy()
+  animation.off('mark-point')
 })
 </script>

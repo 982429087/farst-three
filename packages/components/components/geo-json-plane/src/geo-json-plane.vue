@@ -53,5 +53,6 @@ animation.on('geoJsonPlane', () => {
 onBeforeUnmount(() => {
   destroy()
   destroy2()
+  animation.off('geoJsonPlane')
 })
 </script>
