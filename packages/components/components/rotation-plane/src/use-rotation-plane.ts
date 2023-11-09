@@ -9,14 +9,13 @@ export type RotationPlaneOptions = {
   geometryOptions?: ConstructorParameters<typeof PlaneGeometry>
 }
 
-const defaultOptions = {
-  url: '/geo/rotatingAperture.png',
-  speed: 0.005,
-  materialOptions: {},
-  geometryOptions: [100, 100],
-}
-
 export function useRotationPlane(scene: Scene, ops: RotationPlaneOptions) {
+  const defaultOptions = {
+    url: '/geo/rotatingAperture.png',
+    speed: 0.005,
+    materialOptions: {},
+    geometryOptions: [100, 100],
+  }
   const options = merge(defaultOptions, ops)
 
   const texture = new TextureLoader().load(options.url)

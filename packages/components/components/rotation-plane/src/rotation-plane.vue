@@ -20,13 +20,14 @@ const scene = useScene()
 const animation = useAnimationService()
 emit('load', { scene })
 const { render, dispose, mesh } = useRotationPlane(scene, props.options)
-animation.on('rotation-plane', () => {
+const name = `rotation-plane${Math.random()}`
+animation.on(name, () => {
   render()
 })
 useOptions(props.meshOptions, mesh, scene)
 
 onBeforeUnmount(() => {
   dispose()
-  animation.off('rotation-plane')
+  animation.off(name)
 })
 </script>

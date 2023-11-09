@@ -51,8 +51,8 @@
           />
           <FtRotationPlane
             :options="{
-              url: '/geo/circle-point.png',
-              speed: 0.05,
+              url: '/geo/rotatingAperture.png',
+              speed: -0.005,
             }"
             :mesh-options="{
               position: {
