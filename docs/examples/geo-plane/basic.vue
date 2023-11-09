@@ -1,7 +1,5 @@
 <template>
-  <el-button @click="handleCamera">打印相机</el-button>
-
-  <div ref="domRef" class="farst-three">
+  <div class="farst-three">
     <FtScene>
       <FtPerspectiveCamera
         :fov="45"
@@ -12,7 +10,6 @@
             set: [3.53, 74.82, 112.39],
           },
         }"
-        @load="cameraLoad"
       />
       <FtWebglRenderer
         :params="{ antialias: true, alpha: true }"
@@ -22,7 +19,49 @@
           },
         }"
       >
-        <FtGeoPlane :url="'/jinghuacity.json'" />
+        <!-- <FtProjection
+          :center="[102.44662948242187, 30.927128325051036]"
+          :scale="450"
+        >
+          <FtGeoJsonPlane
+            :geo-json="geoJson"
+            :geo-json-outline="geoJsonOutline"
+          />
+          <FtMarkPoint :points="points" />
+          <FtDomMarkerRenderer>
+            <FtDomMarker
+              v-for="item in points"
+              :key="item.name"
+              :point="item.center"
+            >
+              {{ item.name }}
+            </FtDomMarker>
+          </FtDomMarkerRenderer>
+          <FtReflectorPlane />
+          <FtDiffusionWave />
+          <FtRotationPlane
+            :options="{
+              url: '/geo/rotatingAperture.png',
+            }"
+            :mesh-options="{
+              scale: {
+                set: [1.2, 1.2, 1.2],
+              },
+            }"
+          />
+          <FtRotationPlane
+            :options="{
+              url: '/geo/circle-point.png',
+              speed: 0.05,
+            }"
+            :mesh-options="{
+              position: {
+                y: 0.04,
+              },
+            }"
+          />
+        </FtProjection> -->
+        <FtGeoPlane />
         <!--             autoRotate: true,
             autoRotateSpeed: 0.5, -->
         <FtOrbitControls
@@ -54,28 +93,52 @@
 
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
+import { FileLoader, PerspectiveCamera } from 'three'
 import {
   FtAmbientLight,
   FtAxesHelper,
+  FtDiffusionWave,
   FtDirectionalLight,
+  FtDomMarker,
+  FtDomMarkerRenderer,
+  FtGeoJsonPlane,
   FtGeoPlane,
+  FtMarkPoint,
   FtOrbitControls,
   FtPerspectiveCamera,
   FtPointLight,
+  FtProjection,
+  FtReflectorPlane,
+  FtRotationPlane,
   FtScene,
   FtWebglRenderer,
 } from '@farst-three/components'
-import type { PerspectiveCamera } from 'three'
-import type { PerspectiveCameraLoadEvent } from '@farst-three/components'
+import type { FeatureCollection, Geometry } from '@turf/turf'
 
-const domRef = ref<HTMLDivElement>()
-const pcamera = shallowRef<PerspectiveCamera>()
-function cameraLoad({ camera }: PerspectiveCameraLoadEvent) {
-  pcamera.value = camera
+const geoJson = shallowRef<FeatureCollection<Geometry>>()
+const geoJsonOutline = shallowRef<FeatureCollection<Geometry>>()
+const points = shallowRef<{ name: string; center: [number, number] }[]>([])
+function initGeoJson() {
+  const loader = new FileLoader()
+  loader.load('/geo/四川省.json', (data) => {
+    const dataObj = JSON.parse(data as string)
+    geoJson.value = dataObj
+    points.value = dataObj.features.map((item) => {
+      return {
+        name: item.properties.name,
+        center: item.properties.centroid || item.properties.center,
+      }
+    })
+  })
+
+  loader.load('/geo/四川-outLine.json', (data) => {
+    const dataStr = data as string
+    const jsonData = JSON.parse(dataStr)
+    geoJsonOutline.value = jsonData
+  })
 }
-function handleCamera() {
-  console.log(pcamera.value?.position)
-}
+
+initGeoJson()
 </script>
 
 <style lang="scss" scoped>

@@ -31,7 +31,6 @@ import {
 } from '@farst-three/components'
 import { geoPlaneEmits, geoPlaneProps } from './geo-plane'
 import { useLight } from './use-light'
-import { useStar } from './use-star'
 import { useReflector } from './use-reflector'
 import type { FeatureCollection, Geometry, Position } from '@turf/turf'
 defineOptions({
@@ -155,11 +154,9 @@ const renderer = store.getRenderer()!
 const animation = useAnimationService()
 const camera = store.getRenderCamera()!
 const { render } = useLight(scene, camera, renderer)
-const { render: starRender } = useStar(scene)
 useReflector(scene)
 animation.on(effectComposer, () => {
   render()
-  starRender()
 })
 emit('load', { scene })
 

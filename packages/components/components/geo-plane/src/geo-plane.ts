@@ -6,7 +6,6 @@ import type GeoPlaneComponent from './geo-plane.vue'
 export const geoPlaneProps = buildProps({
   url: {
     type: String,
-    required: true as const,
   },
 })
 export const geoPlaneEmits = {
