@@ -12,7 +12,7 @@ export function useDiffusionWave(scene: Scene) {
   let uniforms: Record<string, any> = {}
   const clock = new Clock()
 
-  const texture = new TextureLoader().load('/geo/地板背景.png')
+  const texture = new TextureLoader().load('/geo/floor-background.png')
   //扩散波效果
   const geometry2 = new CircleGeometry(100, 64)
   uniforms = {

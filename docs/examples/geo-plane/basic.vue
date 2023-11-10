@@ -41,7 +41,7 @@
           <FtDiffusionWave />
           <FtRotationPlane
             :options="{
-              url: '/geo/rotatingAperture.png',
+              url: '/geo/rotating-aperture.png',
             }"
             :mesh-options="{
               scale: {
@@ -51,7 +51,7 @@
           />
           <FtRotationPlane
             :options="{
-              url: '/geo/rotatingAperture.png',
+              url: '/geo/rotating-aperture.png',
               speed: -0.005,
             }"
             :mesh-options="{
@@ -117,7 +117,7 @@ const geoJsonOutline = shallowRef<FeatureCollection<Geometry>>()
 const points = shallowRef<{ name: string; center: [number, number] }[]>([])
 function initGeoJson() {
   const loader = new FileLoader()
-  loader.load('/geo/四川省.json', (data) => {
+  loader.load('/geo/sichuansheng.json', (data) => {
     const dataObj = JSON.parse(data as string)
     geoJson.value = dataObj
     points.value = dataObj.features.map((item) => {
@@ -128,7 +128,7 @@ function initGeoJson() {
     })
   })
 
-  loader.load('/geo/四川-outLine.json', (data) => {
+  loader.load('/geo/sichuan-outLine.json', (data) => {
     const dataStr = data as string
     const jsonData = JSON.parse(dataStr)
     geoJsonOutline.value = jsonData

@@ -11,7 +11,7 @@ export type RotationPlaneOptions = {
 
 export function useRotationPlane(scene: Scene, ops: RotationPlaneOptions) {
   const defaultOptions = {
-    url: '/geo/rotatingAperture.png',
+    url: '/geo/rotating-aperture.png',
     speed: 0.005,
     materialOptions: {},
     geometryOptions: [100, 100],

@@ -31,7 +31,7 @@ export function useFloor(scene: Scene) {
     scene.add(mirror)
 
     //底部颜色
-    const texture = textureLoader.load('/geo/地板背景.png')
+    const texture = textureLoader.load('/geo/floor-background.png')
     const materialx = new MeshPhongMaterial({
       color: 0xffffff,
       map: texture,
@@ -105,7 +105,7 @@ export function useFloor(scene: Scene) {
     scene.add(plane2)
 
     const rotatingApertureTexture = textureLoader.load(
-      '/geo/rotatingAperture.png'
+      '/geo/rotating-aperture.png'
     )
     const rotatingApertureerial = new MeshBasicMaterial({
       map: rotatingApertureTexture,
@@ -139,7 +139,7 @@ export function useFloor(scene: Scene) {
     rotatingPointMesh.scale.set(1, 1, 1)
     scene.add(rotatingPointMesh)
 
-    const circlePoint = textureLoader.load('/geo/circle-point.png')
+    const circlePoint = textureLoader.load('/geo/floor-circle-point.png')
     const material3 = new MeshPhongMaterial({
       color: 0x00ffff,
       map: circlePoint,

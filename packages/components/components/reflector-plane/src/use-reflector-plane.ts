@@ -29,7 +29,7 @@ export function useReflectorPlane(
   scene.add(mirror)
 
   //底部颜色
-  const texture = textureLoader.load('/geo/地板背景.png')
+  const texture = textureLoader.load('/geo/floor-background.png')
   const materialx = new MeshPhongMaterial({
     color: 0xffffff,
     map: texture,
@@ -48,7 +48,7 @@ export function useReflectorPlane(
   plane.position.y = 0.05
   scene.add(plane)
 
-  const circlePoint = textureLoader.load('/geo/circle-point.png')
+  const circlePoint = textureLoader.load('/geo/floor-circle-point.png')
   const material3 = new MeshPhongMaterial({
     color: 0x00ffff,
     map: circlePoint,

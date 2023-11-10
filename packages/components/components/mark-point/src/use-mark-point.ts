@@ -67,7 +67,7 @@ export function useMarkPoint(
     geometry.translate(0, height / 2, 0)
     // 柱子材质
     const material = new MeshBasicMaterial({
-      map: textureLoader.load('/geo/光柱.png'),
+      map: textureLoader.load('/geo/light-column.png'),
       color: '#00ffc4', //ffff00
       transparent: true,
       depthWrite: false,
@@ -104,7 +104,7 @@ export function useMarkPoint(
     // 标记点：几何体，材质，
     const geometry = new PlaneGeometry(1, 1)
     const material = new MeshBasicMaterial({
-      map: textureLoader.load('/geo/标注光圈.png'),
+      map: textureLoader.load('/geo/geo-cycle-label.png'),
       color: '#00ffc4',
       side: DoubleSide,
       opacity: 0,
@@ -127,7 +127,7 @@ export function useMarkPoint(
     // 标记点：几何体，材质，
     const geometry = new PlaneGeometry(1, 1)
     const material = new MeshBasicMaterial({
-      map: textureLoader.load('/geo/标注.png'),
+      map: textureLoader.load('/geo/geo-label.png'),
       color: '#00ffc4', //0x00ffff
       side: DoubleSide,
       transparent: true,

@@ -38,7 +38,7 @@ export function useGeoJsonPlane(
       color: { value: new Color('#02518d') }, //02518d
       repeat: { value: new Vector2(0.07, 0.07) },
       colorTexture: {
-        value: textureLoader.load('/geo/test.png'),
+        value: textureLoader.load('/geo/geo-plane-texture.png'),
       },
     }
     singleUniforms['colorTexture'].value.wrapS = singleUniforms[
@@ -84,7 +84,7 @@ export function useGeoJsonPlane(
       // blending:AdditiveBlending
     })
 
-    const texture2 = textureLoader.load('/geo/jian.png')
+    const texture2 = textureLoader.load('/geo/gradation.png')
     texture2.center.set(0.5, 0.5)
     texture2.rotation = Math.PI
 
