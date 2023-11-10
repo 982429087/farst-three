@@ -46,9 +46,3 @@ onBeforeUnmount(() => {
   destroy()
 })
 </script>
-
-<style>
-.label-item {
-  color: #fff;
-}
-</style>

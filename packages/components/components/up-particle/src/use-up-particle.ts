@@ -28,7 +28,7 @@ const defaultOptions: UpParticleOptions = {
     [-10, 30],
     [-60, 60],
   ],
-  image: '/geo/上升粒子1.png',
+  image: '/geo/up-particle.png',
   width: 180, // 显示的宽度
   height: 189, // 显示的高度
   frame: 9, //总共的帧数

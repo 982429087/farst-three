@@ -1,13 +1,11 @@
-import { buildProps, definePropType } from '@farst-three/utils'
-import type { MeshLine, Scene } from 'three'
+import { buildProps } from '@farst-three/utils'
+import type { Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'
-import type { ThreeOptions } from '@farst-three/utils'
 import type MeshLineComponent from './mesh-line.vue'
 
 export const meshLineProps = buildProps({
   options: {
-    type: definePropType<MeshLineOptions>(Object),
-    default: () => ({}),
+    type: undefined,
   },
 })
 export const meshLineEmits = {
@@ -20,4 +18,3 @@ export type MeshLineLoadEvent = {
 export type MeshLineEmits = typeof meshLineEmits
 export type MeshLineProps = ExtractPropTypes<typeof meshLineProps>
 export type MeshLineInstance = InstanceType<typeof MeshLineComponent>
-export type MeshLineOptions = ThreeOptions<MeshLine>

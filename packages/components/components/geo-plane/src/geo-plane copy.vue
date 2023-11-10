@@ -17,7 +17,7 @@ import {
 } from 'three'
 import { isString } from '@vueuse/core'
 import { center } from '@turf/turf'
-import { geoMercator } from 'd3'
+import { geoMercator } from 'd3-geo'
 import {
   effectComposer,
   useAnimationService,
@@ -31,7 +31,7 @@ import {
 } from '@farst-three/components'
 import { geoPlaneEmits, geoPlaneProps } from './geo-plane'
 import { useLight } from './use-light'
-import { useReflector } from './use-reflector'
+
 import type { FeatureCollection, Geometry, Position } from '@turf/turf'
 defineOptions({
   name: 'FtGeoPlane',
@@ -45,7 +45,7 @@ const loader = new FileLoader()
 
 let material: MeshBasicMaterial | undefined
 const map = new Object3D()
-loader.load(props.url, (data) => {
+loader.load(props.url!, (data) => {
   if (isString(data)) {
     const jsondata = JSON.parse(data) as FeatureCollection<Geometry>
     const c = center(jsondata).geometry.coordinates as [number, number]
@@ -154,7 +154,6 @@ const renderer = store.getRenderer()!
 const animation = useAnimationService()
 const camera = store.getRenderCamera()!
 const { render } = useLight(scene, camera, renderer)
-useReflector(scene)
 animation.on(effectComposer, () => {
   render()
 })

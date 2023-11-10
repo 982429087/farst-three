@@ -1,4 +1,4 @@
-import { geoMercator } from 'd3'
+import { geoMercator } from 'd3-geo'
 
 export function useProjection(
   center: [number, number],

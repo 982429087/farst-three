@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import type { GeoProjection } from 'd3'
+import type { GeoProjection } from 'd3-geo'
 import type { ExtractPropTypes } from 'vue'
 import type ProjectionComponent from './projection.vue'
 

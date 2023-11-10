@@ -2,7 +2,7 @@ import { Color, Group, Object3D } from 'three'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
-import type { GeoProjection } from 'd3'
+import type { GeoProjection } from 'd3-geo'
 import type { Scene } from 'three'
 import type { FeatureCollection, Geometry, Position } from '@turf/turf'
 
@@ -36,8 +36,8 @@ export function useGeoJsonPlaneLines(
       const coordinates = elem.geometry.coordinates as Position[][][]
       coordinates.forEach((multiPolygon) => {
         multiPolygon.forEach((polygon) => {
-          const positions = []
-          const colors = []
+          const positions: number[] = []
+          const colors: number[] = []
           const color = new Color()
           const linGeometry = new LineGeometry()
           for (const element of polygon) {

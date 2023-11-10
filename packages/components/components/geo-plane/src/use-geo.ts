@@ -26,7 +26,7 @@ import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer'
-import { geoMercator } from 'd3'
+import { geoMercator } from 'd3-geo'
 import type { Scene } from 'three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 export function useGeo(scene: Scene) {
@@ -66,8 +66,8 @@ export function useGeo(scene: Scene) {
       initLightPoint(properties, projection)
       coordinates.forEach((multiPolygon: any) => {
         multiPolygon.forEach((polygon: any) => {
-          const positions = []
-          const colors = []
+          const positions: number[] = []
+          const colors: number[] = []
           const color = new Color()
           const linGeometry = new LineGeometry()
           for (const element of polygon) {
@@ -240,11 +240,10 @@ export function useGeo(scene: Scene) {
       // 新建一个省份容器：用来存放省份对应的模型和轮廓线
       const meshArrs = new Object3D()
       const coordinates = elem.geometry.coordinates
-      const properties = elem.properties
       coordinates.forEach((multiPolygon: any) => {
         multiPolygon.forEach((polygon: any) => {
           const shape = new Shape()
-          const v3ps = []
+          const v3ps: Vector3[] = []
           for (const [i, element] of polygon.entries()) {
             const [x, y] = projection(element) as any
             if (i === 0) {

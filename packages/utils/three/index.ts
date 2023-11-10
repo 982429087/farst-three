@@ -1,4 +1,4 @@
-import { geoMercator } from 'd3'
+import { geoMercator } from 'd3-geo'
 
 export function random(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min

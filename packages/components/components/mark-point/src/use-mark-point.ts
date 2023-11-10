@@ -8,7 +8,7 @@ import {
 } from 'three'
 // import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer'
 import { random } from '@farst-three/utils'
-import type { GeoProjection } from 'd3'
+import type { GeoProjection } from 'd3-geo'
 import type { Material, Object3D, Scene } from 'three'
 
 export type MarkPoints = {

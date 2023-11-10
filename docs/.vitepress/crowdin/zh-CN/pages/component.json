@@ -226,6 +226,10 @@
         "text": "水滴面"
       },
       {
+        "link": "/up-particle",
+        "text": "上升粒子"
+      },
+      {
         "link": "/geo-plane",
         "text": "geojson地图"
       }

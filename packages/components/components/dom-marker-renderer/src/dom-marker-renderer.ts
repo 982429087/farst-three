@@ -1,4 +1,4 @@
-import { buildProps, definePropType } from '@farst-three/utils'
+import { buildProps } from '@farst-three/utils'
 import type { Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type DomMarkerRendererComponent from './dom-marker-renderer.vue'

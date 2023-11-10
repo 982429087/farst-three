@@ -20,7 +20,7 @@ import {
   Vector3,
 } from 'three'
 
-import type { GeoProjection } from 'd3'
+import type { GeoProjection } from 'd3-geo'
 import type { Scene } from 'three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 export function useGeoJsonPlane(
@@ -171,7 +171,7 @@ export function useGeoJsonPlane(
       coordinates.forEach((multiPolygon: any) => {
         multiPolygon.forEach((polygon: any) => {
           const shape = new Shape()
-          const v3ps = []
+          const v3ps: Vector3[] = []
           for (const [i, element] of polygon.entries()) {
             const [x, y] = projection(element) as any
             if (i === 0) {
@@ -221,7 +221,7 @@ export function useGeoJsonPlane(
     map.traverse((obj) => {
       if (obj instanceof Mesh) {
         obj.geometry.dispose()
-        obj.material.dispose()
+        obj.material.dispose?.()
       }
     })
     scene.remove(map)

@@ -18,7 +18,7 @@ import {
   storeServiceInjectionKey,
 } from '@farst-three/constants/injection'
 import { useInjection, useRefInjection } from '@farst-three/hooks'
-import type { GeoProjection } from 'd3'
+import type { GeoProjection } from 'd3-geo'
 import type { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import type {
   AnimationService,
