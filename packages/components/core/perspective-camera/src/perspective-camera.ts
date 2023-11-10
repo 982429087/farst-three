@@ -12,14 +12,14 @@ export type PerspectiveCameraParams = ConstructorParameters<
 export const perspectiveCameraProps = buildProps({
   fov: {
     type: Number,
-    default: 50,
+    default: 75,
   },
   aspect: {
     type: Number,
   },
   near: {
     type: Number,
-    default: 0.1,
+    default: 0.01,
   },
   far: {
     type: Number,

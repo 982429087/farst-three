@@ -20,8 +20,6 @@ lang: zh-CN
 
 # $NORMALIZED_NAME
 
-[]()
-
 
 
 ## 基础用法
@@ -66,25 +64,14 @@ cat >$EXAMPLE_FILE_PATH/$NAME/basic.vue <<EOF
   <div ref="domRef" class="farst-three">
     <FtScene>
       <FtPerspectiveCamera
-        :fov="75"
-        :near="0.01"
-        :far="100"
         :options="{
           position: {
-            set: [0.1, 4, 7],
+            set: [0, 5, 5],
           },
         }"
       />
 
-      <FtWebglRenderer
-        :params="{ antialias: true }"
-        :animation-fn="animationFn"
-        :options="{
-          shadowMap: {
-            enabled: true,
-          },
-        }"
-      >
+      <FtWebglRenderer>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>
@@ -92,7 +79,7 @@ cat >$EXAMPLE_FILE_PATH/$NAME/basic.vue <<EOF
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { useGui } from '@farst-three/hooks'
 import {
   FtOrbitControls,
@@ -101,10 +88,6 @@ import {
   FtWebglRenderer,
 } from '@farst-three/components'
 const domRef = ref<HTMLDivElement>()
-
-const animationFn = () => {
-  //
-}
 
 const { guiPromise } = useGui(domRef)
 guiPromise.then(gui => {
