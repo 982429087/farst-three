@@ -63,14 +63,7 @@ cat >$EXAMPLE_FILE_PATH/$NAME/basic.vue <<EOF
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtPerspectiveCamera
-        :options="{
-          position: {
-            set: [0, 5, 5],
-          },
-        }"
-      />
-
+      <FtPerspectiveCamera :options="cameraOptions" />
       <FtWebglRenderer>
         <FtOrbitControls />
       </FtWebglRenderer>
@@ -88,7 +81,11 @@ import {
   FtWebglRenderer,
 } from '@farst-three/components'
 const domRef = ref<HTMLDivElement>()
-
+const cameraOptions = reactive({
+  position: {
+    set: [0, 5, 5],
+  },
+})
 const { guiPromise } = useGui(domRef)
 guiPromise.then(gui => {
   //

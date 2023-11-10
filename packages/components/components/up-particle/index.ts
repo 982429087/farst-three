@@ -5,3 +5,4 @@ export const FtUpParticle = withInstall(UpParticle)
 export default FtUpParticle
 
 export * from './src/up-particle'
+export * from './src/use-up-particle'
