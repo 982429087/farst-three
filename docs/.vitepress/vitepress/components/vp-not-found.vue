@@ -15,7 +15,7 @@ const goHome = () => {
 </script>
 
 <template>
-  <el-result icon="error" :title="locale.title" :sub-title="locale.desc">
+  <el-result icon="error" :title="'locale.title'" :sub-title="locale.desc">
     <template #extra>
       <el-button @click="goHome">{{ locale['button-title'] }}</el-button>
     </template>

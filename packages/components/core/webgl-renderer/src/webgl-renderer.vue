@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, provide, watch } from 'vue'
 import { WebGLRenderer } from 'three'
-import { debounce } from 'lodash-es'
+import { debounce } from 'lodash'
 import { isClient } from '@vueuse/core'
 import {
   useAnimationService,

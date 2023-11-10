@@ -33,7 +33,7 @@ const onClick = (item: string) => {
 
 <template>
   <div class="page-resource">
-    <h1>{{ resourceLang.title }}</h1>
+    <h1>{{ 'resourceLang.title' }}</h1>
     <p>{{ resourceLang.lineOne }}</p>
     <p v-html="resourceLang.lineTwo" />
     <div class="flex flex-wrap justify-center mt-32px">

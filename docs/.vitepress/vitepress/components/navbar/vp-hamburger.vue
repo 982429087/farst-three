@@ -9,9 +9,10 @@ const locale = useNavbarLocale()
 </script>
 
 <template>
+  <!-- locale['mobile-nav'] -->
   <button
     :class="{ active }"
-    :aria-label="locale['mobile-nav']"
+    :aria-label="'?????'"
     :aria-expanded="active"
     aria-controls="full-screen"
     class="reset-btn menu-hamburger"

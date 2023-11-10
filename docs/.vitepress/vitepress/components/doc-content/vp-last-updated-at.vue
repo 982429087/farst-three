@@ -8,7 +8,7 @@ const { page } = useData()
 const lang = useLang()
 
 const prefix = computed(() => {
-  return localeData[lang.value].title
+  return 'localeData[lang.value].title'
 })
 
 const datetime = ref('')

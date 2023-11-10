@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, provide } from 'vue'
 import { PerspectiveCamera } from 'three'
-import { debounce } from 'lodash-es'
+import { debounce } from 'lodash'
 import { perspectiveCameraInjectionKey } from '@farst-three/constants/injection'
 import {
   useOptions,

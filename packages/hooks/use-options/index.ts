@@ -1,5 +1,5 @@
 import { toRaw, watch } from 'vue'
-import { cloneDeep, isEqual, isFunction, isObject, transform } from 'lodash-es'
+import { cloneDeep, isEqual, isFunction, isObject, transform } from 'lodash'
 import { isArray } from '@farst-three/utils'
 import type { Scene } from 'three'
 import type { AnyFun } from '@farst-three/utils'

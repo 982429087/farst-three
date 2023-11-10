@@ -30,7 +30,7 @@ export function useActiveSidebarLinks(
       if (isActive) {
         history.replaceState(
           null,
-          document.title,
+          'document.title',
           hash ? (hash as string) : ' '
         )
         activateLink(hash as string)

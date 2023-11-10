@@ -78,7 +78,7 @@ export default defineConfig(async ({ mode }) => {
       },
     },
     ssr: {
-      noExternal: ['lodash-es', 'dat.gui', 'three'],
+      noExternal: ['lodash-es', 'dat.gui', 'three', 'd3-geo'],
     },
     server: {
       host: true,
