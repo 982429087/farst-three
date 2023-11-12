@@ -3,7 +3,7 @@ import { merge } from 'lodash'
 import type { MeshBasicMaterialParameters, Scene } from 'three'
 
 export type RotationPlaneOptions = {
-  url: string
+  texture?: string
   speed?: number
   materialOptions?: MeshBasicMaterialParameters
   geometryOptions?: ConstructorParameters<typeof PlaneGeometry>
@@ -11,14 +11,14 @@ export type RotationPlaneOptions = {
 
 export function useRotationPlane(scene: Scene, ops: RotationPlaneOptions) {
   const defaultOptions = {
-    url: '/geo/rotating-aperture.png',
+    texture: '/geo/rotating-aperture.png',
     speed: 0.005,
     materialOptions: {},
     geometryOptions: [100, 100],
   }
   const options = merge(defaultOptions, ops)
 
-  const texture = new TextureLoader().load(options.url)
+  const texture = new TextureLoader().load(options.texture)
   const material = new MeshBasicMaterial({
     map: texture,
     transparent: true,

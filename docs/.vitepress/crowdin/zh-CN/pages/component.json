@@ -215,7 +215,7 @@
     ]
   },
   "other": {
-    "text": "其他",
+    "text": "组件",
     "children": [
       {
         "link": "/refraction-mesh",
@@ -232,6 +232,10 @@
       {
         "link": "/geo-plane",
         "text": "geojson地图"
+      },
+      {
+        "link": "/rotation-plane",
+        "text": "旋转平面"
       }
     ]
   }

@@ -21,6 +21,7 @@ export const rotationPlaneEmits = {
 
 export type RotationPlaneLoadEvent = {
   scene: Scene
+  mesh: Mesh
 }
 export type RotationPlaneEmits = typeof rotationPlaneEmits
 export type RotationPlaneProps = ExtractPropTypes<typeof rotationPlaneProps>

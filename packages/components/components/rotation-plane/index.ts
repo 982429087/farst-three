@@ -5,3 +5,4 @@ export const FtRotationPlane = withInstall(RotationPlane)
 export default FtRotationPlane
 
 export * from './src/rotation-plane'
+export * from './src/use-rotation-plane'
