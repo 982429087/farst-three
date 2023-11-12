@@ -236,6 +236,10 @@
       {
         "link": "/rotation-plane",
         "text": "旋转平面"
+      },
+      {
+        "link": "/dom-marker",
+        "text": "dom标记"
       }
     ]
   }

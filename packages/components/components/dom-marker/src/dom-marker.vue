@@ -27,11 +27,13 @@ function createTextPoint() {
   if (!domMarkerItem.value || !props.point) return
   const tag = domMarkerItem.value
   const label = new CSS2DObject(tag)
-  const [x, z] = projection(props.point) as number[]
+  const [x, z] = projection
+    ? (projection([props.point[0], props.point[1]]) as number[])
+    : props.point
   label.position.set(x, props.y, z)
-  label.position.z += props.offset[2]
-  label.position.x += props.offset[0]
-  label.position.y += props.offset[1]
+  label.position.z += props.offsetZ
+  label.position.x += props.offsetX
+  label.position.y += props.offsetY
   scene.add(label)
 }
 

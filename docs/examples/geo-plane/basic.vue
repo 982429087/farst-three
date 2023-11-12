@@ -32,6 +32,7 @@
             <FtDomMarker
               v-for="item in points"
               :key="item.name"
+              :y="5.01"
               :point="item.center"
             >
               {{ item.name }}
@@ -41,7 +42,7 @@
           <FtDiffusionWave />
           <FtRotationPlane
             :options="{
-              url: '/geo/rotating-aperture.png',
+              texture: '/geo/rotating-aperture.png',
             }"
             :mesh-options="{
               scale: {
@@ -51,7 +52,7 @@
           />
           <FtRotationPlane
             :options="{
-              url: '/geo/rotating-aperture.png',
+              texture: '/geo/rotating-aperture.png',
               speed: -0.005,
             }"
             :mesh-options="{

@@ -9,11 +9,19 @@ export const domMarkerProps = buildProps({
   },
   y: {
     type: Number,
-    default: 5.01,
+    default: 0,
   },
-  offset: {
-    type: definePropType<[number, number, number]>(Array),
-    default: () => [0, 0, -3],
+  offsetX: {
+    type: Number,
+    default: 0,
+  },
+  offsetY: {
+    type: Number,
+    default: 0,
+  },
+  offsetZ: {
+    type: Number,
+    default: 0,
   },
 })
 export const domMarkerEmits = {
