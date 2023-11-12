@@ -34,26 +34,7 @@ export function useMarkPoint(
     light.position.z -= 3
     // light.position.y = 13.31;
     map.add(light)
-
-    //这里创建坐标
-    // createTextPoint(x, y, areaName)
   }
-
-  // function createTextPoint(x: number, z: number, areaName: string) {
-  //   // 标签
-  //   const tag = document.createElement('div')
-  //   // tag.innerHTML = name
-  //   tag.className = 'label-item'
-  //   tag.style.pointerEvents = 'none'
-  //   // tag.style.visibility = 'hidden'
-  //   tag.style.position = 'absolute'
-  //   const label = new CSS2DObject(tag)
-  //   label.element.innerHTML = areaName
-  //   label.element.style.visibility = 'visible'
-  //   label.position.set(x, 5.01, z)
-  //   label.position.z -= 3
-  //   scene.add(label)
-  // }
 
   function createLightPillar(x: number, z: number, heightScaleFactor = 1) {
     const group = new Group()

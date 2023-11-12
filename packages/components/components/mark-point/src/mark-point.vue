@@ -19,24 +19,23 @@ defineOptions({
 const props = defineProps(markPointProps)
 const emit = defineEmits(markPointEmits)
 
-// init here
 const scene = useScene()
 const animation = useAnimationService()
 const projection = useProjection()
-let render1: () => void
+let animationFn: () => void
 let destroy: () => void
 watch(
   () => props.points,
   (v) => {
     if (!v) return
     const { render, dispose } = useMarkPoint(scene, projection, v)
-    render1 = render
+    animationFn = render
     destroy = dispose
   },
   { immediate: true }
 )
 animation.on('mark-point', () => {
-  if (render1) render1()
+  if (animationFn) animationFn()
 })
 emit('load', { scene })
 
