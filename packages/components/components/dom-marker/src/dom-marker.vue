@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer'
-import { useProjection, useScene } from '@farst-three/hooks'
+import { useOptions, useProjection, useScene } from '@farst-three/hooks'
 import { domMarkerEmits, domMarkerProps } from './dom-marker'
 
 defineOptions({
@@ -19,22 +19,33 @@ const emit = defineEmits(domMarkerEmits)
 const scene = useScene()
 const projection = useProjection()
 
-emit('load', { scene })
-
 const domMarkerItem = ref<HTMLDivElement>()
 
 function createTextPoint() {
-  if (!domMarkerItem.value || !props.point) return
+  if (!domMarkerItem.value) return
   const tag = domMarkerItem.value
-  const label = new CSS2DObject(tag)
-  const [x, z] = projection
-    ? (projection([props.point[0], props.point[1]]) as number[])
-    : props.point
-  label.position.set(x, props.y, z)
-  label.position.z += props.offsetZ
-  label.position.x += props.offsetX
-  label.position.y += props.offsetY
-  scene.add(label)
+  const css2DObject = new CSS2DObject(tag)
+  const position = projection
+    ? (projection([props.x, props.y]) as number[])
+    : [props.x, props.y]
+  const positionObj: Record<string, number> = {
+    x: position[0],
+    y: position[1],
+    z: props.z,
+  }
+
+  css2DObject.position.set(
+    positionObj[props.xKey],
+    positionObj[props.yKey],
+    positionObj[props.zKey]
+  )
+  css2DObject.position.z += props.offsetZ
+  css2DObject.position.x += props.offsetX
+  css2DObject.position.y += props.offsetY
+  scene.add(css2DObject)
+
+  useOptions(props.options, css2DObject, scene)
+  emit('load', { scene, css2DObject })
 }
 
 onMounted(() => {

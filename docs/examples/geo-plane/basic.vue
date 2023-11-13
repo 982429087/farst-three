@@ -32,8 +32,11 @@
             <FtDomMarker
               v-for="item in points"
               :key="item.name"
-              :y="5.01"
-              :point="item.center"
+              :x="item.center[0]"
+              :y="item.center[1]"
+              :z="5.01"
+              :y-key="'z'"
+              :z-key="'y'"
             >
               {{ item.name }}
             </FtDomMarker>
