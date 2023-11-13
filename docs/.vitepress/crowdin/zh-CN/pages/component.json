@@ -240,6 +240,10 @@
       {
         "link": "/dom-marker",
         "text": "dom标记"
+      },
+      {
+        "link": "/diffusion-wave",
+        "text": "扩散波"
       }
     ]
   }

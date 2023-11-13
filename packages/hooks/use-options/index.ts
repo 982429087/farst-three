@@ -68,7 +68,7 @@ export function useOptions<T extends Record<string, any>, R extends AnyFun>(
     }
   }
 
-  watch(
+  const watchStopHandle = watch(
     () => options,
     (v) => {
       const raw = toRaw(v)
@@ -80,6 +80,7 @@ export function useOptions<T extends Record<string, any>, R extends AnyFun>(
     },
     { immediate: true, deep: true }
   )
+  return { watchStopHandle }
 }
 
 /**

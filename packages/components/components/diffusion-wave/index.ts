@@ -5,3 +5,4 @@ export const FtDiffusionWave = withInstall(DiffusionWave)
 export default FtDiffusionWave
 
 export * from './src/diffusion-wave'
+export * from './src/use-diffusion-wave'
