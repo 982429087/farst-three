@@ -10,18 +10,22 @@ export type ReflectorPlaneOptions = {
 
 export function useReflectorPlane(
   scene: Scene,
+  container: HTMLElement,
   options: ReflectorPlaneOptions = {
     planeGeometry: [800, 800],
     reflectorOptions: {},
   }
 ) {
   const textureLoader = new TextureLoader()
-
   const geometry = new PlaneGeometry(...options.planeGeometry)
+  const dpr = window.devicePixelRatio
+  const width = container.offsetWidth * dpr
+  const height = container.offsetHeight * dpr
+
   const mirror = new Reflector(geometry, {
-    clipBias: 0.13,
-    textureWidth: window.innerWidth * window.devicePixelRatio,
-    textureHeight: window.innerHeight * window.devicePixelRatio,
+    clipBias: 0.1,
+    textureWidth: width,
+    textureHeight: height,
     color: '#8f9299',
     ...options.reflectorOptions,
   })

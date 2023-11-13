@@ -18,6 +18,7 @@ export const webGLRendererProps = buildProps({
     type: definePropType<WebGLRendererParameters>(Object),
     default: () => ({
       antialias: true,
+      logarithmicDepthBuffer: true, // 就是两个面间距比较小的时候，让threejs更容易区分两个面，谁在前，谁在后
     }),
   },
   scissor: {

@@ -11,7 +11,9 @@
           },
         }"
       />
-      <FtWebglRenderer :params="{ antialias: true, alpha: true }">
+      <FtWebglRenderer
+        :params="{ antialias: true, alpha: true, logarithmicDepthBuffer: true }"
+      >
         <FtProjection
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
@@ -54,7 +56,7 @@
             </template>
           </FtDomMarkerRenderer>
 
-          <!-- <FtReflectorPlane /> -->
+          <FtReflectorPlane />
           <FtDiffusionWave />
           <FtRotationPlane
             :options="{

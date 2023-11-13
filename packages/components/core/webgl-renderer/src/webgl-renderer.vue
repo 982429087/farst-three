@@ -48,6 +48,7 @@ eventService.setCamera(camera)
 const dpr = isClient ? window.devicePixelRatio || 1 : 1
 
 let renderer = new WebGLRenderer(props.params)
+
 storeService.setRenderer(renderer)
 renderer.setSize(container.offsetWidth, container.offsetHeight)
 container.appendChild(renderer.domElement)
