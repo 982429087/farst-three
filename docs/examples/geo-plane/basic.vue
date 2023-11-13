@@ -11,14 +11,7 @@
           },
         }"
       />
-      <FtWebglRenderer
-        :params="{ antialias: true, alpha: true }"
-        :options="{
-          shadowMap: {
-            enabled: true,
-          },
-        }"
-      >
+      <FtWebglRenderer :params="{ antialias: true, alpha: true }">
         <FtProjection
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
@@ -27,21 +20,41 @@
             :geo-json="geoJson"
             :geo-json-outline="geoJsonOutline"
           />
-          <FtMarkPoint :points="points" />
           <FtDomMarkerRenderer>
-            <FtDomMarker
-              v-for="item in points"
-              :key="item.name"
-              :x="item.center[0]"
-              :y="item.center[1]"
-              :z="5.01"
-              :y-key="'z'"
-              :z-key="'y'"
-            >
-              {{ item.name }}
-            </FtDomMarker>
+            <template v-for="item in points" :key="item.name">
+              <FtDomMarker
+                :x="item.center[0]"
+                :y="item.center[1]"
+                :z="5.01"
+                :y-key="'z'"
+                :z-key="'y'"
+              >
+                {{ item.name }}
+              </FtDomMarker>
+              <!-- 这里是为了统一循环，只有domMarker需要在domMarkerRender下， 其他两个组件不需要 -->
+              <FtPointMarker
+                :options="{
+                  x: item.center[0],
+                  y: item.center[1],
+                  z: 4.01,
+                  yKey: 'z',
+                  zKey: 'y',
+                }"
+              />
+              <FtPillar
+                :options="{
+                  x: item.center[0],
+                  y: item.center[1],
+                  z: 4.01,
+                  yKey: 'z',
+                  zKey: 'y',
+                  height: 9,
+                }"
+              />
+            </template>
           </FtDomMarkerRenderer>
-          <FtReflectorPlane />
+
+          <!-- <FtReflectorPlane /> -->
           <FtDiffusionWave />
           <FtRotationPlane
             :options="{
@@ -55,7 +68,7 @@
           />
           <FtRotationPlane
             :options="{
-              texture: '/geo/rotating-aperture.png',
+              texture: '/geo/rotating-point2.png',
               speed: -0.005,
             }"
             :mesh-options="{
@@ -104,9 +117,10 @@ import {
   FtDomMarker,
   FtDomMarkerRenderer,
   FtGeoJsonPlane,
-  FtMarkPoint,
   FtOrbitControls,
   FtPerspectiveCamera,
+  FtPillar,
+  FtPointMarker,
   FtProjection,
   FtReflectorPlane,
   FtRotationPlane,

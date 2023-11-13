@@ -92,7 +92,7 @@ provide(rendererInjectionKey, renderer)
 useOptions(props.options, renderer, scene)
 
 onBeforeUnmount(() => {
-  animationService.off('propsFn')
+  if (props.animationFn) animationService.off('propsFn')
   observer.unobserve(container)
   container.removeChild(renderer.domElement)
   renderer.forceContextLoss()

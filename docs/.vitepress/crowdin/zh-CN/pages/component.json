@@ -244,6 +244,14 @@
       {
         "link": "/diffusion-wave",
         "text": "扩散波"
+      },
+      {
+        "link": "/point-marker",
+        "text": "标记点"
+      },
+      {
+        "link": "/pillar",
+        "text": "光柱"
       }
     ]
   }

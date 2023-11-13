@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
-import MarkPoint from '../src/mark-point.vue'
+import PointMarker from '../src/point-marker.vue'
 
 const AXIOM = 'Just test world'
 
-describe('MarkPoint.vue', () => {
+describe('PointMarker.vue', () => {
   test('render test', () => {
-    const wrapper = mount(() => <MarkPoint>{AXIOM}</MarkPoint>)
+    const wrapper = mount(() => <PointMarker>{AXIOM}</PointMarker>)
 
     expect(wrapper.text()).toEqual(AXIOM)
   })
