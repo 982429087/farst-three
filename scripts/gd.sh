@@ -72,7 +72,7 @@ cat >$EXAMPLE_FILE_PATH/$NAME/basic.vue <<EOF
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { useGui } from '@farst-three/hooks'
 import {
   FtOrbitControls,
@@ -87,7 +87,7 @@ const cameraOptions = reactive({
   },
 })
 const { guiPromise } = useGui(domRef)
-guiPromise.then(gui => {
+guiPromise.then((gui) => {
   //
 })
 </script>
