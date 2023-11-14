@@ -87,7 +87,7 @@ export function useDiffusionWave(scene: Scene, opts: DiffusionWaveOptions) {
 
   const mesh = new Mesh(geometry, material)
   mesh.rotateX(-Math.PI / 2)
-  mesh.position.y = -0.015
+  mesh.position.y = -0.15
   scene.add(mesh)
 
   function dispose() {

@@ -12,7 +12,10 @@
         }"
       />
       <FtWebglRenderer
-        :params="{ antialias: true, alpha: true, logarithmicDepthBuffer: true }"
+        :params="{
+          antialias: true,
+          alpha: true,
+        }"
       >
         <FtProjection
           :center="[102.44662948242187, 30.927128325051036]"
@@ -27,7 +30,7 @@
               <FtDomMarker
                 :x="item.center[0]"
                 :y="item.center[1]"
-                :z="5.01"
+                :z="5.1"
                 :y-key="'z'"
                 :z-key="'y'"
               >
@@ -38,7 +41,7 @@
                 :options="{
                   x: item.center[0],
                   y: item.center[1],
-                  z: 4.01,
+                  z: 4.1,
                   yKey: 'z',
                   zKey: 'y',
                 }"
@@ -47,7 +50,7 @@
                 :options="{
                   x: item.center[0],
                   y: item.center[1],
-                  z: 4.01,
+                  z: 4.2,
                   yKey: 'z',
                   zKey: 'y',
                   height: 9,
@@ -75,18 +78,16 @@
             }"
             :mesh-options="{
               position: {
-                y: 0.04,
+                y: 0.25,
               },
             }"
           />
           <FtUpParticle />
         </FtProjection>
-        <!-- <FtGeoPlane /> -->
-
         <FtOrbitControls
           :options="{
             enableDamping: true,
-            enableZoom: true,
+            enableZoom: false,
             minDistance: 1,
             maxDistance: 2000,
             maxPolarAngle: (Math.PI / 180) * 75,
@@ -158,10 +159,13 @@ function initGeoJson() {
 initGeoJson()
 </script>
 
-<style lang="scss" scoped>
+<style>
 .farst-three {
   height: 700px;
   width: 100%;
   position: relative;
+}
+.ft-dom-marker-container {
+  font-size: 12px;
 }
 </style>

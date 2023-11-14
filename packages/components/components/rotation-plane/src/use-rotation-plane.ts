@@ -30,7 +30,7 @@ export function useRotationPlane(scene: Scene, ops: RotationPlaneOptions) {
   const geometry = new PlaneGeometry(...(options.geometryOptions as any[]))
   const mesh = new Mesh(geometry, material)
   mesh.rotateX(-Math.PI / 2)
-  mesh.position.y = 0.02
+  mesh.position.y = 0.15
   mesh.scale.set(1, 1, 1)
   scene.add(mesh)
 
