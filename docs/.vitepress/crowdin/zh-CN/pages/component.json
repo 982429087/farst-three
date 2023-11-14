@@ -256,6 +256,10 @@
       {
         "link": "/geo-json-plane",
         "text": "geojson地图"
+      },
+      {
+        "link": "/edge-move-line",
+        "text": "边缘移动线"
       }
     ]
   },

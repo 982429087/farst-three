@@ -1,11 +1,9 @@
 import {
   Color,
   ExtrudeGeometry,
-  ExtrudeGeometryOptions,
   FrontSide,
   Group,
   Mesh,
-  MeshBasicMaterial,
   MeshPhongMaterial,
   Object3D,
   RepeatWrapping,

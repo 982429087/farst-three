@@ -11,9 +11,18 @@ import {
   ShaderMaterial,
   Vector3,
 } from 'three'
+import { merge } from 'lodash'
 import type { GeoProjection } from 'd3-geo'
 import type { Scene } from 'three'
 import type { FeatureCollection, Geometry, Position } from '@turf/turf'
+
+export type EdgeMoveLineSetting = {
+  number?: number
+  speed?: number
+  length?: number
+  size?: number
+  color?: Vector3
+}
 
 export type EdgeMoveLineOptions = {
   geoJson: FeatureCollection<Geometry>
@@ -22,8 +31,11 @@ export type EdgeMoveLineOptions = {
 export function useEdgeMoveLine(
   scene: Scene,
   projection: GeoProjection,
-  geoJson: FeatureCollection<Geometry>
+  opts: EdgeMoveLineOptions
 ) {
+  const defaultOptions = {}
+  const options = merge(defaultOptions, opts)
+  const geoJson = options.geoJson
   const group = new Group()
   const timeUniforms = {
     u_time: { value: 0.0 },
@@ -104,7 +116,6 @@ export function useEdgeMoveLine(
   }
 
   geoJson.features.forEach((elem) => {
-    const o3d = new Object3D()
     const coordinates = elem.geometry.coordinates as Position[][][]
     coordinates.forEach((multiPolygon) => {
       multiPolygon.forEach((polygon) => {
@@ -119,7 +130,7 @@ export function useEdgeMoveLine(
           curve,
           {
             speed: 0.4,
-            color: new Color('#ffff00'),
+            color: new Color('#1c475e'),
             number: 3, //同时跑动的流光数量
             length: 0.2, //流光线条长度
             size: 8, //粗细
@@ -129,10 +140,9 @@ export function useEdgeMoveLine(
         flyLine.position.set(0, 0.1, -3)
         flyLine.scale.multiplyScalar(1.001)
         flyLine.rotateX(-Math.PI / 2)
-        o3d.add(flyLine)
+        group.add(flyLine)
       })
     })
-    group.add(o3d)
   })
 
   scene.add(group)
@@ -141,7 +151,18 @@ export function useEdgeMoveLine(
     timeUniforms.u_time.value += 0.007
   }
 
+  function dispose() {
+    scene.remove(group)
+    group.traverse((obj) => {
+      if (obj instanceof Points) {
+        obj.geometry.dispose()
+        obj.material.dispose()
+      }
+    })
+  }
+
   return {
     render,
+    dispose,
   }
 }
