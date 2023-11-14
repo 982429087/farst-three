@@ -230,10 +230,6 @@
         "text": "上升粒子"
       },
       {
-        "link": "/geo-plane",
-        "text": "geojson地图"
-      },
-      {
         "link": "/rotation-plane",
         "text": "旋转平面"
       },
@@ -256,6 +252,19 @@
       {
         "link": "/reflector-plane",
         "text": "镜面反射"
+      },
+      {
+        "link": "/geo-json-plane",
+        "text": "geojson地图"
+      }
+    ]
+  },
+  "collection": {
+    "text": "集合",
+    "children": [
+      {
+        "link": "/geo-plane",
+        "text": "效果1"
       }
     ]
   }
