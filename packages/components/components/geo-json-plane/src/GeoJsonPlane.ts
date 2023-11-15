@@ -98,7 +98,8 @@ export class GeoJsonPlane implements FtObject {
   private _geoJson: FeatureCollection<Geometry> | undefined
 
   private textureLoader = new TextureLoader()
-  public group = new Group()
+  public lineGroup = new Group()
+  public planeGroup = new Group()
 
   constructor(
     scene: Scene,
@@ -131,7 +132,6 @@ export class GeoJsonPlane implements FtObject {
     this.dispose()
     const { gridMaterial, gradationMaterial } = this.initPlaneMaterial()
     this.geoJson.features?.forEach((elem) => {
-      const o3d = new Object3D()
       const coordinates = elem.geometry.coordinates as Position[][][]
 
       coordinates.forEach((multiPolygon) => {
@@ -158,7 +158,7 @@ export class GeoJsonPlane implements FtObject {
           const mesh = new Mesh(geometry, [gridMaterial, gradationMaterial])
           mesh.rotateX(-Math.PI / 2)
           mesh.position.set(0, 1, -3)
-          o3d.add(mesh)
+          this.planeGroup.add(mesh)
 
           // 线条
           const { bottomMaterial, topMaterial } = this.initLineMaterial()
@@ -168,7 +168,7 @@ export class GeoJsonPlane implements FtObject {
           if (this.options.showTopLine) {
             const topLine = this.createLine(linGeometry, topMaterial)
             topLine.position.set(...this.options.topLineOptions!.position!)
-            o3d.add(topLine)
+            this.lineGroup.add(topLine)
           }
 
           if (this.options.showBottomLine) {
@@ -176,17 +176,17 @@ export class GeoJsonPlane implements FtObject {
             bottomLine.position.set(
               ...this.options.bottomLineOptions!.position!
             )
-            o3d.add(bottomLine)
+            this.lineGroup.add(bottomLine)
           }
         })
       })
-      this.group.add(o3d)
     })
-    this.scene.add(this.group)
+    this.scene.add(this.planeGroup, this.lineGroup)
   }
   dispose() {
-    this.scene.remove(this.group)
-    this.group.traverse((obj) => {
+    this.scene.remove(this.planeGroup)
+    this.scene.remove(this.lineGroup)
+    this.planeGroup.traverse((obj) => {
       obj.traverse((child) => {
         if (child instanceof Mesh) {
           child.geometry.dispose()
@@ -198,7 +198,20 @@ export class GeoJsonPlane implements FtObject {
         }
       })
     })
-    this.group.remove(...this.group.children)
+    this.planeGroup.remove(...this.planeGroup.children)
+    this.lineGroup.traverse((obj) => {
+      obj.traverse((child) => {
+        if (child instanceof Mesh) {
+          child.geometry.dispose()
+          child.material.dispose?.()
+        }
+        if (child instanceof Line2) {
+          child.geometry.dispose()
+          child.material.dispose()
+        }
+      })
+    })
+    this.lineGroup.remove(...this.lineGroup.children)
   }
 
   loop() {

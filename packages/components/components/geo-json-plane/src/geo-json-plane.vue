@@ -33,12 +33,11 @@ watch(
     geoJsonPlane.geoJson = json
     if (v) geoJsonPlane.options = v
     geoJsonPlane.render()
-    console.log(geoJsonPlane.group.children)
 
     const { dispose } = uesEvent(
       props,
       emit,
-      geoJsonPlane.group.children,
+      geoJsonPlane.planeGroup.children,
       eventService,
       true
     )
