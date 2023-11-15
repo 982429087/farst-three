@@ -13,6 +13,7 @@
           alpha: true,
         }"
       >
+        <FtHighLight />
         <FtProjection
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
@@ -45,7 +46,6 @@
           :options="{ position: { set: [100, 10, 100] } }"
         />
         <FtAxesHelper :size="100" />
-        <FtGridHelper :size="100" :divisions="100" />
       </FtWebglRenderer>
     </FtScene>
   </div>
@@ -53,22 +53,37 @@
 
 <script setup lang="ts">
 import { reactive, ref, shallowRef } from 'vue'
-import { FileLoader } from 'three'
+import {
+  BoxGeometry,
+  Color,
+  FileLoader,
+  MeshBasicMaterial,
+  SphereGeometry,
+} from 'three'
 import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtAxesHelper,
+  FtBoxGeometry,
   FtDirectionalLight,
   FtGeoJsonPlane,
   FtGridHelper,
+  FtHighLight,
+  FtMesh,
+  FtMeshBasicMaterial,
   FtOrbitControls,
   FtPerspectiveCamera,
   FtProjection,
   FtScene,
   FtWebglRenderer,
 } from '@farst-three/components'
+import type { Mesh } from 'three'
 import type { FunsEvent } from '@farst-three/hooks'
-import type { GeoJsonPlaneOptions } from '@farst-three/components'
+import type {
+  GeoJsonPlaneOptions,
+  SceneInstance,
+  SceneLoadEvent,
+} from '@farst-three/components'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
@@ -106,8 +121,26 @@ function initGeoJson() {
   })
 }
 
-function handleClick(e: FunsEvent) {
-  console.log(e)
+const map: Record<string, Mesh> = {}
+function handleClick({ targets }: FunsEvent) {
+  const target = targets[0]
+  if (target) {
+    const object = target.object as Mesh
+    for (const [, value] of Object.entries(map)) {
+      console.log(value)
+
+      value.layers.disable(1)
+    }
+
+    if (!map[object.id]) {
+      map[object.id] = object
+      object.layers.enable(1)
+    } else {
+      object.layers.enable(1)
+    }
+
+    // target.object.geome
+  }
 }
 
 initGeoJson()
