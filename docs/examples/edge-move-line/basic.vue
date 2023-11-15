@@ -20,10 +20,11 @@
           <FtGeoJsonPlane
             :geo-json="geoJson"
             :geo-json-outline="geoJsonOutline"
-            :plane-options="planeOptions"
-            :line-options="lineOptions"
           />
-          <FtEdgeMoveLine :geojson="geoJsonOutline" />
+          <FtEdgeMoveLine
+            :geojson="geoJsonOutline"
+            :options="edgeMoveLineOptions"
+          />
         </FtProjection>
         <FtOrbitControls
           :options="{
@@ -55,7 +56,7 @@
 
 <script setup lang="ts">
 import { reactive, ref, shallowRef } from 'vue'
-import { FileLoader } from 'three'
+import { Color, FileLoader } from 'three'
 import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
@@ -70,10 +71,7 @@ import {
   FtScene,
   FtWebglRenderer,
 } from '@farst-three/components'
-import type {
-  GeoJsonPlaneLinesOptions,
-  GeoJsonPlaneOptions,
-} from '@farst-three/components'
+import type { EdgeMoveLineOptions } from '@farst-three/components'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
@@ -81,27 +79,13 @@ const cameraOptions = reactive({
     set: [3.53, 74.82, 112.39],
   },
 })
-
-const planeOptions = reactive<GeoJsonPlaneOptions>({
-  topPlaneOptions: {
-    color: '#02518d',
-  },
-  sidePlaneOptions: {
-    texture: '/geo/wall.png',
-    textureCenter: [0, 0],
-  },
-})
-const lineOptions = reactive<GeoJsonPlaneLinesOptions>({
-  showBottomLine: true,
-  showTopLine: true,
-  topLineMaterialOptions: {
-    color: 0x68c5f6,
-    linewidth: 0.002,
-  },
-  bottomLineMaterialOptions: {
-    color: 0x45bff8,
-    linewidth: 0.004,
-  },
+const edgeMoveLineOptions = reactive<EdgeMoveLineOptions>({
+  pointsCount: 10000, // 粒子数量
+  speed: 0.2, // 速度
+  color: '#1c475e', // 颜色
+  number: 3, // 同时跑动的流光数量
+  length: 0.2, // 流光线条长度
+  size: 8, // 粗细
 })
 
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
@@ -123,14 +107,12 @@ function initGeoJson() {
 initGeoJson()
 const { guiPromise } = useGui(domRef)
 guiPromise.then((gui) => {
-  gui.addColor(planeOptions.topPlaneOptions!, 'color')
-  gui.add(lineOptions, 'showBottomLine')
-  gui.add(lineOptions, 'showTopLine')
-
-  gui.addColor(lineOptions.topLineMaterialOptions!, 'color')
-  gui.addColor(lineOptions.bottomLineMaterialOptions!, 'color')
-
-  gui.add(lineOptions.topLineMaterialOptions!, 'linewidth', 0.001, 0.01, 0.001)
+  gui.add(edgeMoveLineOptions, 'pointsCount', 1000, 100000, 1000)
+  gui.add(edgeMoveLineOptions, 'speed', 0.1, 1, 0.1)
+  gui.addColor(edgeMoveLineOptions, 'color')
+  gui.add(edgeMoveLineOptions, 'number', 1, 10, 1)
+  gui.add(edgeMoveLineOptions, 'length', 0.1, 1, 0.1)
+  gui.add(edgeMoveLineOptions, 'size', 1, 10, 1)
 })
 </script>
 

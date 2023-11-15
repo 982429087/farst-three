@@ -69,4 +69,5 @@ declare module '@vue/runtime-core' {
     FtGeoPlane: typeof import('@farst-three/components')['FtGeoPlane']
   }
 }
+
 export {}

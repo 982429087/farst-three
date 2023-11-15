@@ -10,8 +10,7 @@ import {
   useScene,
 } from '@farst-three/hooks'
 import { edgeMoveLineEmits, edgeMoveLineProps } from './edge-move-line'
-import { useEdgeMoveLine } from './use-edge-move-line'
-import type { AnyFun } from '@farst-three/utils'
+import { EdgeMoveLine } from './use-edge-move-line'
 
 defineOptions({
   name: 'FtEdgeMoveLine',
@@ -23,19 +22,22 @@ const emit = defineEmits(edgeMoveLineEmits)
 const projection = useProjection()
 const scene = useScene()
 const animation = useAnimationService()
-let animationFn: AnyFun | undefined
-let destroy: AnyFun | undefined
+
+const edgeMoveLine = new EdgeMoveLine(
+  scene,
+  projection,
+  props.options,
+  props.geojson
+)
+
 watch(
   [() => props.geojson, () => props.options],
   ([json, opts]) => {
     if (!json) return
-    destroy?.()
-    const { render, dispose } = useEdgeMoveLine(scene, projection, {
-      ...opts,
-      geoJson: json,
-    })
-    animationFn = render
-    destroy = dispose
+    edgeMoveLine.geoJson = json
+    edgeMoveLine.options = opts
+    edgeMoveLine.render()
+    emit('load', { scene, edgeMoveLine })
   },
   {
     immediate: true,
@@ -43,11 +45,10 @@ watch(
   }
 )
 
-emit('load', { scene })
 animation.on('edge-move-line', () => {
-  animationFn?.()
+  edgeMoveLine.animationLoop()
 })
 onBeforeUnmount(() => {
-  destroy?.()
+  edgeMoveLine.dispose()
 })
 </script>
