@@ -25,6 +25,7 @@
             :geo-json="geoJson"
             :geo-json-outline="geoJsonOutline"
           />
+          <FtEdgeMoveLine :geojson="geoJsonOutline" />
           <FtDomMarkerRenderer>
             <template v-for="item in points" :key="item.name">
               <FtDomMarker
@@ -119,6 +120,7 @@ import {
   FtDirectionalLight,
   FtDomMarker,
   FtDomMarkerRenderer,
+  FtEdgeMoveLine,
   FtGeoJsonPlane,
   FtOrbitControls,
   FtPerspectiveCamera,

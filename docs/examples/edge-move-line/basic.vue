@@ -57,7 +57,6 @@
 <script setup lang="ts">
 import { reactive, ref, shallowRef } from 'vue'
 import { Color, FileLoader } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtAxesHelper,
@@ -70,8 +69,9 @@ import {
   FtProjection,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { EdgeMoveLineOptions } from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import type { EdgeMoveLineOptions } from 'farst-three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
@@ -80,12 +80,13 @@ const cameraOptions = reactive({
   },
 })
 const edgeMoveLineOptions = reactive<EdgeMoveLineOptions>({
-  pointsCount: 10000, // 粒子数量
-  speed: 0.2, // 速度
-  color: '#1c475e', // 颜色
-  number: 3, // 同时跑动的流光数量
-  length: 0.2, // 流光线条长度
-  size: 8, // 粗细
+  pointsCount: 10000,
+  speed: 0.2,
+  color: '#1c475e',
+  number: 3,
+  length: 0.2,
+  size: 8,
+  z: 4.2,
 })
 
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
@@ -113,6 +114,7 @@ guiPromise.then((gui) => {
   gui.add(edgeMoveLineOptions, 'number', 1, 10, 1)
   gui.add(edgeMoveLineOptions, 'length', 0.1, 1, 0.1)
   gui.add(edgeMoveLineOptions, 'size', 1, 10, 1)
+  gui.add(edgeMoveLineOptions, 'z', 0, 10, 1)
 })
 </script>
 

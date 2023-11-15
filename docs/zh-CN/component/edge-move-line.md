@@ -19,22 +19,16 @@ edge-move-line/basic
 
 ### Attributes
 
-| Name          | Description  | Type                      | Default     | Required |
-| ------------- | ------------ | ------------------------- | ----------- | -------- |
-| `skyColor`    | 构造函数参数 | ^[ColorRepresentation]    | `undefined` | No       |
-| `options`     | 实例属性     | ^[HemisphereLightOptions] | `{}`        | No       |
+| Name      | Description | Type                           | Default     | Required |
+| --------- | ----------- | ------------------------------ | ----------- | -------- |
+| `options` | 实例属性    | ^[EdgeMoveLineOptions]         | `{}`        | No       |
+| `geojson` | geojson数据 | ^[FeatureCollection<Geometry>] | `undefined` | true     |
 
 ### Events
 
-| Name   | Description        | Type                                               |
-| ------ | ------------------ | -------------------------------------------------- |
-| `load` | 实例创建后触发方法   | ^[Function]`(e: HemisphereLightLoadEvent) => void` |
-
-### Provide
-
-| Key                           | Description         | Type               |
-| ----------------------------- | ------------------- | ------------------ |
-| `hemisphereLightInjectionKey` | HemisphereLight实例 | ^[HemisphereLight] |
+| Name   | Description        | Type                                            |
+| ------ | ------------------ | ----------------------------------------------- |
+| `load` | 实例创建后触发方法 | ^[Function]`(e: EdgeMoveLineLoadEvent) => void` |
 
 ### Slots
 

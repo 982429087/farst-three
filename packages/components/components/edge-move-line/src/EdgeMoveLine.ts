@@ -5,13 +5,13 @@ import {
   CatmullRomCurve3,
   Color,
   DoubleSide,
-  Group,
   Points,
   ShaderMaterial,
   Vector3,
 } from 'three'
 import { merge } from 'lodash'
 import { fragment, vertex } from './shader'
+import type { FtObject } from '@farst-three/hooks'
 import type { GeoProjection } from 'd3-geo'
 import type { ColorRepresentation, Scene } from 'three'
 import type { FeatureCollection, Geometry, Position } from '@turf/turf'
@@ -26,32 +26,52 @@ export type EdgeMoveLineSetting = {
 
 export type EdgeMoveLineOptions = {
   pointsCount?: number
+  z?: number
 } & EdgeMoveLineSetting
 
-export class EdgeMoveLine {
+/**
+ * @param {Object} options
+
+ */
+
+/**
+ * 流光线条
+ * @param scene
+ * @param projection
+ * @param opts
+ * pointsCount: 线条点数
+ * speed: 线条速度
+ * color: 线条颜色
+ * number: 同时跑动的流光数量
+ * length: 流光线条长度
+ * size: 粗细
+ * z: z轴坐标
+ * @param geoJson
+ */
+export class EdgeMoveLine implements FtObject {
   private defaultOptions: EdgeMoveLineOptions = {
     pointsCount: 10000,
     speed: 0.2,
-    color: new Color('#1c475e'),
-    number: 3, // 同时跑动的流光数量
-    length: 0.2, // 流光线条长度
-    size: 8, // 粗细
+    color: '#1c475e',
+    number: 3,
+    length: 0.2,
+    size: 8,
+    z: 4.2,
   }
   private _options: EdgeMoveLineOptions = {}
   private _scene: Scene
-  private _projection: GeoProjection
-  private _destroyed = false
+  private _projection: GeoProjection | undefined
   private timeUniforms = {
     u_time: { value: 0.0 },
   }
-  public group = new Group()
   public geoJson: FeatureCollection<Geometry> | undefined
+  public flyLine: Points | undefined
 
   constructor(
     scene: Scene,
-    projection: GeoProjection,
+    geoJson?: FeatureCollection<Geometry>,
     opts?: EdgeMoveLineOptions,
-    geoJson?: FeatureCollection<Geometry>
+    projection?: GeoProjection
   ) {
     this._scene = scene
     this._projection = projection
@@ -71,46 +91,40 @@ export class EdgeMoveLine {
     this.dispose()
     if (!this.geoJson) return
 
-    this._destroyed = false
     const v3ps: Vector3[] = []
     this.geoJson.features.forEach((e) => {
       const coordinates = e.geometry.coordinates as Position[][][]
       coordinates.forEach((mp) =>
         mp.forEach((p) => {
           for (const [, element] of p.entries()) {
-            const [x, y] = this._projection(
-              element as [number, number]
-            ) as number[]
-            v3ps.push(new Vector3(x, -y, 4.2))
+            const [x, y] = this._projection
+              ? (this._projection(element as [number, number]) as number[])
+              : (element as number[])
+            v3ps.push(new Vector3(x, -y, this.options.z))
           }
         })
       )
     })
     const curve = new CatmullRomCurve3(v3ps, true)
-    const flyLine = this.initLine(curve)
-    flyLine.position.set(0, 0.1, -3)
-    flyLine.scale.multiplyScalar(1.001)
-    flyLine.rotateX(-Math.PI / 2)
-    this.group.add(flyLine)
-    this._scene.add(this.group)
+    this.flyLine = this.initLine(curve)
+    this.flyLine.rotateX(-Math.PI / 2)
+    this.flyLine.position.set(0, 0.1, -3)
+    this.flyLine.scale.multiplyScalar(1.001)
+    this._scene.add(this.flyLine)
   }
 
-  animationLoop() {
-    if (this._destroyed) return
+  loop() {
+    if (!this.flyLine) return
     this.timeUniforms.u_time.value += 0.007
   }
 
   dispose() {
-    this._scene.remove(this.group)
-    this.group.remove(...this.group.children)
-    this.group.traverse((obj) => {
-      if (obj instanceof Points) {
-        obj.geometry.dispose()
-        obj.material.dispose()
-      }
-    })
+    if (!this.flyLine) return
+    this._scene.remove(this.flyLine)
+    this.flyLine.geometry.dispose()
+    ;(this.flyLine.material as ShaderMaterial).dispose()
+    this.flyLine = undefined
     this.timeUniforms.u_time.value = 0.0
-    this._destroyed = true
   }
 
   initLine(curve: CatmullRomCurve3) {
@@ -128,27 +142,21 @@ export class EdgeMoveLine {
   }
 
   initLineMaterial() {
-    const number = this.options.number
-    const speed = this.options.speed
-    const length = this.options.length
-    const size = this.options.size
-    const color = new Color(this.options.color)
-    const singleUniforms = {
-      u_time: this.timeUniforms.u_time,
-      number: { type: 'f', value: number },
-      speed: { type: 'f', value: speed },
-      length: { type: 'f', value: length },
-      size: { type: 'f', value: size },
-      color: { type: 'v3', value: color },
-    }
-    const lineMaterial = new ShaderMaterial({
-      uniforms: singleUniforms,
+    const material = new ShaderMaterial({
+      uniforms: {
+        u_time: this.timeUniforms.u_time,
+        number: { value: this.options.number },
+        speed: { value: this.options.speed },
+        length: { value: this.options.length },
+        size: { value: this.options.size },
+        color: { value: new Color(this.options.color) },
+      },
       vertexShader: vertex,
       fragmentShader: fragment,
       transparent: true,
       side: DoubleSide,
       blending: AdditiveBlending,
     })
-    return lineMaterial
+    return material
   }
 }

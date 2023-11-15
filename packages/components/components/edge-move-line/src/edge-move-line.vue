@@ -10,7 +10,7 @@ import {
   useScene,
 } from '@farst-three/hooks'
 import { edgeMoveLineEmits, edgeMoveLineProps } from './edge-move-line'
-import { EdgeMoveLine } from './use-edge-move-line'
+import { EdgeMoveLine } from './EdgeMoveLine'
 
 defineOptions({
   name: 'FtEdgeMoveLine',
@@ -25,9 +25,9 @@ const animation = useAnimationService()
 
 const edgeMoveLine = new EdgeMoveLine(
   scene,
-  projection,
+  props.geojson,
   props.options,
-  props.geojson
+  projection
 )
 
 watch(
@@ -46,7 +46,7 @@ watch(
 )
 
 animation.on('edge-move-line', () => {
-  edgeMoveLine.animationLoop()
+  edgeMoveLine.loop()
 })
 onBeforeUnmount(() => {
   edgeMoveLine.dispose()

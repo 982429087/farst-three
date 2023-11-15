@@ -1,6 +1,6 @@
 import { buildProps, definePropType } from '@farst-three/utils'
+import type { EdgeMoveLine, EdgeMoveLineOptions } from './EdgeMoveLine'
 import type { FeatureCollection, Geometry } from '@turf/turf'
-import type { EdgeMoveLine, EdgeMoveLineOptions } from './use-edge-move-line'
 import type { Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type EdgeMoveLineComponent from './edge-move-line.vue'
