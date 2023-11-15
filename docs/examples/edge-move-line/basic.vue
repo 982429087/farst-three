@@ -17,13 +17,11 @@
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
         >
-          <FtGeoJsonPlane
-            :geo-json="geoJson"
-            :geo-json-outline="geoJsonOutline"
-          />
+          <FtGeoJsonPlane :geo-json="geoJson" />
           <FtEdgeMoveLine
             :geojson="geoJsonOutline"
             :options="edgeMoveLineOptions"
+            @load="moveLineLoad"
           />
         </FtProjection>
         <FtOrbitControls
@@ -56,7 +54,7 @@
 
 <script setup lang="ts">
 import { reactive, ref, shallowRef } from 'vue'
-import { Color, FileLoader } from 'three'
+import { FileLoader } from 'three'
 import {
   FtAmbientLight,
   FtAxesHelper,
@@ -71,7 +69,7 @@ import {
   FtWebglRenderer,
   useGui,
 } from 'farst-three'
-import type { EdgeMoveLineOptions } from 'farst-three'
+import type { EdgeMoveLineLoadEvent, EdgeMoveLineOptions } from 'farst-three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
@@ -103,6 +101,10 @@ function initGeoJson() {
     const jsonData = JSON.parse(dataStr)
     geoJsonOutline.value = jsonData
   })
+}
+
+function moveLineLoad(e: EdgeMoveLineLoadEvent) {
+  console.log(e)
 }
 
 initGeoJson()

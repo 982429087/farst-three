@@ -17,12 +17,7 @@
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
         >
-          <FtGeoJsonPlane
-            :geo-json="geoJson"
-            :geo-json-outline="geoJsonOutline"
-            :plane-options="planeOptions"
-            :line-options="lineOptions"
-          />
+          <FtGeoJsonPlane :geo-json="geoJson" :options="planeOptions" />
         </FtProjection>
         <FtOrbitControls
           :options="{
@@ -68,10 +63,7 @@ import {
   FtScene,
   FtWebglRenderer,
 } from '@farst-three/components'
-import type {
-  GeoJsonPlaneLinesOptions,
-  GeoJsonPlaneOptions,
-} from '@farst-three/components'
+import type { GeoJsonPlaneOptions } from '@farst-three/components'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
@@ -88,8 +80,6 @@ const planeOptions = reactive<GeoJsonPlaneOptions>({
     texture: '/geo/wall.png',
     textureCenter: [0, 0],
   },
-})
-const lineOptions = reactive<GeoJsonPlaneLinesOptions>({
   showBottomLine: true,
   showTopLine: true,
   topLineMaterialOptions: {
@@ -103,18 +93,11 @@ const lineOptions = reactive<GeoJsonPlaneLinesOptions>({
 })
 
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
-const geoJsonOutline = shallowRef<FeatureCollection<Geometry>>()
 function initGeoJson() {
   const loader = new FileLoader()
   loader.load('/geo/sichuansheng.json', (data) => {
     const dataObj = JSON.parse(data as string)
     geoJson.value = dataObj
-  })
-
-  loader.load('/geo/sichuan-outLine.json', (data) => {
-    const dataStr = data as string
-    const jsonData = JSON.parse(dataStr)
-    geoJsonOutline.value = jsonData
   })
 }
 
@@ -122,13 +105,13 @@ initGeoJson()
 const { guiPromise } = useGui(domRef)
 guiPromise.then((gui) => {
   gui.addColor(planeOptions.topPlaneOptions!, 'color')
-  gui.add(lineOptions, 'showBottomLine')
-  gui.add(lineOptions, 'showTopLine')
+  gui.add(planeOptions, 'showBottomLine')
+  gui.add(planeOptions, 'showTopLine')
 
-  gui.addColor(lineOptions.topLineMaterialOptions!, 'color')
-  gui.addColor(lineOptions.bottomLineMaterialOptions!, 'color')
+  gui.addColor(planeOptions.topLineMaterialOptions!, 'color')
+  gui.addColor(planeOptions.bottomLineMaterialOptions!, 'color')
 
-  gui.add(lineOptions.topLineMaterialOptions!, 'linewidth', 0.001, 0.01, 0.001)
+  gui.add(planeOptions.topLineMaterialOptions!, 'linewidth', 0.001, 0.01, 0.001)
 })
 </script>
 

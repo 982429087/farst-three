@@ -30,23 +30,11 @@ export type EdgeMoveLineOptions = {
 } & EdgeMoveLineSetting
 
 /**
- * @param {Object} options
-
- */
-
-/**
  * 流光线条
- * @param scene
- * @param projection
- * @param opts
- * pointsCount: 线条点数
- * speed: 线条速度
- * color: 线条颜色
- * number: 同时跑动的流光数量
- * length: 流光线条长度
- * size: 粗细
- * z: z轴坐标
- * @param geoJson
+ * @param scene Scene
+ * @param projection 经纬度转墨卡托
+ * @param opts pointsCount: 线条点数 speed: 线条速度 color: 线条颜色 number: 同时跑动的流光数量 length: 流光线条长度 size: 粗细 z: z轴坐标
+ * @param geoJson GeoJSON
  */
 export class EdgeMoveLine implements FtObject {
   private defaultOptions: EdgeMoveLineOptions = {
@@ -64,8 +52,8 @@ export class EdgeMoveLine implements FtObject {
   private timeUniforms = {
     u_time: { value: 0.0 },
   }
-  public geoJson: FeatureCollection<Geometry> | undefined
-  public flyLine: Points | undefined
+  public _geoJson: FeatureCollection<Geometry> | undefined
+  public flyLine: Points<BufferGeometry, ShaderMaterial> | undefined
 
   constructor(
     scene: Scene,
@@ -85,6 +73,12 @@ export class EdgeMoveLine implements FtObject {
 
   set options(opts: EdgeMoveLineOptions) {
     this._options = merge(this.defaultOptions, opts)
+  }
+  get geoJson() {
+    return this._geoJson
+  }
+  set geoJson(geoJson: FeatureCollection<Geometry> | undefined) {
+    this._geoJson = geoJson
   }
 
   render() {

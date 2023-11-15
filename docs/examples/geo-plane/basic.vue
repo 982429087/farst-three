@@ -21,10 +21,7 @@
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
         >
-          <FtGeoJsonPlane
-            :geo-json="geoJson"
-            :geo-json-outline="geoJsonOutline"
-          />
+          <FtGeoJsonPlane :geo-json="geoJson" />
           <FtEdgeMoveLine :geojson="geoJsonOutline" />
           <FtDomMarkerRenderer>
             <template v-for="item in points" :key="item.name">

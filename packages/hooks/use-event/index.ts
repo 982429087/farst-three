@@ -47,8 +47,16 @@ export function uesEvent<T extends Object3D | Object3D[]>(
   }
 
   onBeforeUnmount(() => {
+    dispose()
+  })
+
+  function dispose() {
     if (props.onHover) es.off(EventType.HOVER, hover)
     if (props.onClick) es.off(EventType.CLICK, click)
     if (props.onHoverPosition) es.off(EventType.HOVERPOSITION, hoverPosition)
-  })
+  }
+
+  return {
+    dispose,
+  }
 }
