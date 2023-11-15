@@ -187,15 +187,18 @@ export class GeoJsonPlane implements FtObject {
   dispose() {
     this.scene.remove(this.group)
     this.group.traverse((obj) => {
-      if (obj instanceof Mesh) {
-        obj.geometry.dispose()
-        obj.material.dispose?.()
-      }
-      if (obj instanceof Line2) {
-        obj.geometry.dispose()
-        obj.material.dispose()
-      }
+      obj.traverse((child) => {
+        if (child instanceof Mesh) {
+          child.geometry.dispose()
+          child.material.dispose?.()
+        }
+        if (child instanceof Line2) {
+          child.geometry.dispose()
+          child.material.dispose()
+        }
+      })
     })
+    this.group.remove(...this.group.children)
   }
 
   loop() {
