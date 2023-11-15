@@ -17,7 +17,11 @@
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
         >
-          <FtGeoJsonPlane :geo-json="geoJson" :options="planeOptions" />
+          <FtGeoJsonPlane
+            :geo-json="geoJson"
+            :options="planeOptions"
+            @click="handleClick"
+          />
         </FtProjection>
         <FtOrbitControls
           :options="{
@@ -63,6 +67,7 @@ import {
   FtScene,
   FtWebglRenderer,
 } from '@farst-three/components'
+import type { FunsEvent } from '@farst-three/hooks'
 import type { GeoJsonPlaneOptions } from '@farst-three/components'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 const domRef = ref<HTMLDivElement>()
@@ -99,6 +104,10 @@ function initGeoJson() {
     const dataObj = JSON.parse(data as string)
     geoJson.value = dataObj
   })
+}
+
+function handleClick(e: FunsEvent) {
+  console.log(e)
 }
 
 initGeoJson()

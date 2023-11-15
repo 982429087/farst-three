@@ -28,7 +28,8 @@ export function uesEvent<T extends Object3D | Object3D[]>(
   props: any,
   emit: AnyFun,
   instance: T,
-  eventService?: EventService
+  eventService?: EventService,
+  noDestroy?: boolean
 ) {
   const hover: Funs = (e) => emit('hover', e)
   const click: Funs = (e) => emit('click', e)
@@ -46,9 +47,10 @@ export function uesEvent<T extends Object3D | Object3D[]>(
     es.on(EventType.HOVERPOSITION, hoverPosition, instance, props.eventOptions)
   }
 
-  onBeforeUnmount(() => {
-    dispose()
-  })
+  if (!noDestroy)
+    onBeforeUnmount(() => {
+      dispose()
+    })
 
   function dispose() {
     if (props.onHover) es.off(EventType.HOVER, hover)

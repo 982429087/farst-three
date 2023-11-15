@@ -4,9 +4,15 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, watch } from 'vue'
-import { useProjection, useScene } from '@farst-three/hooks'
+import {
+  uesEvent,
+  useEventService,
+  useProjection,
+  useScene,
+} from '@farst-three/hooks'
 import { geoJsonPlaneEmits, geoJsonPlaneProps } from './geo-json-plane'
 import { GeoJsonPlane } from './GeoJsonPlane'
+import type { AnyFun } from '@farst-three/utils'
 
 defineOptions({
   name: 'FtGeoJsonPlane',
@@ -16,8 +22,9 @@ const props = defineProps(geoJsonPlaneProps)
 const emit = defineEmits(geoJsonPlaneEmits)
 const scene = useScene()
 const projection = useProjection()
-
 const geoJsonPlane = new GeoJsonPlane(scene, projection)
+const eventService = useEventService()
+let destory: AnyFun | undefined
 
 watch(
   [() => props.geoJson, () => props.options],
@@ -26,6 +33,16 @@ watch(
     geoJsonPlane.geoJson = json
     if (v) geoJsonPlane.options = v
     geoJsonPlane.render()
+    console.log(geoJsonPlane.group.children)
+
+    const { dispose } = uesEvent(
+      props,
+      emit,
+      geoJsonPlane.group.children,
+      eventService,
+      true
+    )
+    destory = dispose
     emit('load', { scene, geoJsonPlane })
   },
   {
@@ -67,5 +84,6 @@ watch(
 
 onBeforeUnmount(() => {
   geoJsonPlane.dispose()
+  destory?.()
 })
 </script>
