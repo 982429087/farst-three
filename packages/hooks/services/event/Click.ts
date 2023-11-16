@@ -2,12 +2,12 @@ import FtEvent from './FtEvent'
 export default class Click extends FtEvent {
   addListeners() {
     const dom = this.sceneRef.value!
-    dom.addEventListener('pointerdown', this.hanlder.bind(this), false)
+    dom.addEventListener('pointerup', this.hanlder.bind(this), false)
   }
 
   removeListeners() {
     const dom = this.sceneRef.value!
-    dom.removeEventListener('pointerdown', this.hanlder, false)
+    dom.removeEventListener('pointerup', this.hanlder, false)
   }
 
   // on(callback: Funs, instance: Object3D | Object3D[], opts?: OnEventOptions) {

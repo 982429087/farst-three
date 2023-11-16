@@ -1,7 +1,8 @@
 import { ref } from 'vue'
 import { Plane, Raycaster, Vector2, Vector3 } from 'three'
+import { throttle } from 'lodash'
 import Subscription from './Subscription'
-import type { Camera, Event, Object3D, Scene } from 'three'
+import type { Camera, Event, Intersection, Object3D, Scene } from 'three'
 import type { EventOptions, Funs, FunsEvent, OnEventOptions } from './type'
 import type { Ref } from 'vue'
 export default class FtEvent {
@@ -60,13 +61,21 @@ export default class FtEvent {
         opts
       )
       // 只有在有交集的时候才触发
-      if (targets.length || opts?.allTheTime) {
-        callback({
-          ...event,
-          targets,
-          position: this.position,
-        })
-      }
+      this.executeCallback(callback, event, targets, opts)
+    }
+  }
+
+  executeCallback(
+    callback: Funs,
+    event: FunsEvent,
+    targets: Intersection<Object3D<Event>>[],
+    opts?: OnEventOptions
+  ) {
+    if (targets.length || opts?.allTheTime) {
+      callback({
+        ...event,
+        targets,
+      })
     }
   }
 
@@ -74,7 +83,8 @@ export default class FtEvent {
     if (this.sub.subscriber.length === 0) this.addListeners() // 设置事件监听
     this.setRaycasterOptions(opts) // 设置射线参数
     const middleFun = this.genMiddleFn(callback, instance, opts) // 生成中间函数
-    this.sub.on(middleFun) // 订阅事件
+    const throttleMiddle = throttle(middleFun, opts?.wait ?? 50)
+    this.sub.on(throttleMiddle) // 订阅事件
   }
 
   emit(e: FunsEvent) {

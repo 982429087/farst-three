@@ -13,12 +13,12 @@ export type FunsEvent = {
   targets: Intersection<Object3D<Event>>[]
   position?: Vector3
 }
-export type Funs = (e: FunsEvent) => void
+export type Funs = (e: FunsEvent) => FunsEvent | void
 
 export enum EventType {
-  HOVER = 'hover',
-  CLICK = 'click',
-  HOVERPOSITION = 'hoverPosition',
+  MOUSEMOVE = 'MOUSEMOVE',
+  CLICK = 'CLICK',
+  MOUSEMOVEPOSITION = 'MOUSEMOVEPOSITION',
 }
 
 export type EventInstance = FtEvent
@@ -32,6 +32,7 @@ export type EventOptions = {
   optionalTarget?: Intersection<Object3D<Event>>[]
   objects?: Object3D<Event>[]
   allTheTime?: boolean
+  wait?: number
 }
 
 export type OnEventOptions = Omit<EventOptions, 'global'>

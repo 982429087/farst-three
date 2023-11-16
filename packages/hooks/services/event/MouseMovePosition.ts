@@ -1,7 +1,7 @@
 import FtEvent from './FtEvent'
 import type { Funs, FunsEvent } from './type'
 
-export class HoverPosition extends FtEvent {
+export class MouseMovePosition extends FtEvent {
   genMiddleFn(callback: Funs) {
     return (event: FunsEvent) => {
       const raycaster = this.raycaster

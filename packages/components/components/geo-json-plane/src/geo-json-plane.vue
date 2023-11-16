@@ -9,9 +9,11 @@ import {
   useEventService,
   useProjection,
   useScene,
+  useStoreService,
 } from '@farst-three/hooks'
 import { geoJsonPlaneEmits, geoJsonPlaneProps } from './geo-json-plane'
 import { GeoJsonPlane } from './GeoJsonPlane'
+import type { FunsEvent } from '@farst-three/hooks'
 import type { AnyFun } from '@farst-three/utils'
 
 defineOptions({
@@ -24,6 +26,8 @@ const scene = useScene()
 const projection = useProjection()
 const geoJsonPlane = new GeoJsonPlane(scene, projection)
 const eventService = useEventService()
+const store = useStoreService()
+const dom = store.getSceneRef()
 let destory: AnyFun | undefined
 
 watch(
@@ -39,6 +43,9 @@ watch(
       emit,
       geoJsonPlane.planeGroup.children,
       eventService,
+      mouseMove,
+      undefined,
+      undefined,
       true
     )
     destory = dispose
@@ -49,6 +56,16 @@ watch(
     deep: true,
   }
 )
+
+function mouseMove(e: FunsEvent) {
+  if (!dom || !props.cursor) return e
+  if (e.targets.length) {
+    dom.style.cursor = props.cursor
+  } else {
+    dom.style.cursor = 'default'
+  }
+  return e
+}
 
 // // 生成线
 // watch(

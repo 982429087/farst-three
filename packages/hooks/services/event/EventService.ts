@@ -1,8 +1,8 @@
 import { ref } from 'vue'
-import Hover from './Hover'
+import MouseMove from './MouseMove'
 import { EventType } from './type'
 import Click from './Click'
-import { HoverPosition } from './HoverPosition'
+import { MouseMovePosition } from './MouseMovePosition'
 import type FtEvent from './FtEvent'
 import type { EventOptions, Funs, OnEventOptions } from './type'
 import type { Ref } from 'vue'
@@ -20,11 +20,11 @@ export class EventService {
     this.scene = scene
     this.options = options
     // 注册事件, 每次有新的事件类型，就从这里注册
-    this.instanceMap.set(EventType.HOVER, new Hover(scene, options))
+    this.instanceMap.set(EventType.MOUSEMOVE, new MouseMove(scene, options))
     this.instanceMap.set(EventType.CLICK, new Click(scene, options))
     this.instanceMap.set(
-      EventType.HOVERPOSITION,
-      new HoverPosition(scene, options)
+      EventType.MOUSEMOVEPOSITION,
+      new MouseMovePosition(scene, options)
     )
   }
 
