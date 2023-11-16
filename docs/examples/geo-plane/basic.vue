@@ -21,7 +21,14 @@
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
         >
-          <FtGeoJsonPlane :geo-json="geoJson" />
+          <FtGeoJsonPlane
+            :geo-json="geoJson"
+            :cursor="'pointer'"
+            @click="handleClick"
+            @load="planeLoad"
+          />
+          <FtHighLight />
+
           <FtEdgeMoveLine :geojson="geoJsonOutline" />
           <FtDomMarkerRenderer>
             <template v-for="item in points" :key="item.name">
@@ -80,26 +87,31 @@
               },
             }"
           />
-          <FtUpParticle />
+          <FtUpParticle
+            :options="{
+              count: 10,
+            }"
+          />
+          <FtAxesHelper :size="1000" />
         </FtProjection>
         <FtOrbitControls
           :options="{
             enableDamping: true,
-            enableZoom: false,
+            enableZoom: true,
             minDistance: 1,
             maxDistance: 2000,
             maxPolarAngle: (Math.PI / 180) * 75,
             enablePan: true,
           }"
         />
-        <FtAmbientLight :color="0x02518d" :intensity="0.8" />
+        <FtAmbientLight :color="0xaaa" :intensity="0.8" />
         <FtDirectionalLight
-          :color="0x02518d"
+          :color="0xaaa"
           :intensity="0.5"
           :options="{ position: { set: [100, 10, -100] } }"
         />
         <FtDirectionalLight
-          :color="0x02518d"
+          :color="0xaaa"
           :intensity="0.8"
           :options="{ position: { set: [100, 10, 100] } }"
         />
@@ -113,12 +125,14 @@ import { shallowRef } from 'vue'
 import { FileLoader } from 'three'
 import {
   FtAmbientLight,
+  FtAxesHelper,
   FtDiffusionWave,
   FtDirectionalLight,
   FtDomMarker,
   FtDomMarkerRenderer,
   FtEdgeMoveLine,
   FtGeoJsonPlane,
+  FtHighLight,
   FtOrbitControls,
   FtPerspectiveCamera,
   FtPillar,
@@ -129,7 +143,10 @@ import {
   FtScene,
   FtUpParticle,
   FtWebglRenderer,
-} from '@farst-three/components'
+  HIGHLITHT_SCENE,
+} from 'farst-three'
+import type { FunsEvent, GeoJsonPlaneLoadEvent } from 'farst-three'
+import type { Mesh, Object3D } from 'three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
@@ -153,6 +170,33 @@ function initGeoJson() {
     const jsonData = JSON.parse(dataStr)
     geoJsonOutline.value = jsonData
   })
+}
+const map: Record<string, Object3D> = {}
+
+function planeLoad(e: GeoJsonPlaneLoadEvent) {
+  const o3d = e.geoJsonPlane.planeGroup.children[0]
+  o3d.layers.enable(HIGHLITHT_SCENE)
+  map[o3d.id] = o3d
+}
+
+function handleClick({ targets }: FunsEvent) {
+  const target = targets[0]
+  if (target) {
+    const object = target.object as Mesh
+    for (const [, value] of Object.entries(map)) {
+      value.layers.disable(1)
+    }
+    if (!map[object.id]) {
+      map[object.id] = object
+      object.layers.enable(1)
+    } else {
+      object.layers.enable(1)
+    }
+  } else {
+    for (const [, value] of Object.entries(map)) {
+      value.layers.disable(1)
+    }
+  }
 }
 
 initGeoJson()

@@ -10,17 +10,15 @@
       <FtWebglRenderer
         :params="{
           antialias: true,
-          alpha: true,
         }"
       >
-        <FtHighLight />
+        <FtHighLight :options="highLightOptions" />
         <FtProjection
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
         >
           <FtGeoJsonPlane
             :geo-json="geoJson"
-            :options="planeOptions"
             :click-options="{
               allTheTime: true,
             }"
@@ -38,18 +36,6 @@
             enablePan: true,
           }"
         />
-        <FtAmbientLight :color="0x02518d" :intensity="0.8" />
-        <FtDirectionalLight
-          :color="0x02518d"
-          :intensity="0.5"
-          :options="{ position: { set: [100, 10, -100] } }"
-        />
-        <FtDirectionalLight
-          :color="0x02518d"
-          :intensity="0.8"
-          :options="{ position: { set: [100, 10, 100] } }"
-        />
-        <FtAxesHelper :size="100" />
       </FtWebglRenderer>
     </FtScene>
   </div>
@@ -58,11 +44,7 @@
 <script setup lang="ts">
 import { reactive, ref, shallowRef } from 'vue'
 import { FileLoader } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
-  FtAmbientLight,
-  FtAxesHelper,
-  FtDirectionalLight,
   FtGeoJsonPlane,
   FtHighLight,
   FtOrbitControls,
@@ -70,11 +52,12 @@ import {
   FtProjection,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type { Mesh } from 'three'
-import type { FunsEvent } from '@farst-three/hooks'
-import type { GeoJsonPlaneOptions } from '@farst-three/components'
+import type { FunsEvent, HighLightOptions } from 'farst-three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
+
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {
@@ -82,24 +65,10 @@ const cameraOptions = reactive({
   },
 })
 
-const planeOptions = reactive<GeoJsonPlaneOptions>({
-  topPlaneOptions: {
-    color: '#02518d',
-  },
-  sidePlaneOptions: {
-    texture: '/geo/wall.png',
-    textureCenter: [0, 0],
-  },
-  showBottomLine: true,
-  showTopLine: true,
-  topLineMaterialOptions: {
-    color: 0x68c5f6,
-    linewidth: 0.002,
-  },
-  bottomLineMaterialOptions: {
-    color: 0x45bff8,
-    linewidth: 0.004,
-  },
+const highLightOptions = reactive<HighLightOptions>({
+  strength: 0.78,
+  threshold: 0,
+  radius: 0.1,
 })
 
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
@@ -110,9 +79,9 @@ function initGeoJson() {
     geoJson.value = dataObj
   })
 }
+// 高亮
 
 const map: Record<string, Mesh> = {}
-// 高亮
 function handleClick({ targets }: FunsEvent) {
   const target = targets[0]
   if (target) {
@@ -136,14 +105,9 @@ function handleClick({ targets }: FunsEvent) {
 initGeoJson()
 const { guiPromise } = useGui(domRef)
 guiPromise.then((gui) => {
-  gui.addColor(planeOptions.topPlaneOptions!, 'color')
-  gui.add(planeOptions, 'showBottomLine')
-  gui.add(planeOptions, 'showTopLine')
-
-  gui.addColor(planeOptions.topLineMaterialOptions!, 'color')
-  gui.addColor(planeOptions.bottomLineMaterialOptions!, 'color')
-
-  gui.add(planeOptions.topLineMaterialOptions!, 'linewidth', 0.001, 0.01, 0.001)
+  gui.add(highLightOptions, 'strength', 0, 1, 0.01)
+  gui.add(highLightOptions, 'threshold', 0, 1, 0.01)
+  gui.add(highLightOptions, 'radius', 0, 1, 0.01)
 })
 </script>
 

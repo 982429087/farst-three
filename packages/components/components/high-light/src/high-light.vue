@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount } from 'vue'
+import { onBeforeUnmount, watch } from 'vue'
 import {
   effectComposer,
   useAnimationService,
@@ -11,13 +11,13 @@ import {
   useStoreService,
 } from '@farst-three/hooks'
 import { highLightEmits, highLightProps } from './high-light'
-import { useHighLight } from './use-high-light'
+import { HighLight } from './HighLight'
 
 defineOptions({
   name: 'FtHighLight',
 })
 
-defineProps(highLightProps)
+const props = defineProps(highLightProps)
 const emit = defineEmits(highLightEmits)
 
 // init here
@@ -26,10 +26,18 @@ const store = useStoreService()
 const camera = store.getRenderCamera()!
 const renderer = store.getRenderer()!
 const animation = useAnimationService()
-const { render } = useHighLight(scene, camera, renderer)
+const highLight = new HighLight(scene, camera, renderer, props.options)
+highLight.render()
+watch(
+  () => props.options,
+  (v) => {
+    if (highLight) highLight.options = v
+  },
+  { deep: true, immediate: true }
+)
 
 animation.on(effectComposer, () => {
-  render()
+  highLight.loop()
 })
 emit('load', { scene })
 // useOptions(props.options, , scene)

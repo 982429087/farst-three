@@ -5,7 +5,6 @@ import {
   Group,
   Mesh,
   MeshPhongMaterial,
-  Object3D,
   RepeatWrapping,
   ShaderMaterial,
   Shape,
@@ -14,11 +13,12 @@ import {
 } from 'three'
 import { merge } from 'lodash'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
-import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
+import { flatten } from '@turf/turf'
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { fragment, vertex } from './shader'
-import type { LineMaterialParameters } from 'three/examples/jsm/lines/LineMaterial'
 import type { FeatureCollection, Geometry, Position } from '@turf/turf'
+import type { LineMaterialParameters } from 'three/examples/jsm/lines/LineMaterial'
 import type { GeoProjection } from 'd3-geo'
 import type {
   ColorRepresentation,
@@ -126,61 +126,59 @@ export class GeoJsonPlane implements FtObject {
   set geoJson(geoJson: FeatureCollection<Geometry> | undefined) {
     this._geoJson = geoJson
   }
-
   render() {
     if (!this.geoJson) return
     this.dispose()
     const { gridMaterial, gradationMaterial } = this.initPlaneMaterial()
-    this.geoJson.features?.forEach((elem) => {
-      const coordinates = elem.geometry.coordinates as Position[][][]
-
+    const { bottomMaterial, topMaterial } = this.initLineMaterial()
+    const geojson = flatten(this.geoJson)
+    geojson.features?.forEach((elem) => {
+      const coordinates = elem.geometry.coordinates as Position[][]
+      const shape = new Shape()
+      const positions: number[] = []
+      const colors: number[] = []
+      const color = new Color()
       coordinates.forEach((multiPolygon) => {
-        multiPolygon.forEach((polygon) => {
-          const shape = new Shape()
-          const positions: number[] = []
-          const colors: number[] = []
-          const color = new Color()
-          const linGeometry = new LineGeometry()
-          for (const [i, element] of polygon.entries()) {
-            const [x, y] = this.projection
-              ? (this.projection(element as [number, number]) as number[])
-              : (element as number[])
-            if (i === 0) shape.moveTo(x, -y)
-            shape.lineTo(x, -y)
-            positions.push(x, -y, this.options.z!)
-            colors.push(color.r, color.g, color.b)
-          }
+        multiPolygon.forEach((element, i) => {
+          const [x, y] = this.projection
+            ? (this.projection(element as [number, number]) as number[])
+            : (element as number[])
 
-          const geometry = new ExtrudeGeometry(shape, {
-            depth: this.options.depth,
-            bevelEnabled: false,
-          })
-          const mesh = new Mesh(geometry, [gridMaterial, gradationMaterial])
-          mesh.rotateX(-Math.PI / 2)
-          mesh.position.set(0, 1, -3)
-          this.planeGroup.add(mesh)
+          if (i === 0) shape.moveTo(x, -y)
 
-          // 线条
-          const { bottomMaterial, topMaterial } = this.initLineMaterial()
-          linGeometry.setPositions(positions)
-          linGeometry.setColors(colors)
+          shape.lineTo(x, -y)
 
-          if (this.options.showTopLine) {
-            const topLine = this.createLine(linGeometry, topMaterial)
-            topLine.position.set(...this.options.topLineOptions!.position!)
-            this.lineGroup.add(topLine)
-          }
-
-          if (this.options.showBottomLine) {
-            const bottomLine = this.createLine(linGeometry, bottomMaterial)
-            bottomLine.position.set(
-              ...this.options.bottomLineOptions!.position!
-            )
-            this.lineGroup.add(bottomLine)
-          }
+          positions.push(x, -y, this.options.z!)
+          colors.push(color.r, color.g, color.b)
         })
       })
+      const geometry = new ExtrudeGeometry(shape, {
+        depth: this.options.depth,
+        bevelEnabled: false,
+      })
+      const mesh = new Mesh(geometry, [gridMaterial, gradationMaterial])
+      mesh.rotateX(-Math.PI / 2)
+      mesh.position.set(0, 1, -3)
+      this.planeGroup.add(mesh)
+
+      // 线条
+      const linGeometry = new LineGeometry()
+      linGeometry.setPositions(positions)
+      linGeometry.setColors(colors)
+
+      if (this.options.showTopLine) {
+        const topLine = this.createLine(linGeometry, topMaterial)
+        topLine.position.set(...this.options.topLineOptions!.position!)
+        this.lineGroup.add(topLine)
+      }
+
+      if (this.options.showBottomLine) {
+        const bottomLine = this.createLine(linGeometry, bottomMaterial)
+        bottomLine.position.set(...this.options.bottomLineOptions!.position!)
+        this.lineGroup.add(bottomLine)
+      }
     })
+
     this.scene.add(this.planeGroup, this.lineGroup)
   }
   dispose() {
@@ -218,7 +216,6 @@ export class GeoJsonPlane implements FtObject {
     return
   }
 
-  // 初始化平面
   initPlaneMaterial() {
     const topts = this.options.topPlaneOptions!
     const sopts = this.options.sidePlaneOptions!
