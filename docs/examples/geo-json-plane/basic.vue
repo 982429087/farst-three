@@ -33,17 +33,6 @@
             enablePan: true,
           }"
         />
-        <FtAmbientLight :color="0x02518d" :intensity="0.8" />
-        <FtDirectionalLight
-          :color="0x02518d"
-          :intensity="0.5"
-          :options="{ position: { set: [100, 10, -100] } }"
-        />
-        <FtDirectionalLight
-          :color="0x02518d"
-          :intensity="0.8"
-          :options="{ position: { set: [100, 10, 100] } }"
-        />
         <FtAxesHelper :size="100" />
       </FtWebglRenderer>
     </FtScene>
@@ -53,21 +42,16 @@
 <script setup lang="ts">
 import { reactive, ref, shallowRef } from 'vue'
 import { FileLoader } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
-  FtAmbientLight,
   FtAxesHelper,
-  FtDirectionalLight,
   FtGeoJsonPlane,
-  FtHighLight,
   FtOrbitControls,
   FtPerspectiveCamera,
   FtProjection,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { Mesh } from 'three'
-import type { FunsEvent } from '@farst-three/hooks'
+} from 'farst-three'
+import { useGui } from '@farst-three/hooks'
 import type { GeoJsonPlaneOptions } from '@farst-three/components'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 const domRef = ref<HTMLDivElement>()
