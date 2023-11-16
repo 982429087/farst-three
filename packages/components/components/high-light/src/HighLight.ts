@@ -3,7 +3,6 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
-import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
 import { merge } from 'lodash'
 
 import type { FtObject } from '@farst-three/hooks'
@@ -52,6 +51,7 @@ export class HighLight implements FtObject {
     this.bloomLayer.set(HIGHLITHT_SCENE)
     this.bloomComposer = new EffectComposer(renderer)
     this.finalComposer = new EffectComposer(renderer)
+    renderer.autoClear = false
   }
 
   get options() {
@@ -70,29 +70,23 @@ export class HighLight implements FtObject {
 
   render() {
     this._destroyed = false
-    const effectFXAA = new ShaderPass(FXAAShader)
-    effectFXAA.uniforms['resolution'].value.set(
-      0.6 / this.width,
-      0.6 / this.height
-    )
-    effectFXAA.renderToScreen = true
-    // 去掉锯齿
+
     const renderScene = new RenderPass(this.scene, this.camera) // RenderPass这个通道会在当前场景（scene）和摄像机（camera）的基础上渲染出一个新场景，新建：
     // 添加光晕效果
-    this.bloomPass = new UnrealBloomPass( // UnrealBloomPass通道可实现一个泛光效果。
+    // UnrealBloomPass通道可实现一个泛光效果。
+    this.bloomPass = new UnrealBloomPass(
       new Vector2(this.width, this.height),
       this.options.strength!,
       this.options.radius!,
       this.options.threshold!
     )
-    // 添加光晕效果---2
     // 着色器通道容器--放进容器里
-    this.bloomComposer = new EffectComposer(this.renderer) // EffectComposer可以理解为着色器通道容器，着色器通道按照先后顺序添加进来并执行
+    // EffectComposer可以理解为着色器通道容器，着色器通道按照先后顺序添加进来并执行
+    this.bloomComposer = new EffectComposer(this.renderer)
 
     this.bloomComposer.renderToScreen = false
     this.bloomComposer.addPass(renderScene)
-    this.bloomComposer.addPass(this.bloomPass) // 添加光晕效果
-    this.bloomComposer.addPass(effectFXAA) // 去掉锯齿
+    this.bloomComposer.addPass(this.bloomPass)
 
     const finalPass = new ShaderPass(
       new ShaderMaterial({
@@ -121,11 +115,10 @@ export class HighLight implements FtObject {
     )
     finalPass.needsSwap = true
     this.finalComposer = new EffectComposer(this.renderer)
-
     this.finalComposer.addPass(renderScene)
     this.finalComposer.addPass(finalPass)
-    this.finalComposer.addPass(effectFXAA)
   }
+
   loop() {
     if (this._destroyed) return
     this.scene.traverse((obj) => {

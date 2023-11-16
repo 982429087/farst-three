@@ -10,6 +10,7 @@
       <FtWebglRenderer
         :params="{
           antialias: true,
+          alpha: true,
         }"
       >
         <FtHighLight :options="highLightOptions" />

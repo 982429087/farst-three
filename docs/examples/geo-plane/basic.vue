@@ -122,7 +122,7 @@
 
 <script setup lang="ts">
 import { shallowRef } from 'vue'
-import { FileLoader } from 'three'
+import { Color, FileLoader } from 'three'
 import {
   FtAmbientLight,
   FtAxesHelper,
