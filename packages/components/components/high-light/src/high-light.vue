@@ -28,6 +28,8 @@ const renderer = store.getRenderer()!
 const animation = useAnimationService()
 const highLight = new HighLight(scene, camera, renderer, props.options)
 highLight.render()
+emit('load', { scene, highLight })
+
 watch(
   () => props.options,
   (v) => {
@@ -39,10 +41,8 @@ watch(
 animation.on(effectComposer, () => {
   highLight.loop()
 })
-emit('load', { scene })
-// useOptions(props.options, , scene)
 
 onBeforeUnmount(() => {
-  //
+  highLight.dispose()
 })
 </script>

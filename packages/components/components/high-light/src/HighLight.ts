@@ -1,10 +1,10 @@
-import { Layers, ShaderMaterial, Vector2 } from 'three'
+import { Layers, ReinhardToneMapping, ShaderMaterial, Vector2 } from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
 import { merge } from 'lodash'
-
 import type { FtObject } from '@farst-three/hooks'
 import type { Camera, Mesh, Scene, WebGLRenderer } from 'three'
 
@@ -12,10 +12,11 @@ export type HighLightOptions = {
   strength?: number
   threshold?: number
   radius?: number
+  exposure?: number
 }
 
 export const HIGHLITHT_SCENE = 1
-
+// https://threejs.org/examples/?q=unreal#webgl_postprocessing_unreal_bloom_selective
 export class HighLight implements FtObject {
   private scene: Scene
   private camera: Camera
@@ -24,6 +25,7 @@ export class HighLight implements FtObject {
     strength: 0.78,
     threshold: 0,
     radius: 0.1,
+    exposure: 6,
   }
   private _options: HighLightOptions = {}
   private width: number
@@ -32,7 +34,6 @@ export class HighLight implements FtObject {
   private bloomComposer: EffectComposer
   private finalComposer: EffectComposer
   private bloomPass: UnrealBloomPass | undefined
-
   private materials: Record<string, any> = {}
   private _destroyed = true
   constructor(
@@ -41,6 +42,8 @@ export class HighLight implements FtObject {
     renderer: WebGLRenderer,
     opts: HighLightOptions = {}
   ) {
+    renderer.toneMapping = ReinhardToneMapping
+
     this.scene = scene
     this.camera = camera
     this.renderer = renderer
@@ -51,7 +54,6 @@ export class HighLight implements FtObject {
     this.bloomLayer.set(HIGHLITHT_SCENE)
     this.bloomComposer = new EffectComposer(renderer)
     this.finalComposer = new EffectComposer(renderer)
-    renderer.autoClear = false
   }
 
   get options() {
@@ -65,28 +67,28 @@ export class HighLight implements FtObject {
       this.bloomPass.threshold = temp.threshold
       this.bloomPass.strength = temp.strength
       this.bloomPass.radius = temp.radius
+      this.renderer.toneMappingExposure = temp.exposure
     }
   }
 
   render() {
     this._destroyed = false
+    const effectFXAA = new ShaderPass(FXAAShader)
+    effectFXAA.uniforms['resolution'].value.set(1 / this.width, 1 / this.height)
+    const renderScene = new RenderPass(this.scene, this.camera)
 
-    const renderScene = new RenderPass(this.scene, this.camera) // RenderPass这个通道会在当前场景（scene）和摄像机（camera）的基础上渲染出一个新场景，新建：
-    // 添加光晕效果
-    // UnrealBloomPass通道可实现一个泛光效果。
     this.bloomPass = new UnrealBloomPass(
       new Vector2(this.width, this.height),
       this.options.strength!,
       this.options.radius!,
       this.options.threshold!
     )
-    // 着色器通道容器--放进容器里
-    // EffectComposer可以理解为着色器通道容器，着色器通道按照先后顺序添加进来并执行
     this.bloomComposer = new EffectComposer(this.renderer)
-
     this.bloomComposer.renderToScreen = false
+
     this.bloomComposer.addPass(renderScene)
     this.bloomComposer.addPass(this.bloomPass)
+    this.bloomComposer.addPass(effectFXAA)
 
     const finalPass = new ShaderPass(
       new ShaderMaterial({
@@ -95,20 +97,26 @@ export class HighLight implements FtObject {
           bloomTexture: { value: this.bloomComposer.renderTarget2.texture },
         },
         vertexShader: `
-        varying vec2 vUv;
-        void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-        }
-      `,
+          varying vec2 vUv;
+          void main() {
+              vUv = uv;
+              gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+          }
+        `,
+        /* https://github.com/mrdoob/three.js/issues/14104 透明背景*/
         fragmentShader: `
-        uniform sampler2D baseTexture;
-        uniform sampler2D bloomTexture;
-        varying vec2 vUv;
-        void main() {
-            gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
-        }
-      `,
+          uniform sampler2D baseTexture;
+          uniform sampler2D bloomTexture;
+          varying vec2 vUv;
+          void main() {
+            // gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
+            vec4 base_color = texture2D(baseTexture, vUv);
+            vec4 bloom_color = texture2D(bloomTexture, vUv);
+
+            float lum = 0.21 * bloom_color.r + 0.71 * bloom_color.g + 0.07 * bloom_color.b;
+            gl_FragColor = vec4(base_color.rgb + bloom_color.rgb, max(base_color.a, lum));
+          }
+        `,
         defines: {},
       }),
       'baseTexture'
@@ -117,6 +125,7 @@ export class HighLight implements FtObject {
     this.finalComposer = new EffectComposer(this.renderer)
     this.finalComposer.addPass(renderScene)
     this.finalComposer.addPass(finalPass)
+    this.finalComposer.addPass(effectFXAA)
   }
 
   loop() {

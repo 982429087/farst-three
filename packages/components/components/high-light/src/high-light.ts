@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import type { HighLightOptions } from './HighLight'
+import type { HighLight, HighLightOptions } from './HighLight'
 import type { Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type HighLightComponent from './high-light.vue'
@@ -16,6 +16,7 @@ export const highLightEmits = {
 
 export type HighLightLoadEvent = {
   scene: Scene
+  highLight: HighLight
 }
 export type HighLightEmits = typeof highLightEmits
 export type HighLightProps = ExtractPropTypes<typeof highLightProps>
