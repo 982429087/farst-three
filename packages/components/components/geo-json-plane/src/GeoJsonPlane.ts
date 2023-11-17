@@ -152,35 +152,53 @@ export class GeoJsonPlane implements FtObject {
           colors.push(color.r, color.g, color.b)
         })
       })
-      const geometry = new ExtrudeGeometry(shape, {
-        depth: this.options.depth,
-        bevelEnabled: false,
-      })
-      const mesh = new Mesh(geometry, [gridMaterial, gradationMaterial])
-      mesh.rotateX(-Math.PI / 2)
-      mesh.position.set(0, 1, -3)
-      this.planeGroup.add(mesh)
 
-      // 线条
-      const linGeometry = new LineGeometry()
-      linGeometry.setPositions(positions)
-      linGeometry.setColors(colors)
-
-      if (this.options.showTopLine) {
-        const topLine = this.createLine(linGeometry, topMaterial)
-        topLine.position.set(...this.options.topLineOptions!.position!)
-        this.lineGroup.add(topLine)
-      }
-
-      if (this.options.showBottomLine) {
-        const bottomLine = this.createLine(linGeometry, bottomMaterial)
-        bottomLine.position.set(...this.options.bottomLineOptions!.position!)
-        this.lineGroup.add(bottomLine)
-      }
+      this.addPlane(shape, gridMaterial, gradationMaterial)
+      this.addLine(positions, colors, topMaterial, bottomMaterial)
     })
 
     this.scene.add(this.planeGroup, this.lineGroup)
   }
+
+  addPlane(
+    shape: Shape,
+    gridMaterial: ShaderMaterial,
+    gradationMaterial: MeshPhongMaterial
+  ) {
+    const geometry = new ExtrudeGeometry(shape, {
+      depth: this.options.depth,
+      bevelEnabled: false,
+    })
+    const mesh = new Mesh(geometry, [gridMaterial, gradationMaterial])
+    mesh.rotateX(-Math.PI / 2)
+    mesh.position.set(0, 1, -3)
+    this.planeGroup.add(mesh)
+  }
+
+  addLine(
+    positions: number[] | Float32Array,
+    colors: number[] | Float32Array,
+    topMaterial: LineMaterial,
+    bottomMaterial: LineMaterial
+  ) {
+    // 线条
+    const linGeometry = new LineGeometry()
+    linGeometry.setPositions(positions)
+    linGeometry.setColors(colors)
+
+    if (this.options.showTopLine) {
+      const topLine = this.createLine(linGeometry, topMaterial)
+      topLine.position.set(...this.options.topLineOptions!.position!)
+      this.lineGroup.add(topLine)
+    }
+
+    if (this.options.showBottomLine) {
+      const bottomLine = this.createLine(linGeometry, bottomMaterial)
+      bottomLine.position.set(...this.options.bottomLineOptions!.position!)
+      this.lineGroup.add(bottomLine)
+    }
+  }
+
   dispose() {
     this.scene.remove(this.planeGroup)
     this.scene.remove(this.lineGroup)
@@ -261,11 +279,8 @@ export class GeoJsonPlane implements FtObject {
     return { gridMaterial, gradationMaterial }
   }
 
-  // 初始化线框
   initLineMaterial() {
-    // 顶部线条
     const topMaterial = new LineMaterial(this.options.topLineMaterialOptions)
-    // 底部线条
     const bottomMaterial = new LineMaterial(
       this.options.bottomLineMaterialOptions
     )

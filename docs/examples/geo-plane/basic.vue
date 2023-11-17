@@ -15,6 +15,7 @@
         :params="{
           antialias: true,
           alpha: true,
+          logarithmicDepthBuffer: true,
         }"
       >
         <FtProjection
@@ -104,15 +105,15 @@
             enablePan: true,
           }"
         />
-        <FtAmbientLight :color="0xaaa" :intensity="0.8" />
+        <FtAmbientLight :color="0x02518d" :intensity="1" />
         <FtDirectionalLight
-          :color="0xaaa"
-          :intensity="0.5"
+          :color="0x02518d"
+          :intensity="1"
           :options="{ position: { set: [100, 10, -100] } }"
         />
         <FtDirectionalLight
-          :color="0xaaa"
-          :intensity="0.8"
+          :color="0x02518d"
+          :intensity="1"
           :options="{ position: { set: [100, 10, 100] } }"
         />
       </FtWebglRenderer>

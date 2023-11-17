@@ -67,37 +67,6 @@ function mouseMove(e: FunsEvent) {
   return e
 }
 
-// // 生成线
-// watch(
-//   [() => props.geoJson, () => props.lineOptions],
-//   ([json, opts]) => {
-//     if (!json) return
-//     destroy?.()
-//     const { dispose, group } = useGeoJsonPlaneLines(scene, projection, {
-//       ...opts,
-//       geoJson: json,
-//     })
-//     destroy = dispose
-//     emit('load', { scene, group })
-//   },
-//   { immediate: true, deep: true }
-// )
-
-// // 生成平面
-// watch(
-//   [() => props.geoJsonOutline, () => props.planeOptions],
-//   ([json, opts]) => {
-//     if (!json) return
-//     destroy2?.()
-//     const { dispose } = useGeoJsonPlane(scene, projection, {
-//       ...opts,
-//       geoJson: json,
-//     })
-//     destroy2 = dispose
-//   },
-//   { immediate: true, deep: true }
-// )
-
 onBeforeUnmount(() => {
   geoJsonPlane.dispose()
   destory?.()
