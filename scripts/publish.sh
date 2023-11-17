@@ -1,8 +1,8 @@
 #!/bin/sh
 
 set -e
-# --frozen-lockfile
-pnpm i
+
+pnpm i --no-frozen-lockfile
 pnpm update:version
 
 pnpm build
