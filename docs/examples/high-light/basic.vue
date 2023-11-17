@@ -37,6 +37,17 @@
             enablePan: true,
           }"
         />
+        <FtAmbientLight :color="0x02518d" :intensity="1" />
+        <FtDirectionalLight
+          :color="0x02518d"
+          :intensity="1"
+          :options="{ position: { set: [100, 10, -100] } }"
+        />
+        <FtDirectionalLight
+          :color="0x02518d"
+          :intensity="1"
+          :options="{ position: { set: [100, 10, 100] } }"
+        />
       </FtWebglRenderer>
     </FtScene>
   </div>
@@ -46,6 +57,8 @@
 import { reactive, ref, shallowRef } from 'vue'
 import { FileLoader } from 'three'
 import {
+  FtAmbientLight,
+  FtDirectionalLight,
   FtGeoJsonPlane,
   FtHighLight,
   FtOrbitControls,
