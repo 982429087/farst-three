@@ -1,7 +1,8 @@
-import type { AnyFn } from '@vueuse/core'
+import type { AnyFun } from './typescript'
+
 export { NOOP } from '@vue/shared'
 
-export function compose(...funcs: AnyFn[]) {
+export function compose(...funcs: AnyFun[]) {
   const length = funcs.length
   if (length === 0) return (...args: any) => args
   if (length === 1) return funcs[0]
