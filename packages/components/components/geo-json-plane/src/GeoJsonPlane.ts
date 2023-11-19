@@ -3,12 +3,14 @@ import {
   Color,
   // DoubleSide,
   ExtrudeGeometry,
+  FrontSide,
   // FrontSide,
   Group,
   Mesh,
   // MeshBasicMaterial,
   MeshPhongMaterial,
   RepeatWrapping,
+  ShaderMaterial,
   // ShaderMaterial,
   Shape,
   TextureLoader,
@@ -20,6 +22,7 @@ import { Line2 } from 'three/examples/jsm/lines/Line2'
 import { flatten } from '@turf/turf'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 // import { fragment, vertex } from './shader'
+import { fragment, vertex } from './shader'
 import type { FeatureCollection, Geometry, Position } from '@turf/turf'
 import type { LineMaterialParameters } from 'three/examples/jsm/lines/LineMaterial'
 import type { GeoProjection } from 'd3-geo'
@@ -208,7 +211,7 @@ export class GeoJsonPlane implements FtObject {
     //   },
     // }
 
-    // TODO shader材质需要再来
+    // // TODO shader材质需要再来
     // const gridMaterial = new ShaderMaterial({
     //   uniforms: singleUniforms,
     //   vertexShader: vertex,
@@ -216,7 +219,7 @@ export class GeoJsonPlane implements FtObject {
     //   transparent: true,
     //   opacity: 1,
     //   side: FrontSide,
-    //   depthTest: false,
+    //   depthTest: true,
 
     //   // blending:AdditiveBlending
     //   ...topts.geometryOptions,

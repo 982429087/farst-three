@@ -3,6 +3,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
 import { merge } from 'lodash'
 import type { FtObject } from '@farst-three/hooks'
@@ -22,10 +23,10 @@ export class HighLight implements FtObject {
   private camera: Camera
   private renderer: WebGLRenderer
   private defaultOptions = {
-    strength: 0.78,
+    strength: 0.4,
     threshold: 0,
     radius: 0.1,
-    exposure: 6,
+    exposure: 5,
   }
   private _options: HighLightOptions = {}
   private width: number
@@ -76,6 +77,7 @@ export class HighLight implements FtObject {
     const effectFXAA = new ShaderPass(FXAAShader)
     effectFXAA.uniforms['resolution'].value.set(1 / this.width, 1 / this.height)
     const renderScene = new RenderPass(this.scene, this.camera)
+    const outputPass = new OutputPass()
 
     this.bloomPass = new UnrealBloomPass(
       new Vector2(this.width, this.height),
@@ -89,6 +91,7 @@ export class HighLight implements FtObject {
     this.bloomComposer.addPass(renderScene)
     this.bloomComposer.addPass(this.bloomPass)
     this.bloomComposer.addPass(effectFXAA)
+    this.bloomComposer.addPass(outputPass)
 
     const finalPass = new ShaderPass(
       new ShaderMaterial({
@@ -126,6 +129,7 @@ export class HighLight implements FtObject {
     this.finalComposer.addPass(renderScene)
     this.finalComposer.addPass(finalPass)
     this.finalComposer.addPass(effectFXAA)
+    this.finalComposer.addPass(outputPass)
   }
 
   loop() {
