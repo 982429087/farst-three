@@ -1,4 +1,4 @@
-import { Layers, ReinhardToneMapping, ShaderMaterial, Vector2 } from 'three'
+import { Layers, ShaderMaterial, Vector2 } from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
@@ -13,7 +13,6 @@ export type HighLightOptions = {
   strength?: number
   threshold?: number
   radius?: number
-  exposure?: number
 }
 
 export const HIGHLITHT_SCENE = 1
@@ -37,7 +36,6 @@ export class HighLight extends FtPass implements FtObject {
     opts: HighLightOptions = {}
   ) {
     super(scene, camera, renderer)
-    renderer.toneMapping = ReinhardToneMapping
     this.options = opts
     this.bloomLayer = new Layers()
     this.bloomLayer.set(HIGHLITHT_SCENE)
@@ -56,7 +54,6 @@ export class HighLight extends FtPass implements FtObject {
       this.bloomPass.threshold = temp.threshold
       this.bloomPass.strength = temp.strength
       this.bloomPass.radius = temp.radius
-      this.renderer.toneMappingExposure = temp.exposure
     }
   }
 

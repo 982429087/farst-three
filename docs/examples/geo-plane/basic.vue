@@ -17,6 +17,10 @@
           alpha: true,
           logarithmicDepthBuffer: true,
         }"
+        :options="{
+          toneMapping: ReinhardToneMapping,
+          toneMappingExposure: 1,
+        }"
       >
         <FtProjection
           :center="[102.44662948242187, 30.927128325051036]"
@@ -122,7 +126,7 @@
 
 <script setup lang="ts">
 import { shallowRef } from 'vue'
-import { Color, FileLoader } from 'three'
+import { Color, FileLoader, ReinhardToneMapping } from 'three'
 import {
   FtAmbientLight,
   FtAxesHelper,

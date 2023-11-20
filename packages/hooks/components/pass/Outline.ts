@@ -80,7 +80,6 @@ export class Outline extends FtPass implements FtObject {
     this.composer.addPass(this.outlinePass)
     this.composer.addPass(this.effectFXAA)
     this.composer.addPass(outputPass)
-
     this.onChange([this.composer])
   }
   loop() {

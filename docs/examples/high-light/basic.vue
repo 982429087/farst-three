@@ -83,7 +83,6 @@ const highLightOptions = reactive<HighLightOptions>({
   strength: 0.78,
   threshold: 0,
   radius: 0.1,
-  exposure: 1,
 })
 
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
@@ -94,7 +93,6 @@ function initGeoJson() {
     geoJson.value = dataObj
   })
 }
-// 高亮
 
 const map: Record<string, Mesh> = {}
 function handleClick({ targets }: FunsEvent) {
@@ -123,7 +121,6 @@ guiPromise.then((gui) => {
   gui.add(highLightOptions, 'strength', 0, 1, 0.01)
   gui.add(highLightOptions, 'threshold', 0, 1, 0.01)
   gui.add(highLightOptions, 'radius', 0, 1, 0.01)
-  gui.add(highLightOptions, 'exposure', -20, 20, 1)
 })
 </script>
 
