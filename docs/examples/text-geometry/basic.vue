@@ -15,7 +15,7 @@
       <!-- 渲染器 -->
       <FtWebglRenderer
         ref="rendererRef"
-        :params="{ antialias: true, alpha: true }"
+        :params="{ antialias: true }"
         :animation-fn="animationFn"
         :options="{
           shadowMap: {
@@ -46,6 +46,9 @@
         >
           <FtBoxGeometry :width="2" :height="2" :depth="10" />
           <FtMeshStandardMaterial
+            :params="{
+              color: 0xffffff,
+            }"
             :options="{
               transparent: true,
               opacity: 0.9,
@@ -55,23 +58,39 @@
           />
         </FtInstancedMesh>
         <!-- 灯光 -->
-        <FtPointLight :color="0xff6000" />
+        <FtPointLight
+          :decay="0"
+          :intensity="10"
+          :distance="100"
+          :color="0xff6000"
+        />
         <FtPointLight
           :color="0xff6000"
-          :intensity="0.85"
+          :decay="0"
+          :intensity="10"
+          :distance="100"
           :options="{ position: { x: 100 } }"
         />
         <FtPointLight
           :color="0x0000ff"
-          :intensity="0.85"
+          :decay="0"
+          :intensity="10"
+          :distance="100"
           :options="{ position: { x: -100 } }"
         />
-        <FtPointLight ref="lightRef" color="#0060ff" :intensity="0.5" />
+        <FtPointLight
+          ref="lightRef"
+          :color="0x0060ff"
+          :decay="0"
+          :intensity="10"
+          :distance="100"
+        />
         <FtAmbientLight :color="0x808080" />
         <FtOrbitControls />
 
         <FtEffectComposer>
           <FtRenderPass />
+
           <FtUnrealBloomPass :strength="1" />
           <FtHalftonePass
             :params="{
@@ -107,13 +126,13 @@ import {
   FtTextGeometry,
   FtUnrealBloomPass,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { FunsEvent } from '@farst-three/hooks'
+} from 'farst-three'
 import type {
+  FunsEvent,
   InstancedMeshInstance,
   PointLightInstance,
   WebGLRendererInstance,
-} from '@farst-three/components'
+} from 'farst-three'
 const { randFloat: rnd, randFloatSpread: rndFS } = MathUtils
 const domRef = ref<HTMLDivElement>()
 const NUM_INSTANCES = 2000
@@ -156,6 +175,7 @@ function animate() {
   const imesh = instancedMeshRef.value?.mesh
   const renderer = rendererRef.value?.renderer
   if (!imesh || !renderer) return
+
   target.copy(positionV3)
   lightRef.value?.light.position.copy(target)
 
