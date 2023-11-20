@@ -73,13 +73,13 @@ cat >$EXAMPLE_FILE_PATH/$NAME/basic.vue <<EOF
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { useGui } from '@farst-three/hooks'
 import {
   FtOrbitControls,
   FtPerspectiveCamera,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {

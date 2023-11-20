@@ -7,8 +7,9 @@ import { onBeforeUnmount, watch } from 'vue'
 import {
   Outline,
   useAnimationService,
+  useRenderCamera,
+  useRenderer,
   useScene,
-  useStoreService,
 } from '@farst-three/hooks'
 import { outlineEmits, outlineProps } from './outline'
 
@@ -20,9 +21,8 @@ const props = defineProps(outlineProps)
 const emit = defineEmits(outlineEmits)
 
 const scene = useScene()
-const store = useStoreService()
-const camera = store.getRenderCamera()!
-const renderer = store.getRenderer()!
+const camera = useRenderCamera()
+const renderer = useRenderer()
 const animation = useAnimationService()
 
 const outline = new Outline(scene, camera, renderer)

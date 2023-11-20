@@ -51,7 +51,13 @@ cat > $DIRNAME/src/$INPUT_NAME.vue <<EOF
 </template>
 
 <script lang="ts" setup>
-import { useOptions, useScene } from '@farst-three/hooks'
+import {
+  Outline,
+  useAnimationService,
+  useRenderCamera,
+  useRenderer,
+  useScene,
+} from '@farst-three/hooks'
 import { onBeforeUnmount } from 'vue'
 import {
   ${SMALL_HUMP}Emits,
@@ -65,13 +71,15 @@ defineOptions({
 const props = defineProps(${SMALL_HUMP}Props)
 const emit = defineEmits(${SMALL_HUMP}Emits)
 
-// init here
-let scene = useScene()
+const scene = useScene()
+const camera = useRenderCamera()
+const renderer = useRenderer()
+const animation = useAnimationService()
 emit('load', { scene })
 useOptions(props.options, , scene)
 
 onBeforeUnmount(() => {
-  ;(scene as any) = null
+  //
 })
 </script>
 EOF
