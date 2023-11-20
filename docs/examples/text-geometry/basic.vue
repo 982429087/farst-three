@@ -15,7 +15,7 @@
       <!-- 渲染器 -->
       <FtWebglRenderer
         ref="rendererRef"
-        :params="{ antialias: true }"
+        :params="{ antialias: true, alpha: true }"
         :animation-fn="animationFn"
         :options="{
           shadowMap: {
@@ -187,12 +187,9 @@ onMounted(() => {
 })
 
 function sceneHover(e: FunsEvent) {
-  console.log('触发')
-
   if (e.position) {
     positionV3 = e.position
   }
-  console.log(e)
 }
 </script>
 

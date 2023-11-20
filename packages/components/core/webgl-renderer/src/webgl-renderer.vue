@@ -23,12 +23,11 @@ defineOptions({
 const props = defineProps(webGLRendererProps)
 const emit = defineEmits(webglRendererEmits)
 
-const scene = useScene()
-const container = useContainer()
-const storeService = useStoreService()
-// 事件处理函数
-const eventService = useEventService()
-const animationService = useAnimationService()
+let scene = useScene()
+let container = useContainer()
+let storeService = useStoreService()
+let eventService = useEventService()
+let animationService = useAnimationService()
 let camera: Camera | undefined = storeService.getRenderCamera()
 
 watch(
@@ -52,9 +51,10 @@ container.appendChild(renderer.domElement)
 if (props.animationFn) animationService.on('propsFn', props.animationFn)
 
 function animate() {
-  if (!camera) throw new Error('<webgl-renderer /> 没有找到主渲染相机!')
-  animationService.emit({ renderer, scene, camera })
-  if (!animationService.noRender) renderer?.render(scene, camera)
+  if (camera) {
+    animationService.emit({ renderer, scene, camera })
+    if (!animationService.noRender) renderer.render(scene, camera)
+  }
   requestAnimationFrame(animate)
 }
 
@@ -76,6 +76,12 @@ onBeforeUnmount(() => {
   container.removeChild(renderer.domElement)
   renderer.forceContextLoss()
   renderer.dispose()
+  ;(scene as any) = null
+  ;(container as any) = null
+  ;(storeService as any) = null
+  ;(eventService as any) = null
+  ;(animationService as any) = null
+  ;(camera as any) = null
 })
 
 defineExpose({

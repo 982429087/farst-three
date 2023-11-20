@@ -31,6 +31,7 @@ emit('load', { scene, composer, renderer })
 provide(effectComposerInjectionKey, composer)
 
 animationService.noRender = true
+
 animationService.on('ft-effect-composer', () => {
   composer.render()
 })
