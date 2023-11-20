@@ -1,36 +1,6 @@
 <template>
   <div class="farst-three">
     <FtScene>
-      <FtMesh :options="{ position: { x: -1.5 } }">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshMatcapMaterial :options="params">
-          <FtTextureLoader
-            url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
-            :type="'map'"
-          />
-          <FtTextureLoader
-            url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_normal.jpg"
-            :type="'matcap'"
-          />
-        </FtMeshMatcapMaterial>
-      </FtMesh>
-      <FtMesh :options="{ position: { x: 1.5 } }">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshMatcapMaterial :params="{ normalScale: new Vector2(1, 1) }">
-          <FtTextureLoader
-            url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
-            :type="'map'"
-          />
-          <FtTextureLoader
-            url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_ambientOcclusion.jpg"
-            :type="'normalMap'"
-          />
-          <FtTextureLoader
-            url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_normal.jpg"
-            :type="'matcap'"
-          />
-        </FtMeshMatcapMaterial>
-      </FtMesh>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -45,6 +15,36 @@
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtMesh :options="{ position: { x: -1.5 } }">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshMatcapMaterial :options="params">
+            <FtTextureLoader
+              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
+              :type="'map'"
+            />
+            <FtTextureLoader
+              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_normal.jpg"
+              :type="'matcap'"
+            />
+          </FtMeshMatcapMaterial>
+        </FtMesh>
+        <FtMesh :options="{ position: { x: 1.5 } }">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshMatcapMaterial :params="{ normalScale: new Vector2(1, 1) }">
+            <FtTextureLoader
+              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
+              :type="'map'"
+            />
+            <FtTextureLoader
+              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_ambientOcclusion.jpg"
+              :type="'normalMap'"
+            />
+            <FtTextureLoader
+              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_normal.jpg"
+              :type="'matcap'"
+            />
+          </FtMeshMatcapMaterial>
+        </FtMesh>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

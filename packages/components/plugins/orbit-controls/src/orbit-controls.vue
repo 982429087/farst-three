@@ -8,6 +8,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import {
   useAnimationService,
   useOptions,
+  useRenderer,
   useScene,
   useStoreService,
 } from '@farst-three/hooks'
@@ -20,10 +21,9 @@ defineOptions({
 const props = defineProps(orbitControlsProps)
 const emit = defineEmits(orbitControlsEmits)
 
-// init here
-let scene = useScene()
-let storeService = useStoreService()
-let renderer = storeService.getRenderer()
+const scene = useScene()
+const storeService = useStoreService()
+const renderer = useRenderer()
 const animationService = useAnimationService()
 
 let camera: Camera | undefined = storeService.getRenderCamera()
@@ -33,7 +33,6 @@ watch(
   (v) => {
     if (v) camera = v
     if (!camera) throw new Error('<OrbitControls /> 没有找到主渲染相机!')
-    if (!renderer) throw new Error('<OrbitControls /> 没有找到渲染器!')
     controls = new OrbitControls(camera, renderer.domElement)
     emit('load', { controls, camera, renderer })
     useOptions(props.options, controls, scene)
@@ -45,10 +44,6 @@ animationService.on('controls', () => {
 })
 onBeforeUnmount(() => {
   controls?.dispose()
-  ;(renderer as any) = null
-  ;(storeService as any) = null
-  ;(camera as any) = null
-  ;(controls as any) = null
-  ;(scene as any) = null
+  animationService.off('controls')
 })
 </script>

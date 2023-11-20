@@ -124,7 +124,7 @@ export function useDragService() {
 }
 
 export function useEffectComposer() {
-  return useRefInjection<EffectComposer>(effectComposerInjectionKey).value
+  return useInjection<EffectComposer>(effectComposerInjectionKey)
 }
 
 export function useProjection() {

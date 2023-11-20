@@ -7,6 +7,7 @@ import { onBeforeUnmount, watch } from 'vue'
 import { DragControls } from 'three/examples/jsm/controls/DragControls'
 import { isEmpty } from 'lodash'
 import {
+  useContainer,
   useDragService,
   useOptions,
   useScene,
@@ -21,19 +22,16 @@ defineOptions({
 const props = defineProps(dragControlsProps)
 const emit = defineEmits(dragControlsEmits)
 
-let scene = useScene()
-let dragService = useDragService()
-let storeService = useStoreService()
+const scene = useScene()
+const dragService = useDragService()
+const storeService = useStoreService()
+const dom = useContainer()
 
 let dragControls: DragControls | null = null
 
 watch(
-  [
-    dragService.aollections,
-    () => storeService.renderCamera.value,
-    () => storeService.sceneRef.value,
-  ],
-  ([collection, camera, dom]) => {
+  [dragService.aollections, () => storeService.renderCamera.value],
+  ([collection, camera]) => {
     if (!isEmpty(collection) && camera && dom) {
       dragControls = new DragControls(collection, camera, dom)
       emit('load', { scene, dragControls })
@@ -50,9 +48,5 @@ useOptions(props.options, dragControls, scene)
 onBeforeUnmount(() => {
   dragControls?.dispose()
   dragService.clearCount()
-  ;(scene as any) = null
-  ;(dragControls as any) = null
-  ;(dragService as any) = null
-  ;(storeService as any) = null
 })
 </script>

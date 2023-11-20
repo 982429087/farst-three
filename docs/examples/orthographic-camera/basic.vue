@@ -1,12 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh @load="loadMesh">
-        <FtBoxGeometry @load="ftBoxGeometryLoad">
-          <FtMeshBasicMaterial :params="meshBasicParamsFn" />
-        </FtBoxGeometry>
-      </FtMesh>
-
       <FtPerspectiveCamera
         :fov="75"
         :near="0.1"
@@ -30,6 +24,11 @@
         }"
         :animation-fn="animationFn"
       >
+        <FtMesh @load="loadMesh">
+          <FtBoxGeometry @load="ftBoxGeometryLoad">
+            <FtMeshBasicMaterial :params="meshBasicParamsFn" />
+          </FtBoxGeometry>
+        </FtMesh>
         <FtOrbitControls />
         <FtCameraHelper @load="cameraHelperLoad" />
       </FtWebglRenderer>

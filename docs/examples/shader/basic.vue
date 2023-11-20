@@ -21,19 +21,6 @@
         </FtMeshPhysicalMaterial>
       </FtMesh> -->
 
-      <FtMesh>
-        <FtSphereGeometry
-          :radius="2"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtShaderMaterial
-          :options="shaderMaterialOpts"
-          :params="materialParams"
-          @load="shaderMaterialLoad"
-        />
-      </FtMesh>
-
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -43,6 +30,19 @@
           },
         }"
       >
+        <FtMesh>
+          <FtSphereGeometry
+            :radius="2"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtShaderMaterial
+            :options="shaderMaterialOpts"
+            :params="materialParams"
+            @load="shaderMaterialLoad"
+          />
+        </FtMesh>
+
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

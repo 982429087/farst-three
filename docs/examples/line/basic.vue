@@ -1,10 +1,6 @@
 <template>
   <div class="farst-three">
     <FtScene @load="sceneLoad">
-      <FtLine>
-        <FtLineBasicMaterial :params="{ vertexColors: true }" />
-        <FtBufferGeometry :options="buffgeoOpts" @load="bufferGeoLoad" />
-      </FtLine>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -15,16 +11,21 @@
           },
         }"
       />
-      <FtDirectionalLight
-        :color="0xffffff"
-        :intensity="0.7"
-        :options="{ position: { set: [1, 2, 4] } }"
-      />
-      <FtAmbientLight :color="0xffffff" :intensity="0.5" />
+
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtLine>
+          <FtLineBasicMaterial :params="{ vertexColors: true }" />
+          <FtBufferGeometry :options="buffgeoOpts" @load="bufferGeoLoad" />
+        </FtLine>
+        <FtDirectionalLight
+          :color="0xffffff"
+          :intensity="0.7"
+          :options="{ position: { set: [1, 2, 4] } }"
+        />
+        <FtAmbientLight :color="0xffffff" :intensity="0.5" />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

@@ -3,15 +3,14 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount, provide, shallowRef, watch } from 'vue'
+import { onBeforeUnmount, provide } from 'vue'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import { debounce } from 'lodash'
 import { Vector2 } from 'three'
 import {
   useAnimationService,
   useContainer,
+  useRenderer,
   useScene,
-  useStoreService,
 } from '@farst-three/hooks'
 import { effectComposerInjectionKey } from '@farst-three/constants'
 import { effectComposerEmits, effectComposerProps } from './effect-composer'
@@ -23,49 +22,29 @@ defineOptions({
 const props = defineProps(effectComposerProps)
 const emit = defineEmits(effectComposerEmits)
 
-// init here
-let scene = useScene()
+const scene = useScene()
 const container = useContainer()
-const store = useStoreService()
+const renderer = useRenderer()
 const animationService = useAnimationService()
-let composer = shallowRef<EffectComposer>()
+const composer = new EffectComposer(renderer, props.renderTarget)
+emit('load', { scene, composer, renderer })
 provide(effectComposerInjectionKey, composer)
-watch(
-  () => store.renderer.value,
-  (v) => {
-    if (v) {
-      composer.value = new EffectComposer(v, props.renderTarget)
-      emit('load', { scene, composer: composer.value, renderer: v })
-    }
-  },
-  {
-    immediate: true,
-  }
-)
 
-// effect render 执行的时候是，不能执行 webglrenderer的render方法
 animationService.noRender = true
-animationService.on('effect-composer', () => {
-  composer.value?.render()
+animationService.on('ft-effect-composer', () => {
+  composer.render()
 })
 
 const resize = () => {
-  const renderer = store.getRenderer()
-
-  if (composer.value && renderer) {
-    const size = renderer.getSize(new Vector2())
-    composer.value?.setSize(size.x, size.y)
-  }
+  const size = renderer.getSize(new Vector2())
+  composer.setSize(size.x, size.y)
 }
-const dOb = debounce(() => resize(), 0)
-const observer = new ResizeObserver(dOb)
+const observer = new ResizeObserver(resize)
 observer.observe(container)
 
 onBeforeUnmount(() => {
-  composer.value?.dispose()
+  composer.dispose()
   animationService.noRender = false
-  animationService.off('effect-composer')
-  ;(scene as any) = null
-  ;(composer as any) = null
+  animationService.off('ft-effect-composer')
 })
 </script>

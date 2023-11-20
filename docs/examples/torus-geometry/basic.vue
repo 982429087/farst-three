@@ -4,25 +4,6 @@
       :options="{ background: () => new Color(0xffffff) }"
       @click="handleClick"
     >
-      <FtAmbientLight :color="0x808080" />
-      <FtPointLight
-        :color="0xffffff"
-        :options="{ position: { y: 50, z: 0 } }"
-      />
-      <FtPointLight
-        :color="0xffffff"
-        :options="{ position: { y: -50, z: 0 } }"
-      />
-      <FtPointLight :color="0xffffff" :options="{ position: { y: 0, z: 0 } }" />
-      <FtMesh v-for="i in n" :key="i" :options="meshOptionsArr[i - 1]">
-        <FtTorusGeometry
-          :radius="i * 0.2"
-          :tube="0.1"
-          :radial-segments="8"
-          :tubular-segments="(i + 2) * 4"
-        />
-        <FtMeshToonMaterial :options="toonOptionaArr[i - 1]" />
-      </FtMesh>
       <FtPerspectiveCamera
         :options="{
           position: {
@@ -31,8 +12,31 @@
         }"
       />
 
-      <FtWebglRenderer :animation-fn="animationFn" />
-      <FtOrbitControls />
+      <FtWebglRenderer :animation-fn="animationFn">
+        <FtAmbientLight :color="0x808080" />
+        <FtPointLight
+          :color="0xffffff"
+          :options="{ position: { y: 50, z: 0 } }"
+        />
+        <FtPointLight
+          :color="0xffffff"
+          :options="{ position: { y: -50, z: 0 } }"
+        />
+        <FtPointLight
+          :color="0xffffff"
+          :options="{ position: { y: 0, z: 0 } }"
+        />
+        <FtMesh v-for="i in n" :key="i" :options="meshOptionsArr[i - 1]">
+          <FtTorusGeometry
+            :radius="i * 0.2"
+            :tube="0.1"
+            :radial-segments="8"
+            :tubular-segments="(i + 2) * 4"
+          />
+          <FtMeshToonMaterial :options="toonOptionaArr[i - 1]" />
+        </FtMesh>
+        <FtOrbitControls />
+      </FtWebglRenderer>
     </FtScene>
   </div>
 </template>

@@ -1,47 +1,46 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <!-- 相机加载需要在mesh前，所以组件要放前面 -->
       <FtPerspectiveCamera
         :fov="100"
         :near="0.01"
         :far="1000"
         @load="cameraLoad"
       />
-      <FtMesh>
-        <FtBoxGeometry>
-          <FtMeshBasicMaterial :params="meshBasicParams" />
-        </FtBoxGeometry>
-      </FtMesh>
-      <FtMesh>
-        <FtTubeGeometry
-          :path="curve"
-          :tubular-segments="200"
-          :radius="0.01"
-          :radial-segments="8"
-          :closed="true"
-        >
-          <FtMeshBasicMaterial :params="meshBasicParams" />
-        </FtTubeGeometry>
-      </FtMesh>
-      <FtMesh @load="meshLoad">
-        <FtSphereGeometry
-          :radius="0.5"
-          :width-segments="32"
-          :height-segments="64"
-        >
-          <FtMeshBasicMaterial :params="meshBasicParams" />
-        </FtSphereGeometry>
-      </FtMesh>
-      <FtAxesHelper :size="4" />
-      <FtGridHelper
-        :size="100"
-        :divisions="10"
-        :color1="0xcd37aa"
-        :color2="0x4a4a4a"
-      />
 
       <FtWebglRenderer :animation-fn="animationFn">
+        <FtMesh>
+          <FtBoxGeometry>
+            <FtMeshBasicMaterial :params="meshBasicParams" />
+          </FtBoxGeometry>
+        </FtMesh>
+        <FtMesh>
+          <FtTubeGeometry
+            :path="curve"
+            :tubular-segments="200"
+            :radius="0.01"
+            :radial-segments="8"
+            :closed="true"
+          >
+            <FtMeshBasicMaterial :params="meshBasicParams" />
+          </FtTubeGeometry>
+        </FtMesh>
+        <FtMesh @load="meshLoad">
+          <FtSphereGeometry
+            :radius="0.5"
+            :width-segments="32"
+            :height-segments="64"
+          >
+            <FtMeshBasicMaterial :params="meshBasicParams" />
+          </FtSphereGeometry>
+        </FtMesh>
+        <FtAxesHelper :size="4" />
+        <FtGridHelper
+          :size="100"
+          :divisions="10"
+          :color1="0xcd37aa"
+          :color2="0x4a4a4a"
+        />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

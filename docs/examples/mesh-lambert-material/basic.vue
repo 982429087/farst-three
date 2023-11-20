@@ -1,31 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh :options="planeOps">
-        <FtPlaneGeometry :width="1" :height="1" />
-        <FtMeshLambertMaterial :options="params" />
-      </FtMesh>
-      <FtMesh :options="sphereOps">
-        <FtSphereGeometry
-          :radius="0.5"
-          :width-segments="16"
-          :height-segments="16"
-        />
-        <FtMeshLambertMaterial :options="params" />
-      </FtMesh>
-      <FtMesh :options="boxOps">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial :options="params" />
-      </FtMesh>
-      <FtMesh :options="torusOps">
-        <FtTorusGeometry
-          :radius="0.4"
-          :tube="0.2"
-          :radial-segments="16"
-          :tubular-segments="32"
-        />
-        <FtMeshLambertMaterial :options="params" />
-      </FtMesh>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -36,16 +11,42 @@
           },
         }"
       />
-      <FtDirectionalLight
-        :color="0xffffff"
-        :intensity="0.7"
-        :options="directionOpts"
-      />
-      <FtAmbientLight :color="0xffffff" :intensity="0.5" />
+
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtMesh :options="planeOps">
+          <FtPlaneGeometry :width="1" :height="1" />
+          <FtMeshLambertMaterial :options="params" />
+        </FtMesh>
+        <FtMesh :options="sphereOps">
+          <FtSphereGeometry
+            :radius="0.5"
+            :width-segments="16"
+            :height-segments="16"
+          />
+          <FtMeshLambertMaterial :options="params" />
+        </FtMesh>
+        <FtMesh :options="boxOps">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial :options="params" />
+        </FtMesh>
+        <FtMesh :options="torusOps">
+          <FtTorusGeometry
+            :radius="0.4"
+            :tube="0.2"
+            :radial-segments="16"
+            :tubular-segments="32"
+          />
+          <FtMeshLambertMaterial :options="params" />
+        </FtMesh>
+        <FtDirectionalLight
+          :color="0xffffff"
+          :intensity="0.7"
+          :options="directionOpts"
+        />
+        <FtAmbientLight :color="0xffffff" :intensity="0.5" />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

@@ -1,34 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh :options="boxOpts" @load="boxLoad">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
-      </FtMesh>
-      <FtMesh :options="wallOps">
-        <FtPlaneGeometry :width="10" :height="10" />
-        <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
-      </FtMesh>
-      <FtMesh :options="floorOps">
-        <FtPlaneGeometry :width="10" :height="10" />
-        <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
-      </FtMesh>
-      <FtMesh :options="pointYellowOpts">
-        <FtSphereGeometry
-          :radius="0.05"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshBasicMaterial :params="{ color: 0xf3ae3d }" />
-      </FtMesh>
-      <FtMesh :options="pointGreenOpts">
-        <FtSphereGeometry
-          :radius="0.05"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshBasicMaterial :params="{ color: 0xa1fc8f }" />
-      </FtMesh>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -39,27 +11,6 @@
           },
         }"
       />
-      <FtPointLight
-        :options="pointLightYellowOpts"
-        :color="0xf3ae3d"
-        :intensity="0.8"
-        @load="pointLightYellowLoad"
-      >
-        <FtPointLightHelper :options="plhOpts" />
-      </FtPointLight>
-      <FtPointLight
-        :options="pointLightGreenOpts"
-        :color="0xa1fc8f"
-        :intensity="0.8"
-        @load="pointLightGreenLoad"
-      />
-      <FtAmbientLight
-        :options="lightOptions"
-        :color="0xffffff"
-        :intensity="0.95"
-      />
-      <FtPoints />
-      <FtGridHelper />
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -69,6 +20,56 @@
           },
         }"
       >
+        <FtMesh :options="boxOpts" @load="boxLoad">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
+        </FtMesh>
+        <FtMesh :options="wallOps">
+          <FtPlaneGeometry :width="10" :height="10" />
+          <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
+        </FtMesh>
+        <FtMesh :options="floorOps">
+          <FtPlaneGeometry :width="10" :height="10" />
+          <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
+        </FtMesh>
+        <FtMesh :options="pointYellowOpts">
+          <FtSphereGeometry
+            :radius="0.05"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshBasicMaterial :params="{ color: 0xf3ae3d }" />
+        </FtMesh>
+        <FtMesh :options="pointGreenOpts">
+          <FtSphereGeometry
+            :radius="0.05"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshBasicMaterial :params="{ color: 0xa1fc8f }" />
+        </FtMesh>
+
+        <FtPointLight
+          :options="pointLightYellowOpts"
+          :color="0xf3ae3d"
+          :intensity="0.8"
+          @load="pointLightYellowLoad"
+        >
+          <FtPointLightHelper :options="plhOpts" />
+        </FtPointLight>
+        <FtPointLight
+          :options="pointLightGreenOpts"
+          :color="0xa1fc8f"
+          :intensity="0.8"
+          @load="pointLightGreenLoad"
+        />
+        <FtAmbientLight
+          :options="lightOptions"
+          :color="0xffffff"
+          :intensity="0.95"
+        />
+        <FtPoints />
+        <FtGridHelper />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

@@ -1,50 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtPoints
-        :options="{
-          position: {
-            x: 2,
-          },
-        }"
-      >
-        <FtPointsMaterial
-          :params="{
-            size: 0.05,
-            color: 0xffffff * Math.random(),
-            sizeAttenuation: false, // 粒子大小不受距离影响 (仅限于透视摄像机)
-          }"
-          :options="pointMaterialOpts"
-        />
-        <FtBoxGeometry
-          :width="2"
-          :height="2"
-          :depth="2"
-          :width-segments="16"
-          :height-segments="32"
-          :depth-segments="32"
-        />
-      </FtPoints>
-      <FtPoints
-        :options="{
-          position: {
-            x: -2,
-          },
-        }"
-      >
-        <FtPointsMaterial
-          :params="{
-            size: 0.05,
-            color: 0xffffff * Math.random(),
-          }"
-          :options="pointMaterialOpts"
-        />
-        <FtSphereGeometry
-          :radius="2"
-          :width-segments="32"
-          :height-segments="32"
-        />
-      </FtPoints>
       <FtPerspectiveCamera
         :fov="27"
         :near="5"
@@ -65,6 +21,50 @@
           },
         }"
       >
+        <FtPoints
+          :options="{
+            position: {
+              x: 2,
+            },
+          }"
+        >
+          <FtPointsMaterial
+            :params="{
+              size: 0.05,
+              color: 0xffffff * Math.random(),
+              sizeAttenuation: false, // 粒子大小不受距离影响 (仅限于透视摄像机)
+            }"
+            :options="pointMaterialOpts"
+          />
+          <FtBoxGeometry
+            :width="2"
+            :height="2"
+            :depth="2"
+            :width-segments="16"
+            :height-segments="32"
+            :depth-segments="32"
+          />
+        </FtPoints>
+        <FtPoints
+          :options="{
+            position: {
+              x: -2,
+            },
+          }"
+        >
+          <FtPointsMaterial
+            :params="{
+              size: 0.05,
+              color: 0xffffff * Math.random(),
+            }"
+            :options="pointMaterialOpts"
+          />
+          <FtSphereGeometry
+            :radius="2"
+            :width-segments="32"
+            :height-segments="32"
+          />
+        </FtPoints>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

@@ -15,15 +15,6 @@
           },
         }"
       />
-      <FtGLTFLoader :url="url" :load="glbLoad" @load="gltfLoader" />
-      <FtAmbientLight />
-      <FtPointLight
-        :options="{
-          position: {
-            set: [0, 10, 0],
-          },
-        }"
-      />
       <FtWebglRenderer
         :params="{ antialias: true, logarithmicDepthBuffer: true }"
         :animation-fn="animationFn"
@@ -33,6 +24,15 @@
           },
         }"
       >
+        <FtGLTFLoader :url="url" :load="glbLoad" @load="gltfLoader" />
+        <FtAmbientLight />
+        <FtPointLight
+          :options="{
+            position: {
+              set: [0, 10, 0],
+            },
+          }"
+        />
         <FtOrbitControls :options="{ enableZoom: false }" />
         <FtAxesHelper />
         <FtGridHelper :size="100" :divisions="100" />

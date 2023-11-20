@@ -4,20 +4,6 @@
       ref="sceneInstance"
       :options="{ background: () => new Color('rgb(255, 255, 255)') }"
     >
-      <FtPointLight :color="0x0e09dc" :intensity="0.85" :options="point1Opts" />
-      <FtPointLight :color="0x1cd1e1" :intensity="0.85" :options="point2Opts" />
-      <FtPointLight :color="0x18c02c" :intensity="0.85" :options="point3Opts" />
-      <FtPointLight :color="0xee3bcf" :intensity="0.85" :options="point4Opts" />
-      <FtMesh>
-        <FtPlaneGeometry
-          :width="200"
-          :height="200"
-          :width-segments="100"
-          :height-segments="100"
-        />
-        <FtMeshPhysicalMaterial :options="pmOpts" />
-      </FtMesh>
-
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -29,6 +15,35 @@
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtPointLight
+          :color="0x0e09dc"
+          :intensity="0.85"
+          :options="point1Opts"
+        />
+        <FtPointLight
+          :color="0x1cd1e1"
+          :intensity="0.85"
+          :options="point2Opts"
+        />
+        <FtPointLight
+          :color="0x18c02c"
+          :intensity="0.85"
+          :options="point3Opts"
+        />
+        <FtPointLight
+          :color="0xee3bcf"
+          :intensity="0.85"
+          :options="point4Opts"
+        />
+        <FtMesh>
+          <FtPlaneGeometry
+            :width="200"
+            :height="200"
+            :width-segments="100"
+            :height-segments="100"
+          />
+          <FtMeshPhysicalMaterial :options="pmOpts" />
+        </FtMesh>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

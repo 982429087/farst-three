@@ -1,38 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh
-        :dragabled="true"
-        :options="{
-          position: {
-            x: -4,
-            y: 3,
-          },
-          rotation: {
-            y: 0.5,
-          },
-        }"
-        @load="({ mesh }) => (box = mesh)"
-      >
-        <FtBoxGeometry :width="4" :height="4" :depth="4" />
-        <FtMeshLambertMaterial>
-          <FtTextureLoader
-            url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
-          />
-        </FtMeshLambertMaterial>
-      </FtMesh>
-      <FtMesh
-        :options="{
-          position: {
-            x: 4,
-            y: 3,
-          },
-        }"
-        @load="({ mesh }) => (blueBox = mesh)"
-      >
-        <FtBoxGeometry :width="4" :height="4" :depth="4" />
-        <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
-      </FtMesh>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -43,9 +11,7 @@
           },
         }"
       />
-      <FtAmbientLight />
-      <FtDirectionalLight />
-      <FtGridHelper :divisions="20" :size="100" />
+
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -55,6 +21,41 @@
           },
         }"
       >
+        <FtMesh
+          :dragabled="true"
+          :options="{
+            position: {
+              x: -4,
+              y: 3,
+            },
+            rotation: {
+              y: 0.5,
+            },
+          }"
+          @load="({ mesh }) => (box = mesh)"
+        >
+          <FtBoxGeometry :width="4" :height="4" :depth="4" />
+          <FtMeshLambertMaterial>
+            <FtTextureLoader
+              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+            />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+        <FtMesh
+          :options="{
+            position: {
+              x: 4,
+              y: 3,
+            },
+          }"
+          @load="({ mesh }) => (blueBox = mesh)"
+        >
+          <FtBoxGeometry :width="4" :height="4" :depth="4" />
+          <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
+        </FtMesh>
+        <FtAmbientLight />
+        <FtDirectionalLight />
+        <FtGridHelper :divisions="20" :size="100" />
         <FtOrbitControls :options="orbitControls" />
       </FtWebglRenderer>
       <FtDragControls @load="dragControlsLoad" />

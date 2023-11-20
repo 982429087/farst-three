@@ -1,11 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtPoints :options="pointsOpts">
-        <FtShaderMaterial :params="materialParams" />
-        <FtBufferGeometry :options="bufferGeoOpts" />
-      </FtPoints>
-
       <FtPerspectiveCamera
         :fov="27"
         :near="2"
@@ -22,6 +17,10 @@
           },
         }"
       >
+        <FtPoints :options="pointsOpts">
+          <FtShaderMaterial :params="materialParams" />
+          <FtBufferGeometry :options="bufferGeoOpts" />
+        </FtPoints>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

@@ -1,39 +1,6 @@
 <template>
   <div class="farst-three">
     <FtScene ref="sceneInstance" :options="sceneOpts" @load="sceneLoad">
-      <FtPointLight :color="0x0e09dc" :intensity="0.85" :options="point1Opts" />
-      <FtPointLight :color="0x1cd1e1" :intensity="0.85" :options="point2Opts" />
-      <FtPointLight :color="0x18c02c" :intensity="0.85" :options="point3Opts" />
-      <FtPointLight :color="0xee3bcf" :intensity="0.85" :options="point4Opts" />
-      <FtMesh>
-        <FtPlaneGeometry
-          :width="200"
-          :height="200"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshStandardMaterial :params="{ color: 0x1cd1e1 }" />
-      </FtMesh>
-
-      <FtMesh ref="meshRef" :options="{ position: { set: [0, -20, 20] } }">
-        <FtMeshPhysicalMaterial
-          ref="standardMaterialRef"
-          :params="{
-            color: '#ffffff',
-            roughness: 0,
-            metalness: 1,
-            flatShading: true,
-          }"
-          :options="materialOptions"
-        />
-        <FtTorusGeometry
-          :radius="8"
-          :tube="3"
-          :radial-segments="8"
-          :tubular-segments="6"
-          :options="torusGeomeryOpts"
-        />
-      </FtMesh>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -50,6 +17,55 @@
           },
         }"
       >
+        <FtPointLight
+          :color="0x0e09dc"
+          :intensity="0.85"
+          :options="point1Opts"
+        />
+        <FtPointLight
+          :color="0x1cd1e1"
+          :intensity="0.85"
+          :options="point2Opts"
+        />
+        <FtPointLight
+          :color="0x18c02c"
+          :intensity="0.85"
+          :options="point3Opts"
+        />
+        <FtPointLight
+          :color="0xee3bcf"
+          :intensity="0.85"
+          :options="point4Opts"
+        />
+        <FtMesh>
+          <FtPlaneGeometry
+            :width="200"
+            :height="200"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshStandardMaterial :params="{ color: 0x1cd1e1 }" />
+        </FtMesh>
+
+        <FtMesh ref="meshRef" :options="{ position: { set: [0, -20, 20] } }">
+          <FtMeshPhysicalMaterial
+            ref="standardMaterialRef"
+            :params="{
+              color: '#ffffff',
+              roughness: 0,
+              metalness: 1,
+              flatShading: true,
+            }"
+            :options="materialOptions"
+          />
+          <FtTorusGeometry
+            :radius="8"
+            :tube="3"
+            :radial-segments="8"
+            :tubular-segments="6"
+            :options="torusGeomeryOpts"
+          />
+        </FtMesh>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

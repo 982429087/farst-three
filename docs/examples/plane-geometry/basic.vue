@@ -1,13 +1,6 @@
 <template>
   <div class="farst-three">
     <FtScene>
-      <FtMesh @load="meshLoad">
-        <FtPlaneGeometry :width="2" :height="2" />
-        <FtMeshLambertMaterial
-          :params="{ color: 0xffffff, side: DoubleSide }"
-        />
-      </FtMesh>
-
       <FtPerspectiveCamera
         :fov="75"
         :near="0.1"
@@ -26,12 +19,18 @@
         @load="cameraLoad"
       />
 
-      <FtAmbientLight :color="0xffffff" :intensity="0.4" />
-      <FtPointLight :color="0xbbccee" :intensity="1" @load="pointlightLoad" />
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtMesh @load="meshLoad">
+          <FtPlaneGeometry :width="2" :height="2" />
+          <FtMeshLambertMaterial
+            :params="{ color: 0xffffff, side: DoubleSide }"
+          />
+        </FtMesh>
+        <FtAmbientLight :color="0xffffff" :intensity="0.4" />
+        <FtPointLight :color="0xbbccee" :intensity="1" @load="pointlightLoad" />
         <FtOrbitControls v-if="showControl" />
         <FtCameraHelper @load="cameraHelperLoad" />
       </FtWebglRenderer>

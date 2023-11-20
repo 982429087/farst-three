@@ -1,63 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh
-        :options="{
-          position: {
-            x: -1,
-          },
-        }"
-      >
-        <FtSphereGeometry
-          :radius="0.5"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshStandardMaterial :options="materialOptions">
-          <FtTextureLoader
-            url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
-            :type="'map'"
-          />
-        </FtMeshStandardMaterial>
-      </FtMesh>
-      <FtMesh
-        :options="{
-          position: {
-            x: 1,
-          },
-        }"
-      >
-        <FtSphereGeometry
-          :radius="0.5"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshStandardMaterial :options="materialOptions">
-          <FtTextureLoader
-            url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
-            :type="'map'"
-          />
-          <FtTextureLoader
-            url="/textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_roughness.jpg"
-            type="roughnessMap"
-          />
-          <FtTextureLoader
-            url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_metallic.jpg"
-            type="metalnessMap"
-          />
-          <FtCubeTextureLoader
-            :urls="[
-              '/textures/fullscreen/1.left.jpg',
-              '/textures/fullscreen/1.right.jpg',
-              '/textures/fullscreen/1.top.jpg',
-              '/textures/fullscreen/1.bottom.jpg',
-              '/textures/fullscreen/1.front.jpg',
-              '/textures/fullscreen/1.back.jpg',
-            ]"
-            type="envMap"
-          />
-        </FtMeshStandardMaterial>
-      </FtMesh>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -68,16 +11,75 @@
           },
         }"
       />
-      <FtDirectionalLight
-        :color="0xffffff"
-        :intensity="0.7"
-        :options="{ position: { set: [1, 2, 4] } }"
-      />
-      <FtAmbientLight :color="0xffffff" :intensity="0.5" />
+
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtMesh
+          :options="{
+            position: {
+              x: -1,
+            },
+          }"
+        >
+          <FtSphereGeometry
+            :radius="0.5"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshStandardMaterial :options="materialOptions">
+            <FtTextureLoader
+              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :type="'map'"
+            />
+          </FtMeshStandardMaterial>
+        </FtMesh>
+        <FtMesh
+          :options="{
+            position: {
+              x: 1,
+            },
+          }"
+        >
+          <FtSphereGeometry
+            :radius="0.5"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshStandardMaterial :options="materialOptions">
+            <FtTextureLoader
+              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :type="'map'"
+            />
+            <FtTextureLoader
+              url="/textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_roughness.jpg"
+              type="roughnessMap"
+            />
+            <FtTextureLoader
+              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_metallic.jpg"
+              type="metalnessMap"
+            />
+            <FtCubeTextureLoader
+              :urls="[
+                '/textures/fullscreen/1.left.jpg',
+                '/textures/fullscreen/1.right.jpg',
+                '/textures/fullscreen/1.top.jpg',
+                '/textures/fullscreen/1.bottom.jpg',
+                '/textures/fullscreen/1.front.jpg',
+                '/textures/fullscreen/1.back.jpg',
+              ]"
+              type="envMap"
+            />
+          </FtMeshStandardMaterial>
+        </FtMesh>
+
+        <FtDirectionalLight
+          :color="0xffffff"
+          :intensity="0.7"
+          :options="{ position: { set: [1, 2, 4] } }"
+        />
+        <FtAmbientLight :color="0xffffff" :intensity="0.5" />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

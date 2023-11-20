@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, watch } from 'vue'
-import { useOptions, useScene, useStoreService } from '@farst-three/hooks'
+import { useContainer, useOptions, useScene } from '@farst-three/hooks'
 import { reflectorPlaneEmits, reflectorPlaneProps } from './reflector-plane'
 import { useReflectorPlane } from './use-reflector-plane'
 import type { AnyFun } from '@farst-three/utils'
@@ -14,9 +14,7 @@ defineOptions({
 })
 const props = defineProps(reflectorPlaneProps)
 const emit = defineEmits(reflectorPlaneEmits)
-
-const store = useStoreService()
-const container = store.getSceneRef()
+const container = useContainer()
 const scene = useScene()
 let destroy: AnyFun | undefined
 let stop: AnyFun | undefined

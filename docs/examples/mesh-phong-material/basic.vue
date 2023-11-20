@@ -1,24 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh :options="{ position: { x: -1 } }">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshPhongMaterial
-          :params="{
-            side: DoubleSide,
-            specular: new Color('#ffff00'),
-            shininess: 50,
-          }"
-          :options="phongOpts"
-        >
-          <FtTextureLoader
-            url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
-            :type="'map'"
-          />
-        </FtMeshPhongMaterial>
-      </FtMesh>
-      <FtDirectionalLight :color="0xffffff" :intensity="1" />
-      <FtAmbientLight :color="0xffffff" :intensity="1" />
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -26,6 +8,24 @@
         :options="caneraOps"
       />
       <FtWebglRenderer :animation-fn="animationFn">
+        <FtMesh :options="{ position: { x: -1 } }">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshPhongMaterial
+            :params="{
+              side: DoubleSide,
+              specular: new Color('#ffff00'),
+              shininess: 50,
+            }"
+            :options="phongOpts"
+          >
+            <FtTextureLoader
+              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :type="'map'"
+            />
+          </FtMeshPhongMaterial>
+        </FtMesh>
+        <FtDirectionalLight :color="0xffffff" :intensity="1" />
+        <FtAmbientLight :color="0xffffff" :intensity="1" />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

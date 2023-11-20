@@ -1,34 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtSpotLight
-        :color="0xffffff"
-        :intensity="0.5"
-        :options="{
-          position: { y: 150, z: 0 },
-          castShadow: true,
-        }"
-      />
-      <FtSpotLight
-        :color="0xff0000"
-        :intensity="0.5"
-        :options="{
-          position: { y: -150, z: 0 },
-          castShadow: true,
-        }"
-      />
-      <FtInstancedMesh
-        ref="imeshRef"
-        :count="NUM_INSTANCES"
-        :options="{
-          castShadow: true,
-          receiveShadow: true,
-        }"
-      >
-        <FtSphereGeometry :radius="5" />
-        <FtMeshPhongMaterial />
-      </FtInstancedMesh>
-
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -45,18 +17,47 @@
             enabled: true,
           },
         }"
-      />
-      <FtOrbitControls
-        :options="{
-          autoRotate: true,
-          enableDamping: true,
-          dampingFactor: 0.05,
-        }"
-      />
-      <FtEffectComposer>
-        <FtRenderPass />
-        <FtUnrealBloomPass />
-      </FtEffectComposer>
+      >
+        <FtSpotLight
+          :color="0xffffff"
+          :intensity="0.5"
+          :options="{
+            position: { y: 150, z: 0 },
+            castShadow: true,
+          }"
+        />
+        <FtSpotLight
+          :color="0xff0000"
+          :intensity="0.5"
+          :options="{
+            position: { y: -150, z: 0 },
+            castShadow: true,
+          }"
+        />
+        <FtInstancedMesh
+          ref="imeshRef"
+          :count="NUM_INSTANCES"
+          :options="{
+            castShadow: true,
+            receiveShadow: true,
+          }"
+        >
+          <FtSphereGeometry :radius="5" />
+          <FtMeshPhongMaterial />
+        </FtInstancedMesh>
+        <FtOrbitControls
+          :options="{
+            autoRotate: true,
+            enableDamping: true,
+            dampingFactor: 0.05,
+          }"
+        />
+        <FtEffectComposer>
+          <FtRenderPass />
+          <FtUnrealBloomPass />
+          <FtOutputPass />
+        </FtEffectComposer>
+      </FtWebglRenderer>
     </FtScene>
   </div>
 </template>
@@ -69,6 +70,7 @@ import {
   FtInstancedMesh,
   FtMeshPhongMaterial,
   FtOrbitControls,
+  FtOutputPass,
   FtPerspectiveCamera,
   FtRenderPass,
   FtScene,

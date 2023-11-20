@@ -15,9 +15,7 @@
           },
         }"
       />
-      <FtGLTFLoader :url="url" :load="gltfLoad" />
-      <FtGLTFLoader :url="url2" :load="glbLoad" decoder-path="/draco/" />
-      <FtAmbientLight />
+
       <FtWebglRenderer
         :params="{ antialias: true, logarithmicDepthBuffer: true }"
         :animation-fn="animationFn"
@@ -27,6 +25,9 @@
           },
         }"
       >
+        <FtGLTFLoader :url="url" :load="gltfLoad" />
+        <FtGLTFLoader :url="url2" :load="glbLoad" decoder-path="/draco/" />
+        <FtAmbientLight />
         <FtOrbitControls />
         <FtAxesHelper />
         <FtGridHelper />

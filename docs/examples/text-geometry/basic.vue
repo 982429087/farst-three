@@ -1,61 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
-    <FtScene @hover-position="sceneHover">
-      <!-- 文字 -->
-      <FtMesh>
-        <FtTextGeometry
-          :url="'/font/helvetikerRegularTypeface.json'"
-          :text="'farst-three'"
-          :params="{
-            size: 30,
-            height: 5,
-          }"
-          :center="true"
-        />
-        <FtMeshPhongMaterial />
-      </FtMesh>
-      <!-- 跟随小光图标 -->
-      <FtInstancedMesh
-        ref="instancedMeshRef"
-        :count="NUM_INSTANCES"
-        :options="{
-          name: 'instancedMesh',
-        }"
-      >
-        <FtBoxGeometry :width="2" :height="2" :depth="10" />
-        <FtMeshStandardMaterial
-          :options="{
-            transparent: true,
-            opacity: 0.9,
-            metalness: 0.8,
-            roughness: 0.5,
-          }"
-        />
-      </FtInstancedMesh>
-      <!-- 灯光 -->
-      <FtPointLight color="0xff6000" />
-      <FtPointLight
-        :color="0xff6000"
-        :intensity="0.85"
-        :options="{ position: { x: 100 } }"
-      />
-      <FtPointLight
-        :color="0x0000ff"
-        :intensity="0.85"
-        :options="{ position: { x: -100 } }"
-      />
-      <FtPointLight ref="lightRef" color="#0060ff" :intensity="0.5" />
-      <FtAmbientLight :color="0x808080" />
-      <FtEffectComposer>
-        <FtRenderPass />
-        <FtUnrealBloomPass :strength="1" />
-        <FtHalftonePass
-          :params="{
-            radius: 1,
-            scatter: 0,
-          }"
-        />
-      </FtEffectComposer>
+    <FtScene @mouse-move-position="sceneHover">
       <!-- 相机 -->
       <FtPerspectiveCamera
         :fov="75"
@@ -77,8 +22,66 @@
             enabled: true,
           },
         }"
-      />
-      <FtOrbitControls />
+      >
+        <!-- 文字 -->
+        <FtMesh>
+          <FtTextGeometry
+            :url="'/font/helvetikerRegularTypeface.json'"
+            :text="'farst-three'"
+            :params="{
+              size: 30,
+              height: 5,
+            }"
+            :center="true"
+          />
+          <FtMeshPhongMaterial />
+        </FtMesh>
+        <!-- 跟随小光图标 -->
+        <FtInstancedMesh
+          ref="instancedMeshRef"
+          :count="NUM_INSTANCES"
+          :options="{
+            name: 'instancedMesh',
+          }"
+        >
+          <FtBoxGeometry :width="2" :height="2" :depth="10" />
+          <FtMeshStandardMaterial
+            :options="{
+              transparent: true,
+              opacity: 0.9,
+              metalness: 0.8,
+              roughness: 0.5,
+            }"
+          />
+        </FtInstancedMesh>
+        <!-- 灯光 -->
+        <FtPointLight :color="0xff6000" />
+        <FtPointLight
+          :color="0xff6000"
+          :intensity="0.85"
+          :options="{ position: { x: 100 } }"
+        />
+        <FtPointLight
+          :color="0x0000ff"
+          :intensity="0.85"
+          :options="{ position: { x: -100 } }"
+        />
+        <FtPointLight ref="lightRef" color="#0060ff" :intensity="0.5" />
+        <FtAmbientLight :color="0x808080" />
+        <FtOrbitControls />
+
+        <FtEffectComposer>
+          <FtRenderPass />
+          <FtUnrealBloomPass :strength="1" />
+          <FtHalftonePass
+            :params="{
+              radius: 1,
+              scatter: 0,
+            }"
+          />
+          <FtOutputPass />
+        </FtEffectComposer>
+      </FtWebglRenderer>
     </FtScene>
   </div>
 </template>
@@ -96,6 +99,7 @@ import {
   FtMeshPhongMaterial,
   FtMeshStandardMaterial,
   FtOrbitControls,
+  FtOutputPass,
   FtPerspectiveCamera,
   FtPointLight,
   FtRenderPass,
@@ -183,6 +187,8 @@ onMounted(() => {
 })
 
 function sceneHover(e: FunsEvent) {
+  console.log('触发')
+
   if (e.position) {
     positionV3 = e.position
   }

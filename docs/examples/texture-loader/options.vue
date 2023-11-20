@@ -1,51 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh
-        :options="{
-          position: {
-            x: -1.5,
-          },
-        }"
-      >
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshStandardMaterial>
-          <FtTextureLoader
-            url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
-            :type="'map'"
-          />
-        </FtMeshStandardMaterial>
-      </FtMesh>
-      <FtMesh
-        :options="{
-          position: {
-            x: 1.5,
-          },
-        }"
-      >
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshStandardMaterial :options="{}" @load="lbasicMaterialLoad">
-          <FtTextureLoader
-            url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
-            :type="'map'"
-            :options="{
-              repeat: {
-                set: [2, 4],
-              },
-              wrapS: RepeatWrapping,
-              wrapT: MirroredRepeatWrapping,
-              // ClampToEdgeWrapping: 1001,
-              // MirroredRepeatWrapping: 1002,
-              offset: new Vector2(0.3, 0.1),
-              rotation: Math.PI / 4,
-              center: {
-                set: [0.5, 0.5],
-              },
-            }"
-            @load="textLaoder"
-          />
-        </FtMeshStandardMaterial>
-      </FtMesh>
       <FtOrthographicCamera
         :left="-size"
         :right="size"
@@ -55,17 +10,62 @@
         :far="100"
         :options="othCameraOptions"
       />
-      <FtDirectionalLight
-        :color="0xffffff"
-        :intensity="0.7"
-        :options="{ position: { set: [1, 2, 4] } }"
-      />
-      <FtAmbientLight :color="0xffffff" :intensity="0.5" />
-
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtMesh
+          :options="{
+            position: {
+              x: -1.5,
+            },
+          }"
+        >
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshStandardMaterial>
+            <FtTextureLoader
+              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :type="'map'"
+            />
+          </FtMeshStandardMaterial>
+        </FtMesh>
+        <FtMesh
+          :options="{
+            position: {
+              x: 1.5,
+            },
+          }"
+        >
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshStandardMaterial :options="{}" @load="lbasicMaterialLoad">
+            <FtTextureLoader
+              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :type="'map'"
+              :options="{
+                repeat: {
+                  set: [2, 4],
+                },
+                wrapS: RepeatWrapping,
+                wrapT: MirroredRepeatWrapping,
+                // ClampToEdgeWrapping: 1001,
+                // MirroredRepeatWrapping: 1002,
+                offset: new Vector2(0.3, 0.1),
+                rotation: Math.PI / 4,
+                center: {
+                  set: [0.5, 0.5],
+                },
+              }"
+              @load="textLaoder"
+            />
+          </FtMeshStandardMaterial>
+        </FtMesh>
+
+        <FtDirectionalLight
+          :color="0xffffff"
+          :intensity="0.7"
+          :options="{ position: { set: [1, 2, 4] } }"
+        />
+        <FtAmbientLight :color="0xffffff" :intensity="0.5" />
         <FtOrbitControls v-if="showControl" />
       </FtWebglRenderer>
     </FtScene>

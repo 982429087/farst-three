@@ -6,8 +6,9 @@
 import { onBeforeUnmount } from 'vue'
 import {
   useAnimationService,
+  useContainer,
+  useRenderCamera,
   useScene,
-  useStoreService,
 } from '@farst-three/hooks'
 import { domMarkerRendererEmits } from './dom-marker-renderer'
 import { useDomMarker } from './use-dom-marker'
@@ -17,13 +18,10 @@ defineOptions({
 })
 
 const emit = defineEmits(domMarkerRendererEmits)
-
-// init here
 const scene = useScene()
-const store = useStoreService()
 const animation = useAnimationService()
-const camera = store.getRenderCamera()!
-const container = store.getSceneRef()!
+const camera = useRenderCamera()
+const container = useContainer()
 
 const { dispose, render } = useDomMarker(scene, camera, container)
 animation.on('dom-marker', () => {

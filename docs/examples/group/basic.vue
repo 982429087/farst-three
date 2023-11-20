@@ -1,48 +1,6 @@
 <template>
   <div class="farst-three">
     <FtScene>
-      <FtGroup
-        :options="{
-          position: {
-            y: 0.2,
-          },
-        }"
-        @load="def.resolve"
-      >
-        <FtMesh>
-          <FtBoxGeometry :width="2" :height="0.2" :depth="1" />
-          <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
-        </FtMesh>
-        <FtMesh v-for="(item, index) in wheels" :key="index" :options="item">
-          <FtCylinderGeometry
-            :radius-top="0.2"
-            :radius-bottom="0.2"
-            :height="0.3"
-            :radial-segments="10"
-          />
-          <FtMeshBasicMaterial :params="{ color: 0xff00ff }" />
-        </FtMesh>
-        <FtMesh
-          :options="{
-            position: {
-              set: [-1.05, 0, 0.2],
-            },
-          }"
-        >
-          <FtBoxGeometry :width="0.1" :height="0.1" :depth="0.1" />
-          <FtMeshBasicMaterial :params="{ color: 0xffff00 }" />
-        </FtMesh>
-        <FtMesh
-          :options="{
-            position: {
-              set: [-1.05, 0, -0.2],
-            },
-          }"
-        >
-          <FtBoxGeometry :width="0.1" :height="0.1" :depth="0.1" />
-          <FtMeshBasicMaterial :params="{ color: 0xffff00 }" />
-        </FtMesh>
-      </FtGroup>
       <FtOrthographicCamera
         :left="-size"
         :right="size"
@@ -52,19 +10,62 @@
         :far="10"
         :options="othCameraOptions"
       />
-      <FtDirectionalLight :color="0xffffff" :intensity="0.5" />
-      <FtAmbientLight :color="0xffffff" />
-      <FtAxesHelper />
-      <FtGridHelper
-        :size="10"
-        :divisions="10"
-        :color1="0xcd37aa"
-        :color2="0x4a4a4a"
-      />
+
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtGroup
+          :options="{
+            position: {
+              y: 0.2,
+            },
+          }"
+          @load="def.resolve"
+        >
+          <FtMesh>
+            <FtBoxGeometry :width="2" :height="0.2" :depth="1" />
+            <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
+          </FtMesh>
+          <FtMesh v-for="(item, index) in wheels" :key="index" :options="item">
+            <FtCylinderGeometry
+              :radius-top="0.2"
+              :radius-bottom="0.2"
+              :height="0.3"
+              :radial-segments="10"
+            />
+            <FtMeshBasicMaterial :params="{ color: 0xff00ff }" />
+          </FtMesh>
+          <FtMesh
+            :options="{
+              position: {
+                set: [-1.05, 0, 0.2],
+              },
+            }"
+          >
+            <FtBoxGeometry :width="0.1" :height="0.1" :depth="0.1" />
+            <FtMeshBasicMaterial :params="{ color: 0xffff00 }" />
+          </FtMesh>
+          <FtMesh
+            :options="{
+              position: {
+                set: [-1.05, 0, -0.2],
+              },
+            }"
+          >
+            <FtBoxGeometry :width="0.1" :height="0.1" :depth="0.1" />
+            <FtMeshBasicMaterial :params="{ color: 0xffff00 }" />
+          </FtMesh>
+        </FtGroup>
+        <FtDirectionalLight :color="0xffffff" :intensity="0.5" />
+        <FtAmbientLight :color="0xffffff" />
+        <FtAxesHelper />
+        <FtGridHelper
+          :size="10"
+          :divisions="10"
+          :color1="0xcd37aa"
+          :color2="0x4a4a4a"
+        />
         <FtOrbitControls v-if="showControl" />
       </FtWebglRenderer>
     </FtScene>

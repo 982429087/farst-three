@@ -6,49 +6,6 @@
       }"
       @load="(e) => (sceneInsance = e.scene)"
     >
-      <FtMesh :options="boxOpts" @load="boxmeshLoad">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
-      </FtMesh>
-      <FtMesh :options="floorOps">
-        <FtPlaneGeometry :width="1000" :height="1000" />
-        <FtMeshMatcapMaterial :params="{ side: DoubleSide }" />
-      </FtMesh>
-      <FtMesh
-        v-for="item in 300"
-        :key="item"
-        :options="{
-          position: {
-            set: [(Math.random() - 0.5) * 50, 1, (Math.random() - 0.5) * 50],
-          },
-          rotation: {
-            set: [
-              Math.random() * Math.PI,
-              Math.random() * Math.PI,
-              Math.random() * Math.PI,
-            ],
-          },
-          scale: {
-            set: [
-              Math.random() * 0.3 + 0.5,
-              Math.random() * 0.3 + 0.5,
-              Math.random() * 0.3 + 0.5,
-            ],
-          },
-        }"
-      >
-        <FtTorusGeometry
-          :radius="Math.random()"
-          :tube="Math.abs(Math.random() - 0.5)"
-          :radial-segments="64"
-        />
-        <FtMeshLambertMaterial :params="{ color: 0xffffff }">
-          <FtTextureLoader
-            url="\textures\matcaps\BA472D_CA6E67-256px.png"
-            :type="'map'"
-          />
-        </FtMeshLambertMaterial>
-      </FtMesh>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -59,13 +16,7 @@
           },
         }"
       />
-      <FtAmbientLight
-        :options="lightOptions"
-        :color="0x888888"
-        :intensity="0.95"
-      />
-      <FtFog :color="0x888888" :options="fogOpts" />
-      <FtGridHelper :size="1000" :divisions="1000" />
+
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -75,6 +26,56 @@
           },
         }"
       >
+        <FtMesh :options="boxOpts" @load="boxmeshLoad">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
+        </FtMesh>
+        <FtMesh :options="floorOps">
+          <FtPlaneGeometry :width="1000" :height="1000" />
+          <FtMeshMatcapMaterial :params="{ side: DoubleSide }" />
+        </FtMesh>
+        <FtMesh
+          v-for="item in 300"
+          :key="item"
+          :options="{
+            position: {
+              set: [(Math.random() - 0.5) * 50, 1, (Math.random() - 0.5) * 50],
+            },
+            rotation: {
+              set: [
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+              ],
+            },
+            scale: {
+              set: [
+                Math.random() * 0.3 + 0.5,
+                Math.random() * 0.3 + 0.5,
+                Math.random() * 0.3 + 0.5,
+              ],
+            },
+          }"
+        >
+          <FtTorusGeometry
+            :radius="Math.random()"
+            :tube="Math.abs(Math.random() - 0.5)"
+            :radial-segments="64"
+          />
+          <FtMeshLambertMaterial :params="{ color: 0xffffff }">
+            <FtTextureLoader
+              url="\textures\matcaps\BA472D_CA6E67-256px.png"
+              :type="'map'"
+            />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+        <FtAmbientLight
+          :options="lightOptions"
+          :color="0x888888"
+          :intensity="0.95"
+        />
+        <FtFog :color="0x888888" :options="fogOpts" />
+        <FtGridHelper :size="1000" :divisions="1000" />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

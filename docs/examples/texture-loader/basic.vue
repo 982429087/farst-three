@@ -1,40 +1,6 @@
 <template>
   <div class="farst-three">
     <FtScene>
-      <FtMesh
-        :options="{
-          position: {
-            x: -1.5,
-          },
-        }"
-      >
-        <FtCylinderGeometry :radius-top="1" :radius-bottom="1" :height="1" />
-        <FtMeshLambertMaterial
-          :params="{
-            color: 0x1890ff,
-          }"
-        >
-          <FtTextureLoader
-            url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
-            :type="'map'"
-          />
-        </FtMeshLambertMaterial>
-      </FtMesh>
-      <FtMesh
-        :options="{
-          position: {
-            x: 1,
-          },
-        }"
-      >
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial v-for="(_, index) in 6" :key="index">
-          <FtTextureLoader
-            :url="`/textures/fullscreen/0${index + 1}.jpg`"
-            :type="'map'"
-          />
-        </FtMeshLambertMaterial>
-      </FtMesh>
       <FtOrthographicCamera
         :left="-size"
         :right="size"
@@ -45,13 +11,47 @@
         :options="othCameraOptions"
         @load="cameraLoad"
       />
-      <FtDirectionalLight :color="0xffffff" :intensity="0.5" />
-      <FtAmbientLight :color="0xffffff" />
-
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtMesh
+          :options="{
+            position: {
+              x: -1.5,
+            },
+          }"
+        >
+          <FtCylinderGeometry :radius-top="1" :radius-bottom="1" :height="1" />
+          <FtMeshLambertMaterial
+            :params="{
+              color: 0x1890ff,
+            }"
+          >
+            <FtTextureLoader
+              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
+              :type="'map'"
+            />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+        <FtMesh
+          :options="{
+            position: {
+              x: 1,
+            },
+          }"
+        >
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial v-for="(_, index) in 6" :key="index">
+            <FtTextureLoader
+              :url="`/textures/fullscreen/0${index + 1}.jpg`"
+              :type="'map'"
+            />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+
+        <FtDirectionalLight :color="0xffffff" :intensity="0.5" />
+        <FtAmbientLight :color="0xffffff" />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

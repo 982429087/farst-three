@@ -7,8 +7,9 @@ import { onBeforeUnmount, watch } from 'vue'
 import {
   HighLight,
   useAnimationService,
+  useRenderCamera,
+  useRenderer,
   useScene,
-  useStoreService,
 } from '@farst-three/hooks'
 import { highLightEmits, highLightProps } from './high-light'
 
@@ -21,9 +22,8 @@ const emit = defineEmits(highLightEmits)
 
 // init here
 const scene = useScene()
-const store = useStoreService()
-const camera = store.getRenderCamera()!
-const renderer = store.getRenderer()!
+const camera = useRenderCamera()
+const renderer = useRenderer()
 const animation = useAnimationService()
 const highLight = new HighLight(scene, camera, renderer, props.options)
 highLight.render()

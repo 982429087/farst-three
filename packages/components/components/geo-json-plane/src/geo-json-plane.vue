@@ -6,10 +6,10 @@
 import { onBeforeUnmount, watch } from 'vue'
 import {
   uesEvent,
+  useContainer,
   useEventService,
   useProjection,
   useScene,
-  useStoreService,
 } from '@farst-three/hooks'
 import { geoJsonPlaneEmits, geoJsonPlaneProps } from './geo-json-plane'
 import { GeoJsonPlane } from './GeoJsonPlane'
@@ -26,8 +26,7 @@ const scene = useScene()
 const projection = useProjection()
 const geoJsonPlane = new GeoJsonPlane(scene, projection)
 const eventService = useEventService()
-const store = useStoreService()
-const dom = store.getSceneRef()
+const dom = useContainer()
 let destory: AnyFun | undefined
 
 watch(

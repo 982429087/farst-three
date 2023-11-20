@@ -1,20 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtPoints :options="pointsOpts">
-        <FtPointsMaterial
-          :params="{
-            color: '#ffffff',
-            size: 0.1,
-            depthTest: true, // 深度测试
-            depthWrite: false, // 材质是否对深度缓冲区有影响
-            blending: AdditiveBlending,
-          }"
-        />
-        <FtBufferGeometry :options="bufferGeoOpts" />
-      </FtPoints>
-      <FtFog :color="0x000000" :near="0" :far="20" />
-
       <FtPerspectiveCamera
         :fov="27"
         :near="2"
@@ -31,6 +17,20 @@
           },
         }"
       >
+        <FtPoints :options="pointsOpts">
+          <FtPointsMaterial
+            :params="{
+              color: '#ffffff',
+              size: 0.1,
+              depthTest: true, // 深度测试
+              depthWrite: false, // 材质是否对深度缓冲区有影响
+              blending: AdditiveBlending,
+            }"
+          />
+          <FtBufferGeometry :options="bufferGeoOpts" />
+        </FtPoints>
+        <FtFog :color="0x000000" :near="0" :far="20" />
+
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

@@ -1,38 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene @load="sceneLoad">
-      <FtMesh @load="meshLoad">
-        <FtSphereGeometry
-          :radius="0.5"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshToonMaterial :options="materialOpts">
-          <FtTextureLoader
-            url="\textures\Glass_Vintage_001\Glass_Vintage_001_basecolor.jpg"
-            :type="'map'"
-          />
-          <FtTextureLoader
-            v-if="whoIsShow === 'three'"
-            :options="threeTonOps"
-            url="\textures\threeTone.jpg"
-            :type="'gradientMap'"
-          />
-          <FtTextureLoader
-            v-if="whoIsShow === 'five'"
-            :options="fiveTonOps"
-            url="\textures\fiveTone.jpg"
-            :type="'gradientMap'"
-          />
-        </FtMeshToonMaterial>
-      </FtMesh>
-      <FtDirectionalLight
-        :color="0xffffff"
-        :intensity="1"
-        :options="{ position: { set: [1, 1, 1] } }"
-      />
-
-      <FtAmbientLight :color="0xffffff" :intensity="1" />
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -40,6 +8,38 @@
         :options="caneraOps"
       />
       <FtWebglRenderer :animation-fn="animationFn">
+        <FtMesh @load="meshLoad">
+          <FtSphereGeometry
+            :radius="0.5"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshToonMaterial :options="materialOpts">
+            <FtTextureLoader
+              url="\textures\Glass_Vintage_001\Glass_Vintage_001_basecolor.jpg"
+              :type="'map'"
+            />
+            <FtTextureLoader
+              v-if="whoIsShow === 'three'"
+              :options="threeTonOps"
+              url="\textures\threeTone.jpg"
+              :type="'gradientMap'"
+            />
+            <FtTextureLoader
+              v-if="whoIsShow === 'five'"
+              :options="fiveTonOps"
+              url="\textures\fiveTone.jpg"
+              :type="'gradientMap'"
+            />
+          </FtMeshToonMaterial>
+        </FtMesh>
+        <FtDirectionalLight
+          :color="0xffffff"
+          :intensity="1"
+          :options="{ position: { set: [1, 1, 1] } }"
+        />
+
+        <FtAmbientLight :color="0xffffff" :intensity="1" />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

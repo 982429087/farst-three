@@ -1,32 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <template v-for="item in positions" :key="item">
-        <FtSprite
-          :options="{
-            position: {
-              set: [item.x, item.y, item.z],
-            },
-          }"
-        >
-          <FtSpriteMaterial
-            :params="{
-              color: Math.random() * 0xffffff,
-              rotation: Math.random() * Math.PI,
-              opacity: Math.random(),
-            }"
-          >
-            <FtTextureLoader
-              :options="{
-                colorSpace: SRGBColorSpace,
-              }"
-              url="\textures\raindrop.png"
-              :type="'map'"
-            />
-          </FtSpriteMaterial>
-        </FtSprite>
-      </template>
-
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -46,6 +20,31 @@
           },
         }"
       >
+        <template v-for="item in positions" :key="item">
+          <FtSprite
+            :options="{
+              position: {
+                set: [item.x, item.y, item.z],
+              },
+            }"
+          >
+            <FtSpriteMaterial
+              :params="{
+                color: Math.random() * 0xffffff,
+                rotation: Math.random() * Math.PI,
+                opacity: Math.random(),
+              }"
+            >
+              <FtTextureLoader
+                :options="{
+                  colorSpace: SRGBColorSpace,
+                }"
+                url="\textures\raindrop.png"
+                :type="'map'"
+              />
+            </FtSpriteMaterial>
+          </FtSprite>
+        </template>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

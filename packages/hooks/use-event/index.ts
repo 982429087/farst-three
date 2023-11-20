@@ -34,7 +34,7 @@ export const eventProps = {
   },
 }
 export const eventEmits = {
-  hover: (e: FunsEvent) => e,
+  mouseMove: (e: FunsEvent) => e,
   click: (e: FunsEvent) => e,
   onMouseMovePosition: (e: FunsEvent) => e,
 }
@@ -44,33 +44,35 @@ export function uesEvent<T extends Object3D | Object3D[]>(
   emit: AnyFun,
   instance: T,
   eventService?: EventService,
-  hoverFn?: Funs,
+  mouseMoveFn?: Funs,
   clickFn?: Funs,
-  hoverPositionFn?: Funs,
+  mouseMovePositionFn?: Funs,
   noDestroy?: boolean
 ) {
-  const hoverEmit: Funs = (e) => emit('hover', e)
+  const mouseMoveEmit: Funs = (e) => emit('mouseMove', e)
   const clickEmit: Funs = (e) => emit('click', e)
-  const positionEmit: Funs = (e) => emit('hoverPosition', e)
+  const positionEmit: Funs = (e) => emit('mouseMovePosition', e)
 
-  const hover: Funs = hoverFn ? compose(hoverEmit, hoverFn) : hoverEmit
+  const mouseMove: Funs = mouseMoveFn
+    ? compose(mouseMoveEmit, mouseMoveFn)
+    : mouseMoveEmit
   const click: Funs = clickFn ? compose(clickEmit, clickFn) : clickEmit
-  const hoverPosition: Funs = hoverPositionFn
-    ? compose(hoverPositionFn, positionEmit)
+  const mouseMovePosition: Funs = mouseMovePositionFn
+    ? compose(mouseMovePositionFn, positionEmit)
     : positionEmit
 
   const es = eventService || useEventService()
 
-  if (props.onMouseMove || hoverFn)
-    es.on(EventType.MOUSEMOVE, hover, instance, props.mouseMoveOptions)
+  if (props.onMouseMove || mouseMoveFn)
+    es.on(EventType.MOUSEMOVE, mouseMove, instance, props.mouseMoveOptions)
 
   if (props.onClick || clickFn)
     es.on(EventType.CLICK, click, instance, props.clickOptions)
 
-  if (props.onMouseMovePosition || hoverPositionFn)
+  if (props.onMouseMovePosition || mouseMovePositionFn)
     es.on(
       EventType.MOUSEMOVEPOSITION,
-      hoverPosition,
+      mouseMovePosition,
       instance,
       props.onMouseMovePositionOptions
     )
@@ -81,10 +83,10 @@ export function uesEvent<T extends Object3D | Object3D[]>(
     })
 
   function dispose() {
-    if (props.onMouseMove) es.off(EventType.MOUSEMOVE, hover)
+    if (props.onMouseMove) es.off(EventType.MOUSEMOVE, mouseMove)
     if (props.onClick) es.off(EventType.CLICK, click)
     if (props.onMouseMovePosition)
-      es.off(EventType.MOUSEMOVEPOSITION, hoverPosition)
+      es.off(EventType.MOUSEMOVEPOSITION, mouseMovePosition)
   }
 
   return {

@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from '@farst-three/utils'
-import { eventEmits } from '@farst-three/hooks'
+import { eventEmits, eventProps } from '@farst-three/hooks'
 import type { EventOptions } from '@farst-three/hooks'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { Scene } from 'three'
@@ -20,6 +20,7 @@ export const sceneProps = buildProps({
     type: definePropType<EventOptions>(Object),
     default: () => ({}),
   },
+  ...eventProps,
 })
 
 export type SceneLoadEvent = {

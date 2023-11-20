@@ -1,12 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtPoints :options="pointsOpts">
-        <FtShaderMaterial :params="materialParams">
-          <!-- <FtTextureLoader :type="'map'" url="\textures\snowflake.png" /> -->
-        </FtShaderMaterial>
-        <FtBufferGeometry :options="bufferGeoOpts" />
-      </FtPoints>
       <FtPerspectiveCamera
         :fov="27"
         :near="5"
@@ -27,6 +21,12 @@
           },
         }"
       >
+        <FtPoints :options="pointsOpts">
+          <FtShaderMaterial :params="materialParams">
+            <!-- <FtTextureLoader :type="'map'" url="\textures\snowflake.png" /> -->
+          </FtShaderMaterial>
+          <FtBufferGeometry :options="bufferGeoOpts" />
+        </FtPoints>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

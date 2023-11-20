@@ -1,10 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene :options="{ background: () => new Color('rgb(100, 100, 100)') }">
-      <FtMesh @hover="meshHover">
-        <FtBoxGeometry />
-        <FtMeshBasicMaterial :params="{ color: '#abcdef' }" />
-      </FtMesh>
       <FtOrthographicCamera
         :left="-size"
         :right="size"
@@ -18,6 +14,10 @@
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtMesh @hover="meshHover">
+          <FtBoxGeometry />
+          <FtMeshBasicMaterial :params="{ color: '#abcdef' }" />
+        </FtMesh>
         <FtOrbitControls v-if="showControl" />
       </FtWebglRenderer>
     </FtScene>

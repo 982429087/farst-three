@@ -5,33 +5,6 @@
         background: 0xffff88,
       }"
     >
-      <FtMesh :options="boxOpts" @click="meshClick">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial
-          :options="boxMaterialOpts"
-          :params="{ color: 0x1890ff }"
-        />
-      </FtMesh>
-      <FtMesh :options="boxOpts2" @hover="meshHover2">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial
-          :options="boxMaterialOpts2"
-          :params="{ color: 0x1890ff }"
-        />
-      </FtMesh>
-      <FtMesh v-for="item in 300" :key="item" :options="randomMeshOpts">
-        <FtTorusGeometry
-          :radius="Math.random()"
-          :tube="Math.abs(Math.random() - 0.5)"
-          :radial-segments="64"
-        />
-        <FtMeshLambertMaterial :params="{ color: 0xffffff }">
-          <FtTextureLoader
-            url="\textures\matcaps\BA472D_CA6E67-256px.png"
-            :type="'map'"
-          />
-        </FtMeshLambertMaterial>
-      </FtMesh>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -42,11 +15,7 @@
           },
         }"
       />
-      <FtAmbientLight
-        :options="lightOptions"
-        :color="0x888888"
-        :intensity="0.95"
-      />
+
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -56,6 +25,38 @@
           },
         }"
       >
+        <FtMesh :options="boxOpts" @click="meshClick">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial
+            :options="boxMaterialOpts"
+            :params="{ color: 0x1890ff }"
+          />
+        </FtMesh>
+        <FtMesh :options="boxOpts2" @mouse-move="meshHover2">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial
+            :options="boxMaterialOpts2"
+            :params="{ color: 0x1890ff }"
+          />
+        </FtMesh>
+        <FtMesh v-for="item in 300" :key="item" :options="randomMeshOpts">
+          <FtTorusGeometry
+            :radius="Math.random()"
+            :tube="Math.abs(Math.random() - 0.5)"
+            :radial-segments="64"
+          />
+          <FtMeshLambertMaterial :params="{ color: 0xffffff }">
+            <FtTextureLoader
+              url="\textures\matcaps\BA472D_CA6E67-256px.png"
+              :type="'map'"
+            />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+        <FtAmbientLight
+          :options="lightOptions"
+          :color="0x888888"
+          :intensity="0.95"
+        />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

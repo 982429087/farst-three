@@ -1,19 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh :options="boxOpts" @load="boxLoad">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
-      </FtMesh>
-      <FtMesh :options="wallOps">
-        <FtPlaneGeometry :width="10" :height="10" />
-        <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
-      </FtMesh>
-      <FtMesh :options="floorOps">
-        <FtPlaneGeometry :width="10" :height="10" />
-        <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
-      </FtMesh>
-
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -24,20 +11,7 @@
           },
         }"
       />
-      <FtDirectionalLight
-        :options="directionalLightOptions"
-        :color="0xffffaa"
-        :intensity="0.95"
-      >
-        <FtDirectionalLightHelper :options="dlhOpts" />
-      </FtDirectionalLight>
-      <FtAmbientLight
-        :options="lightOptions"
-        :color="0xffffff"
-        :intensity="0.95"
-      />
 
-      <FtGridHelper />
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -47,7 +21,33 @@
           },
         }"
       >
+        <FtMesh :options="boxOpts" @load="boxLoad">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
+        </FtMesh>
+        <FtMesh :options="wallOps">
+          <FtPlaneGeometry :width="10" :height="10" />
+          <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
+        </FtMesh>
+        <FtMesh :options="floorOps">
+          <FtPlaneGeometry :width="10" :height="10" />
+          <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
+        </FtMesh>
         <FtOrbitControls />
+        <FtDirectionalLight
+          :options="directionalLightOptions"
+          :color="0xffffaa"
+          :intensity="0.95"
+        >
+          <FtDirectionalLightHelper :options="dlhOpts" />
+        </FtDirectionalLight>
+        <FtAmbientLight
+          :options="lightOptions"
+          :color="0xffffff"
+          :intensity="0.95"
+        />
+
+        <FtGridHelper />
       </FtWebglRenderer>
     </FtScene>
   </div>

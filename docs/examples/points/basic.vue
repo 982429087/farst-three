@@ -6,15 +6,6 @@
         fog: () => new Fog(0x050505, 2000, 3500),
       }"
     >
-      <FtPoints :options="pointsOpts">
-        <FtPointsMaterial
-          :params="{
-            size: 15,
-            vertexColors: true,
-          }"
-        />
-        <FtBufferGeometry :options="bufferGeoOpts" />
-      </FtPoints>
       <FtPerspectiveCamera
         :fov="27"
         :near="5"
@@ -25,8 +16,6 @@
           },
         }"
       />
-
-      <FtGridHelper />
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -36,6 +25,17 @@
           },
         }"
       >
+        <FtPoints :options="pointsOpts">
+          <FtPointsMaterial
+            :params="{
+              size: 15,
+              vertexColors: true,
+            }"
+          />
+          <FtBufferGeometry :options="bufferGeoOpts" />
+        </FtPoints>
+
+        <FtGridHelper />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

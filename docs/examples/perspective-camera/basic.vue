@@ -1,29 +1,29 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh @load="loadMesh">
-        <FtBoxGeometry @load="ftBoxGeometryLoad">
-          <FtMeshBasicMaterial
-            :params="meshBasicParamsFn"
-            @load="ftMeshBasicMaterialLoad"
-          />
-        </FtBoxGeometry>
-      </FtMesh>
-      <FtAxesHelper :size="4" />
-      <FtGridHelper
-        :size="100"
-        :divisions="10"
-        :color1="0xcd37aa"
-        :color2="0x4a4a4a"
-      />
       <FtPerspectiveCamera
         :fov="100"
         :near="0.01"
         :far="1000"
         @load="cameraLoad"
-      >
-        <FtWebglRenderer :animation-fn="animationFn" />
-      </FtPerspectiveCamera>
+      />
+      <FtWebglRenderer :animation-fn="animationFn">
+        <FtMesh @load="loadMesh">
+          <FtBoxGeometry @load="ftBoxGeometryLoad">
+            <FtMeshBasicMaterial
+              :params="meshBasicParamsFn"
+              @load="ftMeshBasicMaterialLoad"
+            />
+          </FtBoxGeometry>
+        </FtMesh>
+        <FtAxesHelper :size="4" />
+        <FtGridHelper
+          :size="100"
+          :divisions="10"
+          :color1="0xcd37aa"
+          :color2="0x4a4a4a"
+        />
+      </FtWebglRenderer>
     </FtScene>
   </div>
 </template>

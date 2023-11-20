@@ -27,12 +27,12 @@ defineOptions({
 const props = defineProps(meshProps)
 const emit = defineEmits(meshEmits)
 
-let scene = useScene()
-let group = useGroup()
+const scene = useScene()
+const group = useGroup()
 const dragService = useDragService()
-let materialService = new CountService<Material>()
+const materialService = new CountService<Material>()
 
-let mesh = new Mesh(props.geometry, props.material)
+const mesh = new Mesh(props.geometry, props.material)
 
 emit('load', { mesh, scene, group })
 
@@ -77,10 +77,6 @@ onBeforeUnmount(() => {
     group.remove(mesh)
   }
   mesh.remove(...mesh.children)
-  ;(scene as any) = null
-  ;(group as any) = null
-  ;(mesh as any) = null
-  ;(materialService as any) = null
 })
 
 defineExpose({

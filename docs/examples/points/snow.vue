@@ -1,19 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtPoints :options="pointsOpts">
-        <FtPointsMaterial
-          :params="{
-            size: 15,
-            depthTest: true, // 深度测试
-            depthWrite: false, // 材质是否对深度缓冲区有影响
-            blending: AdditiveBlending,
-          }"
-        >
-          <FtTextureLoader :type="'map'" url="\textures\snowflake.png" />
-        </FtPointsMaterial>
-        <FtBufferGeometry :options="bufferGeoOpts" />
-      </FtPoints>
       <FtPerspectiveCamera
         :fov="27"
         :near="5"
@@ -34,6 +21,19 @@
           },
         }"
       >
+        <FtPoints :options="pointsOpts">
+          <FtPointsMaterial
+            :params="{
+              size: 15,
+              depthTest: true, // 深度测试
+              depthWrite: false, // 材质是否对深度缓冲区有影响
+              blending: AdditiveBlending,
+            }"
+          >
+            <FtTextureLoader :type="'map'" url="\textures\snowflake.png" />
+          </FtPointsMaterial>
+          <FtBufferGeometry :options="bufferGeoOpts" />
+        </FtPoints>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

@@ -1,15 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh :options="boxOpts" @load="meshlaod">
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
-      </FtMesh>
-      <FtMesh :options="floorOps">
-        <FtPlaneGeometry :width="1000" :height="1000" />
-        <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
-      </FtMesh>
-
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -20,16 +11,6 @@
           },
         }"
       />
-      <FtSpotLight :options="soptLightOpts" @load="soptLightLoad">
-        <!-- <FtSpotLightHelper :options="spothOpts" @load="spotLightHelperload" /> -->
-      </FtSpotLight>
-      <FtAmbientLight
-        :options="lightOptions"
-        :color="0xffffff"
-        :intensity="0.95"
-      />
-
-      <FtGridHelper :size="1000" :divisions="1000" />
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -39,6 +20,25 @@
           },
         }"
       >
+        <FtMesh :options="boxOpts" @load="meshlaod">
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial :params="{ color: 0x1890ff }" />
+        </FtMesh>
+        <FtMesh :options="floorOps">
+          <FtPlaneGeometry :width="1000" :height="1000" />
+          <FtMeshLambertMaterial :params="{ side: DoubleSide }" />
+        </FtMesh>
+
+        <FtSpotLight :options="soptLightOpts" @load="soptLightLoad">
+          <!-- <FtSpotLightHelper :options="spothOpts" @load="spotLightHelperload" /> -->
+        </FtSpotLight>
+        <FtAmbientLight
+          :options="lightOptions"
+          :color="0xffffff"
+          :intensity="0.95"
+        />
+
+        <FtGridHelper :size="1000" :divisions="1000" />
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

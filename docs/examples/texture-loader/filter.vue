@@ -1,46 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtMesh
-        :options="{
-          position: {
-            x: 1.5,
-          },
-        }"
-        @load="({ mesh }) => (emesh = mesh)"
-      >
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial>
-          <FtTextureLoader
-            url="\textures\sword.png"
-            :type="'map'"
-            :options="{
-              minFilter: NearestFilter,
-              magFilter: NearestFilter,
-            }"
-            @load="textureLoad"
-          />
-        </FtMeshLambertMaterial>
-      </FtMesh>
-      <FtMesh
-        :options="{
-          position: {
-            x: -1.5,
-          },
-        }"
-      >
-        <FtBoxGeometry :width="1" :height="1" :depth="1" />
-        <FtMeshLambertMaterial>
-          <FtTextureLoader
-            url="/Material_1741/height.png"
-            :type="'map'"
-            :options="{
-              minFilter: NearestFilter,
-              magFilter: NearestFilter,
-            }"
-          />
-        </FtMeshLambertMaterial>
-      </FtMesh>
       <FtOrthographicCamera
         :left="-size"
         :right="size"
@@ -50,13 +10,53 @@
         :far="100"
         :options="othCameraOptions"
       />
-      <FtDirectionalLight :color="0xffffff" :intensity="0.5" />
-      <FtAmbientLight :color="0xffffff" />
-
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtMesh
+          :options="{
+            position: {
+              x: 1.5,
+            },
+          }"
+          @load="({ mesh }) => (emesh = mesh)"
+        >
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial>
+            <FtTextureLoader
+              url="\textures\sword.png"
+              :type="'map'"
+              :options="{
+                minFilter: NearestFilter,
+                magFilter: NearestFilter,
+              }"
+              @load="textureLoad"
+            />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+        <FtMesh
+          :options="{
+            position: {
+              x: -1.5,
+            },
+          }"
+        >
+          <FtBoxGeometry :width="1" :height="1" :depth="1" />
+          <FtMeshLambertMaterial>
+            <FtTextureLoader
+              url="/Material_1741/height.png"
+              :type="'map'"
+              :options="{
+                minFilter: NearestFilter,
+                magFilter: NearestFilter,
+              }"
+            />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+
+        <FtDirectionalLight :color="0xffffff" :intensity="0.5" />
+        <FtAmbientLight :color="0xffffff" />
         <FtOrbitControls v-if="showControl" />
       </FtWebglRenderer>
     </FtScene>

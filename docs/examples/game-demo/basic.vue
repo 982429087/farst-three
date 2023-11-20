@@ -2,74 +2,6 @@
   <div ref="domRef" class="farst-three">
     <div v-show="showMask" class="mask" @click="start">点击开始</div>
     <FtScene>
-      <FtMesh
-        :options="{
-          position: {
-            z: 40,
-            y: -1,
-          },
-          receiveShadow: true,
-        }"
-      >
-        <FtBoxGeometry :width="100" :height="4" :depth="100" />
-        <FtMeshLambertMaterial>
-          <FtTextureLoader url="\textures\monastery_stone_floor_diff_2k.jpg" />
-        </FtMeshLambertMaterial>
-      </FtMesh>
-      <FtMesh
-        :options="{
-          position: {
-            z: -140,
-            y: -1,
-          },
-          receiveShadow: true,
-        }"
-      >
-        <FtBoxGeometry :width="50" :height="4" :depth="50" />
-        <FtMeshLambertMaterial>
-          <FtTextureLoader url="\textures\monastery_stone_floor_diff_2k.jpg" />
-        </FtMeshLambertMaterial>
-      </FtMesh>
-      <FtMesh :options="bollOptions" @load="({ mesh }) => (bollMesh = mesh)">
-        <FtSphereGeometry
-          :radius="2"
-          :height-segments="64"
-          :width-segments="64"
-        />
-        <FtMeshLambertMaterial>
-          <FtTextureLoader url="\textures\decorative-4813.jpg" />
-        </FtMeshLambertMaterial>
-      </FtMesh>
-      <FtGroup
-        :options="{
-          position: {
-            z: -95,
-          },
-        }"
-        @load="({ group }) => (blokGroup = group)"
-      >
-        <FtMesh
-          v-for="item in 8"
-          :key="item"
-          :options="{
-            position: {
-              z: 10 * item,
-              y: -10,
-            },
-          }"
-        >
-          <FtBoxGeometry :width="10" :height="10" :depth="10" />
-          <FtMeshLambertMaterial>
-            <FtTextureLoader
-              url="\textures\monastery_stone_floor_diff_2k.jpg"
-            />
-          </FtMeshLambertMaterial>
-        </FtMesh>
-      </FtGroup>
-      <FtAmbientLight :color="0xffffff" :intensity="0.95" />
-      <FtDirectionalLight :options="directionLightOPtions">
-        <FtDirectionalLightHelper />
-      </FtDirectionalLight>
       <FtPerspectiveCamera
         :fov="75"
         :near="0.01"
@@ -81,12 +13,7 @@
         }"
         @load="({ camera }) => (renderCamera = camera)"
       />
-      <FtPointerLockControls :options="pointerlCOptions" />
-      <FtAudio
-        v-if="startSound"
-        url="\sound\dong.m4a"
-        :buffer-onload="bufferOnload"
-      />
+
       <FtWebglRenderer
         :params="{ antialias: true }"
         :animation-fn="animationFn"
@@ -96,6 +23,84 @@
           },
         }"
       >
+        <FtMesh
+          :options="{
+            position: {
+              z: 40,
+              y: -1,
+            },
+            receiveShadow: true,
+          }"
+        >
+          <FtBoxGeometry :width="100" :height="4" :depth="100" />
+          <FtMeshLambertMaterial>
+            <FtTextureLoader
+              url="\textures\monastery_stone_floor_diff_2k.jpg"
+            />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+        <FtMesh
+          :options="{
+            position: {
+              z: -140,
+              y: -1,
+            },
+            receiveShadow: true,
+          }"
+        >
+          <FtBoxGeometry :width="50" :height="4" :depth="50" />
+          <FtMeshLambertMaterial>
+            <FtTextureLoader
+              url="\textures\monastery_stone_floor_diff_2k.jpg"
+            />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+        <FtMesh :options="bollOptions" @load="({ mesh }) => (bollMesh = mesh)">
+          <FtSphereGeometry
+            :radius="2"
+            :height-segments="64"
+            :width-segments="64"
+          />
+          <FtMeshLambertMaterial>
+            <FtTextureLoader url="\textures\decorative-4813.jpg" />
+          </FtMeshLambertMaterial>
+        </FtMesh>
+        <FtGroup
+          :options="{
+            position: {
+              z: -95,
+            },
+          }"
+          @load="({ group }) => (blokGroup = group)"
+        >
+          <FtMesh
+            v-for="item in 8"
+            :key="item"
+            :options="{
+              position: {
+                z: 10 * item,
+                y: -10,
+              },
+            }"
+          >
+            <FtBoxGeometry :width="10" :height="10" :depth="10" />
+            <FtMeshLambertMaterial>
+              <FtTextureLoader
+                url="\textures\monastery_stone_floor_diff_2k.jpg"
+              />
+            </FtMeshLambertMaterial>
+          </FtMesh>
+        </FtGroup>
+        <FtAmbientLight :color="0xffffff" :intensity="0.95" />
+        <FtDirectionalLight :options="directionLightOPtions">
+          <FtDirectionalLightHelper />
+        </FtDirectionalLight>
+        <FtPointerLockControls :options="pointerlCOptions" />
+        <FtAudio
+          v-if="startSound"
+          url="\sound\dong.m4a"
+          :buffer-onload="bufferOnload"
+        />
         <!-- <FtOrbitControls /> -->
       </FtWebglRenderer>
     </FtScene>
@@ -103,7 +108,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, shallowRef } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { Clock, Vector3 } from 'three'
 import gsap from 'gsap'
 import {

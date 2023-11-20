@@ -1,44 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene :options="sceneOptions">
-      <FtMesh :options="{ position: { z: 0.5 } }">
-        <FtSphereGeometry
-          :radius="0.5"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshDepthMaterial />
-      </FtMesh>
-      <FtMesh :options="{ position: { z: 1.5 } }">
-        <FtSphereGeometry
-          :radius="0.5"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshDepthMaterial />
-      </FtMesh>
-      <FtMesh :options="{ position: { z: 2.5 } }">
-        <FtSphereGeometry
-          :radius="0.5"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshDepthMaterial />
-      </FtMesh>
-      <FtMesh :options="{ position: { z: 3.5 } }">
-        <FtSphereGeometry
-          :radius="0.5"
-          :width-segments="64"
-          :height-segments="64"
-        />
-        <FtMeshDepthMaterial />
-      </FtMesh>
-      <FtDirectionalLight
-        :color="0xffffff"
-        :intensity="1"
-        :options="{ position: { set: [1, 1, 1] } }"
-      />
-      <FtAmbientLight :color="0xffffff" :intensity="0.5" />
       <FtPerspectiveCamera
         :fov="75"
         :near="1"
@@ -49,6 +11,44 @@
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtMesh :options="{ position: { z: 0.5 } }">
+          <FtSphereGeometry
+            :radius="0.5"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshDepthMaterial />
+        </FtMesh>
+        <FtMesh :options="{ position: { z: 1.5 } }">
+          <FtSphereGeometry
+            :radius="0.5"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshDepthMaterial />
+        </FtMesh>
+        <FtMesh :options="{ position: { z: 2.5 } }">
+          <FtSphereGeometry
+            :radius="0.5"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshDepthMaterial />
+        </FtMesh>
+        <FtMesh :options="{ position: { z: 3.5 } }">
+          <FtSphereGeometry
+            :radius="0.5"
+            :width-segments="64"
+            :height-segments="64"
+          />
+          <FtMeshDepthMaterial />
+        </FtMesh>
+        <FtDirectionalLight
+          :color="0xffffff"
+          :intensity="1"
+          :options="{ position: { set: [1, 1, 1] } }"
+        />
+        <FtAmbientLight :color="0xffffff" :intensity="0.5" />
         <FtGridHelper />
         <FtOrbitControls />
       </FtWebglRenderer>
