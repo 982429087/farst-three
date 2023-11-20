@@ -36,13 +36,10 @@ const ready = ref(false)
 const ns = useNamespace('scene')
 const sceneRef = ref<HTMLDivElement>()
 const scene = new Scene()
-// 拖拽函数
-const dragService = new CountService<Object3D>()
-// 放入相机和dom和实例
-const storeService = new StoreService(scene, sceneRef)
-// 处理事件函数
-const eventService = new EventService(scene, props.eventOptions)
-const animationService = new AnimationService()
+let dragService = new CountService<Object3D>()
+let storeService = new StoreService(scene, sceneRef)
+let eventService = new EventService(scene, props.eventOptions)
+let animationService = new AnimationService()
 
 emit('load', { scene })
 
@@ -64,6 +61,10 @@ onBeforeUnmount(() => {
   scene.clear()
   eventService.destory()
   dragService.clearCount()
+  ;(animationService as any) = null
+  ;(eventService as any) = null
+  ;(dragService as any) = null
+  ;(storeService as any) = null
 })
 
 defineExpose({
