@@ -9,14 +9,14 @@ export type AnimationFunsParams = {
 export type AnimationFuns = (e: AnimationFunsParams) => void
 export class AnimationService {
   private _animationFunMap: Map<string, AnimationFuns> = new Map()
-  private _hasComposer = false
+  private _noRender = false
 
-  get hasComposer() {
-    return this._hasComposer
+  get noRender() {
+    return this._noRender
   }
 
-  set hasComposer(val: boolean) {
-    this._hasComposer = val
+  set noRender(val: boolean) {
+    this._noRender = val
   }
 
   on(key: string, callback: AnimationFuns) {

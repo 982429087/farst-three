@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, provide, ref } from 'vue'
-import { Scene } from 'three'
+import { REVISION, Scene } from 'three'
 import {
   animationServiceInjectionKey,
   dragServiceInjectionKey,
@@ -23,7 +23,7 @@ import {
   useOptions,
 } from '@farst-three/hooks'
 import { sceneEmits, sceneProps } from './scene'
-import type { Event, Object3D } from 'three'
+import type { Object3D } from 'three'
 
 defineOptions({
   name: 'FtScene',
@@ -35,15 +35,17 @@ const emit = defineEmits(sceneEmits)
 const ready = ref(false)
 const ns = useNamespace('scene')
 const sceneRef = ref<HTMLDivElement>()
-let scene = new Scene()
+const scene = new Scene()
 // 拖拽函数
-let dragService = new CountService<Object3D<Event>>()
+const dragService = new CountService<Object3D>()
 // 放入相机和dom和实例
-let storeService = new StoreService(scene, sceneRef)
+const storeService = new StoreService(scene, sceneRef)
 // 处理事件函数
-let eventService = new EventService(scene, props.eventOptions)
+const eventService = new EventService(scene, props.eventOptions)
 const animationService = new AnimationService()
+
 emit('load', { scene })
+
 provide(dragServiceInjectionKey, dragService)
 provide(storeServiceInjectionKey, storeService)
 provide(eventServiceInjectionKey, eventService)
@@ -62,10 +64,6 @@ onBeforeUnmount(() => {
   scene.clear()
   eventService.destory()
   dragService.clearCount()
-  ;(scene as any) = null
-  ;(eventService as any) = null
-  ;(storeService as any) = null
-  ;(dragService as any) = null
 })
 
 defineExpose({
@@ -73,5 +71,5 @@ defineExpose({
 })
 
 // eslint-disable-next-line no-console
-// console.log('当前threejs版本号:', REVISION)
+console.log('当前threejs版本号:', REVISION)
 </script>

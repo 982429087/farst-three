@@ -37,13 +37,13 @@ watch(
   { deep: true, immediate: true }
 )
 
-animation.hasComposer = true
+animation.noRender = true
 animation.on('high-light', () => {
   highLight.loop()
 })
 
 onBeforeUnmount(() => {
-  animation.hasComposer = false
+  animation.noRender = false
   animation.off('high-light')
   highLight.dispose()
 })

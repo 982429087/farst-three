@@ -13,7 +13,6 @@ import {
   pointLightInjectionKey,
   projectionInjectionKey,
   rectAreaLightInjectionKey,
-  rendererInjectionKey,
   spotLightInjectionKey,
   storeServiceInjectionKey,
 } from '@farst-three/constants/injection'
@@ -29,7 +28,6 @@ import type {
 import type {
   BufferGeometry,
   DirectionalLight,
-  Event,
   Group,
   HemisphereLight,
   Material,
@@ -37,7 +35,6 @@ import type {
   Object3D,
   PointLight,
   RectAreaLight,
-  Renderer,
   SpotLight,
 } from 'three'
 
@@ -45,19 +42,40 @@ export function useStoreService() {
   return useInjection<StoreService>(storeServiceInjectionKey)
 }
 
-export function useSceneRef() {
-  const sceneRef = useInjection<StoreService>(
+export function useContainer() {
+  const container = useInjection<StoreService>(
     storeServiceInjectionKey
   ).getSceneRef()
-  if (!sceneRef) {
-    throw new Error('sceneRef is not defined')
+  if (!container) {
+    throw new Error('容器元素缺失')
   }
-  return sceneRef
+  return container
+}
+
+export function useRenderer() {
+  const renderer = useInjection<StoreService>(
+    storeServiceInjectionKey
+  ).getRenderer()
+  if (!renderer) {
+    throw new Error('渲染器缺失')
+  }
+  return renderer
+}
+
+export function useRenderCamera() {
+  const camera = useInjection<StoreService>(
+    storeServiceInjectionKey
+  ).getRenderCamera()
+  if (!camera) {
+    throw new Error('相机缺失')
+  }
+  return camera
 }
 
 export function useScene() {
   return useInjection<StoreService>(storeServiceInjectionKey).getScene()
 }
+
 export function useEventService() {
   return useInjection<EventService>(eventServiceInjectionKey)
 }
@@ -68,10 +86,6 @@ export function useObj3d() {
 
 export function useGeometry() {
   return useInjection<BufferGeometry>(geometryInjectionKey)
-}
-
-export function useRenderer() {
-  return useInjection<Renderer>(rendererInjectionKey)
 }
 
 export function useAnimationService() {

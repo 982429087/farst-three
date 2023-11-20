@@ -45,12 +45,12 @@ watch(
 )
 
 emit('load', { scene, outline })
-animation.hasComposer = true
+animation.noRender = true
 animation.on('high-light', () => {
   outline.loop()
 })
 onBeforeUnmount(() => {
-  animation.hasComposer = false
+  animation.noRender = false
   animation.off('high-light')
   outline.dispose()
 })

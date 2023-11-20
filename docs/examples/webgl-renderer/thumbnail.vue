@@ -1,11 +1,6 @@
 <template>
   <div class="farst-three">
     <FtScene>
-      <FtMesh>
-        <FtBoxGeometry>
-          <FtMeshBasicMaterial :params="meshBasicParams" />
-        </FtBoxGeometry>
-      </FtMesh>
       <FtOrthographicCamera
         :left="-aspect * frustumSize"
         :right="aspect * frustumSize"
@@ -14,12 +9,16 @@
         :near="0.001"
         :far="1000"
         :options="caneraOptions"
-      >
-        <FtWebglRenderer :scissor="true">
-          <FtOrbitControls />
-          <FtThumbnail :is-render-camera="false" @load="thumbnailCameraLoad" />
-        </FtWebglRenderer>
-      </FtOrthographicCamera>
+      />
+      <FtWebglRenderer>
+        <FtMesh>
+          <FtBoxGeometry>
+            <FtMeshBasicMaterial :params="meshBasicParams" />
+          </FtBoxGeometry>
+        </FtMesh>
+        <FtOrbitControls />
+        <FtThumbnail :is-render-camera="false" @load="thumbnailCameraLoad" />
+      </FtWebglRenderer>
     </FtScene>
   </div>
 </template>

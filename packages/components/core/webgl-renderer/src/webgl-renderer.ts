@@ -21,18 +21,6 @@ export const webGLRendererProps = buildProps({
       logarithmicDepthBuffer: true, // 就是两个面间距比较小的时候，让threejs更容易区分两个面，谁在前，谁在后
     }),
   },
-  scissor: {
-    type: Boolean,
-    default: false,
-  },
-  scissorClearColor: {
-    type: String,
-    default: '#999999',
-  },
-  scissorClearColorAlpha: {
-    type: Number,
-    default: 1,
-  },
   options: {
     type: definePropType<WebglRendererOptions>(Object),
     default: () => ({

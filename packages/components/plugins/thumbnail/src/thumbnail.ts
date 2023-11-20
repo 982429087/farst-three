@@ -33,6 +33,14 @@ export const thumbnailProps = buildProps({
   animationFn: {
     type: definePropType<(e: AnimationFunsParams) => void>(Function),
   },
+  scissorClearColor: {
+    type: String,
+    default: '#999999',
+  },
+  scissorClearColorAlpha: {
+    type: Number,
+    default: 1,
+  },
 })
 export const thumbnailEmits = {
   ...orthographicCameraEmits,

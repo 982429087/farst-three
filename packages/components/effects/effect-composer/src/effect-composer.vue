@@ -9,8 +9,8 @@ import { debounce } from 'lodash'
 import { Vector2 } from 'three'
 import {
   useAnimationService,
+  useContainer,
   useScene,
-  useSceneRef,
   useStoreService,
 } from '@farst-three/hooks'
 import { effectComposerInjectionKey } from '@farst-three/constants'
@@ -25,7 +25,7 @@ const emit = defineEmits(effectComposerEmits)
 
 // init here
 let scene = useScene()
-const container = useSceneRef()
+const container = useContainer()
 const store = useStoreService()
 const animationService = useAnimationService()
 let composer = shallowRef<EffectComposer>()
@@ -44,7 +44,7 @@ watch(
 )
 
 // effect render 执行的时候是，不能执行 webglrenderer的render方法
-animationService.hasComposer = true
+animationService.noRender = true
 animationService.on('effect-composer', () => {
   composer.value?.render()
 })
@@ -63,7 +63,7 @@ observer.observe(container)
 
 onBeforeUnmount(() => {
   composer.value?.dispose()
-  animationService.hasComposer = false
+  animationService.noRender = false
   animationService.off('effect-composer')
   ;(scene as any) = null
   ;(composer as any) = null

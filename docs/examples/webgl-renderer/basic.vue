@@ -1,12 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtGroup>
-        <FtMesh>
-          <FtBoxGeometry />
-          <FtMeshBasicMaterial :params="{ color: '#ABCDEF' }" />
-        </FtMesh>
-      </FtGroup>
       <FtOrthographicCamera
         :left="-size"
         :right="size"
@@ -20,6 +14,12 @@
         :params="{ antialias: true }"
         :animation-fn="animationFn"
       >
+        <FtGroup>
+          <FtMesh>
+            <FtBoxGeometry />
+            <FtMeshBasicMaterial :params="{ color: '#ABCDEF' }" />
+          </FtMesh>
+        </FtGroup>
         <FtOrbitControls />
       </FtWebglRenderer>
     </FtScene>

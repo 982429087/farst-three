@@ -8,9 +8,9 @@ import { PerspectiveCamera } from 'three'
 import { debounce } from 'lodash'
 import { perspectiveCameraInjectionKey } from '@farst-three/constants/injection'
 import {
+  useContainer,
   useOptions,
   useScene,
-  useSceneRef,
   useSetRenderCamera,
 } from '@farst-three/hooks'
 import {
@@ -25,7 +25,7 @@ defineOptions({
 const props = defineProps(perspectiveCameraProps)
 const emit = defineEmits(perspectiveCameraEmits)
 
-let container = useSceneRef()
+let container = useContainer()
 let scene = useScene()
 let camera = new PerspectiveCamera(
   props.fov,

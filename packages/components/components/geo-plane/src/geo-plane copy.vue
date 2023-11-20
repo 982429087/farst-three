@@ -153,14 +153,14 @@ const renderer = store.getRenderer()!
 const animation = useAnimationService()
 const camera = store.getRenderCamera()!
 const { render } = useLight(scene, camera, renderer)
-animation.hasComposer = true
+animation.noRender = true
 animation.on('geo-plane', () => {
   render()
 })
 emit('load', { scene })
 
 onBeforeUnmount(() => {
-  animation.hasComposer = false
+  animation.noRender = false
   scene.remove(map)
   ;(scene as any) = null
 })
