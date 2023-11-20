@@ -93,7 +93,6 @@
               count: 10,
             }"
           />
-          <FtAxesHelper :size="1000" />
         </FtProjection>
         <FtOrbitControls
           :options="{

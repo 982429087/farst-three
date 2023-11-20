@@ -5,46 +5,53 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, watch } from 'vue'
 import {
-  HighLight,
+  Outline,
   useAnimationService,
   useScene,
   useStoreService,
 } from '@farst-three/hooks'
-import { highLightEmits, highLightProps } from './high-light'
+import { outlineEmits, outlineProps } from './outline'
 
 defineOptions({
-  name: 'FtHighLight',
+  name: 'FtOutline',
 })
 
-const props = defineProps(highLightProps)
-const emit = defineEmits(highLightEmits)
+const props = defineProps(outlineProps)
+const emit = defineEmits(outlineEmits)
 
-// init here
 const scene = useScene()
 const store = useStoreService()
 const camera = store.getRenderCamera()!
 const renderer = store.getRenderer()!
 const animation = useAnimationService()
-const highLight = new HighLight(scene, camera, renderer, props.options)
-highLight.render()
-emit('load', { scene, highLight })
+
+const outline = new Outline(scene, camera, renderer)
+outline.render()
 
 watch(
   () => props.options,
   (v) => {
-    if (highLight) highLight.options = v
+    if (outline) outline.options = v
   },
   { deep: true, immediate: true }
 )
 
+watch(
+  () => props.selected,
+  (v) => {
+    if (outline.outlinePass) outline.outlinePass.selectedObjects = v
+  },
+  { deep: true, immediate: true }
+)
+
+emit('load', { scene, outline })
 animation.hasComposer = true
 animation.on('high-light', () => {
-  highLight.loop()
+  outline.loop()
 })
-
 onBeforeUnmount(() => {
   animation.hasComposer = false
   animation.off('high-light')
-  highLight.dispose()
+  outline.dispose()
 })
 </script>

@@ -13,7 +13,7 @@
           alpha: true,
         }"
       >
-        <FtHighLight :options="highLightOptions" />
+        <FtOutline :options="highLightOptions" :selected="selectedObjes" />
         <FtProjection
           :center="[102.44662948242187, 30.927128325051036]"
           :scale="450"
@@ -60,16 +60,16 @@ import {
   FtAmbientLight,
   FtDirectionalLight,
   FtGeoJsonPlane,
-  FtHighLight,
   FtOrbitControls,
+  FtOutline,
   FtPerspectiveCamera,
   FtProjection,
   FtScene,
   FtWebglRenderer,
   useGui,
 } from 'farst-three'
-import type { Mesh } from 'three'
-import type { FunsEvent, HighLightOptions } from 'farst-three'
+import type { Mesh, Object3D } from 'three'
+import type { FunsEvent, OutlineOptions } from 'farst-three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 
 const domRef = ref<HTMLDivElement>()
@@ -79,12 +79,17 @@ const cameraOptions = reactive({
   },
 })
 
-const highLightOptions = reactive<HighLightOptions>({
-  strength: 0.78,
-  threshold: 0,
-  radius: 0.1,
-  exposure: 1,
+const highLightOptions = reactive<OutlineOptions>({
+  edgeStrength: 30.0, // 边框的亮度
+  edgeGlow: 1, // 光晕[0,1]
+  usePatternTexture: false, // 是否使用父级的材质
+  edgeThickness: 1.0, // 边框宽度
+  downSampleRatio: 1.0, // 边框弯曲度
+  pulsePeriod: 0, // 呼吸闪烁的速度
+  visibleEdgeColor: 0x02518d, // 无遮挡颜色
+  hiddenEdgeColor: 0x02518d, // 被遮挡颜色
 })
+const selectedObjes = shallowRef<Object3D[]>([])
 
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
 function initGeoJson() {
@@ -94,36 +99,24 @@ function initGeoJson() {
     geoJson.value = dataObj
   })
 }
-// 高亮
 
-const map: Record<string, Mesh> = {}
 function handleClick({ targets }: FunsEvent) {
   const target = targets[0]
   if (target) {
-    const object = target.object as Mesh
-    for (const [, value] of Object.entries(map)) {
-      value.layers.disable(1)
-    }
-    if (!map[object.id]) {
-      map[object.id] = object
-      object.layers.enable(1)
-    } else {
-      object.layers.enable(1)
-    }
-  } else {
-    for (const [, value] of Object.entries(map)) {
-      value.layers.disable(1)
-    }
+    selectedObjes.value = [target.object]
   }
 }
 
 initGeoJson()
 const { guiPromise } = useGui(domRef)
 guiPromise.then((gui) => {
-  gui.add(highLightOptions, 'strength', 0, 1, 0.01)
-  gui.add(highLightOptions, 'threshold', 0, 1, 0.01)
-  gui.add(highLightOptions, 'radius', 0, 1, 0.01)
-  gui.add(highLightOptions, 'exposure', -20, 20, 1)
+  gui.add(highLightOptions, 'edgeStrength', 0, 100)
+  gui.add(highLightOptions, 'edgeGlow', 0, 1)
+  gui.add(highLightOptions, 'edgeThickness', 0, 10)
+  gui.add(highLightOptions, 'downSampleRatio', 0, 1)
+  gui.add(highLightOptions, 'pulsePeriod', 0, 10)
+  gui.addColor(highLightOptions, 'visibleEdgeColor')
+  gui.addColor(highLightOptions, 'hiddenEdgeColor')
 })
 </script>
 

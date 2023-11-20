@@ -1,16 +1,9 @@
 import type FtEvent from './FtEvent'
-import type {
-  Camera,
-  Event,
-  Intersection,
-  Object3D,
-  Scene,
-  Vector3,
-} from 'three'
+import type { Camera, Intersection, Object3D, Scene, Vector3 } from 'three'
 export type FunsEvent = {
   scene: Scene
   camera: Camera
-  targets: Intersection<Object3D<Event>>[]
+  targets: Intersection<Object3D>[]
   position?: Vector3
 }
 export type Funs = (e: FunsEvent) => FunsEvent | void
@@ -29,8 +22,8 @@ export type EventOptions = {
   near?: number
   far?: number
   recursive?: boolean
-  optionalTarget?: Intersection<Object3D<Event>>[]
-  objects?: Object3D<Event>[]
+  optionalTarget?: Intersection<Object3D>[]
+  objects?: Object3D[]
   allTheTime?: boolean
   wait?: number
 }

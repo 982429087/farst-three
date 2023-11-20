@@ -5,3 +5,5 @@ export interface FtObject {
   loop: AnyFun
   dispose: AnyFun
 }
+
+export * from './pass'

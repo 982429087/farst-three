@@ -5,4 +5,3 @@ export const FtHighLight = withInstall(HighLight)
 export default FtHighLight
 
 export * from './src/high-light'
-export * from './src/HighLight'

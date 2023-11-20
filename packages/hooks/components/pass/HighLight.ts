@@ -1,13 +1,13 @@
 import { Layers, ReinhardToneMapping, ShaderMaterial, Vector2 } from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
-import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
-import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
 import { merge } from 'lodash'
-import type { FtObject } from '@farst-three/hooks'
+import { FtPass } from './FtPass'
+import type { FtObject } from '../index'
 import type { Camera, Mesh, Scene, WebGLRenderer } from 'three'
+
+// https://threejs.org/examples/?q=unreal#webgl_postprocessing_unreal_bloom_selective
 
 export type HighLightOptions = {
   strength?: number
@@ -17,40 +17,28 @@ export type HighLightOptions = {
 }
 
 export const HIGHLITHT_SCENE = 1
-// https://threejs.org/examples/?q=unreal#webgl_postprocessing_unreal_bloom_selective
-export class HighLight implements FtObject {
-  private scene: Scene
-  private camera: Camera
-  private renderer: WebGLRenderer
+export class HighLight extends FtPass implements FtObject {
   private defaultOptions = {
     strength: 0.4,
     threshold: 0,
     radius: 0.1,
-    exposure: 3,
+    exposure: 1,
   }
   private _options: HighLightOptions = {}
-  private width: number
-  private height: number
   private bloomLayer: Layers
   private bloomComposer: EffectComposer
   private finalComposer: EffectComposer
   private bloomPass: UnrealBloomPass | undefined
   private materials: Record<string, any> = {}
-  private _destroyed = true
   constructor(
     scene: Scene,
     camera: Camera,
     renderer: WebGLRenderer,
     opts: HighLightOptions = {}
   ) {
+    super(scene, camera, renderer)
     renderer.toneMapping = ReinhardToneMapping
-
-    this.scene = scene
-    this.camera = camera
-    this.renderer = renderer
     this.options = opts
-    this.width = renderer.domElement.offsetWidth
-    this.height = renderer.domElement.offsetHeight
     this.bloomLayer = new Layers()
     this.bloomLayer.set(HIGHLITHT_SCENE)
     this.bloomComposer = new EffectComposer(renderer)
@@ -74,10 +62,7 @@ export class HighLight implements FtObject {
 
   render() {
     this._destroyed = false
-    const effectFXAA = new ShaderPass(FXAAShader)
-    effectFXAA.uniforms['resolution'].value.set(1 / this.width, 1 / this.height)
-    const renderScene = new RenderPass(this.scene, this.camera)
-    const outputPass = new OutputPass()
+    const { renderPass, outputPass } = this.genPass()
 
     this.bloomPass = new UnrealBloomPass(
       new Vector2(this.width, this.height),
@@ -86,12 +71,12 @@ export class HighLight implements FtObject {
       this.options.threshold!
     )
 
-    this.bloomComposer = new EffectComposer(this.renderer)
+    this.bloomComposer = this.genEffectComposer()
     this.bloomComposer.renderToScreen = false
 
-    this.bloomComposer.addPass(renderScene)
+    this.bloomComposer.addPass(renderPass)
     this.bloomComposer.addPass(this.bloomPass)
-    this.bloomComposer.addPass(effectFXAA)
+    this.bloomComposer.addPass(this.effectFXAA)
     this.bloomComposer.addPass(outputPass)
 
     const finalPass = new ShaderPass(
@@ -126,11 +111,13 @@ export class HighLight implements FtObject {
       'baseTexture'
     )
     finalPass.needsSwap = true
-    this.finalComposer = new EffectComposer(this.renderer)
-    this.finalComposer.addPass(renderScene)
+    this.finalComposer = this.genEffectComposer()
+    this.finalComposer.addPass(renderPass)
     this.finalComposer.addPass(finalPass)
-    this.finalComposer.addPass(effectFXAA)
+    this.finalComposer.addPass(this.effectFXAA)
     this.finalComposer.addPass(outputPass)
+    // 设置监听
+    this.onChange([this.bloomComposer, this.finalComposer])
   }
 
   loop() {
@@ -155,7 +142,8 @@ export class HighLight implements FtObject {
   }
 
   dispose() {
-    this._destroyed = true
+    this.destroy()
+
     this.materials = {}
     this.bloomComposer.dispose()
     this.finalComposer.dispose()

@@ -260,6 +260,10 @@
       {
         "link": "/high-light",
         "text": "高亮"
+      },
+      {
+        "link": "/outline",
+        "text": "描边"
       }
     ]
   },
