@@ -26,7 +26,7 @@ export class HighLight implements FtObject {
     strength: 0.4,
     threshold: 0,
     radius: 0.1,
-    exposure: 5,
+    exposure: 3,
   }
   private _options: HighLightOptions = {}
   private width: number
@@ -85,6 +85,7 @@ export class HighLight implements FtObject {
       this.options.radius!,
       this.options.threshold!
     )
+
     this.bloomComposer = new EffectComposer(this.renderer)
     this.bloomComposer.renderToScreen = false
 
@@ -152,6 +153,7 @@ export class HighLight implements FtObject {
     })
     this.finalComposer?.render()
   }
+
   dispose() {
     this._destroyed = true
     this.materials = {}

@@ -19,7 +19,6 @@ import { isString } from '@vueuse/core'
 import { center } from '@turf/turf'
 import { geoMercator } from 'd3-geo'
 import {
-  effectComposer,
   useAnimationService,
   useScene,
   useStoreService,
@@ -154,12 +153,14 @@ const renderer = store.getRenderer()!
 const animation = useAnimationService()
 const camera = store.getRenderCamera()!
 const { render } = useLight(scene, camera, renderer)
-animation.on(effectComposer, () => {
+animation.hasComposer = true
+animation.on('geo-plane', () => {
   render()
 })
 emit('load', { scene })
 
 onBeforeUnmount(() => {
+  animation.hasComposer = false
   scene.remove(map)
   ;(scene as any) = null
 })

@@ -5,7 +5,6 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, watch } from 'vue'
 import {
-  effectComposer,
   useAnimationService,
   useScene,
   useStoreService,
@@ -38,11 +37,14 @@ watch(
   { deep: true, immediate: true }
 )
 
-animation.on(effectComposer, () => {
+animation.hasComposer = true
+animation.on('high-light', () => {
   highLight.loop()
 })
 
 onBeforeUnmount(() => {
+  animation.hasComposer = false
+  animation.off('high-light')
   highLight.dispose()
 })
 </script>

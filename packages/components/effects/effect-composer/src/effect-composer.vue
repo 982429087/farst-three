@@ -8,7 +8,6 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { debounce } from 'lodash'
 import { Vector2 } from 'three'
 import {
-  effectComposer,
   useAnimationService,
   useScene,
   useSceneRef,
@@ -45,7 +44,8 @@ watch(
 )
 
 // effect render 执行的时候是，不能执行 webglrenderer的render方法
-animationService.on(effectComposer, () => {
+animationService.hasComposer = true
+animationService.on('effect-composer', () => {
   composer.value?.render()
 })
 
@@ -63,7 +63,8 @@ observer.observe(container)
 
 onBeforeUnmount(() => {
   composer.value?.dispose()
-  animationService.off(effectComposer)
+  animationService.hasComposer = false
+  animationService.off('effect-composer')
   ;(scene as any) = null
   ;(composer as any) = null
 })

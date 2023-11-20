@@ -106,7 +106,7 @@ export function useSpotLight() {
 }
 
 export function useDragService() {
-  return useInjection<CountService<Object3D<Event>>>(dragServiceInjectionKey)
+  return useInjection<CountService<Object3D>>(dragServiceInjectionKey)
 }
 
 export function useEffectComposer() {

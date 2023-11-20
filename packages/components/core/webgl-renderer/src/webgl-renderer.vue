@@ -57,7 +57,7 @@ if (props.animationFn) animationService.on('propsFn', props.animationFn)
 
 function animate() {
   if (!camera) throw new Error('<webgl-renderer /> 没有找到主渲染相机!')
-  // 裁剪逻辑
+  // 裁剪逻辑 可抽离
   if (props.scissor) {
     renderer.setScissorTest(true)
     renderer.setScissor(0, 0, container.offsetWidth, container.offsetHeight)
@@ -73,7 +73,7 @@ function animate() {
   animationService?.emit({ renderer, scene, camera })
   // 执行事件逻辑
   // eventService.calculate()
-  if (!animationService?.hasComposer()) renderer?.render(scene, camera)
+  if (!animationService?.hasComposer) renderer?.render(scene, camera)
   requestAnimationFrame(animate)
 }
 
@@ -87,9 +87,7 @@ const observer = new ResizeObserver(dOb)
 observer.observe(container)
 
 emit('load', { renderer, scene, camera })
-
 provide(rendererInjectionKey, renderer)
-
 useOptions(props.options, renderer, scene)
 
 onBeforeUnmount(() => {
