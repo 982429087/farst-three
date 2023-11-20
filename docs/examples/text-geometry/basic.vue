@@ -61,7 +61,7 @@
         <FtPointLight
           :decay="0"
           :intensity="10"
-          :distance="100"
+          :distance="150"
           :color="0xff6000"
         />
         <FtPointLight
@@ -69,14 +69,14 @@
           :decay="0"
           :intensity="10"
           :distance="100"
-          :options="{ position: { x: 100 } }"
+          :options="{ position: { x: 30 } }"
         />
         <FtPointLight
           :color="0x0000ff"
           :decay="0"
           :intensity="10"
           :distance="100"
-          :options="{ position: { x: -100 } }"
+          :options="{ position: { x: -30 } }"
         />
         <FtPointLight
           ref="lightRef"
