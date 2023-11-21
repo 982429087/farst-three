@@ -79,10 +79,9 @@ export default defineConfig({
             type: 'component',
             resolve: (componentName: string) => {
               if (componentName.startsWith('Ft')) {
-                console.log(componentName, epRoot)
                 return {
                   name: componentName,
-                  from: '@farst-three/components',
+                  from: 'farst-three',
                   sideEffects: ['FtScene']
                   .includes(componentName) ? `@farst-three/components/${kebabCase(componentName.slice(2))}/style/index.ts` : undefined,
                 }

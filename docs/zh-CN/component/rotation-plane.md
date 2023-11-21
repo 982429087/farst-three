@@ -6,8 +6,10 @@ lang: zh-CN
 # RotationPlane
 
 贴图 + 动画函数中改变 z 轴位置实现旋转
-![alt](/geo/rotating-aperture.png)
-![alt](/geo/rotating-point2.png)
+
+<img src="/geo/rotating-aperture.png" style="width: 50%;height: 50%;background-color: #000" />
+<img src="/geo/rotating-point2.png" style="width: 50%;height: 50%;background-color: #000" />
+
 
 ## 基础用法
 
@@ -23,7 +25,6 @@ rotation-plane/basic
 
 | Name          | Description  | Type                      | Default     | Required |
 | ------------- | ------------ | ------------------------- | ----------- | -------- |
-| `skyColor`    | 构造函数参数 | ^[ColorRepresentation]    | `undefined` | No       |
 | `options`     | 实例属性     | ^[HemisphereLightOptions] | `{}`        | No       |
 
 ### Events

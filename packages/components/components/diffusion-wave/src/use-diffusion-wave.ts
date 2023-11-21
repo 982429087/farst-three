@@ -50,14 +50,14 @@ export function useDiffusionWave(scene: Scene, opts: DiffusionWaveOptions) {
   const geometry = new CircleGeometry(...(options.geometryOptions as any))
   const material = new ShaderMaterial({
     uniforms,
-    vertexShader: `
+    vertexShader: /*glsl*/ `
       varying vec2 vUv;
       void main() {
         vUv = uv;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
       }
     `,
-    fragmentShader: `
+    fragmentShader: /*glsl*/ `
       varying vec2 vUv;
       uniform float iTime;
       uniform vec3 unColor;
@@ -79,7 +79,7 @@ export function useDiffusionWave(scene: Scene, opts: DiffusionWaveOptions) {
     // depthTest: false,
     // depthWrite: false,
     side: DoubleSide,
-    blending: AdditiveBlending,
+    blending: AdditiveBlending, // 混合模式 加法混合
     transparent: true,
     opacity: 1,
     ...options.materialOptions,

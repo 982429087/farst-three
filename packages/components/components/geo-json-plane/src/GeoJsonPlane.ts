@@ -3,14 +3,14 @@ import {
   Color,
   // DoubleSide,
   ExtrudeGeometry,
-  FrontSide,
+  // FrontSide,
   // FrontSide,
   Group,
   Mesh,
   // MeshBasicMaterial,
   MeshPhongMaterial,
   RepeatWrapping,
-  ShaderMaterial,
+  // ShaderMaterial,
   // ShaderMaterial,
   Shape,
   TextureLoader,
@@ -22,7 +22,7 @@ import { Line2 } from 'three/examples/jsm/lines/Line2'
 import { flatten } from '@turf/turf'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 // import { fragment, vertex } from './shader'
-import { fragment, vertex } from './shader'
+// import { fragment, vertex } from './shader'
 import type { FeatureCollection, Geometry, Position } from '@turf/turf'
 import type { LineMaterialParameters } from 'three/examples/jsm/lines/LineMaterial'
 import type { GeoProjection } from 'd3-geo'
