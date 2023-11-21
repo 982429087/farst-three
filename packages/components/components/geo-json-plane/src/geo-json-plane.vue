@@ -5,6 +5,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, watch } from 'vue'
 import {
+  GeoJsonPlane,
   uesEvent,
   useContainer,
   useEventService,
@@ -12,7 +13,6 @@ import {
   useScene,
 } from '@farst-three/hooks'
 import { geoJsonPlaneEmits, geoJsonPlaneProps } from './geo-json-plane'
-import { GeoJsonPlane } from './GeoJsonPlane'
 import type { FunsEvent } from '@farst-three/hooks'
 import type { AnyFun } from '@farst-three/utils'
 

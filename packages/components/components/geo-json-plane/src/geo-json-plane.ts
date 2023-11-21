@@ -1,6 +1,6 @@
 import { buildProps, definePropType } from '@farst-three/utils'
 import { eventEmits, eventProps } from '@farst-three/hooks'
-import type { GeoJsonPlane, GeoJsonPlaneOptions } from './GeoJsonPlane'
+import type { GeoJsonPlane, GeoJsonPlaneOptions } from '@farst-three/hooks'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 import type { Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'

@@ -1,9 +1,3 @@
-import type { AnyFun } from '@farst-three/utils'
-
-export interface FtObject {
-  render: AnyFun
-  loop: AnyFun
-  dispose: AnyFun
-}
-
-export * from './pass'
+export * from './FtObject'
+export * from './Pass'
+export * from './GeoJsonPlane'
