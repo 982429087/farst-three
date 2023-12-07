@@ -48,7 +48,7 @@ jobs:
         run: pnpm i --no-frozen-lockfile
 
       - name: Build website
-        run: pnpm docs:build
+        run: npm run docs:build
         env:
           DOC_ENV: production
           NODE_OPTIONS: --max-old-space-size=4096
