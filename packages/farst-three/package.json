@@ -50,8 +50,8 @@
     "lib/components/*/style/*"
   ],
   "peerDependencies": {
-    "three": "^0.153.0",
-    "vue": "3.2.0"
+    "three": "0.158.0",
+    "vue": "3.3.0"
   },
   "dependencies": {
     "@ctrl/tinycolor": "^3.4.1",
