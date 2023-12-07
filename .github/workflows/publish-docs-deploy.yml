@@ -48,6 +48,9 @@ jobs:
       - name: Generate common locale
         run: pnpm docs:gen-locale
 
+      - name: Install latest Frat Three
+        run: cd docs && pnpm i farst-three@latest
+
       - name: Build website
         run: npm run docs:build
         env:
