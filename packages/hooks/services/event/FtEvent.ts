@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { Plane, Raycaster, Vector2, Vector3 } from 'three'
 import { throttle } from 'lodash'
 import Subscription from './Subscription'
-import type { Camera, Event, Intersection, Object3D, Scene } from 'three'
+import type { Camera, Intersection, Object3D, Scene } from 'three'
 import type { EventOptions, Funs, FunsEvent, OnEventOptions } from './type'
 import type { Ref } from 'vue'
 export default class FtEvent {
@@ -68,7 +68,7 @@ export default class FtEvent {
   executeCallback(
     callback: Funs,
     event: FunsEvent,
-    targets: Intersection<Object3D<Event>>[],
+    targets: Intersection<Object3D>[],
     opts?: OnEventOptions
   ) {
     if (targets.length || opts?.allTheTime) {
@@ -108,7 +108,7 @@ export default class FtEvent {
   genIntersects(
     raycaster: Raycaster,
     camera: Camera,
-    objects: Object3D<Event>[],
+    objects: Object3D[],
     pointer: Vector2,
     options?: EventOptions
   ) {

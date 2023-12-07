@@ -7,7 +7,7 @@ export default class MouseMove extends FtEvent {
   executeCallback(
     callback: Funs,
     event: FunsEvent,
-    targets: Intersection<Object3D<Event>>[]
+    targets: Intersection<Object3D>[]
   ) {
     callback({
       ...event,
