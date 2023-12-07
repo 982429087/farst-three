@@ -65,7 +65,7 @@ import {
   FtWebglRenderer,
 } from 'farst-three'
 import { useGui } from '@farst-three/hooks'
-import type { GeoJsonPlaneOptions } from '@farst-three/components'
+import type { GeoJsonPlaneOptions } from '@farst-three/hooks'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
