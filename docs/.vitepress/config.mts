@@ -42,6 +42,7 @@ languages.forEach((lang) => {
 })
 
 export const config: UserConfig = {
+  base: '/farst-three/',
   title: 'Farst Three',
   description: 'a vue3 encapsulation of threejs',
   lastUpdated: true,

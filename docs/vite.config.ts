@@ -57,6 +57,7 @@ export default defineConfig(async ({ mode }) => {
     }))
   )
   return {
+    base: '/farst-three/',
     build: {
       rollupOptions: {
         output: {
