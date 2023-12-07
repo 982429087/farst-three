@@ -1,9 +1,13 @@
 name: Publish Docs Deploy
 
+# on:
+  # workflow_run:
+  #   workflows: ['Publish to NPM registry']
+  #   types: [completed]
 on:
-  workflow_run:
-    workflows: ['Publish to NPM registry']
-    types: [completed]
+  push:
+    branches:
+      - main
 
 jobs:
   deploy-docs:
