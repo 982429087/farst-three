@@ -52,7 +52,7 @@ jobs:
         run: cd docs && pnpm i farst-three@latest
 
       - name: Build website
-        run: npm run docs:build
+        run: pnpm docs:build
         env:
           DOC_ENV: production
           NODE_OPTIONS: --max-old-space-size=4096
