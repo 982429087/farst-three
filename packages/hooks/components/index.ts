@@ -1,3 +1,3 @@
-export * from './FtObject/index'
-export * from './Pass/index'
-export * from './GeoJsonPlane/index'
+export * from './FtObject'
+export * from './Pass'
+export * from './GeoJsonPlane'
