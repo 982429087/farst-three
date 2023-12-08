@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAxesHelper,
   FtOrbitControls,
@@ -21,16 +20,19 @@ import {
   FtScene,
   FtUpParticle,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { UpParticleOptions } from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import type { UpParticleOptions } from 'farst-three'
 const domRef = ref<HTMLDivElement>()
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const cameraOptions = reactive({
   position: {
     set: [3, 74, 100],
   },
 })
 const upParticleOptions = reactive<UpParticleOptions>({
-  texture: '/geo/up-particle.png',
+  texture: `${baseUrl}geo/up-particle.png`,
   count: 100,
   speed: 0.15,
   textureSpeed: 0.5,

@@ -49,7 +49,7 @@ import {
   FtShaderMaterial,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import vertexShader from './star/v.glsl?raw'
 import fragmentShader from './star/f.glsl?raw'
 import type { DeepPartial, OptionFunction, Options } from '@farst-three/utils'
@@ -64,7 +64,7 @@ import type {
   AmbientLightOptions,
   BufferGeometryOptions,
   PointsOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 
 const positions: number[] = []
@@ -103,6 +103,7 @@ const bufferGeoOpts = reactive<BufferGeometryOptions>({
   },
   computeBoundingSphere: true,
 })
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const materialParams: ShaderMaterialParameters = {
   depthTest: true, // 深度测试
@@ -113,7 +114,7 @@ const materialParams: ShaderMaterialParameters = {
       value: new Color(0xffffff),
     },
     pointTexture: {
-      value: new TextureLoader().load('/textures/star_1.png'),
+      value: new TextureLoader().load(`${baseUrl}textures/star_1.png`),
     },
     fogColor: {
       value: new Color(0x000000),

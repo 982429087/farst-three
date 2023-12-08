@@ -55,7 +55,7 @@ import {
   FtScene,
   FtTorusGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 
 const domRef = ref<HTMLDivElement>()
 const n = 30

@@ -1,6 +1,7 @@
 import { Mesh, MeshPhongMaterial, PlaneGeometry, TextureLoader } from 'three'
 import { Reflector } from 'three/examples/jsm/objects/Reflector'
 import { merge } from 'lodash'
+import { config } from '@farst-three/constants'
 import type { ReflectorOptions } from 'three/examples/jsm/objects/Reflector'
 import type { MeshPhongMaterialParameters, Scene } from 'three'
 
@@ -44,7 +45,9 @@ export function useReflectorPlane(
   scene.add(mirror)
 
   //底部颜色
-  const texture = textureLoader.load('/geo/floor-background.png')
+  const texture = textureLoader.load(
+    `${config.staticUrl}geo/floor-background.png`
+  )
   const floorMaterial = new MeshPhongMaterial({
     color: 0xffffff,
     map: texture,
@@ -65,7 +68,9 @@ export function useReflectorPlane(
   scene.add(floorMesh)
 
   // 点阵图片
-  const circlePoint = textureLoader.load('/geo/floor-circle-point.png')
+  const circlePoint = textureLoader.load(
+    `${config.staticUrl}geo/floor-circle-point.png`
+  )
   const circlePlane = new PlaneGeometry(
     ...(options.circlePlaneGeometryOptions as any)
   )

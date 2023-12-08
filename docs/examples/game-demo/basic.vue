@@ -35,7 +35,7 @@
           <FtBoxGeometry :width="100" :height="4" :depth="100" />
           <FtMeshLambertMaterial>
             <FtTextureLoader
-              url="\textures\monastery_stone_floor_diff_2k.jpg"
+              :url="baseUrl + 'textures/monastery_stone_floor_diff_2k.jpg'"
             />
           </FtMeshLambertMaterial>
         </FtMesh>
@@ -51,7 +51,7 @@
           <FtBoxGeometry :width="50" :height="4" :depth="50" />
           <FtMeshLambertMaterial>
             <FtTextureLoader
-              url="\textures\monastery_stone_floor_diff_2k.jpg"
+              :url="baseUrl + 'textures/monastery_stone_floor_diff_2k.jpg'"
             />
           </FtMeshLambertMaterial>
         </FtMesh>
@@ -62,7 +62,7 @@
             :width-segments="64"
           />
           <FtMeshLambertMaterial>
-            <FtTextureLoader url="\textures\decorative-4813.jpg" />
+            <FtTextureLoader :url="baseUrl + 'textures/decorative-4813.jpg'" />
           </FtMeshLambertMaterial>
         </FtMesh>
         <FtGroup
@@ -86,7 +86,7 @@
             <FtBoxGeometry :width="10" :height="10" :depth="10" />
             <FtMeshLambertMaterial>
               <FtTextureLoader
-                url="\textures\monastery_stone_floor_diff_2k.jpg"
+                :url="baseUrl + 'textures/monastery_stone_floor_diff_2k.jpg'"
               />
             </FtMeshLambertMaterial>
           </FtMesh>
@@ -98,7 +98,7 @@
         <FtPointerLockControls :options="pointerlCOptions" />
         <FtAudio
           v-if="startSound"
-          url="\sound\dong.m4a"
+          :url="baseUrl + 'sound/dong.m4a'"
           :buffer-onload="bufferOnload"
         />
         <!-- <FtOrbitControls /> -->
@@ -128,12 +128,12 @@ import {
   FtSphereGeometry,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { Audio, Group, Mesh, PerspectiveCamera } from 'three'
-import type {
-  AudioLoaderOnLoad,
-  DirectionalLightOptions,
-} from '@farst-three/components'
+import type { AudioLoaderOnLoad, DirectionalLightOptions } from 'farst-three'
+
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const domRef = ref<HTMLDivElement>()
 const startSound = ref(false)
 const showMask = ref(true)

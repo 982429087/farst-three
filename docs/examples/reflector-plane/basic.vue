@@ -82,7 +82,6 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtAxesHelper,
@@ -95,8 +94,9 @@ import {
   FtReflectorPlane,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { ReflectorPlaneOptions } from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import type { ReflectorPlaneOptions } from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {

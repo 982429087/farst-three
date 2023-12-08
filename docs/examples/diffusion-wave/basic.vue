@@ -12,15 +12,15 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useGui } from '@farst-three/hooks'
 import {
   FtDiffusionWave,
   FtOrbitControls,
   FtPerspectiveCamera,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { DiffusionWaveOptions } from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import type { DiffusionWaveOptions } from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {

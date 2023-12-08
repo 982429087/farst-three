@@ -24,7 +24,10 @@
           <FtBoxGeometry :width="1" :height="1" :depth="1" />
           <FtMeshStandardMaterial>
             <FtTextureLoader
-              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :url="
+                baseUrl +
+                'textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_basecolor.jpg'
+              "
               :type="'map'"
             />
           </FtMeshStandardMaterial>
@@ -39,7 +42,10 @@
           <FtBoxGeometry :width="1" :height="1" :depth="1" />
           <FtMeshStandardMaterial :options="{}" @load="lbasicMaterialLoad">
             <FtTextureLoader
-              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :url="
+                baseUrl +
+                'textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_basecolor.jpg'
+              "
               :type="'map'"
               :options="{
                 repeat: {
@@ -80,8 +86,6 @@ import {
   RepeatWrapping,
   Vector2,
 } from 'three'
-import { useGui } from '@farst-three/hooks'
-import { Deferred } from '@farst-three/utils'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -93,12 +97,16 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import { Deferred } from '@farst-three/utils'
 import type {
   MeshStandardMaterialLoadEvent,
   TextureLoadEvent,
   WebGLRendererProps,
-} from '@farst-three/components'
+} from 'farst-three'
+
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const size = 4
 const showControl = ref(true)

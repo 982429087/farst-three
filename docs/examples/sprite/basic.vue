@@ -39,7 +39,7 @@
                 :options="{
                   colorSpace: SRGBColorSpace,
                 }"
-                url="\textures\raindrop.png"
+                :url="baseUrl + 'textures/raindrop.png'"
                 :type="'map'"
               />
             </FtSpriteMaterial>
@@ -64,6 +64,7 @@ import {
   FtWebglRenderer,
 } from '@farst-three/components'
 const domRef = ref<HTMLDivElement>()
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const positions: { x: number; y: number; z: number }[] = []
 for (let x = -10; x < 10; x++) {

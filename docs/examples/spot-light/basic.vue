@@ -48,7 +48,6 @@
 <script setup lang="ts">
 import { reactive, ref, shallowRef } from 'vue'
 import { CameraHelper, Color, DoubleSide } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -62,7 +61,8 @@ import {
   FtSpotLight,
   FtSpotLightHelper,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type {
   PerspectiveCamera,
   SpotLight,
@@ -79,7 +79,7 @@ import type {
   SpotLightHelperLoadEvent,
   SpotLightLoadEvent,
   SpotLightOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 const boxOpts = reactive<MeshOptions>({
   position: {

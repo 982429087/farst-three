@@ -63,12 +63,12 @@ import {
   FtSphereGeometry,
   FtTubeGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import type {
   MeshLoadEvent,
   PerspectiveCameraLoadEvent,
   WebGLRendererLoadEvent,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { Mesh, PerspectiveCamera } from 'three'
 const domRef = ref<HTMLDivElement>()
 

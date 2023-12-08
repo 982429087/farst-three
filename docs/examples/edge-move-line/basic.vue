@@ -71,6 +71,8 @@ import {
 } from 'farst-three'
 import type { EdgeMoveLineLoadEvent, EdgeMoveLineOptions } from 'farst-three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {
@@ -91,12 +93,12 @@ const geoJson = shallowRef<FeatureCollection<Geometry>>()
 const geoJsonOutline = shallowRef<FeatureCollection<Geometry>>()
 function initGeoJson() {
   const loader = new FileLoader()
-  loader.load('/geo/sichuansheng.json', (data) => {
+  loader.load(`${baseUrl}geo/sichuansheng.json`, (data) => {
     const dataObj = JSON.parse(data as string)
     geoJson.value = dataObj
   })
 
-  loader.load('/geo/sichuan-outLine.json', (data) => {
+  loader.load(`${baseUrl}geo/sichuan-outLine.json`, (data) => {
     const dataStr = data as string
     const jsonData = JSON.parse(dataStr)
     geoJsonOutline.value = jsonData

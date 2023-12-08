@@ -19,7 +19,10 @@
             :options="phongOpts"
           >
             <FtTextureLoader
-              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :url="
+                baseUrl +
+                'textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_basecolor.jpg'
+              "
               :type="'map'"
             />
           </FtMeshPhongMaterial>
@@ -35,7 +38,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Color, DoubleSide } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -47,13 +49,14 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type {
   MeshPhongMaterialOptions,
   PerspectiveCameraOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
-
+const baseUrl = import.meta.env.VITE_BASE_URL
 const phongOpts = reactive<MeshPhongMaterialOptions>({
   side: DoubleSide,
   specular: () => new Color('#ffff00'),

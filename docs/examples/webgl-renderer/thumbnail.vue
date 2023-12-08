@@ -36,12 +36,12 @@ import {
   FtScene,
   FtThumbnail,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { Scene } from 'three'
 import type {
   OrthographicCameraLoadEvent,
   OrthographicCameraOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 
 const frustumSize = 4
 const aspect = isClient ? window.innerWidth / window.innerHeight : 1

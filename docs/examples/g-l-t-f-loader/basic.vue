@@ -52,12 +52,10 @@ import {
 } from 'farst-three'
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 const domRef = ref<HTMLDivElement>()
-const url = new URL(
-  '/models/batman_arkham_knight_batmobile/scene.gltf',
-  import.meta.url
-).href
-const url2 = new URL('/models/LittlestTokyo.glb', import.meta.url).href
-console.log(url)
+const baseUrl = import.meta.env.VITE_BASE_URL
+
+const url = `${baseUrl}models/batman_arkham_knight_batmobile/scene.gltf`
+const url2 = `${baseUrl}models/LittlestTokyo.glb`
 // const { composer } = useEffectComposer()
 
 const animationFn = () => {

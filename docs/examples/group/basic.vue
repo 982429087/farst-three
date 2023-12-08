@@ -75,7 +75,6 @@
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
 import { MathUtils } from 'three'
-import { Deferred } from '@farst-three/utils'
 import {
   FtAmbientLight,
   FtAxesHelper,
@@ -91,14 +90,15 @@ import {
   FtOrthographicCamera,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
+import { Deferred } from '@farst-three/utils'
 import type { Scene } from 'three'
 import type {
   GroupLoadEvent,
   MeshOptions,
   OrthographicCameraOptions,
   WebGLRendererLoadEvent,
-} from '@farst-three/components'
+} from 'farst-three'
 
 const def = new Deferred<GroupLoadEvent>()
 const size = 4

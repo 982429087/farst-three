@@ -20,23 +20,25 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useGui } from '@farst-three/hooks'
 import {
   FtOrbitControls,
   FtPerspectiveCamera,
   FtRotationPlane,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { RotationPlaneOptions } from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import type { RotationPlaneOptions } from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {
     set: [3, 74, 100],
   },
 })
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const planeOption = reactive<RotationPlaneOptions>({
-  texture: '/geo/rotating-point2.png',
+  texture: `${baseUrl}geo/rotating-point2.png`,
   speed: -0.001,
 })
 const { guiPromise } = useGui(domRef)

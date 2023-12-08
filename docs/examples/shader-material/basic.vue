@@ -54,7 +54,7 @@ import {
   FtShaderMaterial,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 
 import vertexShader from './basic/vertexShader.glsl?raw'
 import fragmentShader from './basic/fragmentShader.glsl?raw'
@@ -69,7 +69,7 @@ import type {
   AmbientLightOptions,
   BufferGeometryOptions,
   PointsOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 
 const positions: number[] = []
@@ -117,11 +117,12 @@ const bufferGeoOpts = reactive<BufferGeometryOptions>({
   },
   computeBoundingSphere: true,
 })
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const materialParams = reactive<ShaderMaterialParameters>({
   uniforms: {
     pointTexture: {
-      value: new TextureLoader().load('/textures/snowflake.png'),
+      value: new TextureLoader().load(`${baseUrl}textures/snowflake.png`),
     },
     size: {
       value: 20.0,

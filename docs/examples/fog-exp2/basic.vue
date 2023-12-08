@@ -86,7 +86,7 @@
           />
           <FtMeshLambertMaterial :params="{ color: 0xffffff }">
             <FtTextureLoader
-              url="\textures\matcaps\BA472D_CA6E67-256px.png"
+              :url="baseUrl + 'textures/matcaps/BA472D_CA6E67-256px.png'"
               :type="'map'"
             />
           </FtMeshLambertMaterial>
@@ -124,7 +124,7 @@
             :params="{ color: 0xffffff }"
           >
             <FtTextureLoader
-              url="\textures\matcaps\BA472D_CA6E67-256px.png"
+              :url="baseUrl + 'textures/matcaps/BA472D_CA6E67-256px.png'"
               :type="'map'"
             />
           </FtMeshLambertMaterial>
@@ -153,7 +153,10 @@
             }"
           >
             <FtTextureLoader
-              url="\textures\large_sandstone_blocks\large_sandstone_blocks_diff_2k.jpg"
+              :url="
+                baseUrl +
+                'textures/large_sandstone_blocks/large_sandstone_blocks_diff_2k.jpg'
+              "
               :type="'map'"
               :options="{
                 rotation: Math.PI / 4,
@@ -207,6 +210,8 @@ import type {
   MeshLoadEvent,
   MeshOptions,
 } from '@farst-three/components'
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const domRef = ref<HTMLDivElement>()
 const boxOpts = reactive<MeshOptions>({
   position: {

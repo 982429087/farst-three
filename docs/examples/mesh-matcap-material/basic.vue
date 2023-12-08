@@ -19,11 +19,17 @@
           <FtBoxGeometry :width="1" :height="1" :depth="1" />
           <FtMeshMatcapMaterial :options="params">
             <FtTextureLoader
-              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
+              :url="
+                baseUrl +
+                'textures/Wood_Ceiling_Coffers_003/Wood_Ceiling_Coffers_003_basecolor.jpg'
+              "
               :type="'map'"
             />
             <FtTextureLoader
-              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_normal.jpg"
+              :url="
+                baseUrl +
+                'textures/Wood_Ceiling_Coffers_003/Wood_Ceiling_Coffers_003_normal.jpg'
+              "
               :type="'matcap'"
             />
           </FtMeshMatcapMaterial>
@@ -32,15 +38,24 @@
           <FtBoxGeometry :width="1" :height="1" :depth="1" />
           <FtMeshMatcapMaterial :params="{ normalScale: new Vector2(1, 1) }">
             <FtTextureLoader
-              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
+              :url="
+                baseUrl +
+                'textures/Wood_Ceiling_Coffers_003/Wood_Ceiling_Coffers_003_basecolor.jpg'
+              "
               :type="'map'"
             />
             <FtTextureLoader
-              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_ambientOcclusion.jpg"
+              :url="
+                baseUrl +
+                'textures/Wood_Ceiling_Coffers_003/Wood_Ceiling_Coffers_003_ambientOcclusion.jpg'
+              "
               :type="'normalMap'"
             />
             <FtTextureLoader
-              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_normal.jpg"
+              :url="
+                baseUrl +
+                'textures/Wood_Ceiling_Coffers_003/Wood_Ceiling_Coffers_003_normal.jpg'
+              "
               :type="'matcap'"
             />
           </FtMeshMatcapMaterial>
@@ -63,8 +78,10 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { MeshBasicMaterialOptions } from '@farst-three/components'
+} from 'farst-three'
+import type { MeshBasicMaterialOptions } from 'farst-three'
+
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const params = ref<MeshBasicMaterialOptions>({
   // color: new Color(0x1890ff),

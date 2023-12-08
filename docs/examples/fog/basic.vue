@@ -64,7 +64,7 @@
           />
           <FtMeshLambertMaterial :params="{ color: 0xffffff }">
             <FtTextureLoader
-              url="\textures\matcaps\BA472D_CA6E67-256px.png"
+              :url="baseUrl + 'textures/matcaps/BA472D_CA6E67-256px.png'"
               :type="'map'"
             />
           </FtMeshLambertMaterial>
@@ -85,7 +85,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Color, DoubleSide, MeshLambertMaterial } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -101,7 +100,8 @@ import {
   FtTextureLoader,
   FtTorusGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type { Material, Mesh, MeshMatcapMaterial, Scene } from 'three'
 
 import type {
@@ -109,7 +109,9 @@ import type {
   FogOptions,
   MeshLoadEvent,
   MeshOptions,
-} from '@farst-three/components'
+} from 'farst-three'
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const domRef = ref<HTMLDivElement>()
 const boxOpts = reactive<MeshOptions>({
   position: {

@@ -69,12 +69,9 @@ import {
   FtSphereGeometry,
   FtTorusGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
-import { useGui } from '@farst-three/hooks'
-import type {
-  MeshBasicMaterialOptions,
-  MeshOptions,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import type { MeshBasicMaterialOptions, MeshOptions } from 'farst-three'
 
 const clock = new Clock()
 const domRef = ref<HTMLDivElement>()

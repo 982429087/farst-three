@@ -7,6 +7,7 @@ import {
   TextureLoader,
 } from 'three'
 import { merge } from 'lodash'
+import { config } from '@farst-three/constants'
 import type { MeshBasicMaterialParameters, Scene } from 'three'
 import type { GeoProjection } from 'd3-geo'
 
@@ -43,7 +44,7 @@ export function usePillar(
     zKey: 'z',
     height: 3,
     hwRatio: 6.219,
-    texture: '/geo/light-column.png',
+    texture: `${config.staticUrl}geo/light-column.png`,
     materialOptions: {},
   }
   const textureLoader = new TextureLoader()

@@ -7,6 +7,7 @@ import {
   TextureLoader,
 } from 'three'
 import { random } from '@farst-three/utils'
+import { config } from '@farst-three/constants'
 import type { MeshBasicMaterialParameters, Scene } from 'three'
 
 export type UpParticleOptions = {
@@ -31,7 +32,7 @@ export type UpParticleOptions = {
 export function useUpPatricle(scene: Scene, opts?: UpParticleOptions) {
   const particles: Mesh[] = []
   const defaultOptions: UpParticleOptions = {
-    texture: '/geo/up-particle.png',
+    texture: `${config.staticUrl}geo/up-particle.png`,
     count: 20,
     maxX: 60,
     minX: -60,

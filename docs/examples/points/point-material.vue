@@ -74,7 +74,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Color, Float32BufferAttribute, Fog, SRGBColorSpace } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtBoxGeometry,
   FtBufferGeometry,
@@ -86,7 +85,8 @@ import {
   FtScene,
   FtSphereGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type { Vector3 } from 'three'
 import type {
   AmbientLightOptions,
@@ -94,7 +94,7 @@ import type {
   BufferGeometryOptions,
   PointsMaterialOptions,
   PointsOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 
 const positions: number[] = []

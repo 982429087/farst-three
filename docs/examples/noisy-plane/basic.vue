@@ -69,7 +69,7 @@ import {
   FtPointLight,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import v from './basic/v.glsl?raw'
 import fNormal from './basic/f-normal.glsl?raw'
 import fDis from './basic/f-dis.glsl?raw'
@@ -79,7 +79,7 @@ import type {
   SceneInstance,
   WebGLRendererInstance,
   WebGLRendererLoadEvent,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { Vector3 } from 'three'
 
 const sceneInstance = ref<SceneInstance>()

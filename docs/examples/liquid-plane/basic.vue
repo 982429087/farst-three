@@ -50,12 +50,12 @@
               <FtCubeTextureLoader
                 :type="'envMap'"
                 :urls="[
-                  '/textures/fullscreen/1.left.jpg',
-                  '/textures/fullscreen/1.right.jpg',
-                  '/textures/fullscreen/1.top.jpg',
-                  '/textures/fullscreen/1.bottom.jpg',
-                  '/textures/fullscreen/1.front.jpg',
-                  '/textures/fullscreen/1.back.jpg',
+                  baseUrl + 'textures/fullscreen/1.left.jpg',
+                  baseUrl + 'textures/fullscreen/1.right.jpg',
+                  baseUrl + 'textures/fullscreen/1.top.jpg',
+                  baseUrl + 'textures/fullscreen/1.bottom.jpg',
+                  baseUrl + 'textures/fullscreen/1.front.jpg',
+                  baseUrl + 'textures/fullscreen/1.back.jpg',
                 ]"
                 :load="rgbeLoad"
               />
@@ -83,7 +83,7 @@
             >
               <FtTextureLoader
                 :type="'map'"
-                :url="'/textures/Tiles107_1K_Color.jpg'"
+                :url="baseUrl + 'textures/Tiles107_1K_Color.jpg'"
               />
             </FtMeshStandardMaterial>
           </FtMesh>
@@ -112,16 +112,18 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { FunsEvent } from '@farst-three/hooks'
+} from 'farst-three'
 import type {
   CubeTextureLoaderOnLoad,
+  FunsEvent,
   LiquidEffect,
   LiquidInstance,
   LiquidLoadEvent,
   RGBELoaderOnLoad,
   SceneOptions,
-} from '@farst-three/components'
+} from 'farst-three'
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const domRef = ref<HTMLDivElement>()
 const liquid = ref<LiquidInstance>()
 const sceneOptions = reactive<SceneOptions>({})

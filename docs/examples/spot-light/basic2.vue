@@ -78,8 +78,8 @@ import {
   FtSpotLight,
   FtUnrealBloomPass,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { InstancedMeshInstance } from '@farst-three/components'
+} from 'farst-three'
+import type { InstancedMeshInstance } from 'farst-three'
 const imeshRef = ref<InstancedMeshInstance>()
 const NUM_INSTANCES = 2000
 onMounted(async () => {

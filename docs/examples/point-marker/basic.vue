@@ -22,7 +22,6 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useGui } from '@farst-three/hooks'
 import {
   FtGridHelper,
   FtOrbitControls,
@@ -30,8 +29,9 @@ import {
   FtPointMarker,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { PointMarkerOptions } from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import type { PointMarkerOptions } from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {

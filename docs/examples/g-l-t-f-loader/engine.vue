@@ -52,8 +52,9 @@ import type { GLTFLoaderLoadEvent } from '@farst-three/components'
 import type { Mesh, MeshBasicMaterial, Scene } from 'three'
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 const domRef = ref<HTMLDivElement>()
-const url = new URL('/models/2CylinderEngine_blender.gltf', import.meta.url)
-  .href
+const baseUrl = import.meta.env.VITE_BASE_URL
+
+const url = `${baseUrl}models/2CylinderEngine_blender.gltf`
 
 const animationFn = () => {
   //

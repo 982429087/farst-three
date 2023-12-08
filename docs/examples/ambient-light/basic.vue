@@ -44,7 +44,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Color, DoubleSide } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -56,11 +55,9 @@ import {
   FtPlaneGeometry,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type {
-  DirectionalLightOptions,
-  MeshOptions,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import type { DirectionalLightOptions, MeshOptions } from 'farst-three'
 const domRef = ref<HTMLElement>()
 const boxOpts = reactive<MeshOptions>({
   position: {

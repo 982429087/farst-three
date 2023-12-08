@@ -57,13 +57,13 @@ import {
   FtPointsMaterial,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 
 import type {
   AmbientLightOptions,
   BufferGeometryOptions,
   PointsOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 
 const positions: number[] = []

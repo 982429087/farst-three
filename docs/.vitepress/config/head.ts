@@ -72,7 +72,7 @@ export const head: HeadConfig[] = [
     {},
     `if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('/sw.js')
+        .register('./sw.js')
         .then(function(registration) {
           console.log(registration);
         })

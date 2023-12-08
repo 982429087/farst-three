@@ -72,6 +72,8 @@ import type { Mesh } from 'three'
 import type { FunsEvent, HighLightOptions } from 'farst-three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {
@@ -88,7 +90,7 @@ const highLightOptions = reactive<HighLightOptions>({
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
 function initGeoJson() {
   const loader = new FileLoader()
-  loader.load('/geo/sichuansheng.json', (data) => {
+  loader.load(`${baseUrl}geo/sichuansheng.json`, (data) => {
     const dataObj = JSON.parse(data as string)
     geoJson.value = dataObj
   })

@@ -69,12 +69,9 @@ import {
   FtScene,
   FtSphereGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { Scene, Vector3 } from 'three'
-import type {
-  PerspectiveCameraOptions,
-  SceneOptions,
-} from '@farst-three/components'
+import type { PerspectiveCameraOptions, SceneOptions } from 'farst-three'
 
 const domRef = ref<HTMLDivElement>()
 const sceneOptions: SceneOptions = reactive({})

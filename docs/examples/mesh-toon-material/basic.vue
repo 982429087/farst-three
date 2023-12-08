@@ -16,19 +16,22 @@
           />
           <FtMeshToonMaterial :options="materialOpts">
             <FtTextureLoader
-              url="\textures\Glass_Vintage_001\Glass_Vintage_001_basecolor.jpg"
+              :url="
+                baseUrl +
+                'textures/Glass_Vintage_001/Glass_Vintage_001_basecolor.jpg'
+              "
               :type="'map'"
             />
             <FtTextureLoader
               v-if="whoIsShow === 'three'"
               :options="threeTonOps"
-              url="\textures\threeTone.jpg"
+              :url="baseUrl + 'textures/threeTone.jpg'"
               :type="'gradientMap'"
             />
             <FtTextureLoader
               v-if="whoIsShow === 'five'"
               :options="fiveTonOps"
-              url="\textures\fiveTone.jpg"
+              :url="baseUrl + 'textures/fiveTone.jpg'"
               :type="'gradientMap'"
             />
           </FtMeshToonMaterial>
@@ -60,15 +63,17 @@ import {
   FtSphereGeometry,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
-import { useGui } from '@farst-three/hooks'
+  useGui,
+} from 'farst-three'
 import type {
   MeshLoadEvent,
   MeshToonMaterialOptions,
   PerspectiveCameraOptions,
   SceneLoadEvent,
   TextureLoaderOptions,
-} from '@farst-three/components'
+} from 'farst-three'
+
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const domRef = ref<HTMLDivElement>()
 const caneraOps = reactive<PerspectiveCameraOptions>({

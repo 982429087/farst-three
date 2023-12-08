@@ -57,7 +57,7 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { DeepPartial, OptionFunction, Options } from '@farst-three/utils'
 import type {
   BufferGeometry,
@@ -69,7 +69,7 @@ import type {
   AmbientLightOptions,
   BufferGeometryOptions,
   PointsOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 
 const positions: number[] = []

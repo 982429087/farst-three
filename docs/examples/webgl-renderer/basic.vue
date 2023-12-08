@@ -37,11 +37,8 @@ import {
   FtOrthographicCamera,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type {
-  OrthographicCameraOptions,
-  WebGLRendererProps,
-} from '@farst-three/components'
+} from 'farst-three'
+import type { OrthographicCameraOptions, WebGLRendererProps } from 'farst-three'
 import type { CameraHelper, Scene } from 'three'
 
 const cameraHelper = shallowRef<CameraHelper>()

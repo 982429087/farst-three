@@ -63,10 +63,13 @@ import {
   FtProjection,
   FtScene,
   FtWebglRenderer,
+  useGui,
 } from 'farst-three'
-import { useGui } from '@farst-three/hooks'
-import type { GeoJsonPlaneOptions } from '@farst-three/hooks'
+import type { GeoJsonPlaneOptions } from 'farst-three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
+
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {
@@ -79,7 +82,7 @@ const planeOptions = reactive<GeoJsonPlaneOptions>({
     color: '#02518d',
   },
   sidePlaneOptions: {
-    texture: '/geo/wall.png',
+    texture: `${baseUrl}geo/wall.png`,
     textureCenter: [0, 0],
   },
   showBottomLine: true,
@@ -97,7 +100,7 @@ const planeOptions = reactive<GeoJsonPlaneOptions>({
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
 function initGeoJson() {
   const loader = new FileLoader()
-  loader.load('/geo/sichuansheng.json', (data) => {
+  loader.load(`${baseUrl}geo/sichuansheng.json`, (data) => {
     const dataObj = JSON.parse(data as string)
     geoJson.value = dataObj
   })

@@ -1,5 +1,6 @@
 import { Mesh, MeshBasicMaterial, PlaneGeometry, TextureLoader } from 'three'
 import { merge } from 'lodash'
+import { config } from '@farst-three/constants'
 import type { MeshBasicMaterialParameters, Scene } from 'three'
 
 export type RotationPlaneOptions = {
@@ -11,7 +12,7 @@ export type RotationPlaneOptions = {
 
 export function useRotationPlane(scene: Scene, ops: RotationPlaneOptions) {
   const defaultOptions = {
-    texture: '/geo/rotating-aperture.png',
+    texture: `${config.staticUrl}geo/rotating-aperture.png`,
     speed: 0.005,
     materialOptions: {},
     geometryOptions: [100, 100],

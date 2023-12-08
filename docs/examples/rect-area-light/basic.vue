@@ -28,7 +28,10 @@
           <FtPlaneGeometry :width="10" :height="10" />
           <FtMeshStandardMaterial :params="{ side: DoubleSide }">
             <FtTextureLoader
-              :url="'/textures/large_sandstone_blocks/large_sandstone_blocks_diff_2k.jpg'"
+              :url="
+                baseUrl +
+                'textures/large_sandstone_blocks/large_sandstone_blocks_diff_2k.jpg'
+              "
               :type="'map'"
             />
           </FtMeshStandardMaterial>
@@ -37,7 +40,9 @@
           <FtPlaneGeometry :width="10" :height="10" />
           <FtMeshStandardMaterial :params="{ side: DoubleSide, roughness: 0 }">
             <FtTextureLoader
-              :url="'/textures/floor_tiles_06/floor_tiles_06_diff_2k.jpg'"
+              :url="
+                baseUrl + 'textures/floor_tiles_06/floor_tiles_06_diff_2k.jpg'
+              "
               :type="'map'"
             />
           </FtMeshStandardMaterial>
@@ -70,7 +75,9 @@
           >
             <FtPlaneGeometry :width="4" :height="6" />
             <FtMeshStandardMaterial :params="{ roughness: 0 }">
-              <FtTextureLoader url="\textures\frames\A02I7634.png" />
+              <FtTextureLoader
+                :url="baseUrl + 'textures/frames/A02I7634.png'"
+              />
             </FtMeshStandardMaterial>
           </FtMesh>
         </FtGroup>
@@ -121,8 +128,10 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { AmbientLightOptions, MeshOptions } from '@farst-three/components'
+} from 'farst-three'
+import type { AmbientLightOptions, MeshOptions } from 'farst-three'
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const domRef = ref<HTMLDivElement>()
 const boxOpts = reactive<MeshOptions>({
   position: {

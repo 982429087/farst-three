@@ -69,7 +69,7 @@ import {
   FtShaderMaterial,
   FtSphereGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import vertexShader from './basic/v.glsl?raw'
 import fragmentShader from './basic/f.glsl?raw'
 import type { ShaderMaterialParameters } from 'three'
@@ -78,7 +78,7 @@ import type {
   RGBELoaderOnLoad,
   SceneOptions,
   ShaderMaterialLoadEvent,
-} from '@farst-three/components'
+} from 'farst-three'
 
 const domRef = ref<HTMLDivElement>()
 const sceneOptions = reactive<SceneOptions>({})

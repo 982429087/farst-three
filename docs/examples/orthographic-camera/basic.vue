@@ -39,7 +39,6 @@
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
 import { Color } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtBoxGeometry,
   FtCameraHelper,
@@ -50,7 +49,8 @@ import {
   FtPerspectiveCamera,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type { BoxGeometry, CameraHelper, Mesh } from 'three'
 import type {
   BoxGeometryLoadEvent,
@@ -59,7 +59,7 @@ import type {
   OrthographicCameraLoadEvent,
   PerspectiveCameraLoadEvent,
   WebGLRendererProps,
-} from '@farst-three/components'
+} from 'farst-three'
 
 const domRef = ref<HTMLDivElement>()
 const meshRef = shallowRef<Mesh>()

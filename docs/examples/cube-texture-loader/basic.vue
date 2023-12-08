@@ -54,26 +54,35 @@
             @load="lbasicMaterialLoad"
           >
             <FtTextureLoader
-              url="/textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :url="
+                baseUrl +
+                'textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_basecolor.jpg'
+              "
               :type="'map'"
             />
             <FtTextureLoader
-              url="/textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_roughness.jpg"
+              :url="
+                baseUrl +
+                'textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_roughness.jpg'
+              "
               :type="'roughnessMap'"
             />
             <FtTextureLoader
-              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_metallic.jpg"
+              :url="
+                baseUrl +
+                'textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_metallic.jpg'
+              "
               :type="'metalnessMap'"
             />
             <FtCubeTextureLoader
               :type="'envMap'"
               :urls="[
-                '/textures/fullscreen/1.left.jpg',
-                '/textures/fullscreen/1.right.jpg',
-                '/textures/fullscreen/1.top.jpg',
-                '/textures/fullscreen/1.bottom.jpg',
-                '/textures/fullscreen/1.front.jpg',
-                '/textures/fullscreen/1.back.jpg',
+                baseUrl + 'textures/fullscreen/1.left.jpg',
+                baseUrl + 'textures/fullscreen/1.right.jpg',
+                baseUrl + 'textures/fullscreen/1.top.jpg',
+                baseUrl + 'textures/fullscreen/1.bottom.jpg',
+                baseUrl + 'textures/fullscreen/1.front.jpg',
+                baseUrl + 'textures/fullscreen/1.back.jpg',
               ]"
             />
           </FtMeshStandardMaterial>
@@ -94,7 +103,6 @@
 
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtCubeTextureLoader,
@@ -107,13 +115,14 @@ import {
   FtSphereGeometry,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type { CameraHelper } from 'three'
 import type {
   MeshStandardMaterialLoadEvent,
   WebGLRendererProps,
-} from '@farst-three/components'
-
+} from 'farst-three'
+const baseUrl = import.meta.env.VITE_BASE_URL
 const cameraHelper = shallowRef<CameraHelper>()
 const size = 4
 const showControl = ref(true)

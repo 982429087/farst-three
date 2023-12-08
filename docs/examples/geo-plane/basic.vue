@@ -73,7 +73,7 @@
           <FtDiffusionWave />
           <FtRotationPlane
             :options="{
-              texture: '/geo/rotating-aperture.png',
+              texture: baseUrl + 'geo/rotating-aperture.png',
             }"
             :mesh-options="{
               scale: {
@@ -83,7 +83,7 @@
           />
           <FtRotationPlane
             :options="{
-              texture: '/geo/rotating-point2.png',
+              texture: baseUrl + 'geo/rotating-point2.png',
               speed: -0.005,
             }"
             :mesh-options="{
@@ -153,12 +153,14 @@ import type { FunsEvent, GeoJsonPlaneLoadEvent } from 'farst-three'
 import type { Mesh, Object3D } from 'three'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 
+const baseUrl = import.meta.env.VITE_BASE_URL
 const geoJson = shallowRef<FeatureCollection<Geometry>>()
 const geoJsonOutline = shallowRef<FeatureCollection<Geometry>>()
 const points = shallowRef<{ name: string; center: [number, number] }[]>([])
 function initGeoJson() {
   const loader = new FileLoader()
-  loader.load('/geo/sichuansheng.json', (data) => {
+  const url = `${baseUrl}geo/sichuansheng.json`
+  loader.load(url, (data) => {
     const dataObj = JSON.parse(data as string)
     geoJson.value = dataObj
     points.value = dataObj.features.map((item) => {
@@ -168,8 +170,9 @@ function initGeoJson() {
       }
     })
   })
+  const url2 = `${baseUrl}geo/sichuan-outLine.json`
 
-  loader.load('/geo/sichuan-outLine.json', (data) => {
+  loader.load(url2, (data) => {
     const dataStr = data as string
     const jsonData = JSON.parse(dataStr)
     geoJsonOutline.value = jsonData

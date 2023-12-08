@@ -31,7 +31,6 @@
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue'
 import { Color } from 'three'
-import { useGui, useIntersect } from '@farst-three/hooks'
 import {
   FtAxesHelper,
   FtBoxGeometry,
@@ -41,14 +40,16 @@ import {
   FtPerspectiveCamera,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+  useIntersect,
+} from 'farst-three'
 import type { BoxGeometry, Mesh, MeshBasicMaterial } from 'three'
 import type {
   BoxGeometryLoadEvent,
   MeshBasicMaterialLoadEvent,
   MeshLoadEvent,
   PerspectiveCameraLoadEvent,
-} from '@farst-three/components'
+} from 'farst-three'
 
 const meshRef = shallowRef<Mesh>()
 const geometryRef = shallowRef<BoxGeometry>()

@@ -29,7 +29,10 @@
             }"
           >
             <FtTextureLoader
-              url="\textures\Wood_Ceiling_Coffers_003\Wood_Ceiling_Coffers_003_basecolor.jpg"
+              :url="
+                baseUrl +
+                'textures/Wood_Ceiling_Coffers_003/Wood_Ceiling_Coffers_003_basecolor.jpg'
+              "
               :type="'map'"
             />
           </FtMeshLambertMaterial>
@@ -44,7 +47,7 @@
           <FtBoxGeometry :width="1" :height="1" :depth="1" />
           <FtMeshLambertMaterial v-for="(_, index) in 6" :key="index">
             <FtTextureLoader
-              :url="`/textures/fullscreen/0${index + 1}.jpg`"
+              :url="baseUrl + `textures/fullscreen/0${index + 1}.jpg`"
               :type="'map'"
             />
           </FtMeshLambertMaterial>
@@ -72,12 +75,14 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { CameraHelper } from 'three'
 import type {
   OrthographicCameraLoadEvent,
   WebGLRendererProps,
-} from '@farst-three/components'
+} from 'farst-three'
+
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const cameraHelper = shallowRef<CameraHelper>()
 const size = 4

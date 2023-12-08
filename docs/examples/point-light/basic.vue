@@ -86,7 +86,6 @@ import {
   PointsMaterial,
   SphereGeometry,
 } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -103,7 +102,8 @@ import {
   FtScene,
   FtSphereGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type { DirectionalLightShadow, Vector3 } from 'three'
 import type {
   AmbientLightOptions,
@@ -113,7 +113,7 @@ import type {
   PointLightLoadEvent,
   PointLightOptions,
   PointsOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 const boxOpts = reactive<MeshOptions>({
   position: {

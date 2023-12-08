@@ -25,7 +25,7 @@
           <FtBoxGeometry :width="1" :height="1" :depth="1" />
           <FtMeshLambertMaterial>
             <FtTextureLoader
-              url="\textures\sword.png"
+              :url="baseUrl + 'textures/sword.png'"
               :type="'map'"
               :options="{
                 minFilter: NearestFilter,
@@ -45,7 +45,7 @@
           <FtBoxGeometry :width="1" :height="1" :depth="1" />
           <FtMeshLambertMaterial>
             <FtTextureLoader
-              url="/Material_1741/height.png"
+              :url="baseUrl + 'textures/Material_1741/height.png'"
               :type="'map'"
               :options="{
                 minFilter: NearestFilter,
@@ -77,13 +77,12 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
-import { useGui } from '@farst-three/hooks'
-import type {
-  TextureLoadEvent,
-  WebGLRendererProps,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
+import type { TextureLoadEvent, WebGLRendererProps } from 'farst-three'
 import type { CameraHelper, Mesh, Texture } from 'three'
+
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const cameraHelper = shallowRef<CameraHelper>()
 const size = 4

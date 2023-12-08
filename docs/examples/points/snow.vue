@@ -30,7 +30,10 @@
               blending: AdditiveBlending,
             }"
           >
-            <FtTextureLoader :type="'map'" url="\textures\snowflake.png" />
+            <FtTextureLoader
+              :type="'map'"
+              :url="baseUrl + 'textures/snowflake.png'"
+            />
           </FtPointsMaterial>
           <FtBufferGeometry :options="bufferGeoOpts" />
         </FtPoints>
@@ -59,15 +62,16 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { DeepPartial, OptionFunction, Options } from '@farst-three/utils'
 import type { NormalBufferAttributes, Vector3 } from 'three'
 import type {
   AmbientLightOptions,
   BufferGeometryOptions,
   PointsOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const positions: number[] = []
 const colors: number[] = []

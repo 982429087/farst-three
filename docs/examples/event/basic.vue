@@ -47,7 +47,7 @@
           />
           <FtMeshLambertMaterial :params="{ color: 0xffffff }">
             <FtTextureLoader
-              url="\textures\matcaps\BA472D_CA6E67-256px.png"
+              :url="baseUrl + 'textures/matcaps/BA472D_CA6E67-256px.png'"
               :type="'map'"
             />
           </FtMeshLambertMaterial>
@@ -77,14 +77,15 @@ import {
   FtTextureLoader,
   FtTorusGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { FunsEvent } from '@farst-three/hooks'
+} from 'farst-three'
 import type {
   AmbientLightOptions,
+  FunsEvent,
   MeshLambertMaterialOptions,
   MeshOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const randomMeshOpts = reactive({
   position: {

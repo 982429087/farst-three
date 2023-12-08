@@ -56,7 +56,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Color, DoubleSide } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtBoxGeometry,
@@ -67,14 +66,17 @@ import {
   FtPerspectiveCamera,
   FtPlaneGeometry,
   FtScene,
+  FtSphereGeometry,
+  FtTorusGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type { Vector3 } from 'three'
 import type {
   DirectionalLightOptions,
   MeshBasicMaterialOptions,
   MeshOptions,
-} from '@farst-three/components'
+} from 'farst-three'
 const domRef = ref<HTMLDivElement>()
 
 const params = ref<MeshBasicMaterialOptions>({

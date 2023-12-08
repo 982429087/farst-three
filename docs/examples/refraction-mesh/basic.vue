@@ -85,7 +85,6 @@ import {
   TorusGeometry,
   WebGLCubeRenderTarget,
 } from 'three'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAmbientLight,
   FtGridHelper,
@@ -99,7 +98,7 @@ import {
   FtScene,
   FtTorusGeometry,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { Vector3 } from 'three'
 import type {
   MeshInstance,
@@ -114,7 +113,7 @@ import type {
   SceneOptions,
   TorusGeometryOptions,
   WebGLRendererLoadEvent,
-} from '@farst-three/components'
+} from 'farst-three'
 
 const standardMaterialRef = ref<MeshStandardMaterialInstance>()
 const sceneInstance = ref<SceneInstance>()

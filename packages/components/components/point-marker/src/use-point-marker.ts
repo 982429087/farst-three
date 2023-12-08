@@ -7,6 +7,7 @@ import {
   TextureLoader,
 } from 'three'
 import { merge } from 'lodash'
+import { config } from '@farst-three/constants'
 import type { GeoProjection } from 'd3-geo'
 import type { MeshBasicMaterialParameters, Scene } from 'three'
 
@@ -38,8 +39,8 @@ export function usePointMarker(
     yKey: 'y',
     zKey: 'z',
     speed: 0.007,
-    texture: '/geo/geo-label.png',
-    waveTexture: '/geo/geo-cycle-label.png',
+    texture: `${config.staticUrl}geo/geo-label.png`,
+    waveTexture: `${config.staticUrl}geo/geo-cycle-label.png`,
     materialOptions: {},
   }
   const options = merge(defaultOptions, opts)

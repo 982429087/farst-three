@@ -26,7 +26,7 @@
         <!-- 文字 -->
         <FtMesh>
           <FtTextGeometry
-            :url="'/font/helvetikerRegularTypeface.json'"
+            :url="baseUrl + 'font/helvetikerRegularTypeface.json'"
             :text="'farst-three'"
             :params="{
               size: 30,
@@ -143,6 +143,8 @@ const dummyV = new Vector3()
 const instancedMeshRef = ref<InstancedMeshInstance>()
 const rendererRef = ref<WebGLRendererInstance>()
 const lightRef = ref<PointLightInstance>()
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 let positionV3 = new Vector3(0, 0, 0)
 
 for (let i = 0; i < NUM_INSTANCES; i++) {

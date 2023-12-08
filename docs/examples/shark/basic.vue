@@ -61,12 +61,14 @@ import {
   FtPointLight,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type { GLTFLoaderLoadEvent } from '@farst-three/components'
+} from 'farst-three'
+import type { GLTFLoaderLoadEvent } from 'farst-three'
 import type { Material, Mesh, MeshBasicMaterial, Scene } from 'three'
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 const domRef = ref<HTMLDivElement>()
-const url = new URL('/models/shark_animation/scene.gltf', import.meta.url).href
+const baseUrl = import.meta.env.VITE_BASE_URL
+
+const url = `${baseUrl}models/shark_animation/scene.gltf`
 
 const gscene = shallowRef<Scene>()
 let modelLoaded = false
@@ -92,10 +94,10 @@ function glbLoad(gltf: GLTF) {
         if (pbr) {
           // 根据 KHR_materials_pbrSpecularGlossiness 扩展中的数据加载对应的纹理图片
           const map = new TextureLoader().load(
-            '/models/shark_animation/textures/material_0_diffuse.png'
+            `${baseUrl}models/shark_animation/textures/material_0_diffuse.png`
           )
           const specularGlossinessTexture = new TextureLoader().load(
-            '/models/shark_animation/textures/material_0_specularGlossiness.png'
+            `${baseUrl}models/shark_animation/textures/material_0_specularGlossiness.png`
           )
 
           map.colorSpace = SRGBColorSpace

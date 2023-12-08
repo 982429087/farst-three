@@ -5,7 +5,11 @@
       <FtWebglRenderer>
         <FtDomMarkerRenderer>
           <FtDomMarker :x="5" :options="markerOptions">
-            <img class="origin-img" src="/images/figure-1.png" alt="" />
+            <img
+              class="origin-img"
+              :src="baseUrl + 'images/figure-1.png'"
+              alt=""
+            />
             <div>
               {{ (markerOptions.position as any).x }},
               {{ (markerOptions.position as any).y }},
@@ -23,7 +27,6 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useGui } from '@farst-three/hooks'
 import {
   FtAxesHelper,
   FtDomMarker,
@@ -33,9 +36,11 @@ import {
   FtPerspectiveCamera,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+  useGui,
+} from 'farst-three'
 import type { Vector3 } from 'three'
-import type { CSS2DObjectOptions } from '@farst-three/components'
+import type { CSS2DObjectOptions } from 'farst-three'
+const baseUrl = import.meta.env.VITE_BASE_URL
 const domRef = ref<HTMLDivElement>()
 const cameraOptions = reactive({
   position: {

@@ -53,8 +53,8 @@ import {
   FtPointLight,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
-import { useGui } from '@farst-three/hooks'
+  useGui,
+} from 'farst-three'
 import type {
   CameraHelperLoadEvent,
   MeshLoadEvent,
@@ -62,7 +62,7 @@ import type {
   PerspectiveCameraLoadEvent,
   PointLightLoadEvent,
   WebGLRendererProps,
-} from '@farst-three/components'
+} from 'farst-three'
 import type { CameraHelper } from 'three'
 
 const cameraHelper = shallowRef<CameraHelper>()

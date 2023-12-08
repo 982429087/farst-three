@@ -22,6 +22,7 @@ import { Line2 } from 'three/examples/jsm/lines/Line2'
 import { flatten } from '@turf/turf'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 // import { fragment, vertex } from './shader'
+import { config } from '@farst-three/constants'
 import type { FeatureCollection, Geometry, Position } from '@turf/turf'
 import type { LineMaterialParameters } from 'three/examples/jsm/lines/LineMaterial'
 import type { GeoProjection } from 'd3-geo'
@@ -66,13 +67,13 @@ export class GeoJsonPlane implements FtObject {
   private defaultOptions = {
     depth: 3,
     sidePlaneOptions: {
-      texture: '/geo/gradation.png',
+      texture: `${config.staticUrl}geo/gradation.png`,
       textureCenter: [0.5, 0.5],
       textureRotation: Math.PI,
     },
     topPlaneOptions: {
       color: '#02518d',
-      texture: '/geo/geo-plane-texture.png',
+      texture: `${config.staticUrl}geo/geo-plane-texture.png`,
       textureRepeat: new Vector2(0.07, 0.07),
     },
     showBottomLine: true,

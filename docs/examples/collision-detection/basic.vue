@@ -34,7 +34,10 @@
           <FtBoxGeometry :width="4" :height="4" :depth="4" />
           <FtMeshLambertMaterial>
             <FtTextureLoader
-              url="\textures\Warning_Sign_HighVoltage_001\Warning_Sign_HighVoltage_001_basecolor.jpg"
+              :url="
+                baseUrl +
+                'textures/Warning_Sign_HighVoltage_001/Warning_Sign_HighVoltage_001_basecolor.jpg'
+              "
             />
           </FtMeshLambertMaterial>
         </FtMesh>
@@ -76,11 +79,8 @@ import {
   FtScene,
   FtTextureLoader,
   FtWebglRenderer,
-} from '@farst-three/components'
-import type {
-  DragControlsLoadEvent,
-  DragControlsOptions,
-} from '@farst-three/components'
+} from 'farst-three'
+import type { DragControlsLoadEvent, DragControlsOptions } from 'farst-three'
 
 const domRef = ref<HTMLDivElement>()
 let box: Mesh | null
@@ -149,6 +149,7 @@ function dragControlsLoad(e: DragControlsLoadEvent) {
     orbitControls.enabled = true
   })
 }
+const baseUrl = import.meta.env.VITE_BASE_URL
 </script>
 
 <style lang="scss" scoped>

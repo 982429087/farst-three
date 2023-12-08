@@ -45,12 +45,12 @@ import {
   FtPerspectiveCamera,
   FtScene,
   FtWebglRenderer,
-} from '@farst-three/components'
+} from 'farst-three'
 import type {
   BufferGeometryLoadEvent,
   BufferGeometryOptions,
   SceneLoadEvent,
-} from '@farst-three/components'
+} from 'farst-three'
 
 const animationFn = () => {
   //
