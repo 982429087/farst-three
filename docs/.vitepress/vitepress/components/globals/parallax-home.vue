@@ -1,400 +1,233 @@
-<script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
-import { useEventListener, useParallax, useThrottleFn } from '@vueuse/core'
-import { useLang } from '../../composables/lang'
-import homeLocale from '../../../i18n/pages/home.json'
-import HomeSponsors from '../home/home-sponsors.vue'
-import HomeCards from '../home/home-cards.vue'
-import HomeFooter from './vp-footer.vue'
-import type { CSSProperties } from 'vue'
-const target = ref<HTMLElement | null>(null)
-const parallax = reactive(useParallax(target))
-const jumbotronRedOffset = ref(0)
-const jumbotronRef = ref<HTMLElement | null>(null)
-const lang = useLang()
-const homeLang = computed(() => homeLocale[lang.value])
-
-function jumpTo(path: string) {
-  // vitepress has not router
-  location.href = `/${lang.value}/${path}`
-}
-
-const containerStyle: CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  transition: '.3s ease-out all',
-
-  position: 'relative',
-
-  perspective: '300px',
-}
-
-const cardStyle = computed(() => ({
-  height: '30rem',
-  width: '100%',
-  transition: '.3s ease-out all',
-  transform: `rotateX(${parallax.roll}deg) rotateY(${parallax.tilt}deg)`,
-}))
-
-const layerBase: CSSProperties = {
-  position: 'absolute',
-  width: '100%',
-  height: '100%',
-  transition: '.3s ease-out all',
-}
-
-const screenLayer = computed(() => ({
-  ...layerBase,
-  width: '80%',
-  height: '80%',
-  transform: `translateX(${parallax.tilt * 10 + 80}px) translateY(${
-    parallax.roll * 10 + 50
-  }px)`,
-}))
-
-const peopleLayer = computed(() => ({
-  ...layerBase,
-  width: '30%',
-  height: '30%',
-  right: 0,
-  bottom: 0,
-  transform: `translateX(${parallax.tilt * 25 + 25}px) translateY(${
-    parallax.roll * 25
-  }px) scale(1)`,
-}))
-
-// center layer
-const leftLayer = computed(() => ({
-  ...layerBase,
-  width: '20%',
-  height: '20%',
-  transform: `translateX(${parallax.tilt * 12 + 205}px) translateY(${
-    parallax.roll * 12 + 210
-  }px)`,
-}))
-
-const leftBottomLayer = computed(() => ({
-  ...layerBase,
-  width: '30%',
-  height: '30%',
-  left: 0,
-  bottom: 0,
-  transform: `translateX(${parallax.tilt * 30 - 10}px) translateY(${
-    parallax.roll * 30
-  }px)`,
-}))
-
-const rightLayer = computed(() => ({
-  ...layerBase,
-  width: '33%',
-  height: '33%',
-  top: 0,
-  right: 0,
-  transform: `translateX(${parallax.tilt * 25 + 5}px) translateY(${
-    parallax.roll * 25
-  }px)`,
-}))
-
-const handleScroll = useThrottleFn(() => {
-  const ele = jumbotronRef.value
-  if (ele) {
-    const rect = ele.getBoundingClientRect()
-    const eleHeight = ele.clientHeight
-    let calHeight = (180 - rect.top) * 2
-    if (calHeight < 0) calHeight = 0
-    if (calHeight > eleHeight) calHeight = eleHeight
-    jumbotronRedOffset.value = calHeight
-  }
-}, 10)
-
-useEventListener(window, 'scroll', handleScroll)
-</script>
-
 <template>
-  <div ref="target" class="home-page">
-    <div class="banner" text="center">
-      <div class="banner-desc" m="t-4">
-        <h1>{{ homeLang['title'] }}</h1>
-        <p m="t-2">{{ homeLang['title_sub'] }}</p>
-      </div>
-    </div>
-    <div ref="jumbotronRef" class="jumbotron">
-      <div class="parallax-container" :style="containerStyle">
-        <div :style="cardStyle">
-          <screen-svg :style="screenLayer" alt="banner" />
-          <people-svg
-            :style="peopleLayer"
-            alt="banner"
-            class="cursor-pointer"
-            @click="jumpTo('guide/quickstart.html')"
+  <div ref="domRef" class="farst-three">
+    <FtScene
+      :options="{
+        background: 0xffffff,
+      }"
+      @mouse-move-position="sceneHover"
+    >
+      <!-- 相机 -->
+      <FtPerspectiveCamera
+        :fov="75"
+        :near="0.01"
+        :far="10000"
+        :options="{
+          position: {
+            z: 200,
+          },
+        }"
+      />
+      <!-- 渲染器 -->
+      <FtWebglRenderer
+        ref="rendererRef"
+        :params="{ antialias: true, alpha: true }"
+        :animation-fn="animationFn"
+        :options="{
+          shadowMap: {
+            enabled: true,
+          },
+        }"
+      >
+        <!-- 文字 -->
+        <FtMesh>
+          <FtTextGeometry
+            :url="baseUrl + 'font/helvetikerRegularTypeface.json'"
+            :text="'Farst Three'"
+            :params="{
+              size: 70,
+              height: 10,
+            }"
+            :center="true"
           />
-          <left-layer-svg :style="leftLayer" alt="banner" />
-          <left-bottom-layer-svg :style="leftBottomLayer" alt="banner" />
-          <right-layer-svg :style="rightLayer" alt="banner" />
-        </div>
-      </div>
-    </div>
-    <img
-      src="/images/theme-index-blue.png"
-      alt="banner"
-      class="mobile-banner"
-    />
-    <HomeSponsors />
-    <HomeCards />
+          <FtMeshPhongMaterial
+            :options="{
+              color: () => new Color(0x75b9ff),
+            }"
+          />
+        </FtMesh>
+        <!-- 跟随小光图标 -->
+        <FtInstancedMesh
+          ref="instancedMeshRef"
+          :count="NUM_INSTANCES"
+          :options="{
+            name: 'instancedMesh',
+          }"
+        >
+          <FtBoxGeometry :width="2" :height="2" :depth="10" />
+          <FtMeshStandardMaterial
+            :params="{
+              color: 0xffffff,
+            }"
+            :options="{
+              transparent: true,
+              opacity: 0.9,
+              metalness: 0.8,
+              roughness: 0.5,
+            }"
+          />
+        </FtInstancedMesh>
+        <!-- 灯光 -->
+        <FtPointLight
+          :decay="0"
+          :intensity="10"
+          :distance="150"
+          :color="0xff6000"
+        />
+        <FtPointLight
+          :color="0xff6000"
+          :decay="0"
+          :intensity="10"
+          :distance="100"
+          :options="{ position: { x: 30 } }"
+        />
+        <FtPointLight
+          :color="0x0000ff"
+          :decay="0"
+          :intensity="10"
+          :distance="100"
+          :options="{ position: { x: -30 } }"
+        />
+        <FtPointLight
+          ref="lightRef"
+          :color="0x0060ff"
+          :decay="0"
+          :intensity="10"
+          :distance="100"
+        />
+        <FtAmbientLight :color="0x808080" />
+        <FtOrbitControls />
+
+        <FtEffectComposer>
+          <FtRenderPass />
+
+          <FtUnrealBloomPass :strength="1" />
+          <!-- <FtHalftonePass
+            :params="{
+              radius: 1,
+              scatter: 0,
+            }"
+          /> -->
+          <FtOutputPass />
+        </FtEffectComposer>
+      </FtWebglRenderer>
+    </FtScene>
   </div>
-  <HomeFooter :is-home="true" />
 </template>
 
-<style lang="scss">
-@use '../../styles/mixins' as *;
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { Color, MathUtils, Object3D, Vector3 } from 'three'
+import {
+  FtAmbientLight,
+  FtBoxGeometry,
+  FtEffectComposer,
+  FtHalftonePass,
+  FtInstancedMesh,
+  FtMesh,
+  FtMeshPhongMaterial,
+  FtMeshStandardMaterial,
+  FtOrbitControls,
+  FtOutputPass,
+  FtPerspectiveCamera,
+  FtPointLight,
+  FtRenderPass,
+  FtScene,
+  FtTextGeometry,
+  FtUnrealBloomPass,
+  FtWebglRenderer,
+} from 'farst-three'
+import type {
+  FunsEvent,
+  InstancedMeshInstance,
+  PointLightInstance,
+  WebGLRendererInstance,
+} from 'farst-three'
+const { randFloat: rnd, randFloatSpread: rndFS } = MathUtils
+const domRef = ref<HTMLDivElement>()
+const NUM_INSTANCES = 2000
+const instances: any[] = []
+const target = new Vector3()
+const dummyO = new Object3D()
+const dummyV = new Vector3()
+const instancedMeshRef = ref<InstancedMeshInstance>()
+const rendererRef = ref<WebGLRendererInstance>()
+const lightRef = ref<PointLightInstance>()
+const baseUrl = import.meta.env.VITE_BASE_URL
 
-.home-page {
-  .mobile-banner {
-    display: none;
+let positionV3 = new Vector3(0, 0, 0)
+
+for (let i = 0; i < NUM_INSTANCES; i++) {
+  instances.push({
+    position: new Vector3(rndFS(200), rndFS(200), rndFS(200)),
+    scale: rnd(0.2, 1),
+    scaleZ: rnd(0.1, 1),
+    velocity: new Vector3(rndFS(2), rndFS(2), rndFS(2)),
+    attraction: 0.03 + rnd(-0.01, 0.01),
+    vlimit: 1.2 + rnd(-0.1, 0.1),
+  })
+}
+
+function init() {
+  const imesh = instancedMeshRef.value?.mesh
+  const renderer = rendererRef.value?.renderer
+  if (!imesh || !renderer) return
+  // init instanced mesh matrix
+  for (let i = 0; i < NUM_INSTANCES; i++) {
+    const { position, scale, scaleZ } = instances[i]
+    dummyO.position.copy(position)
+    dummyO.scale.set(scale, scale, scaleZ)
+    dummyO.updateMatrix()
+    imesh.setMatrixAt(i, dummyO.matrix)
   }
+  imesh.instanceMatrix.needsUpdate = true
+}
 
-  .banner-dot h1 span {
-    position: relative;
-    &::after {
-      content: '';
-      position: absolute;
-      right: -12px;
-      bottom: 8px;
-      background: var(--el-color-primary);
-      height: 8px;
-      width: 8px;
-      border-radius: 100%;
-    }
+function animate() {
+  const imesh = instancedMeshRef.value?.mesh
+  const renderer = rendererRef.value?.renderer
+  if (!imesh || !renderer) return
+
+  target.copy(positionV3)
+  lightRef.value?.light.position.copy(target)
+
+  for (let i = 0; i < NUM_INSTANCES; i++) {
+    const { position, scale, scaleZ, velocity, attraction, vlimit } =
+      instances[i]
+
+    dummyV.copy(target).sub(position).normalize().multiplyScalar(attraction)
+    velocity.add(dummyV).clampScalar(-vlimit, vlimit)
+    position.add(velocity)
+
+    dummyO.position.copy(position)
+    dummyO.scale.set(scale, scale, scaleZ)
+    dummyO.lookAt(dummyV.copy(position).add(velocity))
+    dummyO.updateMatrix()
+    imesh.setMatrixAt(i, dummyO.matrix)
   }
-  .banner-desc {
-    h1 {
-      font-size: 34px;
-      margin: 0;
-      line-height: 48px;
-      color: var(--text-color);
-    }
+  imesh.instanceMatrix.needsUpdate = true
+}
 
-    p {
-      font-size: 18px;
-      color: var(--text-color-light);
-    }
+const animationFn = () => {
+  if (lightRef.value?.light) {
+    animate()
   }
+}
 
-  .count-down {
-    .cd-main {
-      background: #f1f6fe;
-      border-radius: 10px;
-      width: 50%;
-      margin: 60px auto 120px;
-      padding: 30px 0;
-      font-size: 24px;
-      color: #666;
-      text-align: center;
-      font-weight: 600;
-    }
-    .cd-date {
-      font-size: 28px;
-    }
-    .cd-time {
-      display: flex;
-      justify-content: space-between;
-      width: 80%;
-      margin: 10px auto 0;
-    }
-    .cd-num {
-      color: var(--el-color-primary);
-      font-size: 78px;
-      font-weight: bold;
-    }
-    .cd-num span {
-      width: 50%;
-      display: inline-block;
-    }
-    .cd-str {
-      font-size: 22px;
-      margin-top: -5px;
-    }
+onMounted(() => {
+  init()
+})
+
+function sceneHover(e: FunsEvent) {
+  if (e.position) {
+    positionV3 = e.position
   }
+}
+</script>
 
-  .jumbotron {
-    width: 800px;
-    margin: 20px auto;
-    position: relative;
-
-    img {
-      width: 100%;
-    }
-
-    .parallax-container {
-      width: 800px;
-    }
-  }
-
-  @media screen and (max-width: 959px) {
-    .jumbotron {
-      display: none !important;
-    }
-
-    .mobile-banner {
-      display: inline-block;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .jumbotron {
-      width: 50%;
-      display: flex;
-      margin: auto;
-      justify-content: center;
-      align-items: center;
-
-      .parallax-container {
-        width: 100%;
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    .banner-desc {
-      padding-top: 0px;
-    }
-    .cards {
-      li {
-        width: 80%;
-        margin: 0 auto 20px;
-        float: none;
-      }
-      .card {
-        height: auto;
-        padding-bottom: 54px;
-      }
-    }
-    .banner-stars {
-      display: none;
-    }
-    .banner-desc {
-      h1 {
-        font-size: 22px;
-      }
-      #line2 {
-        display: none;
-      }
-      h2 {
-        font-size: 32px;
-      }
-      p {
-        width: auto;
-      }
-    }
-    .banner-dot h1 span {
-      &::after {
-        right: -8px;
-        bottom: 2px;
-        height: 6px;
-        width: 6px;
-      }
-    }
-    .count-down {
-      .cd-main {
-        width: 90%;
-        margin: 40px auto 40px;
-        padding: 20px 0;
-      }
-      .cd-date {
-        font-size: 22px;
-      }
-      .cd-num {
-        font-size: 38px;
-      }
-      .cd-str {
-        font-size: 12px;
-        margin-top: 0px;
-      }
-    }
-    .sponsors-list {
-      display: flex;
-      flex-direction: column;
-      align-content: center;
-      .sponsor {
-        justify-content: left;
-      }
-    }
-  }
-  .theme-intro-b {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 200;
-    .intro-banner {
-      position: absolute;
-    }
-    img {
-      width: 300px;
-    }
-    .title {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      color: #fff;
-      text-align: center;
-      font-weight: bold;
-      font-size: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      p {
-        padding: 0;
-        margin: 10px 0;
-      }
-    }
-  }
-  .theme-intro-a {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 200;
-    .mask {
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: #000;
-      opacity: 0.5;
-    }
-    .intro-banner {
-      top: 50%;
-      left: 50%;
-      position: fixed;
-      transform: translate(-50%, -50%);
-      box-sizing: border-box;
-      text-align: center;
-      z-index: 100;
-      img {
-        width: 100%;
-      }
-      .intro-text {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        p {
-          padding: 0;
-          margin: 0;
-          font-size: 48px;
-          font-weight: bold;
-          color: #fff;
-        }
-      }
-    }
-  }
+<style lang="scss" scoped>
+.farst-three {
+  height: calc(100vh - 55px - 55px - 90px - 70px);
+  width: 100%;
+  position: relative;
 }
 </style>

@@ -38,6 +38,7 @@ declare module '@vue/runtime-core' {
     MainColor: typeof import('./.vitepress/vitepress/components/globals/main-color.vue')['default']
     NeutralColor: typeof import('./.vitepress/vitepress/components/globals/neutral-color.vue')['default']
     ParallaxHome: typeof import('./.vitepress/vitepress/components/globals/parallax-home.vue')['default']
+    'ParallaxHome copy': typeof import('./.vitepress/vitepress/components/globals/parallax-home copy.vue')['default']
     PeopleSvg: typeof import('./.vitepress/vitepress/components/home/svg/people-svg.vue')['default']
     Playground: typeof import('./.vitepress/vitepress/components/icons/playground.vue')['default']
     Resource: typeof import('./.vitepress/vitepress/components/globals/resource.vue')['default']

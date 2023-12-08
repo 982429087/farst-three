@@ -4,7 +4,7 @@
   </div>
   <el-divider style="margin-bottom: 0" />
   <div class="text-center py-6 text-xs">
-    <!-- <p class="mb-1">
+    <p class="mb-1">
       Released under the
       <a
         href="https://opensource.org/licenses/MIT"
@@ -16,11 +16,11 @@
     <p class="mt-1">
       Made with ❤️ by
       <a
-        href="https://github.com/farst-three"
+        href="https://github.com/982429087/farst-three"
         target="_blank"
         rel="noopener noreferer"
         >Farst Three</a
       >
-    </p> -->
+    </p>
   </div>
 </template>
