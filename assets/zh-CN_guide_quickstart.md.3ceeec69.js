@@ -1,0 +1,56 @@
+import{r as p,o,c as e,j as s,p as n,a as c,w as l,b as a}from"./app.4075c66b.js";const i=a(`<h1 id="\u5FEB\u901F\u5F00\u59CB" tabindex="-1">\u5FEB\u901F\u5F00\u59CB <a class="header-anchor vp-link" href="#\u5FEB\u901F\u5F00\u59CB" aria-hidden="true">#</a></h1><p>\u672C\u8282\u5C06\u4ECB\u7ECD\u5982\u4F55\u5728\u9879\u76EE\u4E2D\u4F7F\u7528 Farst Three</p><h2 id="\u4F7F\u7528" tabindex="-1">\u4F7F\u7528 <a class="header-anchor vp-link" href="#\u4F7F\u7528" aria-hidden="true">#</a></h2><h3 id="\u5168\u5C40\u6CE8\u518C" tabindex="-1">\u5168\u5C40\u6CE8\u518C <a class="header-anchor vp-link" href="#\u5168\u5C40\u6CE8\u518C" aria-hidden="true">#</a></h3><p>\u5982\u679C\u4F60\u5BF9\u6253\u5305\u540E\u7684\u6587\u4EF6\u5927\u5C0F\u4E0D\u662F\u5F88\u5728\u4E4E\uFF0C\u90A3\u4E48\u4F7F\u7528\u5B8C\u6574\u5BFC\u5165\u4F1A\u66F4\u65B9\u4FBF\u3002</p><div class="language-typescript"><pre><code><span class="token comment">// main.ts</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createApp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&#39;vue&#39;</span>
+<span class="token keyword">import</span> FarstThree <span class="token keyword">from</span> <span class="token string">&#39;FarstThree&#39;</span>
+<span class="token keyword">import</span> <span class="token string">&#39;farst-three/dist/index.css&#39;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">&#39;./App.vue&#39;</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">createApp</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>FarstThree<span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">mount</span><span class="token punctuation">(</span><span class="token string">&#39;#app&#39;</span><span class="token punctuation">)</span>
+</code></pre></div><h4 id="volar-\u652F\u6301" tabindex="-1">Volar \u652F\u6301 <a class="header-anchor vp-link" href="#volar-\u652F\u6301" aria-hidden="true">#</a></h4><p>\u5982\u679C\u60A8\u4F7F\u7528 Volar\uFF0C\u8BF7\u5728 tsconfig.json \u4E2D\u901A\u8FC7 compilerOptions.type \u6307\u5B9A\u5168\u5C40\u7EC4\u4EF6\u7C7B\u578B\u3002</p><div class="language-json"><pre><code><span class="token comment">// tsconfig.json</span>
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    <span class="token property">&quot;types&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;farst-three/global&quot;</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="\u6309\u9700\u5BFC\u5165" tabindex="-1">\u6309\u9700\u5BFC\u5165 <a class="header-anchor vp-link" href="#\u6309\u9700\u5BFC\u5165" aria-hidden="true">#</a></h3><p>\u60A8\u9700\u8981\u4F7F\u7528\u989D\u5916\u7684\u63D2\u4EF6\u6765\u5BFC\u5165\u8981\u4F7F\u7528\u7684\u7EC4\u4EF6\u3002</p>`,11),u={id:"\u81EA\u52A8\u5BFC\u5165-recommend",tabindex:"-1"},r=s("a",{class:"header-anchor vp-link",href:"#\u81EA\u52A8\u5BFC\u5165-recommend","aria-hidden":"true"},"#",-1),k=a(`<p>\u9996\u5148\u4F60\u9700\u8981\u5B89\u88C5unplugin-vue-components \u548C unplugin-auto-import\u8FD9\u4E24\u6B3E\u63D2\u4EF6</p><div class="language-shell"><pre><code><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-D</span> unplugin-vue-components unplugin-auto-import
+</code></pre></div><h5 id="vite" tabindex="-1">Vite <a class="header-anchor vp-link" href="#vite" aria-hidden="true">#</a></h5><p>\u7136\u540E\u628A\u4E0B\u5217\u4EE3\u7801\u63D2\u5165\u5230\u4F60\u7684 Vite \u7684\u914D\u7F6E\u6587\u4EF6\u4E2D</p><div class="language-ts"><pre><code><span class="token comment">// vite.config.ts</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> defineConfig <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&#39;vite&#39;</span>
+<span class="token keyword">import</span> AutoImport <span class="token keyword">from</span> <span class="token string">&#39;unplugin-auto-import/vite&#39;</span>
+<span class="token keyword">import</span> Components <span class="token keyword">from</span> <span class="token string">&#39;unplugin-vue-components/vite&#39;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ElementPlusResolver <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&#39;unplugin-vue-components/resolvers&#39;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// ...</span>
+    <span class="token function">AutoImport</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      resolvers<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">Components</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        include<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">\`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">\${</span>__dirname<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/**</span><span class="token template-punctuation string">\`</span></span><span class="token punctuation">,</span>
+        resolvers<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token function">ElementPlusResolver</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            importStyle<span class="token operator">:</span> <span class="token string">&#39;sass&#39;</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            type<span class="token operator">:</span> <span class="token string">&#39;component&#39;</span><span class="token punctuation">,</span>
+            <span class="token function-variable function">resolve</span><span class="token operator">:</span> <span class="token punctuation">(</span>componentName<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+              <span class="token keyword">if</span> <span class="token punctuation">(</span>componentName<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">&#39;Ft&#39;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token punctuation">{</span>
+                  name<span class="token operator">:</span> componentName<span class="token punctuation">,</span>
+                  from<span class="token operator">:</span> <span class="token string">&#39;farst-three&#39;</span><span class="token punctuation">,</span>
+                  sideEffects<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&#39;FtScene&#39;</span><span class="token punctuation">]</span>
+                  <span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>componentName<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token template-string"><span class="token template-punctuation string">\`</span><span class="token string">@farst-three/components/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">\${</span><span class="token function">kebabCase</span><span class="token punctuation">(</span>componentName<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/style/index.ts</span><span class="token template-punctuation string">\`</span></span> <span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        dts<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>`,5),_='{"title":"Quick Start","description":"","frontmatter":{"title":"Quick Start","lang":"zh-CN"},"headers":[{"level":2,"title":"\u4F7F\u7528","slug":"\u4F7F\u7528"},{"level":3,"title":"\u5168\u5C40\u6CE8\u518C","slug":"\u5168\u5C40\u6CE8\u518C"},{"level":3,"title":"\u6309\u9700\u5BFC\u5165","slug":"\u6309\u9700\u5BFC\u5165"}],"relativePath":"zh-CN/guide/quickstart.md","lastUpdated":1702000126000}',d={},v=Object.assign(d,{__name:"quickstart",setup(m){return(h,g)=>{const t=p("el-tag");return o(),e("div",null,[i,s("h4",u,[n("\u81EA\u52A8\u5BFC\u5165 "),c(t,{type:"primary",style:{"vertical-align":"middle"},effect:"dark",size:"small"},{default:l(()=>[n("Recommend")]),_:1}),n(),r]),k])}}});export{_ as __pageData,v as default};
