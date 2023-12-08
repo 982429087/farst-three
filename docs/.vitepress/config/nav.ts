@@ -12,7 +12,7 @@ function getNav() {
         activeMatch?: string
       }[] = Object.values(locales).map((item) => ({
         ...item,
-        link: `${ensureLang(lang)}${item.link}`,
+        link: `/farst-three${ensureLang(lang)}${item.link}`,
       }))
 
       return [lang, item]

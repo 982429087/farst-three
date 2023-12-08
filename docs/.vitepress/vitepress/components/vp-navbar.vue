@@ -19,13 +19,15 @@ const { theme, page } = useData()
 
 const currentLink = computed(() => {
   if (!inBrowser) {
-    return `/${page.value?.frontmatter?.lang || ''}/`
+    return `/farst-three/${page.value?.frontmatter?.lang || ''}/`
   }
   const existLangIndex = theme.value.langs.findIndex((lang) =>
-    window?.location?.pathname.startsWith(`/${lang}`)
+    window?.location?.pathname.startsWith(`/farst-three/${lang}`)
   )
 
-  return existLangIndex === -1 ? '/' : `/${theme.value.langs[existLangIndex]}/`
+  return existLangIndex === -1
+    ? '/farst-three/'
+    : `/farst-three/${theme.value.langs[existLangIndex]}/`
 })
 </script>
 

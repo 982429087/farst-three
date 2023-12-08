@@ -1,6 +1,5 @@
 import {
   endingSlashRE,
-  isActive,
   isExternal,
   normalize,
 } from 'vitepress/dist/client/theme-default/utils'
@@ -13,8 +12,6 @@ export {
   isArray,
   isNullish,
   isExternal,
-  isActive,
-  normalize,
   joinUrl,
   ensureEndingSlash,
   ensureStartingSlash,
@@ -82,4 +79,13 @@ export function createCrowdinUrl(targetLang: string) {
     translateLang = targetLang.split('-').shift()!.toLocaleLowerCase()
   }
   return `https://crowdin.com/translate/farst-three/all/en-${translateLang}`
+}
+
+export function isActive(route, path) {
+  if (path === undefined) {
+    return false
+  }
+  const routePath = normalize(`${route.path}`)
+  const pagePath = normalize(path)
+  return routePath === pagePath
 }
