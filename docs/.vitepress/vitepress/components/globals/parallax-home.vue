@@ -1,11 +1,6 @@
 <template>
   <div ref="domRef" class="farst-three">
-    <FtScene
-      :options="{
-        background: 0xffffff,
-      }"
-      @mouse-move-position="sceneHover"
-    >
+    <FtScene @mouse-move-position="sceneHover">
       <!-- 相机 -->
       <FtPerspectiveCamera
         :fov="75"
@@ -35,13 +30,13 @@
             :text="'Farst Three'"
             :params="{
               size: 70,
-              height: 10,
+              height: 20,
             }"
             :center="true"
           />
           <FtMeshPhongMaterial
             :options="{
-              color: () => new Color(0x75b9ff),
+              color: () => new Color(0x00f0f0),
             }"
           />
         </FtMesh>
@@ -56,11 +51,11 @@
           <FtBoxGeometry :width="2" :height="2" :depth="10" />
           <FtMeshStandardMaterial
             :params="{
-              color: 0xffffff,
+              color: 0xcc00ff,
             }"
             :options="{
               transparent: true,
-              opacity: 0.9,
+              opacity: 1,
               metalness: 0.8,
               roughness: 0.5,
             }"
@@ -71,42 +66,43 @@
           :decay="0"
           :intensity="10"
           :distance="150"
-          :color="0xff6000"
+          :color="0xff6600"
         />
         <FtPointLight
-          :color="0xff6000"
+          :color="0xff6600"
           :decay="0"
           :intensity="10"
           :distance="100"
-          :options="{ position: { x: 30 } }"
+          :options="{ position: { x: 300 } }"
         />
         <FtPointLight
-          :color="0x0000ff"
-          :decay="0"
-          :intensity="10"
-          :distance="100"
-          :options="{ position: { x: -30 } }"
-        />
-        <FtPointLight
-          ref="lightRef"
           :color="0x0060ff"
           :decay="0"
           :intensity="10"
           :distance="100"
+          :options="{ position: { x: -300 } }"
         />
-        <FtAmbientLight :color="0x808080" />
+        <FtPointLight
+          ref="lightRef"
+          :color="0xccff00"
+          :decay="0"
+          :intensity="10"
+          :distance="100"
+        />
+        <FtAmbientLight :color="0xffffcc" />
         <FtOrbitControls />
-
         <FtEffectComposer>
           <FtRenderPass />
 
-          <FtUnrealBloomPass :strength="1" />
+          <FtUnrealBloomPass :strength="0.7" />
           <!-- <FtHalftonePass
             :params="{
               radius: 1,
               scatter: 0,
             }"
           /> -->
+          <FtTransparentPass />
+
           <FtOutputPass />
         </FtEffectComposer>
       </FtWebglRenderer>
@@ -119,6 +115,7 @@ import { onMounted, ref } from 'vue'
 import { Color, MathUtils, Object3D, Vector3 } from 'three'
 import {
   FtAmbientLight,
+  FtAxesHelper,
   FtBoxGeometry,
   FtEffectComposer,
   FtHalftonePass,
@@ -133,6 +130,7 @@ import {
   FtRenderPass,
   FtScene,
   FtTextGeometry,
+  FtTransparentPass,
   FtUnrealBloomPass,
   FtWebglRenderer,
 } from 'farst-three'

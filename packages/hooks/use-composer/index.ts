@@ -17,7 +17,6 @@ export function useComposer(
   const renderer = useRenderer()
   const composer = useEffectComposer()
   const pass = fn(scene, camera, renderer)
-
   composer.addPass(pass)
   emit('load', { scene, pass })
   onBeforeUnmount(() => {
