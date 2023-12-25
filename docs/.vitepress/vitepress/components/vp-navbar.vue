@@ -4,7 +4,7 @@ import { inBrowser, useData } from 'vitepress'
 
 // import VPNavbarSearch from './navbar/vp-search.vue'
 import VPNavbarMenu from './navbar/vp-menu.vue'
-// import VPNavbarThemeToggler from './navbar/vp-theme-toggler.vue'
+import VPNavbarThemeToggler from './navbar/vp-theme-toggler.vue'
 // import VPNavbarTranslation from './navbar/vp-translation.vue'
 import VPNavbarSocialLinks from './navbar/vp-social-links.vue'
 import VPNavbarHamburger from './navbar/vp-hamburger.vue'
@@ -47,7 +47,7 @@ const currentLink = computed(() => {
       <div class="content">
         <!-- <VPNavbarSearch class="search" :options="theme.agolia" multilang /> -->
         <VPNavbarMenu class="menu" />
-        <!-- <VPNavbarThemeToggler class="theme-toggler" /> -->
+        <VPNavbarThemeToggler class="theme-toggler" />
         <!-- <VPNavbarTranslation class="translation" /> -->
         <VPNavbarSocialLinks class="social-links" />
         <VPNavbarHamburger
