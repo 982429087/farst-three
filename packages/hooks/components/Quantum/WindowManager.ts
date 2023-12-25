@@ -29,7 +29,7 @@ export class WindowManager {
     return null
   }
 
-  setItem(id: number, value: WinInfo[]) {
+  setItem(id: string, value: WinInfo[]) {
     this.wins = value
     return window.localStorage.setItem(`${id}`, JSON.stringify(value))
   }

@@ -1,7 +1,7 @@
 <template>
   <div ref="domRef" class="farst-three">
     <FtScene>
-      <FtPerspectiveCamera :options="cameraOptions" />
+      <FtPerspectiveCamera :fov="fov" :far="2000" :options="cameraOptions" />
       <FtWebglRenderer>
         <FtQuantum />
         <FtOrbitControls />
@@ -20,13 +20,18 @@ import {
   FtWebglRenderer,
   useGui,
 } from 'farst-three'
+
 const domRef = ref<HTMLDivElement>()
+const perspective = 800
+const fov =
+  (180 * (2 * Math.atan(window.innerHeight / 2 / perspective))) / Math.PI
 const cameraOptions = reactive({
   position: {
-    set: [0, 5, 5],
+    set: [0, 0, perspective],
   },
 })
 const { guiPromise } = useGui(domRef)
+
 guiPromise.then((gui) => {
   //
 })

@@ -17,6 +17,7 @@ export type Offset = {
 }
 
 const noise3D = createNoise3D()
+
 export class Particles {
   camera: PerspectiveCamera
   scene: Scene
