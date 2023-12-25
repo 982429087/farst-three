@@ -9,7 +9,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-// import glsl from 'vite-plugin-glsl'
+
 import {
   docPackage,
   epPackage,
@@ -39,6 +39,10 @@ if (process.env.DOC_ENV !== 'production') {
 }
 
 export default defineConfig(async ({ mode }) => {
+  // 文档中是可以使用glsl文件
+  // 处理方式 ?raw 当成字符串处理  glsl插件 ts文件中当成字符串导出
+  const glsl = (await import('vite-plugin-glsl')).default
+
   const env = loadEnv(mode, process.cwd(), '')
 
   const { dependencies: epDeps } = getPackageDependencies(epPackage)
@@ -92,7 +96,7 @@ export default defineConfig(async ({ mode }) => {
       alias,
     },
     plugins: [
-      // glsl(), // package.json 中必须包含 "type": "module"
+      glsl(), // package.json 中必须包含 "type": "module"
       VueMacros({
         setupComponent: false,
         setupSFC: false,

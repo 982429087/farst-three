@@ -157,4 +157,4 @@ export const buildFull = (minify: boolean) => async () =>
 export const buildFullBundle = parallel(
   withTaskName('buildFullMinified', buildFull(true)),
   withTaskName('buildFull', buildFull(false))
-)
+) as any
