@@ -14,3 +14,4 @@ export * from './edge-move-line'
 export * from './high-light'
 
 export * from './outline'
+export * from './quantum'

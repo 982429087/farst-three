@@ -264,6 +264,10 @@
       {
         "link": "/outline",
         "text": "描边"
+      },
+      {
+        "link": "/quantum",
+        "text": "量子纠缠"
       }
     ]
   },
