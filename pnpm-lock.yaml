@@ -17,6 +17,9 @@ importers:
       '@farst-three/constants':
         specifier: workspace:*
         version: link:packages/constants
+      '@farst-three/core':
+        specifier: 0.0.3-alpha
+        version: 0.0.3-alpha
       '@farst-three/directives':
         specifier: workspace:*
         version: link:packages/directives
@@ -287,7 +290,7 @@ importers:
         version: 4.0.1
       element-plus:
         specifier: npm:element-plus@latest
-        version: 2.4.0(vue@3.3.8)
+        version: 2.3.8(vue@3.3.8)
       markdown-it:
         specifier: ^13.0.1
         version: 13.0.1
@@ -2594,6 +2597,16 @@ packages:
     resolution: {integrity: sha512-Kn7K8dx/5U6+cT1yEhpX1w4PCSg0M+XyRILPgvwcEBjerFWCwQj5sbr3/VmxqV0JGHCBCzyd6LxypEuehypY1w==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@farst-three/core@0.0.3-alpha:
+    resolution: {integrity: sha512-a9bnV+bCOqzaqGGxR8Eimxdz0s0fYTA9w8C3t+pQp7k3imbvyTQzxmd9BM74pFDCEqNt3piTh6INXb12YvUGOA==}
+    dependencies:
+      '@turf/turf': 6.5.0
+      d3-geo: 3.1.0
+      lodash: 4.17.21
+      simplex-noise: 4.0.1
+      three: 0.161.0
+    dev: false
 
   /@fastify/busboy@2.0.0:
     resolution: {integrity: sha512-JUFJad5lv7jxj926GPgymrWQxxjPYuJNiNjNMzqT+HiuP6Vl3dk5xzG+8sTX96np0ZAluvaMzPsjhHZ5rNuNQQ==}
@@ -8825,8 +8838,8 @@ packages:
   /electron-to-chromium@1.4.581:
     resolution: {integrity: sha512-6uhqWBIapTJUxgPTCHH9sqdbxIMPt7oXl0VcAL1kOtlU6aECdcMncCrX5Z7sHQ/invtrC9jUQUef7+HhO8vVFw==}
 
-  /element-plus@2.4.0(vue@3.3.8):
-    resolution: {integrity: sha512-yJEa8LXkGOOgkfkeqMMEdeX/Dc8EH9qPcRuX91dlhSXxgCKKbp9tH3QFTOG99ibZsrN/Em62nh7ddvbc7I1frw==}
+  /element-plus@2.3.8(vue@3.3.8):
+    resolution: {integrity: sha512-yHQR0/tG2LvPkpGUt7Te/hPmP2XW/BytBNUbx+EFO54VnGCOE3upmQcVffNp1PLgwg9sthYDXontUWpnpmLPJw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -10500,7 +10513,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
@@ -11600,7 +11613,7 @@ packages:
     engines: {node: '>=0.12.0'}
 
   /is-obj@1.0.1:
-    resolution: {integrity: sha1-PkcprB9f3gJc19g6iW2rn09n2w8=}
+    resolution: {integrity: sha512-l4RyHgRqGN4Y3+9JHVrNqO+tN0rV5My76uW5/nuO4K1b6vw5G8d/cmFjP9tRfEsdhZNt0IFdZuK/c2Vr4Nb+Qg==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -11650,7 +11663,7 @@ packages:
       has-tostringtag: 1.0.0
 
   /is-regexp@1.0.0:
-    resolution: {integrity: sha1-/S2INUXEa6xaYz57mgnof6LLUGk=}
+    resolution: {integrity: sha512-7zjFAPO4/gwyQAAgRRmqeEeyIICSdmCqa3tsVHMdBzaXXRiqopZL4Cyghg/XulGWrtABTpbnYYzzIRffLkP4oA==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -11902,7 +11915,7 @@ packages:
     dev: true
 
   /jsesc@0.5.0:
-    resolution: {integrity: sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=}
+    resolution: {integrity: sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==}
     hasBin: true
     dev: true
 
@@ -12262,7 +12275,7 @@ packages:
     dev: true
 
   /lodash.debounce@4.0.8:
-    resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: true
 
   /lodash.includes@4.3.0:
@@ -12313,7 +12326,7 @@ packages:
     dev: true
 
   /lodash.sortby@4.7.0:
-    resolution: {integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=}
+    resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
     dev: true
 
   /lodash.startcase@4.4.0:
@@ -14446,6 +14459,7 @@ packages:
 
   /rollup-plugin-terser@7.0.2(rollup@2.79.1):
     resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
+    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
     peerDependencies:
       rollup: ^2.0.0
     dependencies:
@@ -15287,6 +15301,10 @@ packages:
     resolution: {integrity: sha512-TALj4EOpdDPF1henk2Q+s17K61uEAAWQ7TJB68nr7FKxqwyDr3msOt5IWdbGm4TaWKjrtWS8DJJWe9JnvsWOhQ==}
     dev: false
 
+  /three@0.161.0:
+    resolution: {integrity: sha512-LC28VFtjbOyEu5b93K0bNRLw1rQlMJ85lilKsYj6dgTu+7i17W+JCCEbvrpmNHF1F3NAUqDSWq50UD7w9H2xQw==}
+    dev: false
+
   /through2-filter@3.0.0:
     resolution: {integrity: sha512-jaRjI2WxN3W1V8/FMZ9HKIBXixtiqs3SQSX4/YGIiP3gL6djW48VoZq9tDqeCWs3MT8YY5wb/zli8VW8snY1CA==}
     dependencies:
@@ -15442,7 +15460,7 @@ packages:
     dev: true
 
   /tr46@1.0.1:
-    resolution: {integrity: sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=}
+    resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
     dependencies:
       punycode: 2.3.1
     dev: true
@@ -16727,6 +16745,7 @@ packages:
 
   /workbox-background-sync@6.6.1:
     resolution: {integrity: sha512-trJd3ovpWCvzu4sW0E8rV3FUyIcC0W8G+AZ+VcqzzA890AsWZlUGOTSxIMmIHVusUw/FDq1HFWfy/kC/WTRqSg==}
+    deprecated: this package has been deprecated
     dependencies:
       idb: 7.1.1
       workbox-core: 6.6.1
@@ -16734,6 +16753,7 @@ packages:
 
   /workbox-broadcast-update@6.6.1:
     resolution: {integrity: sha512-fBhffRdaANdeQ1V8s692R9l/gzvjjRtydBOvR6WCSB0BNE2BacA29Z4r9/RHd9KaXCPl6JTdI9q0bR25YKP8TQ==}
+    deprecated: this package has been deprecated
     dependencies:
       workbox-core: 6.6.1
     dev: true
@@ -16741,6 +16761,7 @@ packages:
   /workbox-build@6.6.1:
     resolution: {integrity: sha512-INPgDx6aRycAugUixbKgiEQBWD0MPZqU5r0jyr24CehvNuLPSXp/wGOpdRJmts656lNiXwqV7dC2nzyrzWEDnw==}
     engines: {node: '>=16.0.0'}
+    deprecated: this package has been deprecated
     dependencies:
       '@apideck/better-ajv-errors': 0.3.6(ajv@8.12.0)
       '@babel/core': 7.23.3
@@ -16786,16 +16807,19 @@ packages:
 
   /workbox-cacheable-response@6.6.1:
     resolution: {integrity: sha512-85LY4veT2CnTCDxaVG7ft3NKaFbH6i4urZXgLiU4AiwvKqS2ChL6/eILiGRYXfZ6gAwDnh5RkuDbr/GMS4KSag==}
+    deprecated: workbox-background-sync@6.6.1
     dependencies:
       workbox-core: 6.6.1
     dev: true
 
   /workbox-core@6.6.1:
     resolution: {integrity: sha512-ZrGBXjjaJLqzVothoE12qTbVnOAjFrHDXpZe7coCb6q65qI/59rDLwuFMO4PcZ7jcbxY+0+NhUVztzR/CbjEFw==}
+    deprecated: this package has been deprecated
     dev: true
 
   /workbox-expiration@6.6.1:
     resolution: {integrity: sha512-qFiNeeINndiOxaCrd2DeL1Xh1RFug3JonzjxUHc5WkvkD2u5abY3gZL1xSUNt3vZKsFFGGORItSjVTVnWAZO4A==}
+    deprecated: this package has been deprecated
     dependencies:
       idb: 7.1.1
       workbox-core: 6.6.1
@@ -16803,6 +16827,7 @@ packages:
 
   /workbox-google-analytics@6.6.1:
     resolution: {integrity: sha512-1TjSvbFSLmkpqLcBsF7FuGqqeDsf+uAXO/pjiINQKg3b1GN0nBngnxLcXDYo1n/XxK4N7RaRrpRlkwjY/3ocuA==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 6.6.1
       workbox-core: 6.6.1
@@ -16812,12 +16837,14 @@ packages:
 
   /workbox-navigation-preload@6.6.1:
     resolution: {integrity: sha512-DQCZowCecO+wRoIxJI2V6bXWK6/53ff+hEXLGlQL4Rp9ZaPDLrgV/32nxwWIP7QpWDkVEtllTAK5h6cnhxNxDA==}
+    deprecated: this package has been deprecated
     dependencies:
       workbox-core: 6.6.1
     dev: true
 
   /workbox-precaching@6.6.1:
     resolution: {integrity: sha512-K4znSJ7IKxCnCYEdhNkMr7X1kNh8cz+mFgx9v5jFdz1MfI84pq8C2zG+oAoeE5kFrUf7YkT5x4uLWBNg0DVZ5A==}
+    deprecated: this package has been deprecated
     dependencies:
       workbox-core: 6.6.1
       workbox-routing: 6.6.1
@@ -16826,12 +16853,14 @@ packages:
 
   /workbox-range-requests@6.6.1:
     resolution: {integrity: sha512-4BDzk28govqzg2ZpX0IFkthdRmCKgAKreontYRC5YsAPB2jDtPNxqx3WtTXgHw1NZalXpcH/E4LqUa9+2xbv1g==}
+    deprecated: this package has been deprecated
     dependencies:
       workbox-core: 6.6.1
     dev: true
 
   /workbox-recipes@6.6.1:
     resolution: {integrity: sha512-/oy8vCSzromXokDA+X+VgpeZJvtuf8SkQ8KL0xmRivMgJZrjwM3c2tpKTJn6PZA6TsbxGs3Sc7KwMoZVamcV2g==}
+    deprecated: this package has been deprecated
     dependencies:
       workbox-cacheable-response: 6.6.1
       workbox-core: 6.6.1
@@ -16843,18 +16872,21 @@ packages:
 
   /workbox-routing@6.6.1:
     resolution: {integrity: sha512-j4ohlQvfpVdoR8vDYxTY9rA9VvxTHogkIDwGdJ+rb2VRZQ5vt1CWwUUZBeD/WGFAni12jD1HlMXvJ8JS7aBWTg==}
+    deprecated: this package has been deprecated
     dependencies:
       workbox-core: 6.6.1
     dev: true
 
   /workbox-strategies@6.6.1:
     resolution: {integrity: sha512-WQLXkRnsk4L81fVPkkgon1rZNxnpdO5LsO+ws7tYBC6QQQFJVI6v98klrJEjFtZwzw/mB/HT5yVp7CcX0O+mrw==}
+    deprecated: this package has been deprecated
     dependencies:
       workbox-core: 6.6.1
     dev: true
 
   /workbox-streams@6.6.1:
     resolution: {integrity: sha512-maKG65FUq9e4BLotSKWSTzeF0sgctQdYyTMq529piEN24Dlu9b6WhrAfRpHdCncRS89Zi2QVpW5V33NX8PgH3Q==}
+    deprecated: this package has been deprecated
     dependencies:
       workbox-core: 6.6.1
       workbox-routing: 6.6.1
@@ -16862,10 +16894,12 @@ packages:
 
   /workbox-sw@6.6.1:
     resolution: {integrity: sha512-R7whwjvU2abHH/lR6kQTTXLHDFU2izht9kJOvBRYK65FbwutT4VvnUAJIgHvfWZ/fokrOPhfoWYoPCMpSgUKHQ==}
+    deprecated: this package has been deprecated
     dev: true
 
   /workbox-window@6.6.1:
     resolution: {integrity: sha512-wil4nwOY58nTdCvif/KEZjQ2NP8uk3gGeRNy2jPBbzypU4BT4D9L8xiwbmDBpZlSgJd2xsT9FvSNU0gsxV51JQ==}
+    deprecated: this package has been deprecated
     dependencies:
       '@types/trusted-types': 2.0.6
       workbox-core: 6.6.1

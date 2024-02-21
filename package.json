@@ -49,6 +49,7 @@
     "@element-plus/icons-vue": "^2.0.6",
     "@farst-three/components": "workspace:*",
     "@farst-three/constants": "workspace:*",
+    "@farst-three/core": "0.0.3-alpha",
     "@farst-three/directives": "workspace:*",
     "@farst-three/hooks": "workspace:*",
     "@farst-three/locale": "workspace:*",
