@@ -1,18 +1,16 @@
 import {
-  buildProps,
-  definePropType,
   isNumber,
   isString,
 } from '@farst-three/utils'
 import type { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 import type { DataTexture, Material, Scene, Texture } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type RgbeLoaderComponent from './rgbe-loader.vue'
 
-export const rgbeLoaderProps = buildProps({
+export const rgbeLoaderProps = {
   options: {
-    type: definePropType<RgbeLoaderOptions>(Object),
+    type: Object as PropType<RgbeLoaderOptions>,
     default: () => ({}),
   },
   url: {
@@ -21,22 +19,22 @@ export const rgbeLoaderProps = buildProps({
     default: '',
   },
   load: {
-    type: definePropType<RGBELoaderOnLoad>(Function),
+    type: Function as PropType<RGBELoaderOnLoad>,
     default: () => () => undefined,
   },
   progress: {
-    type: definePropType<RGBELoaderOnProgress>(Function),
+    type: Function as PropType<RGBELoaderOnProgress>,
     default: () => () => undefined,
   },
   error: {
-    type: definePropType<RGBELoaderOnError>(Function),
+    type: Function as PropType<RGBELoaderOnError>,
     default: () => () => undefined,
   },
   type: {
-    type: definePropType<RGBETextureType>(String),
+    type: String as PropType<RGBETextureType>,
     default: 'map',
   },
-})
+}
 export const rgbeLoaderEmits = {
   load: (e: RgbeLoaderLoadEvent) => e,
   managerLoad: () => true,
@@ -77,4 +75,4 @@ export type RGBELoaderOnLoad = (
   texData: object
 ) => void
 export type RGBELoaderOnProgress = (e: ProgressEvent<EventTarget>) => void
-export type RGBELoaderOnError = (e: ErrorEvent) => void
+export type RGBELoaderOnError = (e: any) => void

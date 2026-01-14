@@ -1,18 +1,17 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { Scene, Sprite, SpriteMaterial } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type SpriteComponent from './sprite.vue'
 
-export const spriteProps = buildProps({
+export const spriteProps = {
   options: {
-    type: definePropType<SpriteOptions>(Object),
+    type: Object as PropType<SpriteOptions>,
     default: () => ({}),
   },
   material: {
-    type: definePropType<SpriteMaterial>(Object),
+    type: Object as PropType<SpriteMaterial>,
   },
-})
+}
 export const spriteEmits = {
   load: (e: SpriteLoadEvent) => e,
 }

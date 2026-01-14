@@ -1,25 +1,24 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ColorRepresentation, HemisphereLight, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type HemisphereLightComponent from './hemisphere-light.vue'
 
 /**
  * skyColor?: ColorRepresentation | undefined, groundColor?: ColorRepresentation | undefined, intensity?: number | undefined
  */
-export const hemisphereLightProps = buildProps({
+export const hemisphereLightProps = {
   options: {
-    type: definePropType<HemisphereLightOptions>(Object),
+    type: Object as PropType<HemisphereLightOptions>,
     default: () => ({}),
   },
   skyColor: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
   },
   groundColor: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
   },
   intensity: Number,
-})
+}
 export const hemisphereLightEmits = {
   load: (e: HemisphereLightLoadEvent) => e,
 }

@@ -1,11 +1,10 @@
-import { buildProps } from '@farst-three/utils'
 import type { Scene } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type DomMarkerRendererComponent from './dom-marker-renderer.vue'
 
-export const domMarkerRendererProps = buildProps({
+export const domMarkerRendererProps = {
   value: undefined,
-})
+}
 export const domMarkerRendererEmits = {
   load: (e: DomMarkerRendererLoadEvent) => e,
 }

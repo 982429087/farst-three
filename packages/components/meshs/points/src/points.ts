@@ -1,4 +1,3 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   BufferGeometry,
   Group,
@@ -7,24 +6,22 @@ import type {
   Points,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type PointsComponent from './points.vue'
 
-export const pointsProps = buildProps({
+export const pointsProps = {
   options: {
-    type: definePropType<PointsOptions>(Object),
+    type: Object as PropType<PointsOptions>,
     default: () => ({}),
   },
   geometry: {
-    type: definePropType<BufferGeometry<NormalBufferAttributes> | undefined>(
-      Object
-    ),
+    type: Object as PropType<BufferGeometry<NormalBufferAttributes> | undefined>,
   },
   material: {
-    type: definePropType<Material>(Object),
+    type: Object as PropType<Material>,
   },
-})
+}
 export const pointsEmits = {
   load: (e: PointsLoadEvent) => e,
 }

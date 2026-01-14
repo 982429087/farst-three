@@ -1,18 +1,17 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { Curve, Object3D, Scene, TubeGeometry, Vector3 } from 'three'
 
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type TubeGeometryComponent from './tube-geometry.vue'
 
-export const tubeGeometryProps = buildProps({
+export const tubeGeometryProps = {
   path: {
-    type: definePropType<Curve<Vector3>>(Object),
+    type: Object as PropType<Curve<Vector3>>,
   },
   tubularSegments: Number,
   radius: Number,
   radialSegments: Number,
   closed: Boolean,
-})
+}
 export const tubeGeometryEmits = {
   load: (e: TubeGeometryLoadEvents) => e,
 }

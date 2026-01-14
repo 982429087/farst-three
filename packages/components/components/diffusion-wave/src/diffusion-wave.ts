@@ -1,20 +1,19 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { DiffusionWaveOptions } from './use-diffusion-wave'
 import type { CircleGeometry, Mesh, Scene, ShaderMaterial } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type DiffusionWaveComponent from './diffusion-wave.vue'
 
-export const diffusionWaveProps = buildProps({
+export const diffusionWaveProps = {
   options: {
-    type: definePropType<DiffusionWaveOptions>(Object),
+    type: Object as PropType<DiffusionWaveOptions>,
     default: () => ({}),
   },
   meshOptions: {
-    type: definePropType<ThreeOptions<Mesh>>(Object),
+    type: Object as PropType<ThreeOptions<Mesh>>,
     default: () => ({}),
   },
-})
+}
 export const diffusionWaveEmits = {
   load: (e: DiffusionWaveLoadEvent) => e,
 }

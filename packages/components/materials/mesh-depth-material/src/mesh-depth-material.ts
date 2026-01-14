@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   MeshDepthMaterial,
   MeshDepthMaterialParameters,
   Object3D,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type MeshDepthMaterialComponent from './mesh-depth-material.vue'
 
-export const meshDepthMaterialProps = buildProps({
+export const meshDepthMaterialProps = {
   params: {
-    type: definePropType<MeshDepthMaterialParameters>(Object),
+    type: Object as PropType<MeshDepthMaterialParameters>,
   },
   options: {
-    type: definePropType<MeshDepthMaterialOptions>(Object),
+    type: Object as PropType<MeshDepthMaterialOptions>,
     default: () => ({}),
   },
-})
+}
 export const meshDepthMaterialEmits = {
   load: (e: MeshDepthMaterialLoadEvent) => e,
 }

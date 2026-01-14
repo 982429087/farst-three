@@ -1,5 +1,4 @@
 import { eventEmits, eventProps } from '@farst-three/hooks'
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { EventOptions } from '@farst-three/hooks'
 import type LiquidEffect from './liquid-effect'
@@ -8,23 +7,23 @@ import type {
   MeshPhysicalMaterialParameters,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type LiquidComponent from './liquid-plane.vue'
 
-export const liquidProps = buildProps({
+export const liquidProps = {
   params: {
-    type: definePropType<MeshPhysicalMaterialParameters>(Object),
+    type: Object as PropType<MeshPhysicalMaterialParameters>,
   },
   eventOptions: {
-    type: definePropType<EventOptions>(Object),
+    type: Object as PropType<EventOptions>,
     default: () => ({}),
   },
   options: {
-    type: definePropType<LiquidMaterialOptions>(Object),
+    type: Object as PropType<LiquidMaterialOptions>,
     default: () => ({}),
   },
   ...eventProps,
-})
+}
 export const liquidEmits = {
   load: (e: LiquidLoadEvent) => e,
   ...eventEmits,

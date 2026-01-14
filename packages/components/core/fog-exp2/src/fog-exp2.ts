@@ -1,24 +1,23 @@
 import { Color } from 'three'
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ColorRepresentation, FogExp2, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type FogExp2Component from './fog-exp2.vue'
 
-export const fogExp2Props = buildProps({
+export const fogExp2Props = {
   options: {
-    type: definePropType<FogExp2Options>(Object),
+    type: Object as PropType<FogExp2Options>,
     default: () => ({}),
   },
   color: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
     default: new Color(),
     required: true,
   },
   density: {
     type: Number,
   },
-})
+}
 export const fogExp2Emits = {
   load: (e: FogExp2LoadEvent) => e,
 }

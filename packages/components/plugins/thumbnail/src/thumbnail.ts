@@ -1,14 +1,12 @@
-import { buildProps, definePropType } from '@farst-three/utils'
-
 import {
   orthographicCameraEmits,
   orthographicCameraProps,
 } from '@farst-three/components'
 import type { AnimationFunsParams } from '@farst-three/hooks'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type Thumbnail from './thumbnail.vue'
 
-export const thumbnailProps = buildProps({
+export const thumbnailProps = {
   ...orthographicCameraProps,
   width: {
     type: Number,
@@ -31,7 +29,7 @@ export const thumbnailProps = buildProps({
     default: 20,
   },
   animationFn: {
-    type: definePropType<(e: AnimationFunsParams) => void>(Function),
+    type: Function as PropType<(e: AnimationFunsParams) => void>,
   },
   scissorClearColor: {
     type: String,
@@ -41,7 +39,7 @@ export const thumbnailProps = buildProps({
     type: Number,
     default: 1,
   },
-})
+}
 export const thumbnailEmits = {
   ...orthographicCameraEmits,
 }

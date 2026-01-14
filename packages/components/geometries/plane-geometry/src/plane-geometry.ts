@@ -1,20 +1,19 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { Object3D, PlaneGeometry, Scene } from 'three'
 
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type PlaneGeometryComponent from './plane-geometry.vue'
 
-export const planeGeometryProps = buildProps({
+export const planeGeometryProps = {
   width: Number,
   height: Number,
   widthSegments: Number,
   heightSegments: Number,
   options: {
-    type: definePropType<PlaneGeometryOptions>(Object),
+    type: Object as PropType<PlaneGeometryOptions>,
     default: () => ({}),
   },
-})
+}
 export const planeGeometryEmits = {
   load: (e: PlaneGeometryLoadEvent) => e,
 }

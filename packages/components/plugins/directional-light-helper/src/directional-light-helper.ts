@@ -1,19 +1,18 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ColorRepresentation, DirectionalLightHelper, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type DirectionalLightHelperComponent from './directional-light-helper.vue'
 
-export const directionalLightHelperProps = buildProps({
+export const directionalLightHelperProps = {
   options: {
-    type: definePropType<DirectionalLightHelperOptions>(Object),
+    type: Object as PropType<DirectionalLightHelperOptions>,
     default: () => ({}),
   },
   size: Number,
   color: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
   },
-})
+}
 export const directionalLightHelperEmits = {
   load: (e: DirectionalLightHelperLoadEvent) => e,
 }

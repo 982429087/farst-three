@@ -3,10 +3,9 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { rollup } from 'rollup'
 import commonjs from '@rollup/plugin-commonjs'
 import vue from '@vitejs/plugin-vue'
-import VueMacros from 'unplugin-vue-macros/rollup'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
-import { parallel } from 'gulp'
+import { parallel, TaskFunction } from 'gulp'
 import glob from 'fast-glob'
 import { camelCase, upperFirst } from 'lodash'
 import {
@@ -31,16 +30,8 @@ const banner = `/*! ${PKG_BRAND_NAME} v${version} */\n`
 async function buildFullEntry(minify: boolean) {
   const plugins: Plugin[] = [
     ElementPlusAlias(),
-    VueMacros({
-      setupComponent: false,
-      setupSFC: false,
-      plugins: {
-        vue: vue({
-          isProduction: true,
-        }),
-        vueJsx: vueJsx(),
-      },
-    }),
+    vue() as Plugin,
+    vueJsx() as Plugin,
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts'],
     }),
@@ -53,7 +44,7 @@ async function buildFullEntry(minify: boolean) {
         '.vue': 'ts',
       },
       define: {
-        'process.env.NODE_ENV': JSON.stringify('production'),
+        'process.env.NODE_ENV': '"production"',
       },
       treeShaking: true,
       legalComments: 'eof',
@@ -77,7 +68,7 @@ async function buildFullEntry(minify: boolean) {
   await writeBundles(bundle, [
     {
       format: 'umd',
-      dir: path.resolve(
+      file: path.resolve(
         epOutput,
         'dist',
         formatBundleFilename('index.full', minify, 'js')
@@ -92,7 +83,7 @@ async function buildFullEntry(minify: boolean) {
     },
     {
       format: 'esm',
-      dir: path.resolve(
+      file: path.resolve(
         epOutput,
         'dist',
         formatBundleFilename('index.full', minify, 'mjs')
@@ -126,7 +117,7 @@ async function buildFullLocale(minify: boolean) {
       await writeBundles(bundle, [
         {
           format: 'umd',
-          dir: path.resolve(
+          file: path.resolve(
             epOutput,
             'dist/locale',
             formatBundleFilename(filename, minify, 'js')
@@ -138,7 +129,7 @@ async function buildFullLocale(minify: boolean) {
         },
         {
           format: 'esm',
-          dir: path.resolve(
+          file: path.resolve(
             epOutput,
             'dist/locale',
             formatBundleFilename(filename, minify, 'mjs')
@@ -154,7 +145,7 @@ async function buildFullLocale(minify: boolean) {
 export const buildFull = (minify: boolean) => async () =>
   Promise.all([buildFullEntry(minify), buildFullLocale(minify)])
 
-export const buildFullBundle = parallel(
+export const buildFullBundle: TaskFunction = parallel(
   withTaskName('buildFullMinified', buildFull(true)),
   withTaskName('buildFull', buildFull(false))
-) as any
+)

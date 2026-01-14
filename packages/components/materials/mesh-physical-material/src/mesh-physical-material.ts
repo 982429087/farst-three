@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   MeshPhysicalMaterial,
   MeshPhysicalMaterialParameters,
   Object3D,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type MeshPhysicalMaterialComponent from './mesh-physical-material.vue'
 
-export const meshPhysicalMaterialProps = buildProps({
+export const meshPhysicalMaterialProps = {
   params: {
-    type: definePropType<MeshPhysicalMaterialParameters>(Object),
+    type: Object as PropType<MeshPhysicalMaterialParameters>,
   },
   options: {
-    type: definePropType<MeshPhysicalMaterialOptions>(Object),
+    type: Object as PropType<MeshPhysicalMaterialOptions>,
     default: () => ({}),
   },
-})
+}
 export const meshPhysicalMaterialEmits = {
   load: (e: MeshPhysicalMaterialLoadEvent) => e,
 }

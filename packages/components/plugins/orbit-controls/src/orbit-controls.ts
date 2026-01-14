@@ -1,19 +1,18 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type OrbitControlsComponent from './orbit-controls.vue'
 import type { Camera, Renderer } from 'three'
 
-export const orbitControlsProps = buildProps({
+export const orbitControlsProps = {
   modelValue: {
     type: Object,
   },
   options: {
-    type: definePropType<OrbitControlsOptions>(Object),
+    type: Object as PropType<OrbitControlsOptions>,
     default: () => ({}),
   },
-})
+}
 
 export const orbitControlsEmits = {
   load: (e: OrbitControlsLoadEvent) => e,

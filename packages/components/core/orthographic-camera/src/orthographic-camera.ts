@@ -1,11 +1,10 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { OrthographicCamera, Scene } from 'three'
 
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type OrthographicCameraComponent from './orthographic-camera.vue'
 
-export const orthographicCameraProps = buildProps({
+export const orthographicCameraProps = {
   left: Number,
   right: Number,
   top: Number,
@@ -21,10 +20,10 @@ export const orthographicCameraProps = buildProps({
     default: true,
   },
   options: {
-    type: definePropType<OrthographicCameraOptions>(Object),
+    type: Object as PropType<OrthographicCameraOptions>,
     default: () => ({}),
   },
-})
+}
 export const orthographicCameraEmits = {
   load: (e: OrthographicCameraLoadEvent) => e,
 }

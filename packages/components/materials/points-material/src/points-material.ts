@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   Object3D,
   PointsMaterial,
   PointsMaterialParameters,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type PointsMaterialComponent from './points-material.vue'
 
-export const pointsMaterialProps = buildProps({
+export const pointsMaterialProps = {
   options: {
-    type: definePropType<PointsMaterialOptions>(Object),
+    type: Object as PropType<PointsMaterialOptions>,
     default: () => ({}),
   },
   params: {
-    type: definePropType<PointsMaterialParameters>(Object),
+    type: Object as PropType<PointsMaterialParameters>,
   },
-})
+}
 export const pointsMaterialEmits = {
   load: (e: PointsMaterialLoadEvent) => e,
 }

@@ -42,7 +42,7 @@ export const isEpProp = (val: unknown): val is EpProp<any, any, any> =>
   } as const)
   @link see more: https://github.com/element-plus/element-plus/pull/3341
  */
-export const buildProp = <
+  export const buildProp = <
   Type = never,
   Value = never,
   Validator = never,

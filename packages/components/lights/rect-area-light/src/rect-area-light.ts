@@ -1,16 +1,15 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ColorRepresentation, RectAreaLight, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type RectAreaLightComponent from './rect-area-light.vue'
 
-export const rectAreaLightProps = buildProps({
+export const rectAreaLightProps = {
   options: {
-    type: definePropType<RectAreaLightOptions>(Object),
+    type: Object as PropType<RectAreaLightOptions>,
     default: () => ({}),
   },
   color: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
   },
   intensity: Number,
   width: Number,
@@ -19,7 +18,7 @@ export const rectAreaLightProps = buildProps({
     type: Boolean,
     default: false,
   },
-})
+}
 export const rectAreaLightEmits = {
   load: (e: RectAreaLightLoadEvent) => e,
 }

@@ -1,4 +1,3 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   BufferGeometry,
   Group,
@@ -7,24 +6,24 @@ import type {
   NormalBufferAttributes,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type LineComponent from './line.vue'
 /**
  * geometry?: BufferGeometry<NormalBufferAttributes> | undefined, material?: Material | ... 1 more ... | undefined
  */
-export const lineProps = buildProps({
+export const lineProps = {
   geometry: {
-    type: definePropType<BufferGeometry<NormalBufferAttributes>>(Object),
+    type: Object as PropType<BufferGeometry<NormalBufferAttributes>>,
   },
   material: {
-    type: definePropType<Material>(Object),
+    type: Object as PropType<Material>,
   },
   options: {
-    type: definePropType<LineOptions>(Object),
+    type: Object as PropType<LineOptions>,
     default: () => ({}),
   },
-})
+}
 export const lineEmits = {
   load: (e: LineLoadEvent) => e,
 }

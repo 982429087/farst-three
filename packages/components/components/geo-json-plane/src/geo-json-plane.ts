@@ -1,20 +1,19 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import { eventEmits, eventProps } from '@farst-three/hooks'
 import type { GeoJsonPlane, GeoJsonPlaneOptions } from '@farst-three/hooks'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 import type { Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type GeoJsonPlaneComponent from './geo-json-plane.vue'
 
-export const geoJsonPlaneProps = buildProps({
+export const geoJsonPlaneProps = {
   geoJson: {
-    type: definePropType<FeatureCollection<Geometry>>(Object),
+    type: Object as PropType<FeatureCollection<Geometry>>,
   },
   options: {
-    type: definePropType<GeoJsonPlaneOptions>(Object),
+    type: Object as PropType<GeoJsonPlaneOptions>,
   },
   ...eventProps,
-})
+}
 export const geoJsonPlaneEmits = {
   load: (e: GeoJsonPlaneLoadEvent) => e,
   ...eventEmits,

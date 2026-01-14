@@ -1,4 +1,3 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type {
   MeshBasicMaterial,
@@ -7,18 +6,18 @@ import type {
   Scene,
 } from 'three'
 
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type MeshBasicMaterialComponent from './mesh-basic-material.vue'
 
-export const meshBasicMaterialProps = buildProps({
+export const meshBasicMaterialProps = {
   params: {
-    type: definePropType<MeshBasicMaterialParameters>(Object),
+    type: Object as PropType<MeshBasicMaterialParameters>,
   },
   options: {
-    type: definePropType<MeshBasicMaterialOptions>(Object),
+    type: Object as PropType<MeshBasicMaterialOptions>,
     default: () => ({}),
   },
-})
+}
 export const meshBasicMaterialEmits = {
   load: (e: MeshBasicMaterialLoadEvent) => e,
 }

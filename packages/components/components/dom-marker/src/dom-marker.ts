@@ -1,13 +1,12 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer'
 import type { Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type DomMarkerComponent from './dom-marker.vue'
 
-export const domMarkerProps = buildProps({
+export const domMarkerProps = {
   options: {
-    type: definePropType<CSS2DObjectOptions>(Object),
+    type: Object as PropType<CSS2DObjectOptions>,
     default: () => ({}),
   },
   x: {
@@ -46,7 +45,7 @@ export const domMarkerProps = buildProps({
     type: String,
     default: 'z',
   },
-})
+}
 export const domMarkerEmits = {
   load: (e: DomMarkerLoadEvent) => e,
 }

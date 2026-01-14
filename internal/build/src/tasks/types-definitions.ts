@@ -9,7 +9,7 @@ import { pathRewriter, run } from '../utils'
 
 export const generateTypesDefinitions = async () => {
   const typesDir = path.join(buildOutput, 'types', 'packages')
-  const entryDir = path.join(typesDir, 'element-plus')
+  const entryDir = path.join(typesDir, 'farst-three')
   const entryFilePath = path.join(entryDir, 'index.d.ts')
   const tsDir = path.join(projRoot, 'node_modules', 'typescript')
   const tsConfigPath = path.join(projRoot, 'tsconfig.web.json')
@@ -71,7 +71,7 @@ export const generateTypesDefinitions = async () => {
 
   await writeFile(entryFilePath, formattedText, 'utf8')
 
-  // "@element-plus" should be replaced with "element-plus"
+  // "@farst-three" should be replaced with "farst-three"
   const filePaths = await glob(`**/*.d.ts`, {
     cwd: typesDir,
     absolute: true,

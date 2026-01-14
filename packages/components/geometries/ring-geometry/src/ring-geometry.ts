@@ -1,12 +1,11 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { Object3D, RingGeometry, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type RingGeometryComponent from './ring-geometry.vue'
 
-export const ringGeometryProps = buildProps({
+export const ringGeometryProps = {
   options: {
-    type: definePropType<RingGeometryOptions>(Object),
+    type: Object as PropType<RingGeometryOptions>,
     default: () => ({}),
   },
   innerRadius: Number,
@@ -15,7 +14,7 @@ export const ringGeometryProps = buildProps({
   phiSegments: Number,
   thetaStart: Number,
   thetaLength: Number,
-})
+}
 export const ringGeometryEmits = {
   load: (e: RingGeometryLoadEvent) => e,
 }

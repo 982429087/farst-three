@@ -15,7 +15,7 @@ defineOptions({
 const props = defineProps(projectionProps)
 const emit = defineEmits(projectionEmits)
 
-const projection = useProjection(props.center, props.scale, props.translate)
+const projection = useProjection(props.center as [number, number], props.scale, props.translate as [number, number])
 provide(projectionInjectionKey, projection)
 emit('load', { projection })
 </script>

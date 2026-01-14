@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   MeshPhongMaterial,
   MeshPhongMaterialParameters,
   Object3D,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type MeshPhongMaterialComponent from './mesh-phong-material.vue'
 
-export const meshPhongMaterialProps = buildProps({
+export const meshPhongMaterialProps = {
   options: {
-    type: definePropType<MeshPhongMaterialOptions>(Object),
+    type: Object as PropType<MeshPhongMaterialOptions>,
     default: () => ({}),
   },
   params: {
-    type: definePropType<MeshPhongMaterialParameters>(Object),
+    type: Object as PropType<MeshPhongMaterialParameters>,
   },
-})
+}
 export const meshPhongMaterialEmits = {
   load: (e: MeshPhongMaterialLoadEvent) => e,
 }

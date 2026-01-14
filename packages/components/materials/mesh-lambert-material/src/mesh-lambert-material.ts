@@ -1,4 +1,3 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type {
   MeshLambertMaterial,
@@ -7,18 +6,18 @@ import type {
   Scene,
 } from 'three'
 
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type MeshLambertMaterialComponent from './mesh-lambert-material.vue'
 
-export const meshLambertMaterialProps = buildProps({
+export const meshLambertMaterialProps = {
   params: {
-    type: definePropType<MeshLambertMaterialParameters>(Object),
+    type: Object as PropType<MeshLambertMaterialParameters>,
   },
   options: {
-    type: definePropType<MeshLambertMaterialOptions>(Object),
+    type: Object as PropType<MeshLambertMaterialOptions>,
     default: () => ({}),
   },
-})
+}
 export const meshLambertMaterialEmits = {
   load: (e: MeshLambertMaterialLoadEvent) => e,
 }

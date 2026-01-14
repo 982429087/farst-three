@@ -1,4 +1,3 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type {
   Camera,
@@ -7,29 +6,29 @@ import type {
   WebGLRendererParameters,
 } from 'three'
 
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type WebglRendererComponent from './webgl-renderer.vue'
 
-export const webGLRendererProps = buildProps({
+export const webGLRendererProps = {
   animationFn: {
-    type: definePropType<(e: WebGLRendererLoadEvent) => any>(Function),
+    type: Function as PropType<(e: WebGLRendererLoadEvent) => any>,
   },
   params: {
-    type: definePropType<WebGLRendererParameters>(Object),
+    type: Object as PropType<WebGLRendererParameters>,
     default: () => ({
       antialias: true,
       logarithmicDepthBuffer: true, // 就是两个面间距比较小的时候，让threejs更容易区分两个面，谁在前，谁在后
     }),
   },
   options: {
-    type: definePropType<WebglRendererOptions>(Object),
+    type: Object as PropType<WebglRendererOptions>,
     default: () => ({
       shadowMap: {
         enabled: true,
       },
     }),
   },
-})
+}
 export const webglRendererEmits = {
   load: (e: WebGLRendererLoadEvent) => e,
 }

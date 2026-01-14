@@ -1,20 +1,19 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { PointMarkerOptions } from './use-point-marker'
 import type { Group, Mesh, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type PointMarkerComponent from './point-marker.vue'
 
-export const pointMarkerProps = buildProps({
+export const pointMarkerProps = {
   options: {
-    type: definePropType<PointMarkerOptions>(Object),
+    type: Object as PropType<PointMarkerOptions>,
     default: () => ({}),
   },
   groupOptions: {
-    type: definePropType<ThreeOptions<Group>>(Object),
+    type: Object as PropType<ThreeOptions<Group>>,
     default: () => ({}),
   },
-})
+}
 export const pointMarkerEmits = {
   load: (e: PointMarkerLoadEvent) => e,
 }

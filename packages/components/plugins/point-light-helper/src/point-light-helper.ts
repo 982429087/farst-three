@@ -1,22 +1,21 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ColorRepresentation, PointLightHelper, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type PointLightHelperComponent from './point-light-helper.vue'
 
 /**
  * sphereSize?: number | undefined, color?: ColorRepresentation | undefined
  */
-export const pointLightHelperProps = buildProps({
+export const pointLightHelperProps = {
   options: {
-    type: definePropType<PointLightHelperOptions>(Object),
+    type: Object as PropType<PointLightHelperOptions>,
     default: () => ({}),
   },
   sphereSize: Number,
   color: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
   },
-})
+}
 export const pointLightHelperEmits = {
   load: (e: PointLightHelperLoadEvent) => e,
 }

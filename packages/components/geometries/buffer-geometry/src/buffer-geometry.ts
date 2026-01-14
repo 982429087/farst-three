@@ -1,15 +1,14 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { BufferGeometry, Object3D, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type BufferGeometryComponent from './buffer-geometry.vue'
 
-export const bufferGeometryProps = buildProps({
+export const bufferGeometryProps = {
   options: {
-    type: definePropType<ThreeOptions<BufferGeometry>>(Object),
+    type: Object as PropType<ThreeOptions<BufferGeometry>>,
     default: () => ({}),
   },
-})
+}
 export const bufferGeometryEmits = {
   load: (e: BufferGeometryLoadEvent) => e,
 }

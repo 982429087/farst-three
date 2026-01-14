@@ -1,22 +1,21 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { ColorRepresentation, PointLight, Scene } from 'three'
 
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type PointLightComponent from './point-light.vue'
 
-export const pointLightProps = buildProps({
+export const pointLightProps = {
   color: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
   },
   intensity: Number,
   distance: Number,
   decay: Number,
   options: {
-    type: definePropType<PointLightOptions>(Object),
+    type: Object as PropType<PointLightOptions>,
     default: () => ({}),
   },
-})
+}
 export const pointLightEmits = {
   load: (e: PointLightLoadEvent) => e,
 }

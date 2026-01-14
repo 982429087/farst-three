@@ -92,3 +92,26 @@ type Path<T> =
  * FieldPath<{ 1: number; a: number; b: string; c: { d: number; e: string }; f: [{ value: string }]; g: { value: string }[]; h: Date; i: FileList; j: File; k: Blob; l: RegExp }> => '1' | 'a' | 'b' | 'c' | 'f' | 'g' | 'c.d' | 'c.e' | 'f.0' | 'f.0.value' | 'g.number' | 'g.number.value' | 'h' | 'i' | 'j' | 'k' | 'l'
  */
 export type FieldPath<T> = T extends object ? Path<T> : never
+
+
+import type { Scene } from 'three'
+
+export type AnyFun = (...args: any[]) => any
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    : T[P] extends ReadonlyArray<infer U>
+    ? ReadonlyArray<DeepPartial<U>>
+    : DeepPartial<T[P]>
+}
+
+export type OptionFunction<T> = (scene: Scene, instance: T) => any
+export type Options<T> = {
+  -readonly [P in keyof T]: T[P] extends AnyFun
+    ? OptionFunction<T> | Array<T>
+    : [T[P]] extends Record<string, any>
+    ? Options<T[P]> | OptionFunction<T>
+    : T[P]
+}
+
+export type ThreeOptions<T> = DeepPartial<Options<T>>

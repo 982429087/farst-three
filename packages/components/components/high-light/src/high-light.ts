@@ -1,15 +1,14 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { HighLight, HighLightOptions } from '@farst-three/hooks'
 import type { Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type HighLightComponent from './high-light.vue'
 
-export const highLightProps = buildProps({
+export const highLightProps = {
   options: {
-    type: definePropType<HighLightOptions>(Object),
+    type: Object as PropType<HighLightOptions>,
     default: () => ({}),
   },
-})
+}
 export const highLightEmits = {
   load: (e: HighLightLoadEvent) => e,
 }

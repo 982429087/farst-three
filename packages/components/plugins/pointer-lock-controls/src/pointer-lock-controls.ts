@@ -1,16 +1,15 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls'
 import type { Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type PointerLockControlsComponent from './pointer-lock-controls.vue'
 
-export const pointerLockControlsProps = buildProps({
+export const pointerLockControlsProps = {
   options: {
-    type: definePropType<PointerLockControlsOptions>(Object),
+    type: Object as PropType<PointerLockControlsOptions>,
     default: () => ({}),
   },
-})
+}
 export const pointerLockControlsEmits = {
   load: (e: PointerLockControlsLoadEvent) => e,
 }

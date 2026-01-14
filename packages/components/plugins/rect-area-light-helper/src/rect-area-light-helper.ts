@@ -1,19 +1,18 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper'
 import type { ColorRepresentation, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type RectAreaLightHelperComponent from './rect-area-light-helper.vue'
 
-export const rectAreaLightHelperProps = buildProps({
+export const rectAreaLightHelperProps = {
   options: {
-    type: definePropType<RectAreaLightHelperOptions>(Object),
+    type: Object as PropType<RectAreaLightHelperOptions>,
     default: () => ({}),
   },
   color: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
   },
-})
+}
 export const rectAreaLightHelperEmits = {
   load: (e: RectAreaLightHelperLoadEvent) => e,
 }

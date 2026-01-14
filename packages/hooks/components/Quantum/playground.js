@@ -1,8 +1,8 @@
 import * as THREE from 'three'
 // import { GUI } from 'dat.gui';
 import { OrbitControls } from 'three/examples/jsm/controls/orbitControls'
-import WindowManager from './windowManager'
-import Particles from './particles'
+import { WindowManager } from './windowManager'
+import { Particles } from './particles'
 
 const playground = {
   init() {

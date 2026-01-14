@@ -1,12 +1,11 @@
-import { buildProps } from '@farst-three/utils'
 import type { Camera, CameraHelper, Scene } from 'three'
 
 import type { ExtractPropTypes } from 'vue'
 import type CameraHelperComponent from './camera-helper.vue'
 
-export const cameraHelperProps = buildProps({
+export const cameraHelperProps = {
   modelValue: Object,
-})
+}
 export const cameraHelperEmits = {
   load: (e: CameraHelperLoadEvent) => e,
 }

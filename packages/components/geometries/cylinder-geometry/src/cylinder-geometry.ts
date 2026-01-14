@@ -1,10 +1,9 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { CylinderGeometry, Object3D, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type CylinderGeometryComponent from './cylinder-geometry.vue'
 
-export const cylinderGeometryProps = buildProps({
+export const cylinderGeometryProps = {
   radiusTop: Number,
   radiusBottom: Number,
   height: Number,
@@ -14,10 +13,10 @@ export const cylinderGeometryProps = buildProps({
   thetaStart: Number,
   thetaLength: Number,
   options: {
-    type: definePropType<ThreeOptions<CylinderGeometry>>(Object),
+    type: Object as PropType<ThreeOptions<CylinderGeometry>>,
     default: () => ({}),
   },
-})
+}
 export const cylinderGeometryEmits = {
   load: (e: CylinderGeometryLoadEvent) => e,
 }

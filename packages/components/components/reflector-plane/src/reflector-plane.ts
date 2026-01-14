@@ -1,28 +1,27 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { Reflector } from 'three/examples/jsm/objects/Reflector'
 import type { ReflectorPlaneOptions } from './use-reflector-plane'
 import type { Mesh, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type ReflectorPlaneComponent from './reflector-plane.vue'
 
-export const reflectorPlaneProps = buildProps({
+export const reflectorPlaneProps = {
   options: {
-    type: definePropType<ReflectorPlaneOptions>(Object),
+    type: Object as PropType<ReflectorPlaneOptions>,
   },
   mirrorOptions: {
-    type: definePropType<ThreeOptions<Reflector>>(Object),
+    type: Object as PropType<ThreeOptions<Reflector>>,
     default: () => ({}),
   },
   circleMeshOptions: {
-    type: definePropType<ThreeOptions<Mesh>>(Object),
+    type: Object as PropType<ThreeOptions<Mesh>>,
     default: () => ({}),
   },
   floorMeshOptions: {
-    type: definePropType<ThreeOptions<Mesh>>(Object),
+    type: Object as PropType<ThreeOptions<Mesh>>,
     default: () => ({}),
   },
-})
+}
 export const reflectorPlaneEmits = {
   load: (e: ReflectorPlaneLoadEvent) => e,
 }

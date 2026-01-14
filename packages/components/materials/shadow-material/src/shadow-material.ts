@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   Object3D,
   Scene,
   ShadowMaterial,
   ShadowMaterialParameters,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type ShadowMaterialComponent from './shadow-material.vue'
 
-export const shadowMaterialProps = buildProps({
+export const shadowMaterialProps = {
   options: {
-    type: definePropType<ThreeOptions<ShadowMaterial>>(Object),
+    type: Object as PropType<ThreeOptions<ShadowMaterial>>,
     default: () => ({}),
   },
   params: {
-    type: definePropType<ShadowMaterialParameters>(Object),
+    type: Object as PropType<ShadowMaterialParameters>,
   },
-})
+}
 export const shadowMaterialEmits = {
   load: (e: ShadowMaterialLoadEvent) => e,
 }

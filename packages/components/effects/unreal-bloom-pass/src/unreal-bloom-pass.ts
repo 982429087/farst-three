@@ -1,19 +1,18 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import type { Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type UnrealBloomPassComponent from './unreal-bloom-pass.vue'
 
-export const unrealBloomPassProps = buildProps({
+export const unrealBloomPassProps = {
   options: {
-    type: definePropType<UnrealBloomPassOptions>(Object),
+    type: Object as PropType<UnrealBloomPassOptions>,
     default: () => ({}),
   },
   strength: { type: Number, default: 1.5 },
   radius: { type: Number, default: 0 },
   threshold: { type: Number, default: 0 },
-})
+}
 export const unrealBloomPassEmits = {
   load: (e: UnrealBloomPassLoadEvent) => e,
 }

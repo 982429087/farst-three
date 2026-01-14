@@ -1,19 +1,18 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   HalftonePass,
   HalftonePassParameters,
 } from 'three/examples/jsm/postprocessing/HalftonePass'
 import type { Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type HalftonePassComponent from './halftone-pass.vue'
 
-export const halftonePassProps = buildProps({
+export const halftonePassProps = {
   params: {
-    type: definePropType<HalftonePassParameters>(Object),
+    type: Object as PropType<HalftonePassParameters>,
     default: () => ({}),
   },
-})
+}
 export const halftonePassEmits = {
   load: (e: HalftonePassLoadEvent) => e,
 }

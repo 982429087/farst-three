@@ -1,19 +1,18 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { EdgeMoveLine, EdgeMoveLineOptions } from './EdgeMoveLine'
 import type { FeatureCollection, Geometry } from '@turf/turf'
 import type { Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type EdgeMoveLineComponent from './edge-move-line.vue'
 
-export const edgeMoveLineProps = buildProps({
+export const edgeMoveLineProps = {
   options: {
-    type: definePropType<EdgeMoveLineOptions>(Object),
+    type: Object as PropType<EdgeMoveLineOptions>,
     default: () => ({}),
   },
   geojson: {
-    type: definePropType<FeatureCollection<Geometry>>(Object),
+    type: Object as PropType<FeatureCollection<Geometry>>,
   },
-})
+}
 export const edgeMoveLineEmits = {
   load: (e: EdgeMoveLineLoadEvent) => e,
 }

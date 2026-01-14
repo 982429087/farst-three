@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ColorRepresentation, Scene, SpotLight } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type SpotLightComponent from './spot-light.vue'
 
-export const spotLightProps = buildProps({
+export const spotLightProps = {
   options: {
-    type: definePropType<SpotLightOptions>(Object),
+    type: Object as PropType<SpotLightOptions>,
     default: () => ({}),
   },
   color: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
   },
   intensity: Number,
   distance: Number,
   angle: Number,
   penumbra: Number,
   decay: Number,
-})
+}
 export const spotLightEmits = {
   load: (e: SpotLightLoadEvent) => e,
 }

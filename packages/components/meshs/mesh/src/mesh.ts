@@ -1,4 +1,3 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import { eventEmits, eventProps } from '@farst-three/hooks'
 import type { OnEventOptions } from '@farst-three/hooks'
 import type { ThreeOptions } from '@farst-three/utils'
@@ -10,22 +9,22 @@ import type {
   NormalBufferAttributes,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type MeshComponent from './mesh.vue'
 
-export const meshProps = buildProps({
+export const meshProps = {
   geometry: {
-    type: definePropType<BufferGeometry<NormalBufferAttributes>>(Object),
+    type: Object as PropType<BufferGeometry<NormalBufferAttributes>>,
   },
   material: {
-    type: definePropType<Material>(Object),
+    type: Object as PropType<Material>,
   },
   options: {
-    type: definePropType<MeshOptions>(Object),
+    type: Object as PropType<MeshOptions>,
     default: () => ({}),
   },
   eventOptons: {
-    type: definePropType<OnEventOptions>(Object),
+    type: Object as PropType<OnEventOptions>,
     default: () => ({}),
   },
   dragabled: {
@@ -33,7 +32,7 @@ export const meshProps = buildProps({
     default: false,
   },
   ...eventProps,
-})
+}
 
 export const meshEmits = {
   load: (e: MeshLoadEvent) => e,

@@ -1,14 +1,13 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { UpParticleOptions } from './use-up-particle'
 import type { Mesh, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type UpParticleComponent from './up-particle.vue'
 
-export const upParticleProps = buildProps({
+export const upParticleProps = {
   options: {
-    type: definePropType<UpParticleOptions>(Object),
+    type: Object as PropType<UpParticleOptions>,
   },
-})
+}
 export const upParticleEmits = {
   load: (e: UpParticleLoadEvent) => e,
 }

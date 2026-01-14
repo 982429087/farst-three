@@ -1,41 +1,39 @@
 import {
-  buildProps,
-  definePropType,
   isNumber,
   isString,
 } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { Material, Scene, Texture, TextureLoader } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type TextureLoaderComponent from './texture-loader.vue'
 
-export const textureLoaderProps = buildProps({
+export const textureLoaderProps = {
   url: {
     type: String,
     required: true,
     default: '',
   },
   load: {
-    type: definePropType<TextureLoaderOnLoad>(Function),
+    type: Function as PropType<TextureLoaderOnLoad>,
     default: () => () => undefined,
   },
   progress: {
-    type: definePropType<TextureLoaderOnProgress>(Function),
+    type: Function as PropType<TextureLoaderOnProgress>,
     default: () => () => undefined,
   },
   error: {
-    type: definePropType<TextureLoaderOnError>(Function),
+    type: Function as PropType<TextureLoaderOnError>,
     default: () => () => undefined,
   },
   type: {
-    type: definePropType<TextureType>(String),
+    type: String as PropType<TextureType>,
     default: 'map',
   },
   options: {
-    type: definePropType<TextureLoaderOptions>(Object),
+    type: Object as PropType<TextureLoaderOptions>,
     default: () => ({}),
   },
-})
+}
 export const textureLoaderEmits = {
   load: (e: TextureLoadEvent) => e,
   managerLoad: () => true,
@@ -71,5 +69,5 @@ export type TextureLoaderProps = ExtractPropTypes<typeof textureLoaderProps>
 export type TextureLoaderInstance = InstanceType<typeof TextureLoaderComponent>
 export type TextureLoaderOnLoad = (e: Texture) => void
 export type TextureLoaderOnProgress = (e: ProgressEvent<EventTarget>) => void
-export type TextureLoaderOnError = (e: ErrorEvent) => void
+export type TextureLoaderOnError = (e: any) => void
 export type TextureLoaderOptions = ThreeOptions<Texture>

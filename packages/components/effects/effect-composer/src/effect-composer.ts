@@ -1,14 +1,13 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import type { Scene, WebGLRenderTarget, WebGLRenderer } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type EffectComposerComponent from './effect-composer.vue'
 
-export const effectComposerProps = buildProps({
+export const effectComposerProps = {
   renderTarget: {
-    type: definePropType<WebGLRenderTarget>(Object),
+    type: Object as PropType<WebGLRenderTarget>,
   },
-})
+}
 export const effectComposerEmits = {
   load: (e: EffectComposerLoadEvent) => e,
 }

@@ -1,13 +1,12 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import type { Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type GLTFLoaderComponent from './g-l-t-f-loader.vue'
 
-export const gLTFLoaderProps = buildProps({
+export const gLTFLoaderProps = {
   options: {
-    type: definePropType<GLTFLoaderOptions>(Object),
+    type: Object as PropType<GLTFLoaderOptions>,
     default: () => ({}),
   },
   url: {
@@ -15,20 +14,20 @@ export const gLTFLoaderProps = buildProps({
     required: true as const,
   },
   load: {
-    type: definePropType<(gltf: GLTF) => void>(Function),
+    type: Function as PropType<(gltf: GLTF) => void>,
     required: true as const,
   },
   progress: {
-    type: definePropType<(event: ProgressEvent<EventTarget>) => void>(Function),
+    type: Function as PropType<(event: ProgressEvent<EventTarget>) => void>,
   },
   error: {
-    type: definePropType<(event: ErrorEvent) => void>(Function),
+    type: Function as PropType<(event: any) => void>,
   },
   decoderPath: {
     type: String,
     default: '',
   },
-})
+}
 export const gLTFLoaderEmits = {
   load: (e: GLTFLoaderLoadEvent) => e,
 }

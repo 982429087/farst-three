@@ -1,12 +1,11 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ColorRepresentation, HemisphereLightHelper, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type HemisphereLightHelperComponent from './hemisphere-light-helper.vue'
 
-export const hemisphereLightHelperProps = buildProps({
+export const hemisphereLightHelperProps = {
   options: {
-    type: definePropType<HemisphereLightHelperOptions>(Object),
+    type: Object as PropType<HemisphereLightHelperOptions>,
     default: () => ({}),
   },
   size: {
@@ -15,9 +14,9 @@ export const hemisphereLightHelperProps = buildProps({
     required: true,
   },
   color: {
-    type: definePropType<ColorRepresentation>([String, Number, Object]),
+    type: [String, Number, Object] as PropType<ColorRepresentation>,
   },
-})
+}
 export const hemisphereLightHelperEmits = {
   load: (e: HemisphereLightHelperLoadEvent) => e,
 }

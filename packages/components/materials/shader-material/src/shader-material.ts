@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   Object3D,
   Scene,
   ShaderMaterial,
   ShaderMaterialParameters,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type ShaderMaterialComponent from './shader-material.vue'
 
-export const shaderMaterialProps = buildProps({
+export const shaderMaterialProps = {
   params: {
-    type: definePropType<ShaderMaterialParameters>(Object),
+    type: Object as PropType<ShaderMaterialParameters>,
   },
   options: {
-    type: definePropType<ShaderMaterialOptions>(Object),
+    type: Object as PropType<ShaderMaterialOptions>,
     default: () => ({}),
   },
-})
+}
 export const shaderMaterialEmits = {
   load: (e: ShaderMaterialLoadEvent) => e,
 }

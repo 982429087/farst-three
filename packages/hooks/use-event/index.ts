@@ -1,32 +1,33 @@
 import { onBeforeUnmount } from 'vue'
-import { compose, definePropType } from '@farst-three/utils'
+import { compose } from '@farst-three/utils'
 import { useEventService } from '@farst-three/hooks'
 import { EventType } from '../services'
 import type { FunsEvent } from '@farst-three/hooks'
 import type { Object3D } from 'three'
 import type { AnyFun } from '@farst-three/utils'
 import type { EventService, Funs, OnEventOptions } from '../services'
+import { PropType } from 'vue'
 
 export const eventProps = {
   onMouseMove: {
-    type: definePropType<FunsEvent>(Function),
+    type: Function as PropType<() => FunsEvent>,
   },
   onClick: {
-    type: definePropType<FunsEvent>(Function),
+    type: Function as PropType<() => FunsEvent>,
   },
   onMouseMovePosition: {
-    type: definePropType<FunsEvent>(Function),
+    type: Function as PropType<() => FunsEvent>,
   },
   clickOptions: {
-    type: definePropType<OnEventOptions>(Object),
+    type: Object as PropType<OnEventOptions>,
     default: () => ({}),
   },
   mouseMoveOptions: {
-    type: definePropType<OnEventOptions>(Object),
+    type: Object as PropType<OnEventOptions>,
     default: () => ({}),
   },
   onMouseMovePositionOptions: {
-    type: definePropType<OnEventOptions>(Object),
+    type: Object as PropType<OnEventOptions>,
     default: () => ({}),
   },
   cursor: {

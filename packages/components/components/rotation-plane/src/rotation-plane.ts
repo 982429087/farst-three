@@ -1,20 +1,19 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { RotationPlaneOptions } from './use-rotation-plane'
 import type { Mesh, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type RotationPlaneComponent from './rotation-plane.vue'
 
-export const rotationPlaneProps = buildProps({
+export const rotationPlaneProps = {
   meshOptions: {
-    type: definePropType<RotationPlaneMeshOptions>(Object),
+    type: Object as PropType<RotationPlaneMeshOptions>,
     default: () => ({}),
   },
   options: {
-    type: definePropType<RotationPlaneOptions>(Object),
+    type: Object as PropType<RotationPlaneOptions>,
     default: () => ({}),
   },
-})
+}
 export const rotationPlaneEmits = {
   load: (e: RotationPlaneLoadEvent) => e,
 }

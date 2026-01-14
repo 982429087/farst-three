@@ -1,19 +1,18 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { Outline, OutlineOptions } from '@farst-three/hooks'
 import type { Object3D, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type OutlineComponent from './outline.vue'
 
-export const outlineProps = buildProps({
+export const outlineProps = {
   options: {
-    type: definePropType<OutlineOptions>(Object),
+    type: Object as PropType<OutlineOptions>,
     default: () => ({}),
   },
   selected: {
-    type: definePropType<Object3D[]>(Object),
+    type: Object as PropType<Object3D[]>,
     default: () => [],
   },
-})
+}
 export const outlineEmits = {
   load: (e: OutlineLoadEvent) => e,
 }

@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   MeshMatcapMaterial,
   MeshMatcapMaterialParameters,
   Object3D,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type MeshMatcapMaterialComponent from './mesh-matcap-material.vue'
 
-export const meshMatcapMaterialProps = buildProps({
+export const meshMatcapMaterialProps = {
   options: {
-    type: definePropType<MeshMatcapMaterialOptions>(Object),
+    type: Object as PropType<MeshMatcapMaterialOptions>,
     default: () => ({}),
   },
   params: {
-    type: definePropType<MeshMatcapMaterialParameters>(Object),
+    type: Object as PropType<MeshMatcapMaterialParameters>,
   },
-})
+}
 export const meshMatcapMaterialEmits = {
   load: (e: MeshMatcapMaterialLoadEvent) => e,
 }

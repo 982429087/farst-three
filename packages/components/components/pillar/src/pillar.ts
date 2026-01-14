@@ -1,20 +1,19 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { PillarOptions } from './use-pillar'
 import type { Group, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type PillarComponent from './pillar.vue'
 
-export const pillarProps = buildProps({
+export const pillarProps = {
   options: {
-    type: definePropType<PillarOptions>(Object),
+    type: Object as PropType<PillarOptions>,
     default: () => ({}),
   },
   groupOptions: {
-    type: definePropType<ThreeOptions<Group>>(Object),
+    type: Object as PropType<ThreeOptions<Group>>,
     default: () => ({}),
   },
-})
+}
 export const pillarEmits = {
   load: (e: PillarLoadEvent) => e,
 }

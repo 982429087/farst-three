@@ -1,24 +1,23 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { GeoProjection } from 'd3-geo'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type ProjectionComponent from './projection.vue'
 
-export const projectionProps = buildProps({
+export const projectionProps = {
   center: {
-    type: definePropType<[number, number]>(Array),
+    type: Array as PropType<number[]>,
     default: [0, 0],
     required: true as const,
   },
   scale: {
-    type: definePropType<number>(Number),
+    type: Number as PropType<number>,
     default: 1,
     required: true as const,
   },
   translate: {
-    type: definePropType<[number, number]>(Array),
+    type: Array as PropType<number[]>,
     default: [0, 0],
   },
-})
+}
 export const projectionEmits = {
   load: (e: ProjectionLoadEvent) => e,
 }

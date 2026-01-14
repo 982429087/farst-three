@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   MeshToonMaterial,
   MeshToonMaterialParameters,
   Object3D,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type MeshToonMaterialComponent from './mesh-toon-material.vue'
 
-export const meshToonMaterialProps = buildProps({
+export const meshToonMaterialProps = {
   params: {
-    type: definePropType<MeshToonMaterialParameters>(Object),
+    type: Object as PropType<MeshToonMaterialParameters>,
   },
   options: {
-    type: definePropType<MeshToonMaterialOptions>(Object),
+    type: Object as PropType<MeshToonMaterialOptions>,
     default: () => ({}),
   },
-})
+}
 export const meshToonMaterialEmits = {
   load: (e: MeshToonMaterialLoadEvent) => e,
 }

@@ -1,4 +1,3 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import { eventEmits, eventProps } from '@farst-three/hooks'
 import type {
   BufferGeometry,
@@ -8,31 +7,31 @@ import type {
   NormalBufferAttributes,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type InstancedMeshComponent from './instanced-mesh.vue'
 
-export const instancedMeshProps = buildProps({
+export const instancedMeshProps = {
   options: {
-    type: definePropType<InstancedMeshOptions>(Object),
+    type: Object as PropType<InstancedMeshOptions>,
     default: () => ({}),
   },
   geometry: {
-    type: definePropType<BufferGeometry<NormalBufferAttributes>>(Object),
+    type: Object as PropType<BufferGeometry<NormalBufferAttributes>>,
   },
   material: {
-    type: definePropType<Material>(Object),
+    type: Object as PropType<Material>,
   },
   count: {
-    type: definePropType<number>(Number),
+    type: Number as PropType<number>,
     default: 1,
   },
   dragabled: {
-    type: definePropType<boolean>(Boolean),
+    type: Boolean as PropType<boolean>,
     default: false,
   },
   ...eventProps,
-})
+}
 export const instancedMeshEmits = {
   load: (e: InstancedMeshLoadEvent) => e,
   ...eventEmits,

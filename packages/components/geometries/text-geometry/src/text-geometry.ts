@@ -1,34 +1,33 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   TextGeometry,
   TextGeometryParameters,
 } from 'three/examples/jsm/geometries/TextGeometry'
 import type { Object3D, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type TextGeometryComponent from './text-geometry.vue'
 
-export const textGeometryProps = buildProps({
+export const textGeometryProps = {
   options: {
-    type: definePropType<TextGeometryOptions>(Object),
+    type: Object as PropType<TextGeometryOptions>,
     default: () => ({}),
   },
   text: {
-    type: definePropType<string>(String),
+    type: String as PropType<string>,
     default: 'text',
     required: true as const,
   },
   params: {
-    type: definePropType<Omit<TextGeometryParameters, 'font'>>(Object),
+    type: Object as PropType<Omit<TextGeometryParameters, 'font'>>,
   },
   url: {
-    type: definePropType<string>(String),
+    type: String as PropType<string>,
     required: true as const,
   },
   center: {
     type: Boolean,
   },
-})
+}
 export const textGeometryEmits = {
   load: (e: TextGeometryLoadEvent) => e,
 }

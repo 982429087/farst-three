@@ -1,10 +1,9 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { BoxGeometry, Object3D, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type BoxGeometryComponent from './box-geometry.vue'
 
-export const boxGeometryProps = buildProps({
+export const boxGeometryProps = {
   width: Number,
   height: Number,
   depth: Number,
@@ -12,10 +11,10 @@ export const boxGeometryProps = buildProps({
   heightSegments: Number,
   depthSegments: Number,
   options: {
-    type: definePropType<BoxGeometryOptions>(Object),
+    type: Object as PropType<BoxGeometryOptions>,
     default: () => ({}),
   },
-})
+}
 
 export const boxGeometryEmits = {
   load: (e: BoxGeometryLoadEvent) => e,

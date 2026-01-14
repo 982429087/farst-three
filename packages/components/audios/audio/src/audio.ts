@@ -1,12 +1,11 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type { Audio, Scene } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type AudioComponent from './audio.vue'
 
-export const audioProps = buildProps({
+export const audioProps = {
   options: {
-    type: definePropType<AudioOptions>(Object),
+    type: Object as PropType<AudioOptions>,
     default: () => ({}),
   },
   url: {
@@ -14,10 +13,10 @@ export const audioProps = buildProps({
     required: true as const,
   },
   bufferOnload: {
-    type: definePropType<AudioLoaderOnLoad>(Function),
+    type: Function as PropType<AudioLoaderOnLoad>,
     default: () => true,
   },
-})
+}
 export const audioEmits = {
   load: (e: AudioLoadEvent) => e,
 }

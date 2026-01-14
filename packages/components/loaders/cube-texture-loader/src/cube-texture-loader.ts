@@ -1,41 +1,39 @@
 import {
-  buildProps,
-  definePropType,
   isNumber,
   isString,
 } from '@farst-three/utils'
 import type { ThreeOptions } from '@farst-three/utils'
 import type { CubeTextureLoader, Material, Scene, Texture } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type CubeTextureLoaderComponent from './cube-texture-loader.vue'
 
-export const cubeTextureLoaderProps = buildProps({
+export const cubeTextureLoaderProps = {
   urls: {
-    type: definePropType<string[]>(Array),
+    type: Array as PropType<string[]>,
     default: () => [],
     required: true,
   },
   load: {
-    type: definePropType<CubeTextureLoaderOnLoad>(Function),
+    type: Function as PropType<CubeTextureLoaderOnLoad>,
     default: () => () => undefined,
   },
   progress: {
-    type: definePropType<CubeTextureLoaderOnProgress>(Function),
+    type: Function as PropType<CubeTextureLoaderOnProgress>,
     default: () => () => undefined,
   },
   error: {
-    type: definePropType<CubeTextureLoaderOnError>(Function),
+    type: Function as PropType<CubeTextureLoaderOnError>,
     default: () => () => undefined,
   },
   type: {
-    type: definePropType<CubeTextureType>(String),
+    type: String as PropType<CubeTextureType>,
     default: 'map',
   },
   options: {
-    type: definePropType<CubeTextureLoaderOptions>(Object),
+    type: Object as PropType<CubeTextureLoaderOptions>,
     default: () => ({}),
   },
-})
+}
 export const cubeTextureLoaderEmits = {
   load: (e: CubeTextureLoadEvent) => e,
   managerLoad: () => true,
@@ -65,5 +63,5 @@ export type CubeTextureLoaderOnLoad = (e: Texture) => void
 export type CubeTextureLoaderOnProgress = (
   e: ProgressEvent<EventTarget>
 ) => void
-export type CubeTextureLoaderOnError = (e: ErrorEvent) => void
+export type CubeTextureLoaderOnError = (e: any) => void
 export type CubeTextureLoaderOptions = ThreeOptions<Texture>

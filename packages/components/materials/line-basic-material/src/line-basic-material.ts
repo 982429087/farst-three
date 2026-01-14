@@ -1,23 +1,22 @@
-import { buildProps, definePropType } from '@farst-three/utils'
 import type {
   LineBasicMaterial,
   LineBasicMaterialParameters,
   Object3D,
   Scene,
 } from 'three'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThreeOptions } from '@farst-three/utils'
 import type LineBasicMaterialComponent from './line-basic-material.vue'
 
-export const lineBasicMaterialProps = buildProps({
+export const lineBasicMaterialProps = {
   params: {
-    type: definePropType<LineBasicMaterialParameters>(Object),
+    type: Object as PropType<LineBasicMaterialParameters>,
   },
   options: {
-    type: definePropType<ThreeOptions<LineBasicMaterial>>(Object),
+    type: Object as PropType<ThreeOptions<LineBasicMaterial>>,
     default: () => ({}),
   },
-})
+}
 export const lineBasicMaterialEmits = {
   load: (e: LineBasicMaterialLoadEvent) => e,
 }
