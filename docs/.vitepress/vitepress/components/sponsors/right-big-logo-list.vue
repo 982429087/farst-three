@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { withBase } from 'vitepress'
-import { rightBigLogoSponsors } from '../../../config/sponsors'
+// import { rightBigLogoSponsors } from '../../../config/sponsors'
 import { sendEvent } from '../../../config/analytics'
 import { isDark } from '../../composables/dark'
 

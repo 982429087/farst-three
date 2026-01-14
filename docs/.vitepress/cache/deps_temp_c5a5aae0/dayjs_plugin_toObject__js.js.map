@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/dayjs@1.11.19/node_modules/dayjs/plugin/toObject.js"],
-  "sourcesContent": ["!function(t,e){\"object\"==typeof exports&&\"undefined\"!=typeof module?module.exports=e():\"function\"==typeof define&&define.amd?define(e):(t=\"undefined\"!=typeof globalThis?globalThis:t||self).dayjs_plugin_toObject=e()}(this,(function(){\"use strict\";return function(t,e){e.prototype.toObject=function(){return{years:this.$y,months:this.$M,date:this.$D,hours:this.$H,minutes:this.$m,seconds:this.$s,milliseconds:this.$ms}}}}));"],
-  "mappings": ";;;;;AAAA;AAAA;AAAA,KAAC,SAAS,GAAE,GAAE;AAAC,kBAAU,OAAO,WAAS,eAAa,OAAO,SAAO,OAAO,UAAQ,EAAE,IAAE,cAAY,OAAO,UAAQ,OAAO,MAAI,OAAO,CAAC,KAAG,IAAE,eAAa,OAAO,aAAW,aAAW,KAAG,MAAM,wBAAsB,EAAE;AAAA,IAAC,EAAE,SAAM,WAAU;AAAC;AAAa,aAAO,SAAS,GAAE,GAAE;AAAC,UAAE,UAAU,WAAS,WAAU;AAAC,iBAAM,EAAC,OAAM,KAAK,IAAG,QAAO,KAAK,IAAG,MAAK,KAAK,IAAG,OAAM,KAAK,IAAG,SAAQ,KAAK,IAAG,SAAQ,KAAK,IAAG,cAAa,KAAK,IAAG;AAAA,QAAC;AAAA,MAAC;AAAA,IAAC,CAAE;AAAA;AAAA;",
-  "names": []
-}

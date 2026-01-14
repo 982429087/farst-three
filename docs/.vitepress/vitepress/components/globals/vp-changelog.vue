@@ -4,7 +4,7 @@ import VPLink from '../common/vp-link.vue'
 import VPMarkdown from '../common/vp-markdown.vue'
 import { useLang } from '../../composables/lang'
 import { useLocale } from '../../composables/locale'
-import changelogLocale from '../../../i18n/component/changelog.json'
+// import changelogLocale from '../../../i18n/component/changelog.json'
 
 interface Release {
   id: number

@@ -1,6 +1,6 @@
 import { onUnmounted } from 'vue'
 import { isClient } from '@vueuse/core'
-import { defaultNamespace } from '@element-plus/hooks/use-namespace'
+import { defaultNamespace } from '@farst-three/hooks/use-namespace'
 import {
   addClass,
   getScrollBarWidth,

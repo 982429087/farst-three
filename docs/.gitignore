@@ -2,7 +2,7 @@
 .vitepress/crowdin/*
 !.vitepress/crowdin/en-US
 !.vitepress/crowdin/zh-CN
-
+.vitepress/cache/*
 temp
 fr-FR
 es-ES

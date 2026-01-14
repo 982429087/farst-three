@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import { goldSponsors, platinumSponsors } from '../../../config/sponsors'
-import SponsorsButton from '../sponsors/sponsors-button.vue'
-import SponsorList from './sponsor-list.vue'
+// import { goldSponsors, platinumSponsors } from '../../../config/sponsors'
+// import SponsorsButton from '../sponsors/sponsors-button.vue'
+// import SponsorList from './sponsor-list.vue'
 </script>
 
 <template>
   <div class="sponsors-container" m="auto">
-    <SponsorList :sponsors="platinumSponsors" sponsor-type="platinumSponsor" />
-    <SponsorList :sponsors="goldSponsors" sponsor-type="goldSponsor" />
+    <!-- <SponsorList :sponsors="platinumSponsors" sponsor-type="platinumSponsor" />
+    <SponsorList :sponsors="goldSponsors" sponsor-type="goldSponsor" /> -->
 
-    <sponsors-button round />
+    <!-- <sponsors-button round /> -->
   </div>
 </template>
 

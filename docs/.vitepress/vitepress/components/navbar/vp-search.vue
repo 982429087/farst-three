@@ -49,7 +49,7 @@ function update(options: any) {
   if (vm && vm.vnode.el) {
     vm.vnode.el.innerHTML =
       '<div class="algolia-search-box" id="docsearch"></div>'
-    initialize(options)
+    // initialize(options)
   }
 }
 

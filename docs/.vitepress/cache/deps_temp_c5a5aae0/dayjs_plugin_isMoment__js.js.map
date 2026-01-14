@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/.pnpm/dayjs@1.11.19/node_modules/dayjs/plugin/isMoment.js"],
-  "sourcesContent": ["!function(e,n){\"object\"==typeof exports&&\"undefined\"!=typeof module?module.exports=n():\"function\"==typeof define&&define.amd?define(n):(e=\"undefined\"!=typeof globalThis?globalThis:e||self).dayjs_plugin_isMoment=n()}(this,(function(){\"use strict\";return function(e,n,t){t.isMoment=function(e){return t.isDayjs(e)}}}));"],
-  "mappings": ";;;;;AAAA;AAAA;AAAA,KAAC,SAAS,GAAE,GAAE;AAAC,kBAAU,OAAO,WAAS,eAAa,OAAO,SAAO,OAAO,UAAQ,EAAE,IAAE,cAAY,OAAO,UAAQ,OAAO,MAAI,OAAO,CAAC,KAAG,IAAE,eAAa,OAAO,aAAW,aAAW,KAAG,MAAM,wBAAsB,EAAE;AAAA,IAAC,EAAE,SAAM,WAAU;AAAC;AAAa,aAAO,SAAS,GAAE,GAAE,GAAE;AAAC,UAAE,WAAS,SAASA,IAAE;AAAC,iBAAO,EAAE,QAAQA,EAAC;AAAA,QAAC;AAAA,MAAC;AAAA,IAAC,CAAE;AAAA;AAAA;",
-  "names": ["e"]
-}
