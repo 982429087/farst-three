@@ -1,5 +1,5 @@
 import { nextTick, ref } from 'vue'
-import { isKorean } from '@element-plus/utils'
+import { isKorean } from '@farst-three/utils'
 
 interface UseCompositionOptions {
   afterComposition: (event: CompositionEvent) => void

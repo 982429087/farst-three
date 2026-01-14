@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/dayjs@1.11.19/node_modules/dayjs/plugin/toArray.js"],
+  "sourcesContent": ["!function(t,e){\"object\"==typeof exports&&\"undefined\"!=typeof module?module.exports=e():\"function\"==typeof define&&define.amd?define(e):(t=\"undefined\"!=typeof globalThis?globalThis:t||self).dayjs_plugin_toArray=e()}(this,(function(){\"use strict\";return function(t,e){e.prototype.toArray=function(){return[this.$y,this.$M,this.$D,this.$H,this.$m,this.$s,this.$ms]}}}));"],
+  "mappings": ";;;;;AAAA;AAAA;AAAA,KAAC,SAAS,GAAE,GAAE;AAAC,kBAAU,OAAO,WAAS,eAAa,OAAO,SAAO,OAAO,UAAQ,EAAE,IAAE,cAAY,OAAO,UAAQ,OAAO,MAAI,OAAO,CAAC,KAAG,IAAE,eAAa,OAAO,aAAW,aAAW,KAAG,MAAM,uBAAqB,EAAE;AAAA,IAAC,EAAE,SAAM,WAAU;AAAC;AAAa,aAAO,SAAS,GAAE,GAAE;AAAC,UAAE,UAAU,UAAQ,WAAU;AAAC,iBAAM,CAAC,KAAK,IAAG,KAAK,IAAG,KAAK,IAAG,KAAK,IAAG,KAAK,IAAG,KAAK,IAAG,KAAK,GAAG;AAAA,QAAC;AAAA,MAAC;AAAA,IAAC,CAAE;AAAA;AAAA;",
+  "names": []
+}

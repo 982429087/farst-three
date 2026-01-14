@@ -4,7 +4,7 @@ import {
   createGlobalNode,
   isClient,
   removeGlobalNode,
-} from '@element-plus/utils'
+} from '@farst-three/utils'
 
 import type { Ref, VNode } from 'vue'
 

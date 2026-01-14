@@ -1,4 +1,4 @@
-import { EVENT_CODE } from '@element-plus/constants'
+import { EVENT_CODE } from '@farst-three/constants'
 import { isAndroid } from '../browser'
 
 export const composeEventHandlers = <E>(

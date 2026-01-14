@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/dayjs@1.11.19/node_modules/dayjs/plugin/buddhistEra.js"],
+  "sourcesContent": ["!function(t,e){\"object\"==typeof exports&&\"undefined\"!=typeof module?module.exports=e():\"function\"==typeof define&&define.amd?define(e):(t=\"undefined\"!=typeof globalThis?globalThis:t||self).dayjs_plugin_buddhistEra=e()}(this,(function(){\"use strict\";return function(t,e){var n=e.prototype,i=n.format;n.format=function(t){var e=this,n=(t||\"YYYY-MM-DDTHH:mm:ssZ\").replace(/(\\[[^\\]]+])|BBBB|BB/g,(function(t,n){var i,o=String(e.$y+543),f=\"BB\"===t?[o.slice(-2),2]:[o,4];return n||(i=e.$utils()).s.apply(i,f.concat([\"0\"]))}));return i.bind(this)(n)}}}));"],
+  "mappings": ";;;;;AAAA;AAAA;AAAA,KAAC,SAAS,GAAE,GAAE;AAAC,kBAAU,OAAO,WAAS,eAAa,OAAO,SAAO,OAAO,UAAQ,EAAE,IAAE,cAAY,OAAO,UAAQ,OAAO,MAAI,OAAO,CAAC,KAAG,IAAE,eAAa,OAAO,aAAW,aAAW,KAAG,MAAM,2BAAyB,EAAE;AAAA,IAAC,EAAE,SAAM,WAAU;AAAC;AAAa,aAAO,SAAS,GAAE,GAAE;AAAC,YAAI,IAAE,EAAE,WAAU,IAAE,EAAE;AAAO,UAAE,SAAO,SAASA,IAAE;AAAC,cAAIC,KAAE,MAAKC,MAAGF,MAAG,wBAAwB,QAAQ,wBAAwB,SAASA,IAAEE,IAAE;AAAC,gBAAIC,IAAE,IAAE,OAAOF,GAAE,KAAG,GAAG,GAAE,IAAE,SAAOD,KAAE,CAAC,EAAE,MAAM,EAAE,GAAE,CAAC,IAAE,CAAC,GAAE,CAAC;AAAE,mBAAOE,OAAIC,KAAEF,GAAE,OAAO,GAAG,EAAE,MAAME,IAAE,EAAE,OAAO,CAAC,GAAG,CAAC,CAAC;AAAA,UAAC,CAAE;AAAE,iBAAO,EAAE,KAAK,IAAI,EAAED,EAAC;AAAA,QAAC;AAAA,MAAC;AAAA,IAAC,CAAE;AAAA;AAAA;",
+  "names": ["t", "e", "n", "i"]
+}

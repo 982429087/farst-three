@@ -1,4 +1,4 @@
-import type { INSTALLED_KEY } from '@element-plus/constants'
+import type { INSTALLED_KEY } from '@farst-three/constants'
 
 declare global {
   const process: {

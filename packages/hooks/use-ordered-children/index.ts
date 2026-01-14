@@ -1,5 +1,5 @@
 import { isVNode, shallowRef } from 'vue'
-import { flattedChildren } from '@element-plus/utils'
+import { flattedChildren } from '@farst-three/utils'
 
 import type { ComponentInternalInstance, VNode } from 'vue'
 

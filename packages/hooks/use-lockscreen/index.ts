@@ -7,7 +7,7 @@ import {
   isClient,
   removeClass,
   throwError,
-} from '@element-plus/utils'
+} from '@farst-three/utils'
 import { useNamespace } from '../use-namespace'
 
 import type { Ref } from 'vue'
