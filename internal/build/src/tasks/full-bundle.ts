@@ -1,13 +1,14 @@
 import path from 'path'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { rollup } from 'rollup'
+import replace from '@rollup/plugin-replace'
 import commonjs from '@rollup/plugin-commonjs'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import esbuild, { minify as minifyPlugin } from 'rollup-plugin-esbuild'
-import { parallel, TaskFunction } from 'gulp'
-import glob from 'fast-glob'
-import { camelCase, upperFirst } from 'lodash'
+import { parallel } from 'gulp'
+import { glob } from 'tinyglobby'
+import { camelCase, upperFirst } from 'lodash-unified'
 import {
   PKG_BRAND_NAME,
   PKG_CAMELCASE_LOCAL_NAME,
@@ -23,6 +24,8 @@ import {
   writeBundles,
 } from '../utils'
 import { target } from '../build-info'
+
+import type { TaskFunction } from 'gulp'
 import type { Plugin } from 'rollup'
 
 const banner = `/*! ${PKG_BRAND_NAME} v${version} */\n`
@@ -49,6 +52,9 @@ async function buildFullEntry(minify: boolean) {
       treeShaking: true,
       legalComments: 'eof',
     }),
+    replace({
+      'process.env.NODE_ENV': '"production"',
+    }),
   ]
   if (minify) {
     plugins.push(
@@ -67,8 +73,8 @@ async function buildFullEntry(minify: boolean) {
   })
   await writeBundles(bundle, [
     {
-      format: 'umd',
-      file: path.resolve(
+      format: 'cjs',
+      dir: path.resolve(
         epOutput,
         'dist',
         formatBundleFilename('index.full', minify, 'js')
@@ -83,7 +89,7 @@ async function buildFullEntry(minify: boolean) {
     },
     {
       format: 'esm',
-      file: path.resolve(
+      dir: path.resolve(
         epOutput,
         'dist',
         formatBundleFilename('index.full', minify, 'mjs')
@@ -116,8 +122,8 @@ async function buildFullLocale(minify: boolean) {
       })
       await writeBundles(bundle, [
         {
-          format: 'umd',
-          file: path.resolve(
+          format: 'cjs',
+          dir: path.resolve(
             epOutput,
             'dist/locale',
             formatBundleFilename(filename, minify, 'js')
@@ -129,7 +135,7 @@ async function buildFullLocale(minify: boolean) {
         },
         {
           format: 'esm',
-          file: path.resolve(
+          dir: path.resolve(
             epOutput,
             'dist/locale',
             formatBundleFilename(filename, minify, 'mjs')
