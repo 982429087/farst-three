@@ -1,7 +1,8 @@
 import { INSTALLED_KEY } from '@farst-three/constants'
 import { version } from './version'
 
-import type { App, Plugin } from '@vue/runtime-core'
+import type { App, Plugin } from 'vue'
+
 
 export const makeInstaller = (components: Plugin[] = []) => {
   const install = (app: App) => {
@@ -9,6 +10,7 @@ export const makeInstaller = (components: Plugin[] = []) => {
 
     app[INSTALLED_KEY] = true
     components.forEach((c) => app.use(c))
+
   }
 
   return {

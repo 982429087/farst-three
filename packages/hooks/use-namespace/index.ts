@@ -1,8 +1,8 @@
-import { computed, inject, ref, unref } from 'vue'
+import { computed, getCurrentInstance, inject, ref, unref } from 'vue'
 
 import type { InjectionKey, Ref } from 'vue'
 
-export const defaultNamespace = 'ft'
+export const defaultNamespace = 'el'
 const statePrefix = 'is-'
 
 const _bem = (
@@ -32,7 +32,10 @@ export const useGetDerivedNamespace = (
   namespaceOverrides?: Ref<string | undefined>
 ) => {
   const derivedNamespace =
-    namespaceOverrides || inject(namespaceContextKey, ref(defaultNamespace))
+    namespaceOverrides ||
+    (getCurrentInstance()
+      ? inject(namespaceContextKey, ref(defaultNamespace))
+      : ref(defaultNamespace))
   const namespace = computed(() => {
     return unref(derivedNamespace) || defaultNamespace
   })

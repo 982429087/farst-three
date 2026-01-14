@@ -40,14 +40,14 @@ export const isEpProp = (val: unknown): val is EpProp<any, any, any> =>
     values: ['small', 'large'],
     validator: (val: unknown): val is number => typeof val === 'number',
   } as const)
-  @link see more: https://github.com/farst-three/farst-three/pull/3341
+  @link see more: https://github.com/element-plus/element-plus/pull/3341
  */
 export const buildProp = <
   Type = never,
   Value = never,
   Validator = never,
   Default extends EpPropMergeType<Type, Value, Validator> = never,
-  Required extends boolean = false
+  Required extends boolean = false,
 >(
   prop: EpPropInput<Type, Value, Validator, Default, Required>,
   key?: string
@@ -104,7 +104,7 @@ export const buildProps = <
     | { [epPropKey]: true }
     | NativePropType
     | EpPropInput<any, any, any, any, any>
-  >
+  >,
 >(
   props: Props
 ): {

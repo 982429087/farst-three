@@ -16,10 +16,10 @@
     <p class="mt-1">
       Made with ❤️ by
       <a
-        href="https://github.com/982429087/farst-three"
+        href="https://github.com/element-plus"
         target="_blank"
         rel="noopener noreferer"
-        >Farst Three</a
+        >Element Plus</a
       >
     </p>
   </div>

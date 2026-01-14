@@ -1,12 +1,13 @@
 import { onUnmounted } from 'vue'
 import { isClient } from '@vueuse/core'
+import { defaultNamespace } from '@element-plus/hooks/use-namespace'
 import {
   addClass,
   getScrollBarWidth,
   getStyle,
   hasClass,
   removeClass,
-} from '@farst-three/utils'
+} from '@element-plus/utils'
 
 export const useLockScreen = () => {
   let scrollBarWidth = 0
@@ -36,7 +37,7 @@ export const useLockScreen = () => {
         10
       )
     }
-    scrollBarWidth = getScrollBarWidth()
+    scrollBarWidth = getScrollBarWidth(defaultNamespace)
     const bodyHasOverflow =
       document.documentElement.clientHeight < document.body.scrollHeight
     const bodyOverflowY = getStyle(document.body, 'overflowY')

@@ -1,5 +1,9 @@
-import ElementPlus from 'element-plus'
 import FarstThree, { config } from 'farst-three'
+import ElementPlus, {
+  ID_INJECTION_KEY,
+  ZINDEX_INJECTION_KEY,
+} from 'element-plus'
+import { isClient } from '@vueuse/core'
 
 import VPApp, { NotFound, globals } from '../vitepress'
 import { define } from '../utils/types'
@@ -10,13 +14,18 @@ import type { Theme } from 'vitepress'
 export default define<Theme>({
   NotFound,
   Layout: VPApp,
-  enhanceApp: ({ app }) => {
+  enhanceApp: async ({ app, router }) => {
     config.staticUrl = import.meta.env.VITE_BASE_URL
     app.use(ElementPlus)
     app.use(FarstThree)
-
-    globals.forEach(([name, Comp]) => {
+    app.provide(ID_INJECTION_KEY, { prefix: 1024, current: 0 })
+    app.provide(ZINDEX_INJECTION_KEY, { current: 0 })
+    Object.entries(globals).forEach(([name, Comp]) => {
       app.component(name, Comp)
     })
+    if (!isClient) return
+    const nprogress = await import('nprogress')
+    router.onBeforeRouteChange = nprogress.start
+    router.onAfterRouteChange = nprogress.done
   },
 })

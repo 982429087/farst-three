@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { inBrowser, useData } from 'vitepress'
-
-// import VPNavbarSearch from './navbar/vp-search.vue'
+import { inBrowser, useData, withBase } from 'vitepress'
+import { version as epVersion } from 'element-plus'
+import VPNavbarSearch from './navbar/vp-search.vue'
 import VPNavbarMenu from './navbar/vp-menu.vue'
 import VPNavbarThemeToggler from './navbar/vp-theme-toggler.vue'
-// import VPNavbarTranslation from './navbar/vp-translation.vue'
+import VPNavbarTranslation from './navbar/vp-translation.vue'
 import VPNavbarSocialLinks from './navbar/vp-social-links.vue'
 import VPNavbarHamburger from './navbar/vp-hamburger.vue'
 
@@ -15,19 +15,17 @@ defineProps<{
 
 defineEmits(['toggle'])
 
-const { theme, page } = useData()
+const { theme, page, site } = useData()
 
 const currentLink = computed(() => {
   if (!inBrowser) {
-    return `/farst-three/${page.value?.frontmatter?.lang || ''}/`
+    return `/${page.value?.frontmatter?.lang || ''}/`
   }
   const existLangIndex = theme.value.langs.findIndex((lang) =>
-    window?.location?.pathname.startsWith(`/farst-three/${lang}`)
+    window?.location?.pathname.startsWith(`${site.value.base}${lang}`)
   )
 
-  return existLangIndex === -1
-    ? '/farst-three/'
-    : `/farst-three/${theme.value.langs[existLangIndex]}/`
+  return existLangIndex === -1 ? '/' : `/${theme.value.langs[existLangIndex]}/`
 })
 </script>
 
@@ -35,20 +33,22 @@ const currentLink = computed(() => {
   <div class="navbar-wrapper">
     <div class="header-container">
       <div class="logo-container">
-        <a :href="currentLink">
-          Farst Three Logo
-          <!-- <img
+        <a :href="withBase(currentLink)">
+          <img
             class="logo"
             src="/images/element-plus-logo.svg"
-            alt="Farst Three Logo"
-          /> -->
+            alt="Element Plus Logo"
+          />
         </a>
+        <el-tag round size="small" title="latest version">{{
+          epVersion.replace('0.0.0-staging.', '')
+        }}</el-tag>
       </div>
       <div class="content">
-        <!-- <VPNavbarSearch class="search" :options="theme.agolia" multilang /> -->
+        <VPNavbarSearch class="search" :options="theme.agolia" multilang />
         <VPNavbarMenu class="menu" />
         <VPNavbarThemeToggler class="theme-toggler" />
-        <!-- <VPNavbarTranslation class="translation" /> -->
+        <VPNavbarTranslation class="translation" />
         <VPNavbarSocialLinks class="social-links" />
         <VPNavbarHamburger
           :active="fullScreen"
@@ -72,6 +72,11 @@ const currentLink = computed(() => {
   .logo {
     position: relative;
     height: 100%;
+  }
+}
+.dark {
+  .logo {
+    filter: drop-shadow(2px 2px 6px #409eff);
   }
 }
 </style>

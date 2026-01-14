@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useEditLink } from '../../composables/edit-link'
 
-const { url } = useEditLink()
+const { url, text } = useEditLink()
 </script>
 
 <template>
@@ -13,10 +13,10 @@ const { url } = useEditLink()
       target="_blank"
       rel="noopener noreferrer"
     >
-      <!-- {{ text }}
+      {{ text }}
       <ElIcon :size="16" style="vertical-align: text-top; line-height: 24px">
         <i-ri-external-link-line />
-      </ElIcon> -->
+      </ElIcon>
     </a>
   </div>
 </template>

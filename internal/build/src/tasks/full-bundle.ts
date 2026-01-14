@@ -76,7 +76,7 @@ async function buildFullEntry(minify: boolean) {
   })
   await writeBundles(bundle, [
     {
-      format: 'commonjs',
+      format: 'umd',
       dir: path.resolve(
         epOutput,
         'dist',
@@ -125,7 +125,7 @@ async function buildFullLocale(minify: boolean) {
       })
       await writeBundles(bundle, [
         {
-          format: 'commonjs',
+          format: 'umd',
           dir: path.resolve(
             epOutput,
             'dist/locale',
