@@ -44,7 +44,7 @@ function mapPrefix(item: Item, lang: string, prefix = '') {
   }
   return {
     ...item,
-    link: `/farst-three${ensureLang(lang)}${prefix}${item.link}`,
+    link: `${ensureLang(lang)}${prefix}${item.link}`,
   }
 }
 

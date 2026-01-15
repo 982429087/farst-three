@@ -38,9 +38,9 @@ const removeTag = (str: string) => str.replace(/<span.*<\/span>/g, '')
         class="mt-8 toc-ads flex flex-col"
         item-style="width: 180px; height: 55px;"
       /> -->
-      <p class="text-14px font-300 color-$text-color-secondary">
+      <!-- <p class="text-14px font-300 color-$text-color-secondary">
         {{ sponsor.sponsoredBy }}
-      </p>
+      </p> -->
       <!-- <sponsors-button class="sponsors-button mt-4 w-100%" />
       <sponsor-right-big-logo-list />
       <sponsor-right-logo-small-list />

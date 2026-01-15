@@ -8,7 +8,6 @@ const route = useRoute()
 const lang = useLang()
 
 const anchorRef = ref()
-debugger
 const title = computed(() => skipLinkLocale[lang.value].title)
 
 watch(
